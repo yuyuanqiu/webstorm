@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<p id="p" style="font-size: 30px;">
+	你还剩
+	<strong style="color: purple">
+	</strong>
+	天
+	<strong style="color: purple">
+	</strong>
+	小时
+	<strong style="color: purple">
+	</strong>
+	分
+	<strong style="color: purple">
+	</strong>
+	秒
+</p>
+<script>
+	function getSubTime() {
+		var date = new Date().getTime();
+		var seconds = Math.floor((endDate - date) / 1000 % 60);
+		var minutes = Math.floor(((endDate - date) / 1000 % 3600) / 60);
+		var hours = Math.floor(((endDate - date) / 1000 % (24 * 3600)) / 3600);
+		var time = Math.floor((endDate - date) / 1000 / (24 * 3600));
+		strong[0].innerText = time;
+		strong[1].innerText = hours;
+		strong[2].innerText = minutes;
+		strong[3].innerText = seconds;	
+	}	
+	var strong = document.getElementsByTagName("strong");
+	var endDate = new Date("2019/10/10 10:00:00").getTime();
+	getSubTime();
+	setInterval(function() {
+		var date = new Date().getTime();
+		var seconds = Math.floor((endDate - date) / 1000 % 60);
+		var minutes = Math.floor(((endDate - date) / 1000 % 3600) / 60);
+		var hours = Math.floor(((endDate - date) / 1000 % (24 * 3600)) / 3600);
+		var time = Math.floor((endDate - date) / 1000 / (24 * 3600));
+		strong[0].innerText = time;
+		strong[1].innerText = hours;
+		strong[2].innerText = minutes;
+		strong[3].innerText = seconds;		
+	}, 1000);
+</script>
+</body>
+</html>
+
+

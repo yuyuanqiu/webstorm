@@ -1,0 +1,366 @@
+*{
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+body{
+	background-image: url("../img/loginPageBackground.jpg");
+	/*设置背景覆盖整个窗口，超出部分剪掉*/
+	background-size: cover;
+}
+
+form{
+	/*content-box使得对象的宽高==设置的宽高，padding和border不包括在内*/
+	box-sizing: content-box;
+	line-height: 30px;
+	/*padding: 20px;*/
+	/*background: #ffe4cc;*/
+	/*适用于块元素的垂直居中的方法*/
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+form{
+	display: block;
+}
+/*登录注册成功后隐藏注册登录表单*/
+.form {
+	display: none;
+}
+
+.click {
+	display: none;
+}
+
+
+h1,
+h2,
+#username,
+#password,
+#code {
+	display: block;
+	height: 30px;
+	line-height: 30px;
+}
+
+h1,
+h2
+{
+	padding: 20px 0;
+	font-family: cursive,Arial;
+	font-size: 24px;
+	text-align: center;
+
+}
+
+#contentItem,
+.q,
+.loginClick {
+	background: rgba(96, 108, 97, 0.42);
+	border: 1px solid #c6c6c6;
+	border-radius: 10px;
+}
+#contentItem {
+	padding: 15px;
+}
+#contentItem>p,
+#contentItem>div{
+	width: 320px;
+	margin-bottom: 10px;
+}
+#contentItem p:last-child {
+	margin-bottom: 0;
+	margin-top: 20px;
+}
+#contentItem p:first-child {
+	/*width: 310px;*/
+}
+
+.focus {
+	box-shadow: 0 0 0 3px #e5001c;
+}
+.blur {
+	box-shadow: none;
+}
+#username,
+#password,
+#code,
+#getCode {
+	border: 1px solid #929292;
+	box-sizing: border-box;
+	border-radius: 3px;
+	padding: 2px 5px;
+}
+
+
+#code {
+	border-radius: 3px 0 0 3px;
+}
+#getCode {
+	border-radius: 0 3px 3px 0;
+}
+
+#login {
+	height: 30px;
+	line-height: 30px;
+	border-radius: 3px;
+	background: #18b63d;
+}
+#login:hover {
+	background: #17a439;
+}
+#contentItem p label,
+#contentItem p input,
+#contentItem p span,
+#codeAside label {
+	width: inherit;
+}
+
+#code{
+	width: 218px;
+	border-right: 0;
+}
+/*禁止父元素浮动*/
+#codeAside{
+	overflow: hidden;
+}
+#codeAside label,
+#codeAside #code,
+#codeAside #getCode{
+	float: left;
+}
+
+#codeAside label {
+	/*将验证码项与输入分离*/
+	width: 100%;
+}
+/*消除边距*/
+input#getCode {
+	margin-left: -4px;
+}
+
+#getCode{
+	padding: 0 10px;
+	/*自适应内容的宽度fit-content*/
+	width: fit-content;
+	height: 30px;
+	border-left: 0;
+	font-size: 20px;
+	background-image: url('../img/randomCodeImg.jpg');
+	cursor: default;
+}
+
+#getCode>span{
+	display: inline-block;
+	width: 16px;
+	height: 14px;
+	text-align: center;
+	/*transform: rotate(45deg);*/
+}
+/*错误信息设置开始*/
+/*#error{
+	display: none;
+}
+#error.error{
+	display: block;
+	color: #ff1c06;
+}*/
+.error{
+	display: none;
+}
+.errorCode.error{
+	display: block;
+	/*清除上面元素带来的浮动*/
+	clear: both;
+	width: 320px;
+	height: 20px;
+	color: #ff1c06;
+}
+/*错误信息设置结束*/
+
+/*第一次页面加载时隐藏主页面*/
+.nav {
+	display: none;
+}
+nav {
+	margin: 8% 15%;
+}
+
+h1{
+	font-size: 30px;
+	padding: 30px;
+
+}
+
+nav h2 {
+	padding:6px 0 10px;
+}
+
+.q,.loginClick{
+	width: 19%;
+	height: 300px;
+	float: left;
+	margin-right: 3.5%;
+	padding:1.5%;
+}
+
+.q button ,.loginClick button{
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	border: 1px solid #75957b;
+	background: #30951f;
+	border-radius: 3px;
+	color: #10ff0ead;
+	font-weight: bolder;
+	cursor: pointer;
+}
+
+.q button:hover ,
+.loginClick button:hover {
+	background: #287b1a;
+	color: #f8f8f8;
+}
+
+button+button {
+	margin-top: 20px;
+}
+
+.loginClick {
+	margin-right: 0;
+}
+/*显示子程序*/
+.subContentDisplay {
+	display: block;
+	padding-top: 66px;
+}
+/*隐藏子程序*/
+.subContentNone {
+	display: none;
+}
+
+.subContentDisplay .title {
+
+}
+
+/*页面水平对齐*/
+
+.subContentDisplay>div {
+	width: fit-content;
+	height: fit-content;
+	margin: 0 auto;
+}
+.subContentDisplay>div:last-child {
+	/*兼容Firefox:当容器未设置宽度时，margin：0 auto;无效*/
+	/*width: 1063px;*/
+	-moz-margin-start: 30%;
+
+}
+/*时间显示内容*/
+
+.subContentDisplay .timeContent {
+	width: fit-content;
+	height: fit-content;
+	line-height: 300px;
+	background: #279f63b5;
+	mso-background: #18b63d;
+	text-align: center;
+	font-size: 300px;
+	font-weight: bolder;
+	color: #ff8a13;
+	text-shadow: 0 1px 3px rgba(255, 255, 255, 0.67),0 -1px 3px rgba(0, 0, 0, 0.67),-1px 0 3px rgba(255, 255, 255, 0.67),-1px 0 3px rgba(0, 0, 0, 0.67);
+}
+
+/*时分秒之间的冒号垂直居中*/
+.subContentDisplay .timeContent>*:nth-child(odd) {
+	vertical-align: middle;
+}
+
+/*子程序功能键按钮*/
+.subContentDisplay .subFunctionSon {
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 30% 100% 100% 30%;
+	background: #923f3f7a;
+    cursor: pointer;
+}
+/*鼠标覆盖时的样式*/
+.subContentDisplay .subFunctionSon:hover {
+	background: rgba(243, 0, 0, 0.54);
+}
+/*使得功能键水平对称排列*/
+.subContentDisplay button+button {
+	margin-left: 30px;
+}
+/*自定义设置键*/
+.subContentDisplay div:last-child>*{
+	margin-top: 15px;
+	width: 120px;
+	font-size: 20px;
+	height: 30px;
+	line-height: 30px;
+}
+.subContentDisplay div:last-child :nth-child(even) {
+	margin-right: 20px;
+}
+#subContent input[type="button"].myinput_3 {
+	width: 250px;
+    background: #fff9f96e;
+}
+#subContent input[type="button"].myinput_3:hover {
+    background-color: #18181845;
+    color: #ffffff;
+}
+.subContentDisplay .setDateTimeDiv {
+    width: fit-content;
+    height: fit-content;
+    /*overflow: hidden;*/
+}
+#subContent .setDateTimeDiv input {
+
+    width: 210px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 24px;
+    color: #00bde5;
+}
+#subContent .setDateTimeDiv input {
+
+
+}
+#subContent input[type="button"] {
+    cursor: pointer;
+}
+#subContent .setDateTimeDiv .setDateTime{
+    width: fit-content;
+    height: fit-content;
+    margin: 36px 30px;
+    float: left;
+
+}
+
+#subContent .setDateTimeDiv .setDateTime>*{
+    display: block;
+    margin: 20px 30px;
+    border-radius: 20px;
+}
+#subContent .setDateTimeDiv .setDateTime>input[type="button"] {
+    color: #ffffff;
+    height: 100px;
+    margin-bottom: 30px;
+    background-color: #e2e2e236;
+}
+#subContent .setDateTimeDiv .setDateTime>input[type="button"]:hover {
+    background-color: #5e796a9e;
+    color: #f3032a;
+}
+#subContent .setDateTimeDiv .setDateTime>label{
+    text-align: center;
+    margin: 0 50px;
+    background: #7fac949e;
+    font-size: 20px;
+    border-radius: 20px;
+}

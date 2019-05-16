@@ -1,0 +1,78 @@
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>团购——限时抢</title>
+    <link rel="stylesheet" href="style.css"  />
+</head>
+<body>
+<div class="content3">
+    <div class="time">还剩 <span id="LeftTime"></span></div>
+    <div id="now"></div>
+</div>
+<script>
+    function FreshTime(){
+        var endtime=new Date("2019/4/18,12:00:00");//结束时间
+        var nowtime = new Date();//当前时间
+        var lefttime=  parseInt((endtime.getTime()-nowtime.getTime())/1000)  ;
+        d=  parseInt(lefttime/24/60/60);
+        h=  parseInt((lefttime/(60*60))%24);
+        m=  parseInt(lefttime/60%60);
+        s=  parseInt(lefttime%60);
+        ms = parseInt((endtime.getTime()-nowtime.getTime())%1000);
+        document.getElementById("LeftTime").innerHTML=d+"天"+h+"小时"+m+"分"+s+"秒"+ms+"毫秒";
+        if(lefttime<=0){
+            document.getElementById("LeftTime").innerHTML="团购已结束";
+            clearInterval(sh);
+        }
+    }
+    FreshTime();
+    var sh;
+    sh= setInterval(FreshTime,1);
+
+    function f() {
+
+        var nowTime = new Date();
+        var year = nowTime.getFullYear();
+        var month = nowTime.getMonth() + 1;
+        if (month < 10) {
+            month = "0" + month;
+        }
+        var day = nowTime.getDate();
+        if (day < 10) {
+            day = "0" + day;
+        }
+        var hour = nowTime.getHours();
+        if (hour < 10) {
+            hour = "0" + hour;
+        }
+        var minute = nowTime.getMinutes();
+        if (minute < 10) {
+            minute = "0" + minute;
+        }
+        var second = nowTime.getSeconds();
+        if (second < 10) {
+            second = "0" + second;
+        }
+        var msecond = nowTime.getMilliseconds();
+        if (msecond < 100) {
+            if (msecond < 10) {
+                msecond = "00" + msecond;
+            }
+            else
+                msecond = "0" + msecond;
+        }
+
+        document.getElementById("now").innerHTML=year+"年"+month+"月"+day+"日"+hour+"小时"+minute+"分"+second+"秒"+msecond+"毫秒";
+    }
+    var sss = setInterval(f,1);
+    document.getElementById("now").onclick = function () {
+        clearInterval(sh);
+        clearInterval(sss);
+    }
+    document.getElementById("LeftTime").onclick = function () {
+        var sss = setInterval(f,1);
+        var sh;
+        sh= setInterval(FreshTime,1);
+    }
+</script>
+</body>
+</html>

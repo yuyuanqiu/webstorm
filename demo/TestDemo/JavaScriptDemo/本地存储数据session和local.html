@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据存储的两种方式（本地）</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+
+        }
+        p{
+            /*这个对齐方式一定要设置position*/
+            /*position: absolute;*/
+            /*top: 50%;*/
+            /*left: 50%;*/
+            margin: 36px auto;
+            width: fit-content;
+            /*height: 100px;*/
+        }
+        p * {
+            font-size: 30px;
+            height: 50px;
+            line-height: 50px;
+            background: rgba(0, 0, 0, 0.01);
+            color: #f30000;
+            border: 1px solid skyblue;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        p *:hover {
+            background: #ff8a13;
+        }
+
+
+    </style>
+
+</head>
+<body>
+<p>
+    <label for="username">用户名：</label>
+    <input type="text" id="username" value="">
+</p>
+<p>
+    <input type="button" class="setUsername" value="session设置">
+    <input type="button" class="getUsername" value="session获取">
+    <input type="button" class="removeUsername" value="session删除">
+    <input type="button" class="clearUserName" value="session清空">
+</p>
+<p>
+    <input type="button" class="setUsername" value="local设置">
+    <input type="button" class="getUsername" value="local获取">
+    <input type="button" class="removeUsername" value="local删除">
+    <input type="button" class="clearUserName" value="local清空">
+</p>
+
+<script>
+    // 设置username
+    // F12查看
+    // localStorage存储数据20MB，硬盘，同一浏览器可之内可共享数据
+    // sessionStorage存储数据5MB，关掉网页及时失效
+    var setUsername = document.querySelectorAll(".setUsername");
+    setUsername[0].onclick = function () {
+        var  username  = document.querySelector("#username").value;
+        alert(username)
+        var setUsernameSession = window.sessionStorage.setItem("Username", username);
+    };
+    setUsername[1].onclick = function () {
+        var  username  = document.querySelector("#username").value;
+        alert(username)
+        var setUsernameLocal = window.localStorage.setItem("Username", username);
+    }
+    // 获取username
+    var getUsername = document.querySelectorAll(".getUsername");
+    getUsername[0].onclick = function () {
+        var getUsernameInSession = window.sessionStorage.getItem("Username");
+        alert(getUsernameInSession)
+    };
+    getUsername[1].onclick = function () {
+        var getUsernameLocal = window.localStorage.getItem("Username");
+        alert(getUsernameLocal)
+    };
+    //删除username
+    var removeUsername = document.querySelectorAll(".removeUsername");
+    removeUsername[0].onclick = function () {
+        window.sessionStorage.removeItem("Username");
+    };
+    removeUsername[1].onclick = function () {
+        window.localStorage.removeItem("Username");
+    };
+    // 清空数据
+    var clearDate = document.querySelectorAll(".clearUserName");
+    clearDate[0].onclick = function () {
+        window.sessionStorage.clear();
+    };
+    clearDate[1].onclick = function () {
+        window.localStorage.clear();
+    };
+</script>
+</body>
+</html>

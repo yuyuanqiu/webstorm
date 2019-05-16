@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        ::selection{
+            color: #ff4f93;
+            background: #c5ffbb;
+        }
+        input:read-only{
+            background-color: #ffcf68;}
+        label::before{
+            content: attr(for);
+        }
+    </style>
+</head>
+<body>
+<form>
+    <label>
+        <input type="text"  value="yuyuan">
+    </label>
+    <label for="ii">nan</label> <input type="radio" value="nan" id="ii" name="di" checked>
+<label for="iii">nv</label> <input type="radio"  id="iii" value="nv" name="di">
+</form>
+</body>
+</html>
