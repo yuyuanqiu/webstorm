@@ -12,99 +12,44 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.6814276">
-      <split-first>
-        <leaf>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/myNavDemo/default/index.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="400">
-                  <caret line="3617" selection-start-line="3617" selection-end-line="3617" />
-                  <folding>
-                    <element signature="n#aside#0;n#body#0;n#html#0;n#!!top" />
-                    <element signature="n#div#0;n#nav#0;n#aside#0;n#body#0;n#html#0;n#!!top" />
-                    <element signature="n#section#0;n#main#0;n#body#0;n#html#0;n#!!top" />
-                    <element signature="e#4854#4859#0" expanded="true" />
-                    <element signature="e#28276#28281#0" expanded="true" />
-                    <element signature="e#31451#31456#0" expanded="true" />
-                    <element signature="e#56513#56518#0" expanded="true" />
-                    <element signature="e#62906#62911#0" expanded="true" />
-                    <element signature="e#63332#63337#0" expanded="true" />
-                    <element signature="e#63712#63717#0" expanded="true" />
-                    <element signature="e#65204#65209#0" expanded="true" />
-                    <element signature="e#65218#65223#0" expanded="true" />
-                    <element signature="e#76359#76364#0" expanded="true" />
-                    <element signature="e#84550#84555#0" expanded="true" />
-                    <element signature="e#85220#85224#0" expanded="true" />
-                    <element signature="e#85225#85229#0" expanded="true" />
-                    <element signature="e#88040#88045#0" expanded="true" />
-                    <element signature="e#92398#92403#0" expanded="true" />
-                    <element signature="e#99319#99324#0" expanded="true" />
-                    <element signature="e#115541#115547#0" expanded="true" />
-                    <element signature="e#115555#115561#0" expanded="true" />
-                    <element signature="e#116797#116802#0" expanded="true" />
-                    <element signature="e#118844#118849#0" expanded="true" />
-                    <element signature="e#124257#124262#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/myNavDemo/default/js/index.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state>
-                  <caret line="30" selection-start-line="30" selection-end-line="30" />
-                  <folding>
-                    <element signature="n#!!doc" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/jquery-1.12.4/.jshintrc">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="384">
-                  <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/jquery-1.12.4.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="213">
-                  <caret line="135" column="4" selection-start-line="135" selection-start-column="4" selection-end-line="135" selection-end-column="4" />
-                  <folding>
-                    <element signature="n#!!doc" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/myNavDemo/default/css/index.css">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="616">
-                  <caret line="210" column="16" selection-start-line="210" selection-start-column="16" selection-end-line="210" selection-end-column="16" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.1.addClass().html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="528">
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.2.addClass().html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/jquery-1.12.4.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="211080">
+              <caret line="8807" column="4" selection-start-line="8807" selection-start-column="4" selection-end-line="8807" selection-end-column="4" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -152,13 +97,17 @@
         <option value="$PROJECT_DIR$/myNavDemo/default/index.html" />
         <option value="$PROJECT_DIR$/jquery-1.12.4/.jshintrc" />
         <option value="$PROJECT_DIR$/myNavDemo/default/js/index.js" />
+        <option value="$PROJECT_DIR$/myNavDemo/jqueryStudy/1.1.隐藏修改并显现元素内容.html" />
+        <option value="$PROJECT_DIR$/myNavDemo/jqueryStudy/1.2.jquery选择器.html" />
+        <option value="$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.1.addClass().html" />
+        <option value="$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.2.addClass().html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="952" />
-    <option name="width" value="977" />
-    <option name="height" value="1038" />
+    <option name="x" value="981" />
+    <option name="width" value="945" />
+    <option name="height" value="1039" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -166,6 +115,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -173,27 +123,65 @@
               <item name="WebstormProjects" type="b2602c69:ProjectViewProjectNode" />
               <item name="WebstormProjects" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="WebstormProjects" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WebstormProjects" type="462c0819:PsiDirectoryNode" />
+              <item name="myNavDemo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WebstormProjects" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WebstormProjects" type="462c0819:PsiDirectoryNode" />
+              <item name="myNavDemo" type="462c0819:PsiDirectoryNode" />
+              <item name="jqueryStudy" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WebstormProjects" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WebstormProjects" type="462c0819:PsiDirectoryNode" />
+              <item name="myNavDemo" type="462c0819:PsiDirectoryNode" />
+              <item name="jqueryStudy" type="462c0819:PsiDirectoryNode" />
+              <item name="jQuery书籍笔记" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WebstormProjects" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WebstormProjects" type="462c0819:PsiDirectoryNode" />
+              <item name="myNavDemo" type="462c0819:PsiDirectoryNode" />
+              <item name="jqueryStudy" type="462c0819:PsiDirectoryNode" />
+              <item name="jQuery官方文档笔记" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WebstormProjects" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WebstormProjects" type="462c0819:PsiDirectoryNode" />
+              <item name="jquery-1.12.4.js" type="620a8d5e:NestingTreeNode" />
+            </path>
+            <path>
+              <item name="WebstormProjects" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WebstormProjects" type="462c0819:PsiDirectoryNode" />
+              <item name="jquery-3.4.0.js" type="620a8d5e:NestingTreeNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../yuyuan" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="Q:\桌面\WebstormProjects\myNavDemo\jqueryStudy\jQuery书籍笔记" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="Q:\桌面\WebstormProjects\myNavDemo\jqueryStudy\jQuery官方文档笔记" />
+      <recent name="Q:\桌面\WebstormProjects\myNavDemo\jqueryStudy" />
+      <recent name="Q:\桌面\WebstormProjects\myNavDemo" />
       <recent name="Q:\桌面\WebstormProjects\myNavDemo\default\test" />
       <recent name="Q:\桌面\WebstormProjects\myNavDemo\default\js" />
-      <recent name="Q:\桌面\WebstormProjects\myNavDemo\default" />
-      <recent name="Q:\桌面\WebstormProjects\myNavDemo" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -238,7 +226,11 @@
       <workItem from="1557824134767" duration="12474000" />
       <workItem from="1557886832892" duration="7178000" />
       <workItem from="1557909885950" duration="6179000" />
-      <workItem from="1557965836589" duration="33504000" />
+      <workItem from="1557965836589" duration="34322000" />
+      <workItem from="1558050695900" duration="7076000" />
+      <workItem from="1558090155024" duration="1242000" />
+      <workItem from="1558091759233" duration="2029000" />
+      <workItem from="1558329047842" duration="49000" />
     </task>
     <task id="LOCAL-00001" summary="ls">
       <created>1558014323775</created>
@@ -251,12 +243,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="89033000" />
+    <option name="totallyTimeSpent" value="100247000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20819564" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.3986577" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -268,7 +260,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49966952" weight="0.32941177" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.7376074" visible="true" weight="0.96617645" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.7376074" visible="true" weight="0.19705883" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.2623926" side_tool="true" weight="0.96617645" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -322,6 +314,23 @@
         </entry>
       </map>
     </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myShow1" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
@@ -346,43 +355,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://Q:/文档/bookmarks_5_13_19.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="25" column="100" lean-forward="true" selection-start-line="25" selection-start-column="100" selection-end-line="25" selection-end-column="100" />
-          <folding>
-            <element signature="e#795#800#0" expanded="true" />
-            <element signature="e#6109#6114#0" expanded="true" />
-            <element signature="e#11459#11464#0" expanded="true" />
-            <element signature="e#16302#16307#0" expanded="true" />
-            <element signature="e#17038#17043#0" expanded="true" />
-            <element signature="e#24322#24327#0" expanded="true" />
-            <element signature="e#25510#25515#0" expanded="true" />
-            <element signature="e#27209#27213#0" expanded="true" />
-            <element signature="e#27214#27218#0" expanded="true" />
-            <element signature="e#28524#28529#0" expanded="true" />
-            <element signature="e#28813#28818#0" expanded="true" />
-            <element signature="e#33460#33466#0" expanded="true" />
-            <element signature="e#33474#33480#0" expanded="true" />
-            <element signature="e#33819#33824#0" expanded="true" />
-            <element signature="e#34405#34410#0" expanded="true" />
-            <element signature="e#36957#36962#0" expanded="true" />
-            <element signature="e#38689#38694#0" expanded="true" />
-            <element signature="e#38849#38854#0" expanded="true" />
-            <element signature="e#38964#38969#0" expanded="true" />
-            <element signature="e#39604#39609#0" expanded="true" />
-            <element signature="e#39618#39623#0" expanded="true" />
-            <element signature="e#39713#39718#0" expanded="true" />
-            <element signature="e#39727#39732#0" expanded="true" />
-            <element signature="e#45290#45295#0" expanded="true" />
-            <element signature="e#47382#47387#0" expanded="true" />
-            <element signature="e#47520#47525#0" expanded="true" />
-            <element signature="e#47881#47886#0" expanded="true" />
-            <element signature="e#47901#47906#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://Q:/文档/bookmarks_5_13_19.html" />
     <entry file="file://$PROJECT_DIR$/myNavDemo/default/test/test1.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
@@ -438,16 +411,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3060">
           <caret line="27" column="12" lean-forward="true" selection-start-line="27" selection-start-column="12" selection-end-line="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jquery-1.12.4.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="135" column="4" selection-start-line="135" selection-start-column="4" selection-end-line="135" selection-end-column="4" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -536,42 +499,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myNavDemo/default/css/index.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="210" column="16" selection-start-line="210" selection-start-column="16" selection-end-line="210" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/myNavDemo/default/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
+        <state relative-caret-position="81528">
           <caret line="3617" selection-start-line="3617" selection-end-line="3617" />
           <folding>
             <element signature="n#aside#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#div#0;n#nav#0;n#aside#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#section#0;n#main#0;n#body#0;n#html#0;n#!!top" />
-            <element signature="e#4854#4859#0" expanded="true" />
-            <element signature="e#28276#28281#0" expanded="true" />
-            <element signature="e#31451#31456#0" expanded="true" />
-            <element signature="e#56513#56518#0" expanded="true" />
-            <element signature="e#62906#62911#0" expanded="true" />
-            <element signature="e#63332#63337#0" expanded="true" />
-            <element signature="e#63712#63717#0" expanded="true" />
-            <element signature="e#65204#65209#0" expanded="true" />
-            <element signature="e#65218#65223#0" expanded="true" />
-            <element signature="e#76359#76364#0" expanded="true" />
-            <element signature="e#84550#84555#0" expanded="true" />
-            <element signature="e#85220#85224#0" expanded="true" />
-            <element signature="e#85225#85229#0" expanded="true" />
-            <element signature="e#88040#88045#0" expanded="true" />
-            <element signature="e#92398#92403#0" expanded="true" />
-            <element signature="e#99319#99324#0" expanded="true" />
-            <element signature="e#115541#115547#0" expanded="true" />
-            <element signature="e#115555#115561#0" expanded="true" />
-            <element signature="e#116797#116802#0" expanded="true" />
-            <element signature="e#118844#118849#0" expanded="true" />
-            <element signature="e#124257#124262#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myNavDemo/default/css/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="210" column="16" selection-start-line="210" selection-start-column="16" selection-end-line="210" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myNavDemo/default/js/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -583,13 +535,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myNavDemo/default/js/index.js">
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/block.rnc">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
+        <state relative-caret-position="-410">
+          <caret line="248" column="16" selection-start-line="248" selection-start-column="16" selection-end-line="248" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery书籍笔记/1.1.隐藏修改并显现元素内容.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="45" column="12" selection-start-line="45" selection-start-column="12" selection-end-line="45" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery书籍笔记/1.2.jquery选择器.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2424">
+          <caret line="28" column="9" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery书籍笔记/jquery-1.12.4.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/jquery-1.12.4.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.1.addClass().html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="528">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jquery-1.12.4.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211080">
+          <caret line="8807" column="4" selection-start-line="8807" selection-start-column="4" selection-end-line="8807" selection-end-column="4" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.2.addClass().html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
         </state>
       </provider>
     </entry>
