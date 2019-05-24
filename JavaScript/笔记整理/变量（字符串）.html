@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var myName = "谕爰";
+    console.log(myName.length);  // 2
+    // 转化为字符串：toString([进制基数]),null与undefined无此方法
+    // console.log(null.toString(), undefined.toString()); // TypeError
+    // 任何类型转为字符串：String(v)
+    // 有toString()方法则调用该方法
+    console.log(String(null), String(undefined));  // null undefined
+    console.log("Aspirate\0\rAi\ng");
+    var longStr = "字符串对于保存可以以文本形式表示的数据非常有用。\       一些常用的字符串操作有：\
+    查询字符串长度，使用 + 和 += 运算符来构建和连接字符串，\
+    使用 indexOf 方法检查某一子字符串在父字符串中的位置，\
+    又或是使用 substring 方法提取从父字符串中提取子字符串。";
+    console.log(longStr);
+    // 获取字符串的某个索引的值
+    console.log(myName.charAt(1),myName[1], myName.charCodeAt(1));
+    // eval()执行字符串内js代码
+    console.log(eval("myName.length"));
+    // 字符串对象不会执行，返回字符串对象
+    console.log(eval(new String("myName.length")));
+    // 将字符串对象-->基本字符串
+    var basicStr = new String("myName.length").valueOf();
+    console.log(eval(basicStr));
+    // 字符串连接
+    console.log(myName.concat("终将是", "牛人"));
+    // 判断是否含有某个子字符串
+    console.log(myName.includes("谕"));
+    // 创建html标签文本
+    document.body.innerHTML = myName.small() + myName.big() + myName.bold() + myName.italics() + myName.strike() + myName.sup() + myName.sub();
+</script>
+</body>
+</html>

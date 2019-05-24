@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 5种基本数据类型采用值传递：boolean，null，undefined，String，Number；包含了数据
+    /*值传递：传递的是副本，拷贝完全独立，互不干涉
+            改变其中任一个，不影响另一个
+
+    对象（Array，Function，Object）采用引用传递：只记录了地址
+    函数参数采用隐式引用(实际上为共享传递）:只传递了地址
+        当更改一方的地址（重新赋值，该变量指向了新的地址，抛弃了新的地址）时，另一方地址并未跟着变化
+    更改里面的属性是互相影响，
+        eg：只更改对象的内部（属性/元素）
+    只要其中任意一方更改变量的整体值（之后就不相关联了）
+        eg：将一个对象更改为一个string，或者重新赋值另一个对象等此类
+    判断两对象地址是否相等采用==/===。
+    判断值是否相等: 转为string或递归判断对象内部是否相等
+
+
+    */
+
+    // 面试题
+    function changeAgeAndReference(person) {
+        person.age = 25;
+        // 下面更改了整体对象，相当于另一个引用，所以两者互不关联了
+        /*person = {
+            name: "John",
+            age: 50
+        };*/
+
+        return person;
+    }
+    var personObj1 = {
+        name: "Alex",
+        age: 30
+    };
+    var personObj2 = changeAgeAndReference(personObj1);
+    console.log(personObj1); // -> ?
+    console.log(personObj2); // -> ?
+    // 更改内部属性，两者跟着一起变化
+    personObj2.name = 100;
+    // 添加内部属性，两者跟着一起变化
+    personObj2.a = "a";
+    // 删除内部属性，两者跟着一起变化
+    delete personObj1.age;
+    console.log(personObj1, personObj2);
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="javascript:void(0)">click here!</a>
+<script>
+    // del操作符删除对象属性，返回bool值，当成功删除或属性不存在返回true
+    var Persion = {
+        name: "Ioiy Aig",
+        age: 22
+    };
+    console.log(delete Persion.name);
+   /* {age: 22}
+    age: 22*/
+    console.log(Persion);
+
+    // 构造函数
+    function Person() {
+        this.name = "张三";
+        this.job = "工程师"
+    }
+    Person.prototype.name = "李四";
+    // 创建实例对象
+    var p = new Person();
+    // 只删除p实例的name属性 "张三"
+    delete p.name;  // 原型链继承的属性“李四”未删除
+    console.log(p);
+    console.log(p.name)  // 李四
+
+
+    // 非严格模式下为false，未删除，严格模式下抛出异常
+    // 使用var，let，const声明的任何东西都  不能被删除
+    var herName = "Ioiy Aig";
+    console.log(delete herName); // 非严格模式下为false，未删除，严格模式下抛出异常
+    console.log(herName); // Ioiy Aig
+    // 内置对象属性以及不可设置的属性 不能删除
+    // Math, Array, Object等内置对象的属性不可删除, 内置方法可以删除
+    console.log(delete String.prototype.length);
+    // Object.defineProperty()设置为不可设置的属性,不可删除
+    var university = {};
+    Object.defineProperty(university, "name", {
+        value: "JGSU",
+        configurable: false
+    });
+    console.log(delete university.name);
+    console.log(university); // JGSU
+
+    // 可以删除数组元素，但数组长度不变(类似于下面越界定义了数组元素一样），删除的元素索引的值为undefined
+    var week = ["Monday", "Tuesday", "Sunday"];
+    delete week[0];
+    console.log(week);
+    console.log(week.length);
+    week[10] = "a";
+    console.log(0 in week);
+    console.log(week.length);
+
+</script>
+</body>
+</html>

@@ -14,89 +14,87 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.1.addClass().html">
+        <entry file="file://$PROJECT_DIR$/JavaScript/笔记整理/Array.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="22" selection-start-line="22" selection-end-line="22" />
+            <state relative-caret-position="470">
+              <caret line="24" column="36" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.2.addClass().html">
+        <entry file="file://$PROJECT_DIR$/JavaScript/笔记整理/Date日期.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
+            <state relative-caret-position="110">
+              <caret line="9" column="42" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="42" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.3.删除class1.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="624">
-              <caret line="55" column="58" selection-start-line="55" selection-start-column="58" selection-end-line="55" selection-end-column="58" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/jquery-1.12.4.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="5816" column="6" lean-forward="true" selection-start-line="5816" selection-start-column="6" selection-end-line="5816" selection-end-column="6" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.6.attr().html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-864">
-              <caret line="5" column="9" lean-forward="true" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.7.prop().html">
+        <entry file="file://$PROJECT_DIR$/JavaScript/笔记整理/类型转换.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="446">
-              <caret line="26" column="54" selection-start-line="26" selection-start-column="54" selection-end-line="26" selection-end-column="54" />
+              <caret line="26" column="100" lean-forward="true" selection-start-line="26" selection-start-column="100" selection-end-line="26" selection-end-column="100" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.8获取高度height宽度width.html">
+        <entry file="file://$PROJECT_DIR$/JavaScript/笔记整理/函数.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="518">
+              <caret line="107" column="14" lean-forward="true" selection-start-line="107" selection-start-column="14" selection-end-line="107" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/JavaScript/笔记整理/逻辑表达式&amp;&amp;.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="336">
+              <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/JavaScript/笔记整理/值传递和引用传递.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="168">
+              <caret line="7" column="8" lean-forward="true" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/JavaScript/笔记整理/JavaScript引用传递图.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/JavaScript/笔记整理/变量.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="216">
-              <caret line="12" column="30" lean-forward="true" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+              <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/JavaScript/笔记整理/对象.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="384">
+              <caret line="16" selection-start-line="16" selection-end-line="16" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.9.获取坐标offset，position.html">
+        <entry file="file://$PROJECT_DIR$/JavaScript/笔记整理/数值变量.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="470">
-              <caret line="36" column="19" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/jquery-1.12.4.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="2998" column="4" selection-start-line="2998" selection-start-column="4" selection-end-line="2998" selection-end-column="4" />
+            <state relative-caret-position="278">
+              <caret line="13" column="26" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -169,13 +167,28 @@
         <option value="$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.7.prop().html" />
         <option value="$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.8获取高度height宽度width.html" />
         <option value="$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.9.获取坐标offset，position.html" />
+        <option value="$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.10获取滚动条位置.html" />
+        <option value="$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.10获取滚动条位置scrollLeft，scrollTop.html" />
+        <option value="$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.9.设置高度.html" />
+        <option value="$PROJECT_DIR$/JavaScript/笔记整理/del操作符.html" />
+        <option value="$PROJECT_DIR$/JavaScript/笔记整理/逻辑表达式&amp;&amp;.html" />
+        <option value="$PROJECT_DIR$/JavaScript/笔记整理/常量（字符串）.html" />
+        <option value="$PROJECT_DIR$/JavaScript/笔记整理/值传递和引用传递.html" />
+        <option value="$PROJECT_DIR$/JavaScript/笔记整理/变量.html" />
+        <option value="$PROJECT_DIR$/JavaScript/笔记整理/对象.html" />
+        <option value="$PROJECT_DIR$/JavaScript/笔记整理/变量（字符串）.html" />
+        <option value="$PROJECT_DIR$/JavaScript/笔记整理/Array.html" />
+        <option value="$PROJECT_DIR$/JavaScript/笔记整理/Date日期.html" />
+        <option value="$PROJECT_DIR$/JavaScript/笔记整理/类型转换.html" />
+        <option value="$PROJECT_DIR$/JavaScript/笔记整理/函数.html" />
+        <option value="$PROJECT_DIR$/JavaScript/笔记整理/数值变量.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="951" />
     <option name="width" value="978" />
-    <option name="height" value="1040" />
+    <option name="height" value="1039" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -189,6 +202,17 @@
             <path>
               <item name="WebstormProjects" type="b2602c69:ProjectViewProjectNode" />
               <item name="WebstormProjects" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WebstormProjects" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WebstormProjects" type="462c0819:PsiDirectoryNode" />
+              <item name="JavaScript" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="WebstormProjects" type="b2602c69:ProjectViewProjectNode" />
+              <item name="WebstormProjects" type="462c0819:PsiDirectoryNode" />
+              <item name="JavaScript" type="462c0819:PsiDirectoryNode" />
+              <item name="笔记整理" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="WebstormProjects" type="b2602c69:ProjectViewProjectNode" />
@@ -207,13 +231,6 @@
               <item name="myNavDemo" type="462c0819:PsiDirectoryNode" />
               <item name="jqueryStudy" type="462c0819:PsiDirectoryNode" />
               <item name="jQuery书籍笔记" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WebstormProjects" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WebstormProjects" type="462c0819:PsiDirectoryNode" />
-              <item name="myNavDemo" type="462c0819:PsiDirectoryNode" />
-              <item name="jqueryStudy" type="462c0819:PsiDirectoryNode" />
-              <item name="jQuery官方文档笔记" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="WebstormProjects" type="b2602c69:ProjectViewProjectNode" />
@@ -241,15 +258,15 @@
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="Q:\桌面\WebstormProjects\myNavDemo\jqueryStudy\jQuery书籍笔记" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="Q:\桌面\WebstormProjects\JavaScript\笔记整理" />
       <recent name="Q:\桌面\WebstormProjects\myNavDemo\jqueryStudy\jQuery官方文档笔记" />
       <recent name="Q:\桌面\WebstormProjects\myNavDemo\jqueryStudy" />
       <recent name="Q:\桌面\WebstormProjects\myNavDemo" />
       <recent name="Q:\桌面\WebstormProjects\myNavDemo\default\test" />
-      <recent name="Q:\桌面\WebstormProjects\myNavDemo\default\js" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="Q:\桌面\WebstormProjects\myNavDemo\jqueryStudy\jQuery书籍笔记" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -264,7 +281,10 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.demo_index.html">
+  <component name="RunManager" selected="JavaScript Debug.Array.html">
+    <configuration name="Array.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/WebstormProjects/JavaScript/笔记整理/Array.html">
+      <method v="2" />
+    </configuration>
     <configuration name="demo_index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/WebstormProjects/myNavDemo/default/fontImage/demo_index.html">
       <method v="2" />
     </configuration>
@@ -273,6 +293,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.Array.html" />
         <item itemvalue="JavaScript Debug.demo_index.html" />
         <item itemvalue="JavaScript Debug.index.html" />
       </list>
@@ -299,7 +320,9 @@
       <workItem from="1558090155024" duration="1242000" />
       <workItem from="1558091759233" duration="2029000" />
       <workItem from="1558329047842" duration="49000" />
-      <workItem from="1558491494401" duration="23903000" />
+      <workItem from="1558491494401" duration="26319000" />
+      <workItem from="1558569181493" duration="28489000" />
+      <workItem from="1558656790030" duration="12453000" />
     </task>
     <task id="LOCAL-00001" summary="ls">
       <created>1558014323775</created>
@@ -312,13 +335,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="124150000" />
+    <option name="totallyTimeSpent" value="167508000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.34808454" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2688243" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -643,16 +666,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/jquery-1.12.4.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="5816" column="6" lean-forward="true" selection-start-line="5816" selection-start-column="6" selection-end-line="5816" selection-end-column="6" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.4.toggleClass.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="518">
@@ -669,36 +682,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.1.addClass().html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
+        <state relative-caret-position="528">
           <caret line="22" selection-start-line="22" selection-end-line="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.2.addClass().html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
+        <state relative-caret-position="696">
           <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.3.删除class1.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
+        <state relative-caret-position="1320">
           <caret line="55" column="58" selection-start-line="55" selection-start-column="58" selection-end-line="55" selection-end-column="58" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/jquery-1.12.4.js">
+    <entry file="file://$PROJECT_DIR$/jquery-1.12.4.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="2998" column="4" selection-start-line="2998" selection-start-column="4" selection-end-line="2998" selection-end-column="4" />
+        <state relative-caret-position="139296">
+          <caret line="5816" column="6" selection-start-line="5816" selection-start-column="6" selection-end-line="5816" selection-end-column="6" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.6.attr().html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-864">
-          <caret line="5" column="9" lean-forward="true" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+        <state relative-caret-position="120">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -708,22 +724,137 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.7.prop().html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="446">
+        <state relative-caret-position="624">
           <caret line="26" column="54" selection-start-line="26" selection-start-column="54" selection-end-line="26" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/jquery-1.12.4.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="71664">
+          <caret line="2998" column="4" selection-start-line="2998" selection-start-column="4" selection-end-line="2998" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.10获取滚动条位置scrollLeft，scrollTop.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="61" column="9" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.8获取高度height宽度width.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="30" lean-forward="true" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+        <state relative-caret-position="350">
+          <caret line="43" column="22" lean-forward="true" selection-start-line="43" selection-start-column="22" selection-end-line="43" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.9.获取坐标offset，position.html">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="912">
+          <caret line="36" column="8" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myNavDemo/jqueryStudy/jQuery官方文档笔记/1.9.设置高度.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="32" column="13" lean-forward="true" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JavaScript/笔记整理/常量（字符串）.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="11" column="50" selection-start-line="11" selection-start-column="50" selection-end-line="11" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JavaScript/笔记整理/变量（字符串）.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="24" column="39" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JavaScript/笔记整理/del操作符.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JavaScript/笔记整理/逻辑表达式&amp;&amp;.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JavaScript/笔记整理/值传递和引用传递.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="7" column="8" lean-forward="true" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JavaScript/笔记整理/JavaScript引用传递图.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JavaScript/笔记整理/变量.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JavaScript/笔记整理/对象.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JavaScript/笔记整理/Array.html">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="470">
-          <caret line="36" column="19" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
+          <caret line="24" column="36" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="812" column="4" selection-start-line="812" selection-start-column="4" selection-end-line="812" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JavaScript/笔记整理/Date日期.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="9" column="42" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JavaScript/笔记整理/类型转换.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="446">
+          <caret line="26" column="100" lean-forward="true" selection-start-line="26" selection-start-column="100" selection-end-line="26" selection-end-column="100" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JavaScript/笔记整理/函数.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="518">
+          <caret line="107" column="14" lean-forward="true" selection-start-line="107" selection-start-column="14" selection-end-line="107" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/JavaScript/笔记整理/数值变量.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="13" column="26" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
         </state>
       </provider>
     </entry>
