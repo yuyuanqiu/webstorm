@@ -2,7 +2,7 @@ var information = {
     name: 'Ioiy Aig',
     age: 21,
     sex: 'female',
-    phone: 1500791
+    phone: 1500791,
 };
 console.log(information.name);
 delete information.age;
@@ -17,8 +17,8 @@ var nameList = {
     name: 'Ioiy Aig',
     age: 21,
     sex: 'female',
-    phone: 1500791
-}
+    phone: 1500791,
+};
 
 // false
 console.log(information === nameList);

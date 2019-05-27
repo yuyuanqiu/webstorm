@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 正则表达式：
+    // 新建方式：2种方式新建均为对象形式
+    // 所以以下2个值是不同正则式对象：
+    // 当确定了正则表达式规则时，使用字面量新建性能更佳
+    console.log(/ab/ == /ab/); // false
+    // 字面量新建：
+    var regex = /ab/gi; // 正则式在2个'/'之间，末尾可添加修饰符（如i）
+    console.log(typeof regex);
+    // 构造函数新建：
+    var regex2 = new RegExp("ab", "i"); // 前一个参数为正则式，后一个参数为修饰符
+
+    // 正则式为空，匹配所有字符串
+    console.log(new RegExp("").test("匹配所有字符串")); // true
+    // 正则对象实例的6个属性：5个只读(修饰符：(ignoreCase, global, multiline, flags:返回设置的哪些修饰符的字符串, source: 返回正则式的str形式)，一个读写(lastIndex：下一次开始搜索的索引)
+
+    /*注意：
+    只有当设置了全局匹配g时，
+    lastIndex才会记住同一个正则式下次开始搜索时的索引
+    否则从默认位置或自定义设置位置重新开始
+    */
+
+    var fruits = "apple ab pear ab banana  ab orange ab ab abzz";
+    console.log(new String(fruits));
+    // 实例方法：test(): 匹配成功返回true
+    console.log(regex.test(fruits), regex.ignoreCase, regex.multiline, regex.global, regex.flags, regex.source, regex.lastIndex); // true true false true "gi" "ab" 8
+    // 可以设置lastIndex的值
+    regex.lastIndex = 22;
+    console.log(regex.test(fruits), regex.lastIndex); // true 27
+    console.log(regex.test(fruits), regex.lastIndex); // true 37
+
+    // 实例方法：exec(): 匹配成功返回一个匹配的数组，若正则式含括号，则还会返回匹配括号的值（组匹配），匹配失败返回null
+    // 一次只返回一个匹配到的结果，
+    // 返回的数组中：第一个返回整个匹配的结果，若有括号，后续返回括号中匹配的结果
+    // 第1个括号的结果为第二个元素值，依次类推(组匹配中最后一个符合要求的值）
+    // 返回数组还包括2个属性：input：整个原字符串，index：匹配成功的开始索引
+    var regex3 = /(\d)+/ig;
+    var toRegexStr = "ab31897ji3g3fa gsd8080324fad";
+    var matchArr = regex3.exec(toRegexStr);
+    // 共匹配四次，当匹配为null时，跳出匹配
+    while (matchArr) {
+        //["31897", "7", index: 2, input: "ab31897ji3g3fa gsd8080324fad"] 2 0
+        // 第一个为整体匹配到的,第二个元素之后为括号匹配
+        // 设置全局属性后，可继续匹配，接着从lastIndex的索引值开始
+        console.log(matchArr, matchArr.index, regex3.lastIndex);
+        matchArr = regex3.exec(toRegexStr);
+    }
+    console.log(matchArr, regex3.lastIndex);
+
+    // 数组的四个有关正则表达式的方法：search(),match(),split(),replace()
+    // match(): lastIndex设置无效, 一次性输出所有匹配的结果
+    // 在match方法中，如果不想返回正则式括号的内容，需要加上/g
+    console.log("模式");
+    console.log("abc".match(/a(b)c/)); // ["abc", "b"]，不加还返回b
+    console.log("abc".match(/a(b)c/g)); // ["abc"]
+    // match中的非捕获组
+    var verb = /(\S){1,}/ig;
+    var verbstr = "my name is yy";
+    console.log(verbstr.match(verb), verb.lastIndex); // ["my", "name", "is", "yy"] 0
+    // search(): 返回第一个匹配的索引，或者-1
+    console.log(verbstr.search(verb), verb.lastIndex); // 0  0
+    // replace(原内容，替换内容);第一个参数可为str，re
+    /*replace方法的第二个参数可以使用美元符号$，用来指代所替换的内容。
+        $&：匹配的子字符串。
+        $`：匹配结果前面的文本。
+        $'：匹配结果后面的文本。
+        $n：匹配成功的第n组内容，n是从1开始的自然数。
+        $$：指代美元符号$。*/
+    var content = verbstr.replace(verb, "$&"); // 每个替换本身my name is yy
+    console.log(content);
+    content = verbstr.replace(verb, "$`"); // 每个单词替换成其前面的内容"   my  my name  my name is "
+    console.log(content);
+    content = verbstr.replace(verb, "$'"); // 每个单词替换成其后面的内容"name is yy  is yy  yy "
+    console.log(content);
+    content = verbstr.replace(verb, "$1"); // 每个替换成括号内最后一个匹配的  y e s y
+    console.log(content);
+    // replace方法的第二个参数可以为函数，匿名函数可为多个参数，第一个参数为匹配到的内容，其他的为组匹配
+    content = verbstr.replace(verb, function (match) {
+        return match + 10;
+    });
+    console.log(content);
+
+    //                                                              !!!!!!!!!!!!!!!!!
+    // split(re/str, 返回的数组元素个数), 此函数返回数组
+    var a = "aaa*aa*a*";
+    var split = a.split(/a*/); // 使用0个或以上的a分割字符串，如果没有，则用''分割；
+    console.log(split);//   ["", "*", "*", "*"]
+    // 当遇到2个字符没有用a分割，则会使用空白分割
+    split = "aaammamm".split(/a*/); // 没有a，则用''(0个a)分割
+    console.log(split); // ["", "m", "m", "m", "m"]
+    split = a.split(/((a)*)/); // 使用>=0的a进行分割，并且还会返回括号的匹配(按原序返回）
+    // 每分割得到一个匹配后，就对匹配符中的括号内容跟着返回，然后再得到下一次分割，依次循环
+    console.log(split); // ["", "aaa", "a", "*", "aa", "a", "*", "a", "a", "*"]
+</script>
+</body>
+</html>
