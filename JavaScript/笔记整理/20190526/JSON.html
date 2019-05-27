@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 当符合规范的json格式用stringify()和parse()解析后，原值===解析后的值
+    /*json的语法规定（规范）：
+    复合对象只能为数组或对象（不能为函数等），原始值中不能是无穷，NaN，undefined；
+    字符串只能用双引号，对象的键key要用双引号括起来，数组/对象的最后一个成员后不能加逗号；*/
+    console.log(JSON.stringify(function () {
+        return 100;
+    })); // 输出undefined
+
+    //静态方法：JSON.stringify(),JSON.parse();
+    // JSON.stringify();
+    // 对于原始类型值，转换后会带双引号
+    console.log(JSON.stringify("abc")); // 输出""abc""
+    console.log(JSON.stringify(12));  // 输出"12"
+    // 当对象属性值为undefined，函数，xml时，会被自动跳过该属性（不转换）
+    // JSON.stringify()会忽略不可遍历的属性
+    console.log(JSON.stringify({"price": function () {
+            return 10;
+        }})); // 结果："{}"
+    // 正则对象会转为空对象
+    console.log(JSON.stringify(new RegExp("ab"))); //结果： "{}"
+    // 当数组成员为undefined，函数，xml时，会转为null
+    console.log(JSON.stringify([undefined])); // 结果为："[null]"
+    // JSON.stringify(value, arr);
+    // 接受第二个参数（数组），表示选择要转换的对象属性，不在数组内则自动过滤该属性,只对对象有效
+    console.log(JSON.stringify({"goods": "apple", "price": 12}, ["goods"])); // "{"goods": "apple"}"
+    // 第二个参数可以是一个函数，更改要返回的值，函数接受2个参数：key和value
+    // 若函数返回值为undefined或无返回值，则跳过该属性
+    // 递归处理
+    var o = {a: 1};
+    // recursive: 递归
+    function f(key, value) {
+        // 第一次遍历：key为空，value为整个对象
+        // 第二次遍历：key为a，value为1
+        console.log("key: " + key + " value: " + value);
+        return value;
+    }
+    console.log(JSON.stringify(o, f));
+    function recursive(key, value) {
+        if (typeof value === "object") {
+            // 第一次遍历value为整个对象
+            // 符合条件： o = {b: 2};
+            console.log("key: " + key + " value: " + value);
+            return {b: 2};
+        }
+        // 第二次遍历value为2，所以返回2*2=4
+        return value * 2;
+    }
+    console.log(JSON.stringify(o, recursive));
+    // 接受第三个参数：增加可读性：可为数字（在key之前增加空格<=10），或string（在key之前增加str）,对象有效（此时第二个参数设置为null才不会出错）
+    console.log(JSON.stringify({"goods": "apple","price": 12}, null, "对象："));
+    // 当对象又自定义的toJSON()方法时，则使用toJSON()的返回值作为参数，忽略其他属性
+    var person = {
+        firstName: "Aig",
+        lastName: "Ioiy",
+
+        // ？？？
+        get fullName() {
+          return "your name is " + this.firstName + " " + this.lastName;  
+        }, // 此处会转为：  fullName："your name is Aig Ioiy"
+        toJSON: function () {
+            return {name: this.firstName + this.lastName};
+        }
+    };
+    console.log(JSON.stringify(person)); // 此处先调用person的toJSON()方法，转为字符串，再被json处理
+
+    // JSON.parse(): 将json字符串转为对应的值
+    // 当传入的字符串不是有效的json格式时，将报错
+    // 因为字符串转为json的时候又套了一层引号，并且为双引号：正确json格式：'"string"'
+    // 为了解析错误，可以放在try..catch中
+    try {
+        console.log(JSON.parse("'string'")); // Uncaught SyntaxError: Unexpected token ' in JSON at position 0
+    }catch (e) {
+        console.log(e.toString());
+    }
+    // 接收第二个参数（fun）
+    console.log(JSON.parse('{"goods": "apple", "price": 12}', function (key, value) {
+        if (key === "price") {
+            return value * 0.8;
+        }
+        return value;
+    })); // {goods: "apple", price: 9.600000000000001}
+
+</script>
+</body>
+</html>

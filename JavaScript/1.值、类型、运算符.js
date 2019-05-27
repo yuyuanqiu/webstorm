@@ -14,7 +14,7 @@ console.log(typeof d);
 //字符串的比较是基于Unicode编码排序的
 //在JavaScript中只有NaN不等于它本身
 //因为不同的非法运算的结果并不会相等
-console.log("NaN==NaN:",NaN==NaN);
+console.log("NaN==NaN:",NaN == NaN);
 //未定义值：null，undefined
 //强制转换：当运算符作用在错误类型的值上，会自动将它转换为它所期盼的值;
 console.log(8*null);//0

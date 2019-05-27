@@ -14,5 +14,10 @@
 	"unused": true,
 
 	"node": true,
-  	"jquery": true
+  	"jquery": true,
+  	"ajax": true,
+  	"es3": true,
+  	"es5": true,
+  	"esnext": true
+
 }

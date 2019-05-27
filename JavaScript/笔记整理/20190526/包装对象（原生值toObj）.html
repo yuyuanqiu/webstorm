@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 三种原生类型值生成（包装为）相应地原生对象：Number，String，Boolean
+    // 使用new运算符：
+    var numObj = new Number(123);
+    var strObj = new String("string");
+    var boolObj = new Boolean(true);
+    // 转为对象后是可以更改内部的值, 而原生对象无法更改值（改动无效）
+    numObj.x = 12;
+    console.log(numObj);
+    console.log(typeof numObj); //object
+    console.log(typeof strObj); //object
+    console.log(typeof boolObj); //object
+    // 包装对象继承Object的方法：valueOf(), toString()
+    // 包装对象的值生成原生类型值：valueOf(), Number(), Boolean(), String()
+    var numOrigin = numObj.valueOf();
+    console.log(typeof numOrigin); // Number
+    var numOrigin2 = Number(numObj);
+    console.log(typeof numOrigin2); // Number
+    // 原生类型调用包装对象方法时，会自动转为包装对象实例，并在使用后自动销毁
+    var string = "string";
+    console.log(string.length);
+    // 相等于：使用完后自动销毁strToObj
+    var strToObj = new String(string);
+    console.log(strToObj.length);
+
+    // 包装对象可以自定义方法和属性
+    function const100() {
+        return 100;
+    }
+    Number.prototype.doubleLength = const100(); // 自定义属性
+    Number.prototype.doubleValue = function () { // 自定义方法
+        return this.valueOf() + this.valueOf();
+    };
+    console.log((123).doubleLength, (123).doubleValue());// 数字调用时需要用"()"括起
+</script>
+</body>
+</html>
