@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<article>
+    <header>
+        <h1>苹果</h1>
+        <p>发表日期：<time pubdate="pubdate">2010/10/09</time></p>
+    </header>
+    <p>
+        <b>苹果</b>，植物类水果，多花果树...（“苹果”的文章正文）
+    </p>
+    <footer>
+        <p><small>著作权归***公司所有。</small></p>
+    </footer>
+</article>
+
+<!--可嵌套的article元素-->
+<article>
+    <header>
+        <h1>苹果</h1>
+        <p>
+            发表日期：
+            <time pubdate="pubdate" datetime="2019/06/11">2019/06/11</time>
+        </p>
+    </header>
+    <p><b>苹果</b>，植物类水果（“苹果”文章的正文</p>
+    <section>
+        <h2>评论</h2>
+        <article>
+            <header>
+                <h3>发表者：谕爰</h3>
+                <p>
+                    <time pubdate datetime="2019-06-11T13:02+08:00">十分钟前</time>
+                </p>
+            </header>
+            <p>我喜欢苹果...（评论内容）</p>
+        </article>
+        <article>
+            <header>
+                <h3>发表者：可知</h3>
+                <p>
+                    <time pubdate datetime="2019-06-12T14:00-07:00">五分钟前</time>
+                </p>
+            </header>
+            <p>我不喜欢苹果...（评论内容）</p>
+        </article>
+    </section>
+</article>
+
+<!--article指代插件-->
+<article>
+    <h1>my fruit spinner</h1>
+    <object>
+        <param name="allowFullScreen" value="true">
+        <embed src="article元素示例.html" width="600px" height="500px">
+    </object>
+</article>
+
+</body>
+</html>
