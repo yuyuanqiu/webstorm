@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form id="new_form">
+    <label for="text">输入文本：</label>
+    <input type="text" id="text">
+    <!--formaction单击按钮时将表单提交到不同页面-->
+    <input type="submit" name="s1" value="v1" formaction="s1.jsp">提交到s1
+    <input type="image" src="#" formaction="s2.jsp" alt="提交到s2">提交到s2
+    <button type="submit" formaction="s3.jsp">提交到s3</button>
+    <!--formmethod指定表单的提交方法-->
+
+</form>
+<label>
+    <!--form属性声明该元素的从属表单，从而可以写在任意地方-->
+    <!--label包含表单子元素时，可不指定for属性-->
+    <!--作用：更方便向页面中的元素添加样式-->
+    <textarea form="new_form"></textarea>
+</label>
+
+</body>
+</html>
