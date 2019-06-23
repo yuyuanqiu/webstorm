@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="module">
+     /* es2015之前没有模块的概念，读取外部的文件，需要依次在html中使用script标签引入文件
+    缺点：离不开html，不能单独管理JavaScript脚本，必须注意脚本的读取顺序*/
+
+   /*JavaScript模块使用方法：
+    1，需要有支持JavaScript模块的浏览器
+    2，被读取端的处理（外部的模块文件处理）
+    3，读取端的处理（引入模块文件的js文件处理）*/
+    // 脚本文件：模块文件.js
+    // 引用外部文件时，需要使用type="module"语句导入模块，不指定将引发脚本错误
+   // import导入时，路径必须使用"./","../","/"指定相对路径，不能仅使用xxx.js的形式
+   // 使用{}同时指定多个需要导入的变量，对象，函数
+
+    import {user} from "./模块文件.html";
+    import {sayMessage} from "./模块文件.html";
+    import {user, sayMessage} from "./模块文件.html";
+
+
+   sayMessage(user);  // 需要运行在网站上
+    // 运行结果： Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, https.
+    // 使用as关键字指定别名
+   import {user as newUser, sayMessage as newSayMessage} from "./模块文件.html";
+   newSayMessage(newUser);
+   // 使用*导入所有能够导入的，并将这些值变成一个对象的属性
+    import * as All from "./模块文件.html";
+    All.sayMessage(All.user);
+
+    // 导入模板默认的所有变量
+    import all from "./模块文件.html";
+    all.sayMessage(all.user);
+
+    // 可以使用外部网站的JavaScript模块文件, 只有设计了模块的类库才能够导入
+    import * as THREE from "https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.module.js";
+    console.log(THREE);
+/*
+    // 模块导入JavaScript引擎执行的步骤
+    1，解析：引擎读取源代码并检查语法错误
+    2，加载：引擎加载所有需要导入的模块
+    3，链接；对每个加载的模块创建一个模块作用域，并为模块中的声明也创建作用域，包括从其他模块中导入的
+    4，运行：
+
+    // 模块加载的规则
+    1，只能在顶级作用域中使用import和export关键字，不允许在条件判断或函数内使用
+    2，所有的导出export必须指定导出名，不允许在循环中进行多次导出
+    3，不能在模块外部修改模块（模块对象是被冻结的）
+    4，不能对模块导入import进行错误处理（不能再try/catch中导入）
+    5，模块加载前不允许运行模块中的代码*/
+</script>
+</body>
+</html>

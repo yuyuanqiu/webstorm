@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="普通函数显示age" onclick="getAgeByOrdinary();">
+<input type="button" value="普通函数显示age-改进" onclick="getAgeByOrdinary1();">
+<input type="button" value="箭头函数显示age" onclick="getAgeByArrow();">
+<script>
+    // es2015：引入：箭头函数
+    /*1,函数体只有一行时，可省略{}与return关键字
+    2,函数体有多行时，需要{}，若函数需要赋值给变量，则需要return（不可省略），否则不需要return
+    3,使用箭头函数创建对象时，对象两边需要用()括起来，因为不括起来表示一个代码块
+    4,箭头函数与普通函数区别：箭头函数的this对象总是从函数外部直接继承（没有自己的this对象）
+    */// es2015之前：
+    var plus = function (x, y) {
+        return x + y;
+    };
+    // es2015:
+    var plusOther = (x, y) => {return x +y;};
+    var plusOther2 = (x, y) => x + y;
+    var plusOther3 = (x, y) => {
+        x = x + 2;
+        y = y + 2;
+        return x + y;
+    };
+    console.log(plus(1, 2), plusOther(1, 2), plusOther2(1, 2), plusOther3(1, 2)); // 3 3 3 7
+    // 箭头函数创建对象
+    var getUserName = () => ({name: "Ioiy-Aig"});
+    var getUseAge = () => {age: 23};
+    console.log(getUserName(), getUseAge()); // {name: "Ioiy-Aig"} undefined
+
+    // 普通函数
+    class Person {
+        constructor() {
+            this.age = 0;
+            setInterval(function growUp() {
+                console.log(this); // Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, parent: Window, …}
+                this.age++;
+            }, 1000);
+        }
+        set age(value) {
+            this._age = value;
+        }
+        get age() {
+            return this._age;
+        }
+    }
+    var p = new Person();
+    function getAgeByOrdinary() {
+        console.log(p.age); // 0,一直为0
+    }
+    // 普通函数的改进
+    class Person1 {
+        constructor() {
+            this.age = 0;
+            //              var that = this;改进方法
+            var that = this;
+            setInterval(function growUp() {
+                console.log(that); // Person1 {_age: 0}
+                that.age++;
+            }, 1000);
+        }
+        set age(value) {
+            this._age = value;
+        }
+        get age() {
+            return this._age;
+        }
+    }
+    var p1 = new Person1();
+    function getAgeByOrdinary1() {
+        console.log(p1.age); // 1，2，3。。。
+    }
+    // 箭头函数
+    class Person2 {
+        constructor() {
+            this.age = 0;
+            //              箭头函数的this从函数外部直接继承，即Person2
+            setInterval(() => {
+                console.log(this); // Person2 {_age: 0}
+                this.age++;
+            }, 1000);
+        }
+        set age(value) {
+            this._age = value;
+        }
+        get age() {
+            return this._age;
+        }
+    }
+    var p2 = new Person2();
+    function getAgeByArrow() {
+        console.log(p2.age); // 1，2，3.。。
+    }
+
+</script>
+</body>
+</html>
