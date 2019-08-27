@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*h5之前，将原始的二进制数据转为二进制数的字符串，并用charCodeAt方法读取原始数据中的每一个字节（效率低下，经常产生错误
+    h5：使用webSocket访问
+    ArrayBuffer对象：代表一个固定（长度固定）的用于装载二进制数据的缓存区（不能直接对内容进行操作）
+    ArrayBufferView对象；读写ArrayBuffer对象的内容，并转为各种数值类型的数组*/
+    // 创建ArrayBuffer对象：
+    // 成功创建缓存区后，缓存区中所有数据将初始化为0
+    // length属性: ArrayBuffer对象缓存区长度
+    var buffer = new ArrayBuffer(32); // 需要指定一个无符号整数参数（缓存区长度：byte）
+
+    /*h5中，一般使用继承ArrayBufferView类的子类实例存取缓存区数据
+    1，子类：Int8Array（1byte，8位整数元素的数组），Uint8Array（模数算法）
+    2，UintClampedArray：（1byte，用于canvas，箝位算法）
+    3，(U)Int16(32)Array，Float32(64)Array
+    4，ArrayBufferView的作用：可根据同一个ArrayBuffer对象创建各种类型的数组*/
+
+    // 创建对象时构造函数的参数：buffer对象，可选：byteOffset（偏离值），length（数组元素个数）
+    // 这三个属性也是ArrayBufferView对象的三个属性
+    var Int32Array = new Int32Array(buffer, 12, 1);
+    var Uint8Array = new Uint8Array(buffer);
+    // 设置某位数据：
+    Uint8Array[4] = 255;
+    // 获取某位数据：
+    var byte = Uint8Array[4];
+    console.log(byte);
+
+</script>
+</body>
+</html>

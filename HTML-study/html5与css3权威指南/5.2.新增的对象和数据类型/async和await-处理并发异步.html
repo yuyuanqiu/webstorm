@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="读取文件" onclick="read()">
+<div id="result">
+    <!--读取到的文件内容-->
+</div>
+<script>
+    function getDate(filename) {
+        return new Promise((resolve, reject) => {
+            let objXmlHttp = new XMLHttpRequest();
+            objXmlHttp.open("GET", filename, true);
+            objXmlHttp.onreadystatechange = () => {
+                if (objXmlHttp.readyState === 4) {
+                    if (objXmlHttp.status === 200) {
+                        resolve(objXmlHttp.responseText);
+                    }
+                    else {
+                        reject("读取文件失败");
+                    }
+                }
+            };
+            objXmlHttp.send();
+        });
+    }
+    async function get() {
+        const [msg1, msg2, msg3] = await Promise.all([getDate("promise对象测试文件1.txt"), getDate("promise对象测试文件2.txt"), getDate("promise对象测试文件3.txt")]);
+        return [msg1, msg2, msg3];
+    }
+    function read() {
+        get().then((responses) => {
+            let result = document.getElementById("result");
+            responses.forEach((response) => {
+                result.innerHTML += response + "<br/>";
+            });
+        }, () => alert("读取文件失败"));
+    }
+</script>
+</body>
+</html>

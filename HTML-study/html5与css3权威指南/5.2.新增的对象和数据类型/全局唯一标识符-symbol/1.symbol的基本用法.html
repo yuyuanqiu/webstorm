@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*symbol：用于表示唯一值的简单原始数据类型
+    新增原因：兼容性，不破坏现有代码功能的前提下，为对象添加一些新的方法
+    特点：
+    1，symbol类型一经创建不能被修改
+    1，symbol属性不能用for-in循环遍历列举出来，可以使用Object.getOwnPropertySymbols(obj)列举出一个对象的所有symbol属性名
+    2，调用symbol得到的值被称为一个以symbol为属性名的属性，而不是一个以字符串命令的属性
+    3，调用symbol方法得到的值不等于任何其他的值，此特性可以避免属性冲突
+    4，调用symbol方法时在参数内定义一个描述符字符串用来帮助调试
+    5，不能使用"."号访问以symbol为属性名的属性，必须使用"[]"进行访问
+    6，判断symbol定义的属性是否在某个对象中：if (symbolVar in obj)
+    7，删除symbol定义的属性：delete obj[symbolVar] */
+    let person = {
+        firstName: "Ioiy",
+        lastName: "Aig"
+    };
+    // Symbol("描述符str");
+    var age = Symbol("年龄");
+    /*1，symbol不能被自动（隐式）转换成字符串，与字符串连接会发生类型错误
+    2，显示使用String(sym)或sym.toString()将其转为字符串避免类型错误*/
+    // console.log(age + "年龄"); // TypeError: Cannot convert a Symbol value to a string
+    person[age] = 22;
+    var area = Symbol("住址");
+    person[area] = "NanChang";
+    console.log(person);
+    console.log(person[age]);
+    console.log(person[area]);
+
+    // 取得symbol的三种方法：
+    /*1，Symbol("描述符")
+     2，Symbol.for(sym)：在symbol注册表中搜索是否有sym的symbol类型，如果有(有是指仅用此方法建立的symbol类型，就返回这个symbol，否则新建一个以sym的symbol
+        Symbol.keyFor(sym)：检测在注册表中是否含有sym的symbol类型（是否创建）,有就输出值，否则抛出异常
+     3，使用Symbol.iterator属性*/
+    let people = {
+        zhao: "赵",
+        qian: "钱"
+    };
+    var sun = Symbol.for("sun:孙");
+    people[sun] = "孙";
+    var li = Symbol.for("sun:孙");
+    people[li] = "李";
+    // 创建了两次symbol，但是参数都一致，所以只相当于创建了一次
+    console.log(people, Symbol.keyFor(li)); // {zhao: "赵", qian: "钱", Symbol(sun:孙): "李"} "sun:孙"
+    console.log(Object.getOwnPropertySymbols(people))
+</script>
+</body>
+</html>

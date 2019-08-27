@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // promise对象的then采用2个参数：
+    //  一个是构造函数的参数值（回调函数中的处理执行成功时）调用
+    //  一个是在执行失败时调用
+    // 两者只会执行其中一个
+    var promise = new Promise((resolve, reject) => {
+        // resolve(JSON.parse("this ain't Json"));// 处理失败的案例
+        resolve(1)
+    });
+    promise.then((result) => {
+        console.log("处理正常", result);
+    }, (err) => {
+        console.log("处理失败", err);
+    });
+
+    // 链式操作
+    // 使用catch机制捕捉promise构造函数参数值(回调函数中抛出的异常)
+    promise.then((result) => {
+        console.log("处理正常", result);
+    }).catch((err) => {
+        console.log("处理失败", err);
+    });
+    // 相当于：
+    promise.then((result) => {
+        console.log("处理正常", result);
+    }).then(undefined, (err) => {
+        console.log("处理失败", err);
+    });
+    // catch机制也会捕捉then发生的错误：链式调用
+    promise.then(() => {
+        console.log(a - 10);
+    }).catch((err) => {
+        // 捕捉then的错误：ReferenceError: a is not defined
+        console.log("捕捉then的错误：" + err);
+    });
+
+    // es2017开始，可使用finally方法指定无论promise对象返回正确/错误结果都将执行的处理
+    promise.then(() => {
+        console.log("执行正确");
+    }).catch(() => {
+        console.log("执行错误");
+    }).finally(() => {
+        console.log("会执行的finally");
+    });
+    // finally的位置可随意
+    promise.then(() => {
+        console.log(a);
+    }).finally(() => {
+        console.log("执行finally");
+    }).catch((err) => {
+        console.log("错误：" + err);
+    })
+</script>
+</body>
+</html>

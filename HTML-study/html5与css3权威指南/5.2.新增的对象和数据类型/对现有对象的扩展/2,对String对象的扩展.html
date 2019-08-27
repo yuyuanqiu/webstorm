@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // es2017新增：padStart，padEnd：在字符串前/后进行填充padString字符串（默认填充空格,一直以该字符进行填充，直到填充至指定长度），使其长度等于指定长度targetLength
+    // str.padStart/End(targetLength, [padString])
+    console.log("es8".padStart(5));         // "  es8"
+    console.log("es8".padStart(6, "woof")); // "wooes8"
+    console.log("es8".padStart(14, "wow")); // "wowwowwowwoes8"
+    console.log("es8".padStart(7, "0"));    // "0000es8"
+    console.log("es8".padEnd(5));           // "es8  "
+    console.log("es8".padEnd(6, "woof"));   // "es8woo"
+    console.log("es8".padEnd(14, "wow"));   // "es8wowwowwowwo"
+    console.log("es8".padEnd(7, "0"));      // "es80000"
+</script>
+</body>
+</html>

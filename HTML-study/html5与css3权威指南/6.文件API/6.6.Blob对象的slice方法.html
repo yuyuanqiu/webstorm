@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="file" id="file" multiple/>
+<button type="button" onclick="showFileInfo()">截取文件信息</button>
+<div id="result">
+    <!--文件信息显示-->
+</div>
+<script>
+    // file对象继承自Blob对象
+    // var newBlob = blob.slice(start, end , countType);
+    // 复制的位置为[start,end)或[end, start)，单位：byte
+    // 三个参数均为可选参数，省略代表原样复制
+    // start + blob.size = k
+    // start<0，k>=0，则起始复制位置为k
+    // start<0, k<0,则起始复制位置为0
+    // start>blob.size,则起始复制位置为blob.size
+    // end + blob.size = t
+    // end<0,t>=0,则终止复制位置为t
+    // end<0,t<0,则终止复制位置为0
+    // end>blob.size,则终止复制位置为blob.size
+    // countType代表对象的MIME类型
+    // 用id获取元素
+    function getElem(id) {
+        return document.getElementById(id);
+    }
+    // 展示文本信息
+    function showFileInfo() {
+        var file = getElem("file").files[0];
+        // 复制file对象
+        var fileClone = file.slice();
+        console.log(fileClone);
+        var fileClone2 = file.slice(0, file.size);
+        console.log(fileClone2);
+        // 复制后半部分
+        var fileClone3 = file.slice(-(Math.round(file.size / 2)));
+        console.log(fileClone3);
+        // 复制前半部分
+        var fileClone4 = file.slice(0, Math.round(file.size / 2));
+        console.log(fileClone4);
+        // 复制指定字节
+        var fileClone5 = file.slice(0, 150, "*/*");
+        console.log(fileClone5);
+
+    }
+</script>
+</body>
+</html>

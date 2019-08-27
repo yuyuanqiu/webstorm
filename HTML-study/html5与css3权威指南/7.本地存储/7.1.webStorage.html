@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        input {
+            width: 200px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<h1>web storage 示例</h1>
+<p id="msg"></p>
+<input type="text" id="input">
+<input type="button" value="保存数据By SessionStorage" onclick="saveStorage('input');">
+<input type="button" value="读取数据By SessionStorage" onclick="loadStorage('msg');">
+<br/>
+<input type="text" id="inputByLocal">
+<input type="button" value="保存数据By LocalStorage" onclick="saveStorageByLocal('inputByLocal')">
+<input type="button" value="读取数据By LocalStorage" onclick="loadStorageByLocal('msg')">
+<script>
+    /*web storage存储：对h4中cookie存储的改善
+    cookie的优缺点：
+    1，大小<4kb，
+    2，cookie随http事务一起发送，浪费一部分带宽
+    3，操作复杂
+    web storage：
+    1，sessionStorage:
+        数据保存在session对象（进入网站到关闭浏览器这段时间）中
+        临时保存
+    2，localStorage：
+        数据保存在客户端本地硬件设备（如硬盘）中
+        永久保存
+    sessionStorage.setItem('key', 'value');
+    sessionStorage.key = "value";
+    var getvalue = sessionStorage.getItem('key');
+    var getvalue = sessionStorage.key;
+
+    localStorage.setItem('key', 'value');
+    localStorage.key = 'value';
+    var getvalue = localStorage.getItem('key');
+    var getvalue = localStorage.key;*/
+    function saveStorage(id) {
+        var target = document.getElementById(id);
+        var str = target.value;
+        sessionStorage.setItem("message", str);
+    }
+    function loadStorage(id) {
+        var target = document.getElementById(id);
+        var msg = sessionStorage.getItem('message');
+        target.innerHTML = msg;
+    }
+    function saveStorageByLocal(id) {
+        var target = document.getElementById(id);
+        var str = target.value;
+        localStorage.setItem("message", str);
+    }
+    function loadStorageByLocal(id) {
+        var target = document.getElementById(id);
+        var msg = localStorage.getItem('message');
+        target.innerHTML = msg;
+    }
+</script>
+</body>
+</html>

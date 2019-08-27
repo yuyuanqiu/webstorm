@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // es2015: Object.assign(target, ...sources)
+    // 将所有可枚举的属性和属性值从1/多个源对象source中复制到目标对象target，并返回目标对象
+    // 若目标对象存在相同属性，将会被覆盖属性值（后来的覆盖先前已有的）
+    // 不会跳过值为null和undefined的属性值
+    // 若目标对象属性值为只读属性，则修改该属性引发typeerror错误
+    var o1 = {a: 1};
+    var o2 = {b: 2};
+    var o3 = {a: 3, undefined};
+    var obj = Object.assign(o1, o2, o3);
+    console.log(obj); // {a: 3, b: 2, undefined: undefined}
+    console.log(o1); // {a: 3, b: 2, undefined: undefined}
+
+    // es2017: Object.values(obj): 返回一个由指定对象的各个属性值所组成的数组，当为数组时，返回所有数组元素
+    const obj0 = {x: "xxx", y: 1};
+    console.log(Object.values(obj0)); // ["xxx", 1]
+    const obj1 = ["s", "o", "c"]; // 等效于{0: "s", ,,}
+    console.log(Object.values(obj1)); // ["s", "o", "c"]
+    const obj2 = {10: "xxx", 1: "yyy", 2: "zzz"};
+    console.log(Object.values(obj2));   // ["yyy", "zzz", "xxx"]
+    console.log(Object.values("es8"));  // ["e", "s", "8"]
+
+    // es2017: Object.entries(obj): 返回一个数组元素为[key, value]的数组
+    // 记得需要使用引号括起来
+    const obj4 = {x: "xxx", y: 2};
+    console.log(Object.entries(obj4));  // [["x", "xxx"], ["y", "2"]]
+    const obj5 = ["e", "s", "u"];
+    console.log(Object.entries(obj5));  // [["0", "e"], ["1", "s"], ["2", "u"]]
+    const obj6 = {10: "xxx", 11: "yyy", 12: "zzz"};
+    console.log(Object.entries(obj6));  // [["10", "xxx"], ["11", "yyy"], ["12", "zzz"]]
+    console.log(Object.entries("es8")); // [["0", "e"], ["1", "s"], ["2", "8"]]
+
+    // es2017: Object.getOwnPropertyDescriptors(obj): 返回对象的所有属性描述对象（configurable，enumerable，writable，get， set，value)属性
+    const obj7 = {
+        get es7() {return 777;},
+        get es8() {return 888;}
+        };
+    /*es7:
+        configurable: true
+    enumerable: true
+    get: ƒ es7()
+    set: undefined
+    __proto__: Object
+    es8:
+        configurable: true
+    enumerable: true
+    get: ƒ es8()
+    set: undefined
+    __proto__: Object
+    __proto__: Object*/
+    console.log(Object.getOwnPropertyDescriptors(obj7));
+
+
+</script>
+</body>
+</html>

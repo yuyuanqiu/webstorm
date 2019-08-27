@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        dl {
+            margin-bottom: 30px;
+            background: #f5ffcf;
+        }
+    </style>
+</head>
+<body>
+<input id="file" type="file" multiple/>
+<input type="button" onclick="getInfo()" value="获取文件信息"/>
+<div id="result">
+    <!--显示文件信息-->
+</div>
+<script>
+    // 获取文件列表
+    function getFileList() {
+        let fileList = document.getElementById("file").files;
+        return fileList;
+    }
+    // 处理
+    function getInfo() {
+        var fileList = getFileList();
+        console.log(fileList);
+        var result = document.getElementById("result");
+        for (var i = 0, length = fileList.length; i < length; i++) {
+            let dl = document.createElement("dl");
+            for (value in fileList[i]) {
+                let dt = document.createElement("dt");
+                let dd = document.createElement("dd");
+                dt.innerText = value;
+                if (!fileList[i][value]) {
+                    dd.innerText = "未知";
+                }
+                else {
+                    dd.innerText = fileList[i][value];
+                }
+                dl.append(dt);
+                dl.append(dd);
+            }
+            result.append(dl);
+        }
+    }
+    console.log(document.getElementById("file"));
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input onclick="read()" type="button" value="读取文件"/>
+<div id="result">
+    <!--显示读取到的文件内容-->
+</div>
+<script>
+    function getData(filename) {
+        /*Promise: 构造函数使用一个回调函数做参数；
+        而回调函数中又使用2个回调函数做参数
+        resolve：执行结果正常时调用
+        reject： 执行失败时调用*/
+        return new Promise((resolve, reject) => {
+            let objXmlHttp = new XMLHttpRequest();
+            objXmlHttp.open("GET", filename, true);
+            objXmlHttp.onreadystatechange = () => {
+                if (objXmlHttp.readyState === 4) {
+                    // resolve：执行结果正常时调用
+                    if (objXmlHttp.status === 200) {
+                        // 参数值是返回值
+                        resolve(objXmlHttp.responseText);
+                    }
+                    // reject： 执行失败时调用
+                    else {
+                        // 参数值是返回值
+                        reject(objXmlHttp);
+                    }
+                }
+            };
+            objXmlHttp.send();
+        });
+    }
+    function read() {
+        /*then(f1, f2)方法：两个参数均为回调函数，可选
+        第一个参数f1：用于构造函数中处理执行成功的场合，跳过第一个时，值直接写undefined
+        第二个参数f2： 用于失败的场合*/
+        // promise对象的all方法：以一个promise对象数组作为参数，并创建一个所有执行都成功返回肯定的promise对象
+        // promise对象的race方法：同样以promise对象数组为参数，但只返回第一个肯定/否定结果
+        Promise.all([getData("promise对象测试文件11.txt"),
+            getData("promise对象测试文件2.txt"),
+            getData("promise对象测试文件3.txt")]).then((responses) => {
+                let result = document.getElementById("result");
+                responses.forEach((response) => {
+                    result.innerHTML += response + "<br/>";
+                });
+        }, (error) => {
+                alert("读取文件失败！");
+                console.log(error);
+        });
+    }
+</script>
+</body>
+</html>

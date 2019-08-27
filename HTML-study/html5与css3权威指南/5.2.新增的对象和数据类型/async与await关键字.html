@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // async和await关键字：实现异步处理，可以书写比promise更简洁的代码，多数情况下两者配合使用
+    // await: 用于在async函数内部强制等待promise返回结果（暂停继续执行）
+    // 在函数定义前加async关键字，可将函数声明为async函数
+    // async函数返回promise，当函数返回值时，promise返回肯定结果
+    // 当函数抛出异常时，promise返回否定结果
+    // 返回肯定结果：
+    async function resolve() {
+        return "resolve";
+    }
+    resolve().then((value => {
+        console.log(value);
+    }));
+    // 返回否定结果：
+    async function reject() {
+        throw new Error("reject");
+    }
+    reject().catch((err) => {
+        console.log(err);
+    });
+    async function sample() {
+        const result = await resolve();
+        // 在promise返回结果之前不会执行下面代码
+        console.log(result);
+    }
+    sample();
+</script>
+</body>
+</html>

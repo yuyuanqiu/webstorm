@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*使用形式：该属性为对象obj定义一个用于创建对象迭代器的方法，可以使用for-of循环遍历
+    (obj)[Symbol.iterator] = function () {
+
+    }*/
+    // 字符串翻转：
+    var str = new String("这是一个字符串");
+    str[Symbol.iterator] = function () {
+        var s = this;
+        var l = s.length;
+        return {
+            // 为了可以对str对象进行for-of遍历并具有next方法：对属性值定义了一个next方法
+            next: function () {
+                if (l > 0) {
+                    l--;
+                    return {value: s[l], done: false};
+                }
+                else {
+                    return {done: true};
+                }
+            }
+        }
+    };
+    console.log(str);
+    var strReverse = "";
+    for (var item of str) {
+        strReverse += item;
+    }
+    console.log(strReverse);    // 串符字个一是这
+</script>
+</body>
+</html>

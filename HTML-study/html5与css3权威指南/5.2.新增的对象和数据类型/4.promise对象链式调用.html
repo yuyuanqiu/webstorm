@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form>
+    <p>
+        <button type="button" value="读取用户资料" onclick="read()">读取用户资料</button><br/>
+        <label>
+            学号：<input type="text" id="number">
+        </label><br/>
+        <label>
+            姓名：<input type="text" id="name">
+        </label><br/>
+        <label>
+            年龄：<input type="number" id="age">
+        </label>
+    </p>
+</form>
+<script>
+    // 读取json数据，并显示到界面中
+    function read() {
+        const FILENAME = "promise对象链式调用.json";
+        var promise = new Promise((resolve, reject) => {
+            let objXmlHttp = new XMLHttpRequest();
+            objXmlHttp.open("GET", FILENAME, true);
+            objXmlHttp.onreadystatechange = () => {
+                if (objXmlHttp.readyState === 4) {
+                    if (objXmlHttp.status === 200) {
+                        resolve(objXmlHttp.responseText);
+                    } else {
+                        reject();
+                    }
+                }
+            };
+            objXmlHttp.send();
+        });
+        promise.then((response => {
+            // 须有返回值，不然下一条链式命令取不到值
+            return JSON.parse(response);
+        }), () => {
+            alert("读取信息失败！");
+        }).then((obj) => {
+            // alert(obj);
+            document.getElementById("number").value = obj.number;
+            document.getElementById("name").value = obj.name;
+            document.getElementById("age").value = obj.age;
+        });
+    }
+
+    // 通过链式调用Promise对象的then方法：一个接一个的运行
+    function test() {
+        var promise = new Promise((resolve, reject) => {
+            resolve(1);
+        });
+        promise.then((value) => {
+            return value + 2;
+        }).then((value) => {
+            console.log(value);
+        })
+    }
+    test(); // 3
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="读取文件" onclick="read()">
+<div id="result">
+    <!--这里显示读取结果-->
+</div>
+<script>
+    // es2015之前实现：做完一件事再做另一件事的处理请求
+    // 当读取失败时，只输出错误信息，其他读取到的信息不输出
+    function getDate (filename) {
+        let objXmlHttp = new XMLHttpRequest();
+        objXmlHttp.open("GET", filename, true);
+        objXmlHttp.onreadystatechange = () => {
+            if (objXmlHttp.readyState === 4) {
+                if (objXmlHttp.status === 200) {
+                    allDate += objXmlHttp.responseText + "<br/>";
+                    count += 1;
+                    if (count === 3) {
+                        let result = document.getElementById("result");
+                        result.innerHTML += allDate;
+                    }
+                } else {
+                    if (errFlag === false) {
+                        alert("读取文件失败！");
+                    }
+                    errFlag = true;
+                }
+            } 
+        };
+        objXmlHttp.send();
+    }
+    function read() {
+        // 判断文件是否读取失败
+        errFlag = false;
+        // allDate保存读取到的文件内容
+        allDate = "";
+        // count表示成功读取到的文件个数
+        count = 0;
+        getDate("promise对象测试文件1.txt");
+        // 读取出错，则输出error
+        // getDate("noExist.txt");
+        getDate("promise对象测试文件2.txt");
+        getDate("promise对象测试文件3.txt");
+    }
+</script>
+</body>
+</html>

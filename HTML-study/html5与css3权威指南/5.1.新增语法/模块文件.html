@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*1，使用export关键字 指定需要向外部导出的变量，对象，函数
+    2，外部脚本文件只能使用模块文件中导出的变量，对象，函数
+    3，可以使用{}将需要的变量，对象，函数写在一起
+    4，在函数内部使用default指定默认导出的变量，对象，函数等
+    4，附录：此时导入所有内容，则只需指定一个对象名称即可，这些导入的内容表示其属性，见在客户端..js（34）*/
+    export let user = "Ioiy Aig";
+    export function sayMessage(message) {
+        alert(message);
+    }
+
+    let age = 23;
+    function getAge(age) {
+        alert(age);
+    }
+    export {age, getAge};
+
+    export default {
+        user: user,
+        sayMessage: sayMessage
+    };
+</script>
+</body>
+</html>

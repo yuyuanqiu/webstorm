@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  /*const区别：常量
+    1，声明就要给值
+    2，声明之后不能改值*/
+  function use1() {
+      const MAX_INDEX; // SyntaxError: Missing initializer in const declaration
+  }
+  use1();
+  function use2() {
+      const MIN_INDEX = 0;
+      MIN_INDEX = 100; // TypeError: Assignment to constant variable.
+  }
+  use2();
+</script>
+</body>
+</html>

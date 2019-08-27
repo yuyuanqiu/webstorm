@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="读取文件" onclick="read()"/>
+<div id="result">
+    <!--读取的文件内容-->
+</div>
+<script type="text/javascript">
+    function read() {
+        const FILENAME = "promise对象测试文件1.txt";
+        var promise = new Promise((resolve, reject) => {
+            let objXmlHttp = new XMLHttpRequest();
+            objXmlHttp.open("GET", FILENAME, true);
+            objXmlHttp.onreadystatechange = () => {
+                if (objXmlHttp.readyState === 4) {
+                    if (objXmlHttp.status === 200) {
+                        resolve(objXmlHttp.responseText);
+                    } else {
+                        reject();
+                    }
+                }
+            };
+            objXmlHttp.send();
+        });
+        promise.then((response) => {
+            let result = document.getElementById("result");
+            result.innerHTML = response;
+        }, () => {
+            alert("读取文件失败！");
+        });
+    }
+</script>
+</body>
+</html>

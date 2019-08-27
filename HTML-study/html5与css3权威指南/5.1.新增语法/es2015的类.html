@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // es2015之前的类
+    function Cat(name) {
+        this.setName(name);
+    }
+    Cat.prototype = {
+        setName: function (name) {
+            this._name = name;
+        },
+        getName: function () {
+            return this._name;
+        },
+        walk: function () {
+            console.log(this._name + "正在玩耍");
+        }
+    };
+    // 创建Cat对象
+    var bigCat = new Cat("大猫");
+    var smallCat = new Cat("小猫");
+    bigCat.walk(); // 大猫正在玩耍
+    smallCat.walk(); // 小猫正在玩耍
+
+    // es2015新增的类机制
+    var dogCount = 0;
+    class Dog {
+        constructor(name) {
+            this.name = name;  // ???
+            dogCount++;
+        }
+        set name(name) {
+            this._name = name;
+        }
+        get name() {
+            return this._name;
+        }
+        walk() {
+            console.log(this._name + "正在啃骨头");
+        }
+        // 静态方法
+        static getDogCount() {
+            return dogCount;
+        }
+    }
+    console.log(Dog.getDogCount()); // 0
+    var bigDog = new Dog("大狗");
+    console.log(Dog.getDogCount()); // 1
+    var smallDog = new Dog("小狗");
+    console.log(Dog.getDogCount()); // 2
+    bigDog.walk(); // 大狗正在啃骨头
+    smallDog.walk(); // 小狗正在啃骨头
+</script>
+</body>
+</html>

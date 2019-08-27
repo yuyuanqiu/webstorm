@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button type="button" value="读取文件" onclick="read()">读取文件</button>
+<div id="result">
+    <!--读取到的文件内容-->
+</div>
+<script type="text/javascript">
+    /*通过链式调用promise对象的then方法进行一系列的异步操作
+    当then返回一个值时，下一个then方法将被立即调用，并且使用这个返回值
+    当then返回一个promise对象，下一个方法将进入等待，直到这个对象的处理结果确定之后才会被调用下一个方法*/
+    function getData(filename) {
+        return new Promise((resolve, reject) => {
+            let objXmlHttp = new XMLHttpRequest();
+            objXmlHttp.open("GET", filename, true);
+            objXmlHttp.onreadystatechange = () => {
+                if (objXmlHttp.readyState === 4) {
+                    if (objXmlHttp.status === 200) {
+                        allDate += objXmlHttp.responseText + "<br/>";
+                        resolve();
+                    }
+                    else {
+                        alert("读取文件失败！");
+                    }
+                }
+            };
+            objXmlHttp.send();
+        });
+    }
+    function read() {
+        allDate = "";
+        getData("promise对象测试文件1.txt").then(() => getData("promise对象测试文件2.txt")).then(() => getData("promise对象测试文件3.txt")).then(() => {
+            let result = document.getElementById("result");
+            result.innerHTML += allDate;
+        });
+    }
+</script>
+</body>
+</html>

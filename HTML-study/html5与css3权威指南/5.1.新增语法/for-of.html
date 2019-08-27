@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // for-of对任何集合进行循环(arr,map,set,str,迭代器),对象不属于集合
+    for(let n of [10, 20, 30]) {
+        console.log(n);
+    }
+    for(let n of "abcd") {
+        console.log(n);
+    }
+    // for-in:循环遍历(obj)
+    var person = {
+        name: "Tom",
+        age: 23,
+        tel: "123-123"
+    };
+    for (var i in person) {
+        console.log(i + ": " + person[i])
+    }
+    for (var i of person) { // 对象不属于集合
+        console.log(i); // TypeError: person is not iterable
+    }
+
+</script>
+</body>
+</html>

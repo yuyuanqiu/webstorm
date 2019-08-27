@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #text {
+            min-height: 500px;
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body>
+<textarea id="text" placeholder="请输入一些文字"></textarea>
+<br/>
+<button onclick="Blob_test()">创建及下载二进制文件</button>
+<output id="result"></output>
+<script>
+    // 创建Blob对象：var blob = new Blob(blobParts, type);
+    // 两个参数可选，不使用参数则对象字节长度为0
+    // 第一个参数为一个array，可存放任意个ArrayBuffer(View)对象，Blob对象，String对象
+    var blobs = new Blob(["1234" + "5678"]);
+    var buffer = new ArrayBuffer(3200);
+    var shorts = new Uint16Array(buffer, 512, 10);
+    var blobA = new Blob([blobs, shorts]);
+    var bytes = new Uint8Array(buffer, shorts.byteOffset + shorts.byteLength);
+    var blobB = new Blob([blobs, blobA, bytes]);
+    var blobC = new Blob([buffer, blobs, blobA, bytes]);
+    // 第二个参数指定Blob对象的type属性（MIME类型），默认为空串（未知类型）
+    var blobs1 = new Blob(["1234" + "5678"], {type: "text/plain"});
+    var blobs2 = new Blob(["1234" + "5678"], {type: "text/plain", charset: "ANSI"});
+    // 创建及下载二进制文件
+    function Blob_test() {
+        var text = document.getElementById("text").value;
+        var blob;
+        var result = document.getElementById("result");
+        // 创建Blob对象
+        if (!window.Blob) {
+            result.innerText = "您的浏览器不支持使用Blob对象！";
+        }
+        else {
+            blob = new Blob([text], {type: "text/plain"});    //Blob中数据为文字时默认使用utf-8格式
+            console.log(blob)
+        }
+        // 通过createObjectURL方法创建type为文字的blob链接
+        if (window.URL) {
+            console.log(window.URL.createObjectURL(blob));
+            result.innerHTML = "<a download href='" + window.URL.createObjectURL(blob) + "' target='_blank'>文件下载</a>";
+        }
+    }
+
+</script>
+</body>
+</html>

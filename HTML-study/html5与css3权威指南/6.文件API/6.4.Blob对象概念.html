@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        p::after {
+            content: '';
+            display: block;
+            height: 30px;
+            background: #ffb9a7;
+        }
+        span:first-of-type {
+            display: inline-block;
+            width: 200px;
+            text-align: right;
+        }
+        span + span {margin-left: 50px;}
+    </style>
+</head>
+<body>
+<!--accept属性：默认选择的文件类型，但可以在选择文件的时候更改选项-->
+<input id="file" type="file" multiple accept="image/*">
+<input type="button" value="获取信息" onclick="showFileInfo()">
+<div id="result">
+    <!--信息显示区域-->
+</div>
+<script>
+    /*Blob对象：代表原始二进制数据，file对象也继承自blob对象
+    2个属性：size表示对象字节长度，type表示对象的MIME类型，未知类型返回空串*/
+    function showFileInfo() {
+        var file = document.getElementById("file").files;
+        var fileCount = file.length;
+        var result = document.getElementById("result");
+        for (var i = 0; i < fileCount; i++) {
+            if (!/image\/\w+/.test(file[i].type)) {
+                alert(file[i].name + "不是图像文件");
+                break;
+            }
+            else {
+                var item = document.createElement("p");
+                for (items in file[i]) {
+                    var h3 = document.createElement("h3");
+                    var name = document.createElement("span");
+                    var value = document.createElement("span");
+                    name.innerText = items;
+                    value.innerText = file[i][items];
+                    h3.append(name);
+                    h3.append(value);
+                    item.append(h3);
+                }
+                result.append(item);
+            }
+        }
+    }
+</script>
+</body>
+</html>

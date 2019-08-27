@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="file" id="file">
+<input type="button" value="获取文件内容" onclick="getFileContent()">
+<div id="result">
+    <!--读取到的文件内容-->
+</div>
+<script>
+    var file = document.getElementById("file");
+    var result = document.getElementById("result");
+    function getFileContent() {
+        var files = file.files[0];
+        var fileReader = new FileReader();
+        fileReader.readAsDataURL(files);
+        fileReader.onload = function () {
+            console.log(this);
+            result.innertext = "<img src='" + this.result +"'/>";
+        }
+    }
+</script>
+</body>
+</html>

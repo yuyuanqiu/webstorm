@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // Array.from(arrayLike, mapFn, thisArg)
+    // 从一个伪数组（拥有一个length属性和若干索引属性的任意对象）或
+    // 从一个可迭代对象（可以获取对象中的元素，map/set）创建并返回一个新的数组
+    // arrayLike: 伪数组/可迭代对象
+    // mapFn: 指定则对新数组的每一个元素调用该回调函数，相当于Array.from(obj).map(mapFn, thisArg)
+    // thisArg: 指定mapFn中回调参数传入的this对象
+    console.log(Array.from("foo")); // ["f", "o", "o"]
+    // [html, link, head, meta, title, body, script]
+    console.log(Array.from(document.querySelectorAll("*")));
+    // 2 4 6
+    Array.from([1, 2, 3], function (x) {
+        x *= 2;
+        console.log(x);
+    })
+
+    // Array.of(ele1, ele2, ele3....)
+    // 使用不确定的值创建并返回一个以这些值为元素的新数组
+    console.log(Array.of(1, 2, {}, [], 5)); //  [1, 2, {…}, Array(0), 5]
+
+    // Array.prototype.fill(value, start, end)：start/end可为负数
+    // return: 返回对象本身
+    // 省略start则默认为0，省略end默认为length-1
+    // 使用固定值value填充一个数组中从start开始到end-1的索引元素
+    console.log([1, 2, 3].fill(4));         // [4, 4, 4]
+    console.log([1, 2, 3].fill(4, 1));      // [1, 4, 4]
+    console.log([1, 2, 3].fill(4, 1, 2));   // [1, 4, 3]
+    console.log([1, 2, 3].fill(4, 1, 1));   // [1, 2, 3]
+    console.log([1, 2, 3].fill(4, -3, -2)); // [4, 2, 3]
+    console.log(Array(3).fill(4));          // [4, 4, 4]
+    // 填充数组是对数组的地址引用：而参数中若为对象，则改变对象内部，所有的填充该对象的元素都会改变
+    var test = Array(2).fill([]);
+    test[0][0] = "aaa";
+    console.log(test);
+    var arr = Array(2).fill({});
+    // var arr = [{}, {}];
+    arr[0].hi = "hi";
+    arr[1].hello = "hello";
+    console.log(arr);   // [{hi: "hi", hello: "hello"}, {hi: "hi", hello: "hello"}]
+
+    // Array.prototype.find(callback, thisArg)：遍历查找数组中满足测试函数callback的第一个元素并返回
+    // Array.prototype.findIndex(callback, thisArg)：遍历查找数组中满足测试函数的第一个元素并返回其索引
+    var fruits = [{name: "苹果", price: 2}, {name: "香蕉", price: 3}, {name: "樱桃", price: 1}];
+    function findCherries(fruit) {
+        return fruit.name === "樱桃";
+    }
+    console.log(fruits.find(findCherries)); // {name: "樱桃", price: 1}
+    console.log(fruits.findIndex(findCherries)); // 2
+
+    // Array.prototype.copyWithin(targetIndex, start, end)
+    // 将（start，end-1）处的内容从数组的targetIndex处开始填充（覆盖原有内容）,只填一次
+    // 此过程同fill(省略start代表从0开始填充，省略end代表填充到末尾），但是数组长度不变
+    console.log([1, 2, 3, 4, 5].copyWithin(-2));    // [1, 2, 3, 1, 2]
+    console.log([1, 2, 3, 4, 5].copyWithin(0, 3));  // [4, 5, 3, 4, 5]
+    console.log([1, 2, 3, 4, 5].copyWithin(0, 3, 4));   // [4, 2, 3, 4, 5]
+    console.log([1, 2, 3, 4, 5].copyWithin(-2, -3, -1));// [1, 2, 3, 3, 4]
+
+    // Array.prototype.entries()/keys(): 均无参数
+    // 返回一个新的数组迭代器对象，entries方法返回值中包含索引/值的键值对，keys方法返回索引
+    var arr = ["a", "b", "c"];
+    var iter = arr.entries();
+    for (value of iter) {
+        console.log(value); // [0, "a"]  [1, "b"]  [2, "c"]
+    }
+    var iter = arr.keys();
+    for (value of iter) {
+        console.log(value); // 0, 1, 2
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var person = {
+        age: 23,
+        getAge: function () {
+            console.log(this, this.age); // {age: 23, getAge: ƒ, getAgeByArrow: ƒ} 23
+        },
+        getAgeByArrow: () => {
+            console.log(this, this.age); // Window{...}  undefined
+        },
+        print: function () {
+            console.log(this, this.age); // {age: 23, getAge: ƒ, getAgeByArrow: ƒ} 23
+            setTimeout(() => {
+                console.log(this, this.age); // {age: 23, getAge: ƒ, getAgeByArrow: ƒ} 23
+            }, 100);
+        }
+    };
+    person.getAge();
+    person.getAgeByArrow();
+    person.print();
+
+    birth =  1994;
+    var obj = {
+        birth: 2000,
+        getAge: function () {
+            console.log(this.birth, this);
+        }
+    };
+    obj.getAge(); //2000
+    var a = obj.getAge;
+    a();//1994
+</script>
+</body>
+</html>

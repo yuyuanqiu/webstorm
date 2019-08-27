@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="读取文件" onclick="read()">
+<div id="result">
+    <!--这里显示读取结果-->
+</div>
+<div id="test">
+    <!--这里显示读取结果-->
+</div>
+<script>
+    // es2015之前实现：做完一件事再做另一件事的处理请求
+    // 异步：执行的顺序不一致
+    function getDate (filename) {
+        let objXmlHttp = new XMLHttpRequest();
+        objXmlHttp.open("GET", filename, true);
+        objXmlHttp.onreadystatechange = () => {
+            if (objXmlHttp.readyState === 4) {
+                if (objXmlHttp.status !== 200) {
+                    alert("读取文件失败！");
+                } else {
+                    // 疑问:
+                    // result定义在内部不会重新定义? 得到的结果应该是最后一项，为什么是全部？？？
+                    // 解决：
+                    // 每次都是会先取得result11的innerHtml的值（+=），然后累加新的值
+                    let result = document.getElementById("result");
+                    result.innerHTML += objXmlHttp.responseText + "<br>";
+                }
+            } 
+        };
+        objXmlHttp.send();
+    }
+    function read() {
+        getDate("promise对象测试文件1.txt");
+        // 即使读取文件出错，剩余的内容还会继续执行
+        // getDate("noExist.txt");
+        getDate("promise对象测试文件2.txt");
+        getDate("promise对象测试文件3.txt");
+    }
+</script>
+</body>
+</html>
