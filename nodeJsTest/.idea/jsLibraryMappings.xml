@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="JavaScriptLibraryMappings">
-    <file url="file://R:/node-v10.15.3-win-x64/node-global/node_modules" libraries="{nodeJsTest/node_modules}" />
-    <includedPredefinedLibrary name="Node.js Core" />
-    <excludedPredefinedLibrary name="HTML" />
-  </component>
-</project>
