@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件注册</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 在Vue根实例中使用组件 -->
+        <component-a>
+            <!-- 在component-a组件内使用组件component-b -->
+            <component-b></component-b>
+        </component-a>
+        <component-b></component-b>
+        <component-c></component-c>
+    </div>
+    <script>
+        // 注册组件：需要给组件命名，命名含义取决于其组件功能
+        // 当直接在dom中使用组件(非字符串模板/单组件文件)时，组件命名推荐使用字母全小写且必须含一个连字符（W3C规范），以避免与html元素冲突
+
+        // 组件命名的方式：
+        // kebab-case(短横线分隔命名)：引用组件时，也必须使用kebab-case
+        Vue.component("my-component-name", {}); // 引用：<my-component-name></my-component-name> 
+        // PascalCase(首字母大写命名)：引用组件时，可用PascalCase和kebab-case，但在dom中使用只有kebab-case有效
+        Vue.component(
+        "MyComponentName", {}); // 引用使用<my-component-name></my-component-name>或<MyComponentName></MyComponentName>
+
+        // 组件的注册方法：
+        // 全局注册：使用Vue.component()的方式注册
+        // (注册之后)可以用在任何新创建的Vue根实例的模板中, 也可以用在其他注册组件的内部
+        // 全局注册组件的缺点：
+        //      使用构建工具（如webpack）构建系统时，即使不再使用某个全局组件，但最终仍然会包含在结果中，增加用户下载的JavaScript大小
+        Vue.component("component-a", {});
+        Vue.component("component-b", {});
+        Vue.component("component-c", {});
+        new Vue({
+            el: "#app"
+        });
+        // 局部组件：通过JavaScript对象定义组件，然后在components选项中定义想要使用的组件
+        // 对于components对象中的每个属性，属性名为自定义组件的名字，属性值为组件的选项对象（类似注册全局组件的第二个参数）
+        // 局部注册的组件之间不能 直接 在各自内部使用
+        var ComponentE = {
+            /*...*/
+        };
+        // 如果某局部组件component-d需要使用局部组件component-e，则需定义d时在components选项中添加想要使用的组件e
+        var ComponentD = {
+            components: {
+                "component-e": ComponentE
+            },
+            // ...
+        };
+        // 或者，组件之间使用：可通过Babel和webpack使用es2015模块，如下：下面的一部分代码假设在ComponentD.vue中
+        import ComponentE from "./ComponentE.vue";
+        export default {
+            components: {
+                // 在es2015+中，在对象内部放入一个变量名（如ComponentE）是ComponentE: ComponentE的缩写
+                // 表示这个变量名即是自定义组件元素的名称，又是包含了这个组件选项的变量名（像上面定义的ComponentD一样）
+                ComponentE,
+            }
+        };
+
+        new Vue({
+            el: "#app",
+            components: {
+                "component-d": ComponentD,
+                "component-d": ComponentE
+            }
+        });
+
+        // 在模块系统中局部注册：（在使用Babel和webpack类似的模块系统中），推荐创建一个components目录存放组件
+        // 需要在局部注册之前导入想要使用的组件：如下所示
+        // 在一个假设的ComponentH.js/vue文件中
+        import ComponentF from "./ComponentF";
+        import ComponentG from "./ComponentG";
+        export default {
+            components: {
+                ComponentF,
+                ComponentG
+            },
+            // ...
+        };
+        // 此时ComponentF和ComponentG可以在ComponentH的模板中使用了
+    </script>
+</body>
+
+</html>

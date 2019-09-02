@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>计算属性</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <!-- 模板中的表达式：用于简单运算，逻辑过于复杂导致模板难以维护 -->
+    <div id="example">
+        <!-- {{ message.split("").reverse().join("") }} -->
+    </div>
+    <!-- 对于任何复杂逻辑，应使用计算属性 -->
+    <div id="computed">
+        <p>original message: {{ message }}</p>
+        <!-- 计算属性的绑定方式和普通属性一样 -->
+        <p>computed reversed message: {{ reverseMessage }}</p>
+        <!-- 表达式中调用方法达到相同效果 -->
+        <p>expression reversed message: {{ reverseMessage2() }}</p>
+        <p>now time: {{ nowTime }}</p>
+    </div>
+
+    <script>
+        var vmComputed = new Vue({
+            el: "#computed",
+            data: {
+                message: "你好，世界！"
+            },
+            computed: {
+                // 响应式依赖：应该指data中的属性(个人理解)
+                // 计算属性只有在基于他们的响应式依赖改变时才会重新求值（基于响应式依赖进行缓存）
+                // 意味着只要响应式依赖不变，会立即返回之前的计算结果，不必再次执行函数
+                // reverseMessage即为计算属性
+                // 其中匿名函数 默认 为计算属性的getter函数
+                reverseMessage: function () {
+                    // this指向vm实例
+                    return this.message.split("").reverse().join("");
+                },
+                // nowTime这个计算属性载入页面后不再更新，Date.now()不是响应式依赖
+                nowTime: function () {
+                    return Date.now();
+                }
+            },
+            methods: {
+                reverseMessage2: function () {
+                    return this.message.split("").reverse().join("");
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

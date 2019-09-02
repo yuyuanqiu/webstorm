@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <!-- 使用v-model在表单元素（input,textarea,select)创建双向数据绑定,会根据控件类型自动选取正确的方法更新元素
+        v-model会忽略所有表单元素的value，checked，selected特性的初始值，总是将vue实例的数据作为数据来源
+        v-model在内部为不同输入元素使用不同属性并抛出不同的事件
+        text/textarea使用value属性和input事件
+        radio/checkbox使用checked属性和change事件
+        select将value作为props并将change作为事件
+        对于需要使用输入法（中文等），在一个字未完全输入完的拼音状态不会实时更新 
+    -->
+    <div id="app">
+        <!-- 单行文本： 响应的值为input的value -->
+        <p>
+            <input v-model="message" placeholder="please edit me: ">
+            <p>message is : {{ message }}</p>
+        </p>
+        <!-- 多行文本： 响应的值为input的value -->
+        <p>
+            <textarea v-model="muchMsg" placeholder="please edit me: "></textarea>
+            <p style="white-space: pre-line">textarea message is : {{ muchMsg }}</p>
+            <!-- 在文本区域插入值不会生效，只能在v-model中设置 -->
+            <textarea v-model="muchMsg" placeholder="此处不会显示muchMsg的值！">{{ muchMsg }}</textarea>
+        </p>
+        <!-- 复选框：若只有一个：数据绑定（响应的值）使用布尔值，多个使用数组 -->
+        <p>
+            <!-- 响应的值为选中的状态布尔值 -->
+            <label for="first-checkbox">性别：男 {{ checked }}</label>
+            <input type="checkbox" v-model="checked" id="first-checkbox">
+            <p>checked : {{ checked }}</p>
+        </p>
+        <p>
+            <!-- 多个复选框需要有不同的value和相同的v-model: 响应的值为选中的value的值的一个数组 -->
+            <input type="checkbox" value="夏" v-model="checkedNames" id="XIA">
+            <label for="XIA">夏</label>
+            <input type="checkbox" value="秋" v-model="checkedNames" id="QIU">
+            <label for="QIU">秋</label>
+            <input type="checkbox" value="Aig" v-model="checkedNames" id="Aig">
+            <label for="Aig">Aig</label>
+            <p>checked names: {{ checkedNames }}</p>
+        </p>
+        <!-- 单选按钮: 数据绑定的为字符串： 响应的数据为value的值 -->
+        <p>
+            <input type="radio" value="男" v-model="checkedSex" id="male">
+            <label for="male">男</label>
+            <input type="radio" value="女" v-model="checkedSex" id="female">
+            <label for="female">女</label>
+            <p>checked sex: {{ checkedSex }}</p>
+        </p>
+        <!-- 选择框：数据绑定的值是一个字符串 / 数组 -->
+        <!-- 如果表达式初始值未能匹配任何项，select将被渲染为未选中状态，在iOS中，这会使用户无法选中第一项（不会触发change事件）
+        推荐提供一个值为空的禁用选项 -->
+        <p>
+            <!-- 当一个选项有设置value属性时则被选中，若添加一个disabled属性则禁止选中（相当于提示） -->
+            <select v-model="selected">
+                <option disabled value="">请选择</option>
+                <option>跑步</option>
+                <option>唱歌</option>
+                <option>刷剧</option>
+
+            </select>
+            <p>checked style: {{ selected }}</p>
+        </p>
+        <p>
+            <!-- 多选时： 提供了value则选中时值为value中的值，否则为option内部文本的值-->
+            <select v-model="muchSelected" multiple style="width: 50px; height: 50px">
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+            </select>
+            <p>checked : {{ muchSelected }}</p>
+        </p>
+        <p>
+            <!-- 结合v-for使用：未绑定value，则输出的是元素内部{{option.value}}的内容 -->
+            <select v-model="autoSelected" multiple style="width: 100px; height: 50px">
+                <option v-for="option in options">
+                    {{ option.value }}
+                </option>
+            </select>
+            <p>checked: {{ autoSelected }}</p>
+        </p>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                message: "",
+                muchMsg: "",
+                checked: true,
+                checkedNames: [],
+                checkedSex: "",
+                selected: "",
+                muchSelected: [],
+                autoSelected: [],
+                options: [
+                    {value: "苹果", text: "apple"},
+                    {value: "香蕉", text: "banana"},
+                    {value: "橘子", text: "orange"}
+                ]
+            }
+        });
+    </script>
+</body>
+
+</html>

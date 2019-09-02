@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Prop</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <blog-post post-tittle="hello vue!"></blog-post>
+    </div>
+    <script>
+        Vue.component("blog-post", {
+            props: ["postTittle"],
+            // html属性名大小写不敏感，浏览器会把大写字符转为小写，故使用模板实例时一律需要用短横线
+            // prop属性为驼峰时，可在模板内部使用而不用转为短横线，但创建模板实例时只能转为短横线
+            /* template: `\
+                <h3 postTittle="postTittleValue">{{ postTittleValue }}</h3>\
+                \
+            `, */
+            template: `\
+            <h3>{{ postTittle }}</h3>\
+            \
+            `,
+            data: function () {
+                return {
+                    postTittleValue: "hello world tittle"
+                }
+            }
+        })
+        var app = new Vue({
+            el: "#app",
+            
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./vue.js"></script>
+</head>
+<style>
+    #gpa {
+        margin: 0 auto;
+        width: 100px;
+        height: 60px;
+        background: green;
+    }
+
+    #pa {
+        width: 60px;
+        height: 40px;
+        background: pink;
+        margin: 0 auto;
+        text-align: center
+    }
+</style>
+
+<body>
+    <!-- //--------------------------------重点是这一部分代码。 -->
+    <div id="gpa" v-on:click="dodo">
+        <div id="pa" v-on:click="doThat">
+            <a v-on:click.stop="doThis" href="http://www.baidu.com">百度</a>
+            <!-- //点击百度的时候不发生冒泡，执行doThis函数，然后跳转到百度首页。 -->
+        </div>
+        <!-- //点击粉色部分，即pa部分，发生冒泡，执行doThat，dodo函数。 -->
+    </div>
+
+</body>
+<script>
+    var gpas = new Vue({
+        el: '#gpa',
+        data: {},
+        methods: {
+            doThis: function () {
+                alert("doThis");
+            },
+            doThat: function () {
+                alert("doThat")
+            },
+            dodo: function () {
+                alert("dodo")
+            }
+        }
+    })
+</script>
+
+</html>

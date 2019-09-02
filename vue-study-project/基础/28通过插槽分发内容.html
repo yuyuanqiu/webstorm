@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>通过插槽分发内容</title>
+    <style>
+        .alertBox {
+            border: 1px solid black;
+            background: yellow;
+            width: 800px;
+            height: fit-content;
+        }
+    </style>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <!-- 像html元素一样，经常需要向组件传递内容： 如下所示的组件内部的中文字符串-->
+    <!-- vue自定义的slot元素可以实现将内容传递给组件的功能：slot元素代表组件实例的内容 -->
+    <div id="app">
+        <!-- 下面的内容"通过插槽分发内容！"会通过slot元素传递到组件的相应位置 -->
+        <alert-box>通过插槽分发内容！</alert-box>
+    </div>
+    <script>
+        // 模板字符串是使用``引起来的，记住又三种引号：(', ", `)
+        Vue.component("alert-box", {
+            template: `\
+                <div class="alertBox">\
+                    <strong>提示：</strong>\
+                    <slot></slot>\
+                </div>\
+            `
+        });
+        var app = new Vue({
+            el: "#app"
+        })
+    </script>
+</body>
+
+</html>

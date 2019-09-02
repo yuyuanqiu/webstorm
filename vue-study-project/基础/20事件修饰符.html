@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件修饰符</title>
+    <script src="./vue.js"></script>
+    <style>
+        .outer {
+            width: fit-content;
+            height: 400px;
+            background: red;
+            display: inline-block;
+            overflow: hidden;
+        }
+
+        .middle {
+            width: fit-content;
+            height: 300px;
+            background: rgb(0, 255, 179);
+            display: inline-block;
+            overflow: hidden;
+        }
+
+        .inner {
+            width: 150px;
+            height: 200px;
+            background: rgb(238, 255, 0);
+            display: inline-block;
+            float: left;
+            border: 1px solid rgb(219, 129, 12);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 在事件调用event.preventDefault();event.stopPropagation();是非常常见的需求
+    更好的实现方式：方法只有纯粹的数据逻辑，而不是去处理dom事件的细节，为了解决这个问题，使用v-on命令的事件修饰符
+    修饰符（以点开头）：.stop,.prevent,.capture,.self,.once,.passive -->
+
+    <div id="app">
+        <!-- 阻止单击事件再次传播(阻止冒泡事件)：.stop: 调用 event.stopPropagation()
+        event.stopPropagation(): 防止事件冒泡到DOM树上，也就是不触发的任何前辈元素上的事件处理函数 -->
+        <!-- 事件冒泡：依次向外层触发事件： -->
+        <!-- 事件侦听（事件捕获）：capture，当元素的内部元素发生事件时，最先在该元素处理，然后才交由内部元素处理 -->
+        <!-- 当某元素同时会执行事件（事件侦听/冒泡）：在冒泡的过程中，若已由侦听事件执行，则不会进行冒泡（跳过） -->
+        <div class="outer" v-on:click.capture="outer">
+            <!-- 点击中层，会触发middle和outer -->
+            <div v-on:click="middle" class="middle">
+                <!-- 点击内层，只会触发inner -->
+                <div v-on:click.stop="inner" class="inner">点击不进行事件冒泡，会执行用户定义的函数</div>
+                <!-- 修饰符可以串联使用 -->
+                <a href="https://www.baidu.com" v-on:click.prevent.stop="inner" class="inner">不进行冒泡和不跳转，会执行用户定义的函数
+                </a>
+                <!-- 只有修饰符，省略用户定义的函数： -->
+                <a href="https://www.baidu.com" v-on:click.stop class="inner">省略用户函数（不会冒泡会跳转）</a>
+                <a href="https://www.baidu.com" v-on:click.prevent class="inner">省略用户函数（不会跳转会冒泡）</a>
+                <!-- passive：表示事件的默认行为将会立即触发，而不会等到执行完passive回调之后再触发 -->
+                <!-- addEventListener()的第三个参数passive: Boolean，设置为true时，表示 listener 永远不会调用 preventDefault()。
+                    如果 listener 仍然调用了这个函数，客户端将会忽略它并抛出一个控制台警告。
+                 -->
+                <!-- 下面的点击事件执行顺序：click事件默认调用 > innerForPassive -->
+                <div v-on:click.passive="innerForPassive" class="inner click">
+                    默认操作可先/后于innerForPassive执行，看哪个操作响应时间更短
+                </div>
+                <!-- Error compiling template:
+                    passive and prevent can't be used together. Passive handler can't prevent default event. -->
+                <a href="https://www.baidu.com" v-on:click.prevent="innerForPassive" class="inner click">
+                    prevent会阻止元素的默认行为（跳转等）
+                </a>
+                <a href="https://www.baidu.com" class="inner click" v-on:click.passive.prevent="innerForPassive">
+                    当prevent和passive一起使用时，会发出上述警告，并且prevent修饰符无效（不会阻止默认行为）
+                </a>
+            </div>
+        </div>
+
+        <!-- 提交事件不再重载页面：.prevent:调用 event.preventDefault()
+            event.preventDefault(): 如果调用这个方法，默认事件行为(元素本身的特性，比如点击超链接会跳转等等）将不再触发 -->
+        <form v-bind:style="aStyle" v-on:submit.prevent="changeColor">
+            <label for="name">姓名：</label>
+            <input id="name">
+            <input type="submit" value="提交" />
+        </form>
+        <a href="https://www.baidu.com" v-on:click.prevent="changeColor">跳转</a>
+
+        <!-- 修饰符的顺序很重要 -->
+        <!-- 当prevent修饰符在某元素上时，无论是操作（点击等）该元素或其内部的子元素，该元素和其内部元素都不会发生默认行为(元素本有（非用户设置）的特性) -->
+        <div class="outer" v-on:click.prevent="outer">
+            <a href="https://www.baidu.com" v-on:click="inner" class="inner">hahaha</a>
+            <!-- 事件只触发一次：once，除此之外，其他修饰符只能修饰原生dom事件，once除此还能修饰自定义的组件事件 -->
+            <a href="https://www.baidu.com" v-on:click.once="inner" class="inner">点击只触发一次inner事件</a>
+
+        </div>
+
+
+
+    </div>
+    <script>
+        // "user-select":"none": 禁止鼠标选中文本
+        var app = new Vue({
+            el: "#app",
+            data: {
+                aStyle: {
+                    color: "",
+                    fontSize: "50px",
+                    "user-select": "none",
+                }
+            },
+            methods: {
+                outer: function () {
+                    alert("外层");
+                },
+                middle: function () {
+                    alert("中层");
+                },
+                inner: function () {
+                    alert("内层");
+                },
+                innerForPassive: function () {
+                    setTimeout(function () {
+                        alert("内层");
+                    }, 5000);
+                },
+                changeColor: function () {
+                    let color = "#";
+                    const signal = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "a", "b", "c", "d", "e", "f"];
+                    for (let i = 0; i < 6; i++) {
+                        let random = Math.floor(Math.random() * 16);
+                        color += signal[random];
+                    }
+                    this.aStyle.color = color;
+                }
+            }
+        });
+        for(let clicks = document.getElementsByClassName("click"), length = clicks.length, i = 0; i < length; i++) {
+            clicks[i].onclick = function () {
+                alert("passive修饰符");
+            }
+        }
+    </script>
+</body>
+
+</html>

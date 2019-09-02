@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>通过props向子组件传递数据</title>
+    <style>
+        .blog-post {
+            border: 1px dotted blue;
+            border-style: dotted none;
+        }
+    </style>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 当在组件实例使用prop时（将一个字符串传递给tittle时），就相当于一个元素的属性一样 -->
+        <blog-post tittle="My journey with Vue"></blog-post>
+        <blog-post tittle="Blogging with Vue"></blog-post>
+        <blog-post tittle="Why Vue is so fun"></blog-post>
+    </div>
+
+    <!-- 在典型的应用中，可能在data里有一个相关数据的数组 -->
+    <!-- 使用v-bind来动态传递prop（不是手动传递） -->
+    <div id="app-2">
+        <!-- 用了v-bind和没用的区别：使用了v-bind的属性，他的值只能从Vue中获取数据（值为一个变量），而不像普通属性一样自己定义 -->
+        <blog-post-2 v-for="post in posts" v-bind:tittle="post.tittle" v-bind:key="post.id"></blog-post-2>
+    </div>
+
+    <!-- 
+        每个组件必须只有一个根元素，所以需要将模板的内容包在一个父元素内
+        当一个组件变得越来越复杂时，为每个相关信息定义一个prop会很麻烦，
+        所以需重构该组件，使它变成接收一个单独自定义属性的prop，即将某些相关联信息放在一个prop中
+        即使需要增加额外的信息，只需将其加入到这一个prop中 
+    -->
+    <div id="app-3">
+        <!-- 在使用模板时，需要绑定自定义prop，才能传值到模板内部： v-bind:post="post" -->
+        <!-- 而其他没有自定义的prop或不是元素本有的属性，不能在模板中体现，除了key属性 -->
+
+        <!-- 在开发组件时，有些功能要求我们和父组件进行沟通，比如引入一个功能放大所有文章的字号： 则在组件的父级元素中添加一个postFontSize属性 -->
+        <!-- 在模板中，父级组件可以通过v-on监听子组件的任意事件：因为Vue实例提供了一个自定义事件的系统：下例自定义事件侦听器"text-to-large" -->
+
+        <!-- 子组件可以通过调用内建的$emit方法并传入事件名作为参数触发一个事件 -->
+        <!-- 下例子组件button内建$emit方法传入事件名为其第一个参数，当触发事件侦听器，父级组件就会接收该事件并更新postFontSize的值 -->
+<!--         <blog-post-3 v-bind:style="{fontSize: postFontSize +'em'}" v-on:text-to-large="postFontSize += 1"
+            v-for="post in posts" v-bind:post="post" v-bind:key="post.id"></blog-post-3>
+ -->
+        <!-- $emit函数提供第二个参数：且父组件用$event来接收这个参数 -->
+<!--         <blog-post-3 v-bind:style="{fontSize: postFontSize +'em'}" v-on:text-to-large="postFontSize += $event"
+            v-for="post in posts" v-bind:post="post" v-bind:key="post.id"></blog-post-3>
+ -->
+        <!-- 或者父组件的事件处理函数是一个方法：则该方法的参数接收$emit函数的第二个参数 -->
+        <blog-post-3 v-bind:style="{fontSize: postFontSize +'em'}" v-on:text-to-large="onTextToLarge"
+            v-for="post in posts" v-bind:post="post" v-bind:key="post.id"></blog-post-3>
+
+    </div>
+
+    <script>
+        Vue.component("blog-post", {
+            // 使用prop在组件上注册一些自定义特性，当一个值传递给一个prop特性时，它就变成了那个组件实例的一个属性
+            // 一个组件默认可以拥有任意数量的prop，prop的值可以是任意的类型
+            // 在组件实例中访问prop，就像data中的值一样
+            props: ["tittle"],
+            template: "<h3>{{ tittle }}</h3>"
+        });
+        Vue.component("blog-post-2", {
+            // template中的{{tittle}}就是自定义属性tittle的值
+            props: ["tittle"],
+            template: "\
+                <h3> {{ tittle }} </h3>\
+            ",
+        });
+        Vue.component("blog-post-3", {
+            props: ["post"],
+            /* template选项使用了JavaScript的模板字符串来让多行的模板更易读，但它在IE下并没有被支持
+            所以如果在不经过（Babel/typescript之类）编译的情况支持IE，需要使用折行转义字符（"\"）,其他浏览器可以不使用 */
+            /* template: "\
+                <div class='blog-post'>\
+                    <h3>{{ post.tittle }}</h3>\
+                    <button v-on:click=\"$emit('text-to-large')\">字体变大</button>\
+                    <div v-html='post.content'></div>\
+                    <strong><small> {{ post.publishedAt }}</small></strong>\
+                    <p>\
+                        <span v-for='(comment,index) in post.comments'>\
+                            {{ index }} : {{ comment }}\
+                        </span>\
+                    </p>\
+                </div>\
+            ", */
+
+            // 有时候用一个事件抛出一个特定的值是非常有用的，
+            // 例如可以让组件自己决定文本放大的倍数，这是可以使用$emit函数的第二个参数来提供这个值
+            // 然后在父级组件监听这个事件的时候，可以通过$event访问被抛出的这个值
+            // 下面定义了文本放大倍数为2
+            template: "\
+            <div class='blog-post'>\
+                <h3>{{ post.tittle }}</h3>\
+                <button v-on:click=\"$emit('text-to-large', '2')\">字体变大</button>\
+                <div v-html='post.content'></div>\
+                <strong><small> {{ post.publishedAt }}</small></strong>\
+                <p>\
+                    <span v-for='(comment,index) in post.comments'>\
+                        {{ index }} : {{ comment }}\
+                    </span>\
+                </p>\
+            </div>\
+            ",
+        });
+        var app = new Vue({
+            el: "#app"
+        });
+        var app2 = new Vue({
+            el: "#app-2",
+            data: {
+                posts: [{
+                        id: 1,
+                        tittle: "My journey with Vue"
+                    },
+                    {
+                        id: 2,
+                        tittle: "Blogging with Vue"
+                    },
+                    {
+                        id: 3,
+                        tittle: "Why Vue is so fun"
+                    }
+                ]
+            }
+        });
+        var app3 = new Vue({
+            el: "#app-3",
+            data: {
+                postFontSize: 1,
+                posts: [{
+                        id: 1,
+                        tittle: "first tittle",
+                        content: "<p style='color: green; font-size: 16px;'>这是正文内容1</p>",
+                        publishedAt: "出版社1",
+                        comments: ["评论1", "评论2", "评论3", "评论4", "评论5"]
+                    },
+                    {
+                        id: 2,
+                        tittle: "second tittle",
+                        content: "<p style='color: green; font-size: 16px;'>这是正文内容2</p>",
+                        publishedAt: "出版社2",
+                        comments: ["评论1", "评论2", "评论3", "评论4", "评论5"]
+                    },
+                    {
+                        id: 3,
+                        tittle: "three tittle",
+                        content: "<p style='color: green; font-size: 16px;'>这是正文内容3</p>",
+                        publishedAt: "出版社3",
+                        comments: ["评论1", "评论2", "评论3", "评论4", "评论5"]
+                    },
+                    {
+                        id: 4,
+                        tittle: "four tittle",
+                        content: "<p style='color: green; font-size: 16px;'>这是正文内容4</p>",
+                        publishedAt: "出版社4",
+                        comments: ["评论1", "评论2", "评论3", "评论4", "评论5"]
+                    },
+                ]
+            },
+            methods: {
+                onTextToLarge: function (toLargeAmount) {
+                    this.postFontSize += toLargeAmount;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

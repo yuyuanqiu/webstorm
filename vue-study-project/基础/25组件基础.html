@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件基础</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <!-- vue组件允许创建具有完全自定义行为且可复用的输入组件，这些组件甚至可以和v-model一起使用 -->
+    <div id="app">
+        <!-- 可以在一个vue根实例中，将组件作为自定义元素使用 -->
+        <button-counter></button-counter>
+        <!-- 每个组件都有一个作用域，所以他们是互不相干的,点击一个组件，其他组件不会有变化 -->
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+    </div>
+    <script>
+        // 因为组件是可复用的Vue实例，所以组件与Vue实例一样接收相同的选项(data,computed,methods等等),但根实例特有的选项el等除外
+        // 因为每个Vue实例之间都有各自的作用域，所以每使用一个组件，他们的作用域都是不一样的，包含的数据也是不同的
+
+        // 为了能在模板中使用自定义组件，必须先注册以便于Vue能够识别（全局注册和局部注册）
+        // 自此及之前的例子，都是通过全局注册组件的
+        // 全局注册组件可以用在其注册之后的任何（通过new Vue）新创建的vue根实例，和其组件树中的所有子组件的模板中
+        Vue.component("button-counter", {
+            // 一个组件的data选项必须是一个函数，因此每个组件实例可以维护一份被返回对象独立的拷贝
+            // 若没有这个规则，则点击一个按钮，其他所有该相同组件的实例均会发生响应的变化
+            data: function () {
+                return {
+                    counter: 0
+                }
+            },
+            template: '<button v-on:click="counter++">you clicked me {{ counter }} times.</button>'
+        });
+        var app = new Vue({
+            el: "#app"
+        })
+    </script>
+</body>
+
+</html>

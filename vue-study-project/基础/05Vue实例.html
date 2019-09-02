@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue实例</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{ foo }}</p>
+        <button v-on:click="foo='haha'">Change it!</button>
+    </div>
+    <div id="example"></div>
+    <script>
+        // 数据对象
+        var data = {a: 1};
+        // 在文档中常使用vm表示Vue实例
+        var vm = new Vue({
+            // 选项
+            // 当Vue实例【一被创建】，data对象所有的属性会加入到Vue的响应式系统中
+            data: data
+        });
+        // 获取实例上的属性：返回原数据中对应的字段
+        console.log(vm.a == data.a);    // true;
+        // 设置属性会影响到原始数据
+        vm.a = 2;
+        console.log(data.a);    // 2
+        // 反之亦然
+        data.a = 3;
+        console.log(vm.a);      // 3
+
+        // 如果知道某属性之后会被添加，则需要设置一些初始值
+        var dataInit = {
+            newTodoText: "",
+            visitCount: 0,
+            hideCompletedTodos: false,
+            todos: [],
+            error: null
+        };
+        var vmInit = new Vue({
+            data: dataInit
+        });
+        // 当使用Object.freeze(obj)时，会阻止修改obj的所有属性（无法追踪变化）
+        // 注意：需要在new Vue之前使用，否则无效果
+        // 更改时出现：
+        // TypeError: Cannot assign to read only property 'foo' of object '#<Object>'
+        var dataUseFreeze = {
+            foo: "bar"
+        };
+        Object.freeze(dataUseFreeze); 
+        new Vue({
+        el: "#app",
+        data: dataUseFreeze
+        });
+        
+        // Vue暴露了一些有用的实例属性和方法：均以前缀"$"开头
+        var data = {a: 1};
+        var vm$ = new Vue({
+            el: "#example",
+            data: data
+        });
+        console.log(vm.$data === data);      // true
+        console.log(vm.$el === document.getElementById("example"));     // true
+        // 实例方法： 在vm$.a改变后调用
+        vm$.$watch("a", function (newValue, oldValue) {
+            // ...
+        });
+
+        // 实例生命周期钩子
+        new Vue({
+            data: {
+                a: 1
+            },
+            created: function () {
+                // this指向调用它的Vue实例
+                /* 不要在选项属性/回调函数中使用箭头函数，
+                经常导致 Uncaught TypeError: Cannot read property of undefined 
+                或 Uncaught TypeError: this.myMethod is not a function 之类的错误。 */
+                console.log("a is " + this.a);
+            }
+        })
+    </script>
+</body>
+</html>

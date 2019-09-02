@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>动态组件</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <!-- 在组件之间进行动态切换（比如切换选项卡）：可以通过vue中的component元素加一个特殊的is特性来实现 -->
+    <!-- 组件会在componentID改变时改变：componentID可以包括已注册的组件名字/一个组件的选项对象 -->
+    <!-- <component :is="componentId"></component> -->
+    <!-- 
+        对于某些html元素，比如ol，ul，table，select等，其内部子元素只能是某些特定的元素
+        而某些元素，如li，tr，option也只能出现在特定的元素内部
+        这就会导致使用这些有条件的元素时出现问题，
+        比如在table元素中添加一个组件实例，即使该组件注册的是其内部元素，也不能识别
+        这个组件会被作为无效的内容提升到外部，并导致最终渲染结果出错
+        引入 is属性 解决了这个不能识别的问题
+        当从字符串(template: "..."),单文件组件(.vue文件),<script type="text/template">中使用组件模板时，不存在上述限制
+     -->
+     <table id="app">
+         <tr v-for="item in items" v-bind:post="item" is="post-row"></tr>
+     </table>
+     <script>
+         Vue.component("post-row", {
+            props: ["post"],
+            template: `
+                <tr>\
+                    <td>{{ post[0] }}</td>\
+                    <td>{{ post[1] }}</td>\
+                    <td>{{ post[2] }}</td>\
+                </tr>\
+                `
+         });
+         var app = new Vue({
+            el: "#app",
+            data: {
+                items: [
+                    ["语文", "数学", "英语"],]
+                    [100, 100, 90],
+                    [81, 89, 71],
+                    [112, 123, 111],
+                    [80, 87, 98],
+                    [12, 11, 11]
+                ]
+            }
+         });
+     </script>
+</body>
+
+</html>

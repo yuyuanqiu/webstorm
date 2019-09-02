@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ToDo应用</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <form v-on:submit.prevent="addNewToDo">
+            <label for="new-todo">Add a ToDo: </label>
+            <input 
+                v-model="newToDoText" 
+                id="new-todo" 
+                placeholder:="例如：下班之前完成任务。"
+            >
+            <button>ADD</button>
+        </form>
+        <ul>
+            <li 
+                is="todo-item"
+                v-for="(todo, index) in todos"
+                v-bind:key="todo.id"
+                v-bind:tittle="todo.tittle"
+                v-on:remove="todos.splice(index, 1)"    
+            ></li>
+        </ul>
+    </div>
+    <script>
+        // 注册Todo组件
+        // $emit函数是什么: 点击然后绑定组件的某个事件？？？
+        Vue.component("todo-item",{
+            props: ["tittle"],
+            template: '\
+                <li>\
+                    {{ tittle }}\
+                    <button v-on:click="$emit(\'remove\')">Remove</button>\
+                </li>\
+            ',
+        });
+        // 创建vue实例：
+        var app = new Vue({
+            el: "#app",
+            data: {
+                newToDoText: '',
+                todos: [
+                    {
+                        id: 1,
+                        tittle: "跑步"
+                    },
+                    {
+                        id: 2,
+                        tittle: "唱歌"
+                    },
+                    {
+                        id: 3,
+                        tittle: "跳舞"
+                    }
+                ],
+                nextToDoId: 4
+            },
+            methods: {
+                addNewToDo: function () {
+                    if (this.newToDoText) {
+                        this.todos.push({
+                            id: this.nextToDoId++,
+                            tittle: this.newToDoText
+                        });
+                    }
+                    this.newToDoText = '';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

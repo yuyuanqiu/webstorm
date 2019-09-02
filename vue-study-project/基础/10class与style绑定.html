@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>class与style绑定</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <!-- 用v-bind绑定时，表达式值的结果可以是字符串、数组、对象
+    绑定class的对象语法：
+    当isActive的值为真（条件判断：不含undefined、0、''、false、null、NaN）：class包含active -->
+    <div id="bind-class-by-obj">
+        <div v-bind:class="{active: isActive}"></div>
+        <!-- v-bind指令可以与普通class属性共存 -->
+        <div class="static" v-bind:class="{active: isActive, 'text-danger': hasError}"></div>
+        <!-- 绑定数据的对象不必内联定义在模板里 -->
+        <div v-bind:class="classObject"></div>
+        <!-- 可以绑定一个返回对象的计算属性（这个模式常用且功能强大） -->
+        <div v-bind:class="classObjByComputed"></div>
+    </div>
+    <div id="bind-class-by-array">
+        <!-- 将数组传给v-bind:class,以应用一个样式列表: 即将数组中每个元素的 值 累加到class中 -->
+        <div v-bind:class="[activeClass, errorClass]"></div>
+        <!-- 使用条件表达式：切换class(当存在多个class时有些繁琐) -->
+        <div v-bind:class="[isActive ? activeClass : '', errorClass]"></div>
+        <!-- 在数组中使用对象语法(上一种方法的改进) -->
+        <div v-bind:class="[{active: isActive}, errorClass]"></div>
+
+        <!-- 在自定义组件上使用class：这些class会被添加到组件根元素上（不会覆盖原有class） -->
+        <add-class-to-component class="baz boo"></add-class-to-component>
+        <!-- 同样适用于带数据绑定的class -->
+        <add-class-to-component class="baz" v-bind:class="{active: isActive}"></add-class-to-component>
+    </div>
+
+    <!-- 绑定内联样式style的语法：
+        当v-bind:style需要使用添加浏览器前缀的css属性时，vue.js会自动侦测并添加相应前缀
+        对象语法：v-bind的值为一个JavaScript对象，css属性可以用驼峰/短横线（引号括起）来命名 -->
+    <div id="bind-style-by-obj">
+        <div v-bind:style="{color: activeColor, fontSize: fontSize + 'px'}">haha</div>
+        <!-- 直接绑定一个样式对象（在data/computed）会使模板更加清晰 -->
+        <div v-bind:style="styleObject">haha</div>
+        <!-- 使用返回对象的计算属性 -->
+        <div v-bind:style="styleObjByComputed">haha</div>
+        <!-- 从2.3版本开始，可以为style绑定的属性提供一个包含多个值的数组，浏览器只会渲染最后一个被他支持的值 -->
+        <div v-bind:style="{display: ['-ms-flexbox', 'flex','-webkit-box']}"></div>
+    </div>
+    <!-- 数组语法： 多个样式对象应用到同一个元素上 -->
+    <div id="bind-style-by-array">
+        <div v-bind:style="[baseStyles, overridingStyles]">haha </div>
+    </div>
+
+    <script>
+        // 注册的组件需要在所应用实例的前面，否则组件不能应用正确
+        // 组件上添加class：
+        Vue.component("add-class-to-component", {
+            template: "<p class='foo bar'></p>"
+        });
+
+        var bindClassByObjVM = new Vue({
+            el: "#bind-class-by-obj",
+            data: {
+                isActive: [],
+                hasError: -Infinity,
+                classObject: {
+                    active: true,
+                    'text-danger': {}
+                }
+            },
+            computed: {
+                classObjByComputed: function () {
+                    return {
+                        active: this.isActive && !this.hasError,
+                        'text-danger': this.hasError && this.hasError.type === "fatal",
+                        others: " "
+                    }
+                }
+            }
+        });
+
+        var bindClassByArrayVM = new Vue({
+            el: "#bind-class-by-array",
+            data: {
+                isActive: true,
+                activeClass: "active",
+                errorClass: "text-anger"
+            }
+        });
+
+        var bindStyleByObjVM = new Vue({
+            el: "#bind-style-by-obj",
+            data: {
+                activeColor: "red",
+                fontSize: 30,
+                styleObject: {
+                    color: "red",
+                    fontSize: "30px"
+                }
+            },
+            computed: {
+                styleObjByComputed: function () {
+                    return {
+                        color: "red",
+                        fontSize: "30px"
+                    };
+                }
+            }
+        });
+
+        var bindStyleByArrayVM = new Vue({
+            el: "#bind-style-by-array",
+            data: {
+                baseStyles: {
+                    color: "red",
+                    fontSize: "30px"
+                },
+                overridingStyles: {
+                    color: "purple",
+                    'background-Color': "black"
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

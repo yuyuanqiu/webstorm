@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>显示过滤后的结果</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="n in sortNumbers">{{ n }}</li>
+        </ul>
+        <!-- 在计算属性不适用的情况下，使用方法 -->
+        <ul>
+            <li v-for="n in even(numbers)">{{ n }}</li>
+        </ul>
+        <!-- 在v-for里面可以接受整数：会把模板重复对应的次数:从1开始 -->
+        <ul>
+            <li v-for="n in 20">{{ n }}</li>
+        </ul>
+        <!-- 在模板上使用v-for：不含模板本身<template> -->
+        <template v-for="n in 10">
+            <p>haha : {{ n }}</p>
+            <p>lulululu</p>
+        </template>
+
+        <!-- 因为v-for优先级大于v-if，若两个修饰同一元素，则相当于在for循环内运行if：渲染部分节点非常有用 -->
+        <ul>
+            <li v-for="n in 10" v-if="n % 2 === 0">{{ n }}</li>
+        </ul>
+        <!-- 如果目的是先条件判断，则将v-if置于外层/template中 -->
+        <!-- 下面是如果数组不为空，则循环输出每个元素，否则打印信息 -->
+        <ul v-if="numbers.length">
+            <li v-for="n in numbers">{{ n }}</li>
+        </ul>
+        <p v-else>数组为空</p>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                numbers: [1, 3, 4, 7, 0, 9, 2]
+            },
+            // 若想显示一个数组过滤/排序后的结果，而不改变/重置原始数据，可以创建一个计算属性
+            computed: {
+                sortNumbers: function () {
+                    return this.numbers.filter(function (number) {
+                        return number % 2 === 0;
+                    });
+                }
+            },
+            methods: {
+                even: function (numbers) {
+                    return numbers.filter(function (number) {
+                        return number % 2 === 0;
+                    })
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

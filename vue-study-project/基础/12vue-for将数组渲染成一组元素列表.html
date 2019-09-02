@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-for: 将数组渲染成元素列表</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <!-- v-for:基于数组来渲染一个列表元素，需使用item in/of items的语法 -->
+    <div id="example-1">
+        <ul>
+            <li v-for="item in items">
+                {{ item.msg }}
+            </li>
+        </ul>
+        <!-- 在v-for块中，可以访问所有父元素作用域的属性，v-for支持第二个参数（当前项索引） -->
+        <ul>
+            <li v-for="(item, index) in items">
+                {{ parentMsg }} - {{ index }} - {{ item.msg }}
+            </li>
+        </ul>
+        <!-- 可使用of代替in，更接近迭代器语法 -->
+        <ul>
+            <li v-for="(item, index) of items">
+                {{ index }} : {{ item.msg }}
+            </li>
+        </ul>
+    </div>
+    <script>
+        var example1 = new Vue({
+            el: "#example-1",
+            data: {
+                parentMsg: "父元素作用域数据",
+                items: [
+                    {msg: 1},
+                    {msg: 2},
+                    {msg: 3}
+                ]
+            }
+        });
+        
+    </script>
+</body>
+</html>
