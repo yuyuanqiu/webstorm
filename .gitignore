@@ -1,6 +1,6 @@
-node_modules/
+node_modules/*
 *.mp4
 *.mp3
-.history/
-.git/
-.idea/
+.history/*
+.git/*
+.idea/*
