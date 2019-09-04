@@ -60,7 +60,7 @@
                 <!-- passive：表示事件的默认行为将会立即触发，而不会等到执行完passive回调之后再触发 -->
                 <!-- addEventListener()的第三个参数passive: Boolean，设置为true时，表示 listener 永远不会调用 preventDefault()。
                     如果 listener 仍然调用了这个函数，客户端将会忽略它并抛出一个控制台警告。
-                 -->
+                -->
                 <!-- 下面的点击事件执行顺序：click事件默认调用 > innerForPassive -->
                 <div v-on:click.passive="innerForPassive" class="inner click">
                     默认操作可先/后于innerForPassive执行，看哪个操作响应时间更短

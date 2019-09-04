@@ -21,12 +21,12 @@
         这个组件会被作为无效的内容提升到外部，并导致最终渲染结果出错
         引入 is属性 解决了这个不能识别的问题
         当从字符串(template: "..."),单文件组件(.vue文件),<script type="text/template">中使用组件模板时，不存在上述限制
-     -->
-     <table id="app">
-         <tr v-for="item in items" v-bind:post="item" is="post-row"></tr>
-     </table>
-     <script>
-         Vue.component("post-row", {
+    -->
+    <table id="app">
+        <tr v-for="item in items" v-bind:post="item" is="post-row"></tr>
+    </table>
+    <script>
+        Vue.component("post-row", {
             props: ["post"],
             template: `
                 <tr>\
@@ -35,12 +35,12 @@
                     <td>{{ post[2] }}</td>\
                 </tr>\
                 `
-         });
-         var app = new Vue({
+        });
+        var app = new Vue({
             el: "#app",
             data: {
                 items: [
-                    ["语文", "数学", "英语"],]
+                    ["语文", "数学", "英语"],
                     [100, 100, 90],
                     [81, 89, 71],
                     [112, 123, 111],
@@ -48,8 +48,8 @@
                     [12, 11, 11]
                 ]
             }
-         });
-     </script>
+        });
+    </script>
 </body>
 
 </html>

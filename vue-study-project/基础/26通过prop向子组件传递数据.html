@@ -47,11 +47,11 @@
         <!-- 下例子组件button内建$emit方法传入事件名为其第一个参数，当触发事件侦听器，父级组件就会接收该事件并更新postFontSize的值 -->
 <!--         <blog-post-3 v-bind:style="{fontSize: postFontSize +'em'}" v-on:text-to-large="postFontSize += 1"
             v-for="post in posts" v-bind:post="post" v-bind:key="post.id"></blog-post-3>
- -->
+-->
         <!-- $emit函数提供第二个参数：且父组件用$event来接收这个参数 -->
 <!--         <blog-post-3 v-bind:style="{fontSize: postFontSize +'em'}" v-on:text-to-large="postFontSize += $event"
             v-for="post in posts" v-bind:post="post" v-bind:key="post.id"></blog-post-3>
- -->
+-->
         <!-- 或者父组件的事件处理函数是一个方法：则该方法的参数接收$emit函数的第二个参数 -->
         <blog-post-3 v-bind:style="{fontSize: postFontSize +'em'}" v-on:text-to-large="onTextToLarge"
             v-for="post in posts" v-bind:post="post" v-bind:key="post.id"></blog-post-3>

@@ -9,7 +9,7 @@
     <!-- 将数据绑定到dom结构 -->
     <div id="app">
         <!-- 如果seen为true，则显示p标签 -->
-        <p v-if="seen">现在你看到我了！</p>
+        <p v-if="seen" @click="isSeen">现在你看到我了！</p>
     </div>
     <div id="app-2">
         <ol>
@@ -23,7 +23,12 @@
             el: "#app",
             data: {
                 seen: true,
-            }
+            },
+            methods: {
+                isSeen: function() {
+                    this.seen = !this.seen;
+                }
+            },
         });
         var app2 = new Vue({
             el: "#app-2",

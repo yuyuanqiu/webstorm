@@ -21,14 +21,15 @@
         <p>computed reversed message: {{ reverseMessage }}</p>
         <!-- 表达式中调用方法达到相同效果 -->
         <p>expression reversed message: {{ reverseMessage2() }}</p>
-        <p>now time: {{ nowTime }}</p>
+        <p @click="updateTime">now time: {{ nowTime }}</p>
     </div>
 
     <script>
         var vmComputed = new Vue({
             el: "#computed",
             data: {
-                message: "你好，世界！"
+                message: "你好，世界！",
+                time: Date.now()
             },
             computed: {
                 // 响应式依赖：应该指data中的属性(个人理解)
@@ -48,6 +49,10 @@
             methods: {
                 reverseMessage2: function () {
                     return this.message.split("").reverse().join("");
+                },
+                // 测试nowTime
+                updateTime: function () {
+                    this.time = Date.now();
                 }
             }
         })
