@@ -151,6 +151,14 @@
     - `el.style.getPropertyValue(property-name)`由属性名获取属性值
     - `el.style.item(index)`返回style属性相对应位置的属性名
     - `el.style.removeProperty(property-name)`移除相应的属性
-    - `el.style.setProperty(property-name, property-value, 优先级(important))
-
-
+    - `el.style.setProperty(property-name, property-value, 优先级(important))`
+- css模块侦测：判断浏览器是否支持某个属性
+    - 如果支持某属性，则typeof判断为str
+    - 否则判断为undefined
+    - 或者使用`in`判断某属性是否在对象sytle内
+- 转义选择器特殊字符`CSS.escape(属性值)`
+- 判断是否支持写法：`CSS.supports(property,value)`或`CSS.supports('dispaly: none')`
+- `window.getComputedStyle(el, 伪元素表示:before)`：返回所有的样式的css对象实例（包括元素的伪元素），并且是动态的，可直接引用`s.height`
+    - 返回的实例为绝对单位，颜色为rgb(a)
+    - 属性不能合写，margin的四个方向
+    - 有些短横线属性使用方括号读取
