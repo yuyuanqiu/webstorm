@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>flex弹性布局</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #demo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #header {
+            display: flex;
+            flex-direction: row;
+            background-color: rgb(222, 233, 162);
+            height: 1000px;
+        }
+
+        #bar {
+            background-color: #6bcaf0;
+            flex-shrink: 0;
+            width: 20%;
+        }
+
+        #main {
+            display: flex;
+            flex-direction: row;
+            flex-grow: 1;
+            background-color: rgb(100, 209, 136);
+        }
+
+        .left {
+            flex-grow: 1;
+            background-color: rgb(176, 234, 241);
+        }
+
+        .center {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 2;
+        }
+
+        .top{
+            flex-grow: 3;
+            background-color: rgb(238, 255, 83);
+        } 
+
+        .bottom {
+            flex-grow: 1;
+            background-color: rgb(145, 156, 255);
+        }
+
+        .right {
+            flex-grow: 1;
+            background-color: rgb(157, 202, 120);
+        }
+
+        #footer {
+            background-color: rgb(231, 146, 146);
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div id="demo">
+        <div id="header">
+            <div id="bar">bar</div>
+            <div id="main">
+                <div class="left">main-left</div>
+                <div class="center">
+                    <div class="top">main-center-top</div>
+                    <div class="bottom">main-center-bottom</div>
+                </div>
+                <div class="right">main-right</div>
+            </div>
+        </div>
+
+        <div id="footer">footer</div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>事件监听器</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .outer {
+            width: 600px;
+            height: 600px;
+            background-color: rgb(211, 144, 183);
+        }
+        .outer2 {
+            width: 500px;
+            height: 500px;
+            background-color: rgb(255, 119, 119);
+        }
+        .outer3 {
+            width: 400px;
+            height: 400px;
+            background-color: rgb(159, 218, 120);
+        }
+        .inner {
+            width: 200px;
+            height: 200px;
+            background-color: rgb(135, 187, 207);
+        }
+    </style>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div class="outer">outer
+        <div class="outer2">outer2
+            <div class="outer3">outer3
+                <div class="inner">inner</div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function getClass(name) {
+            return document.getElementsByClassName(name)[0];
+        }
+        
+        var outer = getClass("outer");
+        var outer2 = getClass("outer2");
+        var outer3 = getClass("outer3");
+        var inner = getClass("inner");
+        outer.addEventListener("click",function (event) {
+            console.log(this.className + ": " + event.target.className);
+            // event.stopPropagation();
+        }, true);
+        outer2.addEventListener("click",function (event) {
+            console.log(this.className + ": " + event.target.className);
+            event.stopPropagation();
+        }, true);
+        outer3.addEventListener("click",function (event) {
+            console.log(this.className + ": " + event.target.className);
+            // event.stopPropagation();
+        }, true);
+        inner.addEventListener("click",function (event) {
+            console.log(this.className + ": " + event.target.className);
+            // event.stopPropagation();
+        }, true);
+        outer.addEventListener("click",function (event) {
+            console.log(this.className + ": " + event.target.className);
+            // event.stopPropagation();
+        }, false);
+        outer2.addEventListener("click",function (event) {
+            console.log(this.className + ": " + event.target.className);
+            // event.stopPropagation();
+        }, false);
+        outer3.addEventListener("click",function (event) {
+            console.log(this.className + ": " + event.target.className);
+            // event.stopPropagation();
+        }, false);
+        inner.addEventListener("click",function (event) {
+            console.log(this.className + ": " + event.target.className);
+            // event.stopPropagation();
+        }, false);
+        // 自动触发dom对象的相应事件
+        // 参数必须是一个事件类型，故而需要创建一个事件对象
+        // var event = new Event("click");
+        // var a = outer.dispatchEvent(event);
+        // console.log(a);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>层叠等级</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .box1 {
+            position: relative;
+            background-color: #89e;
+        }
+
+        .block {
+            position: absolute;
+            background: grey;
+            width: 150px;
+            height: 150px;
+        }
+
+        .lt0 {
+            background-color: rgb(247, 181, 181);
+        }
+
+        .bl {
+            background-color: rgb(15, 142, 245);
+            top: 40px;
+            left: 40px;
+        }
+
+        .float {
+            background-color: yellow;
+            top: 60px;
+            left: 60px;
+        }
+
+        .t0 {
+            background-color: palegreen;
+            top: 90px;
+            left: 90px;
+        }
+
+        .gt0 {
+            background-color: purple;
+            top: 110px;
+            left: 110px;
+        }
+
+        .inline {
+            background-color: rgb(197, 204, 200);
+            position: absolute;
+            display: inline-block;
+            width: 150px;
+            height: 150px;
+            top: 70px;
+            left: 70px;
+        }
+        .fixed {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            right: 100px;
+            bottom: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div class="box1">
+        <div class="block lt0">z-index&lt;0</div>
+        <div class="block bl">块元素</div>
+        <div class="block float">浮动元素</div>
+        <span class="inline">行内元素</span>
+        <div class="block t0">z-indx=0</div>
+        <div class="block gt0">z-index&gt;0</div>
+
+    </div>
+    <img src="../img/草莓.png" class="fixed">
+</body>
+
+</html>
