@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<products>
+    <九宫格>
+        <name>九宫格</name>
+        <description>这是一个镂空的九宫格图片</description>
+        <src>../img/九宫格.png</src>
+    </九宫格>
+    <草莓>
+        <name>草莓</name>
+        <description>这是一个红红的草莓</description>
+        <src>../img/草莓.png</src>
+    </草莓>
+</products>
