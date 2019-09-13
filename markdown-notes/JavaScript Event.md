@@ -58,7 +58,6 @@
     - 事件触发顺序
         - 按下鼠标`mousedown`->松开鼠标`mouseup`->`click`->`dblclick`
         - 鼠标进入`mouseenter`->进入/移动`mouseover`->离开/移动`mouseout`->离开`mouseleave`
-        - 按下键盘`keydown`->按下有值的键`keypress`->松开键盘`keyup`
         - `mouseenter`事件进入元素之后在元素内部移动不会触发该事件，而`mouseover`事件在进入元素之后，在元素内部之间移动会触发事件，但是2种事件从监听元素外部进入则会触发事件
     - contextmenu事件：鼠标右键/按下上下文菜单键触发
     - wheel事件：滚动鼠标滚轮触发（**Wheel事件继承了MouseEvent事件**）
@@ -75,3 +74,26 @@
         - `e.pageX/Y`：鼠标距文档节点左上角的位置
 - 实例方法：`e.getModifierState(功能键名)`表示是否同时按下特定的功能键
 
+### 键盘事件
+- 按下键盘`keydown`->按下有值的键（ctrl/shift/alt/meta除外）`keypress`->松开键盘`keyup`
+- 事件属性
+    - Boolean：ctrlKey,altKey,metaKey,shiftKey,repeat(是否重复按键，会一直触发keydown和keypress)
+    - e.key：返回按下的字符串键名，只读属性，可打印字符直接输出，不可打印字符输出默认键值，比如空格为Backspace，左箭头为Left等
+    - e.code: 返回当前按键的字符串形式，分左右功能键，数字键为digitalx的形式，字母键为Keyx的形式
+- 实例方法：
+    - e.getModifierState(功能键的key属性字符串)：返回Boolean值
+
+### 进度事件
+- 定义：描述资源加载的进度，主要有Ajax(xhr)，音视频，图片，样式等外部资源加载时触发
+- 事件类型；
+    - abort：外部资源终止加载触发（比如用户取消），若错误导致终止，不会触发
+    - error，timeout
+    - load，loadstart，loadend：外部资源加载成功/开始加载/停止加载时触发
+    - progress：外部资源加载过程中触发
+- 有时候资源会在脚本运行前加载完成，所以需要使用complete属性判断是否加载完成
+- 由于dom节点没有提供是否加载错误的属性，所以error事件的侦听函数应该防止html标签内部使用onerror的形式，并且error事件不会冒泡
+- 事件的属性
+    - lengthComputable：表示加载的总量是否可以计算
+    - loaded：表示已经加载的量
+    - total：表示需要加载的总量
+    
