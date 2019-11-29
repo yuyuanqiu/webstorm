@@ -1,8 +1,8 @@
 node_modules/
 *.mp4
 *.mp3
-.history
+.history/
 .git/
 .idea/
-.vscode
+.vscode/
 jquery-1.12.4/
