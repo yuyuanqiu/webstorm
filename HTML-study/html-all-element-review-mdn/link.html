@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css" />
+    <link rel="icon" href="favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-icon-114.png" type="image/png" />
+    <!-- 提供媒体类型/媒体查询 -->
+    <link rel="stylesheet" href="print.css" media="print">
+    <link rel="stylesheet" href="mobile.css" media="screen and (max-width: 600px)" />
+    <!-- 预加载 -->
+    <link rel="preload" href="myFont.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+
+    <!-- 提供可替换的样式表 -->
+    <link rel="stylesheet" href="default.css" title="Default Style" />
+    <link rel="alternate stylesheet" title="Fancy" />
+    <link rel="alternate stylesheet" title="Basic" />
+    <!-- 提供用于不同用法上下文的图标 -->
+    <!-- third-generation iPad with high-resolution Retina display: -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="favicon144.png">
+    <!-- iPhone with high-resolution Retina display: -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="favicon114.png">
+    <!-- first- and second-generation iPad: -->
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="favicon72.png">
+    <!-- non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <link rel="apple-touch-icon-precomposed" href="favicon57.png">
+    <!-- basic favicon -->
+    <link rel="icon" href="favicon32.png">
+    <!-- 通过媒体查询有条件的加载资源 -->
+    <link rel="stylesheet" href="print.css" media="print"/>
+    <link rel="stylesheet" href="mobile.css" media="all"/>
+    <link rel="stylesheet" href="desktop.css" media="screen and (min-width: 600px)"/>
+    <link rel="stylesheet" href="highres.css" media="screen and (min-resolution: 300dpi)"/>
+    <!-- 样式表加载事件 -->
+    <script>
+        function sheetLoaded() {
+            // do something interesting; the sheet has been loaded
+        }
+        function sheetError() {
+            alert("an error occured loading the stylesheet!");
+        }
+    </script>
+    <link rel="stylesheet" href="mystylesheet.css" onload="sheetLoaded()" onerror="sheetError()"/>
+</head>
+
+<body>
+
+</body>
+
+</html>

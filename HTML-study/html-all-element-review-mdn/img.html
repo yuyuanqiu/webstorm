@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 在高分辨率设备中优先加载，取代src中的图像，在支持该属性的代理中src属性的图片分辨率作为1x候选项 -->
+    <img src="https://developer.mozilla.org/static/img/favicon72.png" 
+    alt="MDN logo" 
+    srcset="https://developer.mozilla.org/static/img/favicon144.png 2x">
+
+    <!-- 在支持srcset的代理中，使用w描述符src属性会被忽略。当匹配了媒体条件min-width：600px图像将宽200px，否则宽50vw。 -->
+    <img src="/files/16864/clock-demo-200px.png" 
+    alt="Clock" 
+    srcset="/files/16864/clock-demo-200px.png 200w,
+        /files/16797/clock-demo-400px.png 400w"
+    sizes="(max-width: 600px) 200px, 50vw">
+</body>
+</html>

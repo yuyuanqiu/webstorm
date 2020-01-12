@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- context menu  -->
+    <div contextmenu="popup-menu">
+        Right-click to see the adjusted context menu
+    </div>
+
+    <menu type="context" id="popup-menu">
+        <menuitem>Action</menuitem>
+        <menuitem>Another action</menuitem>
+        <hr />
+        <menuitem>Separated action</menuitem>
+    </menu>
+
+    <!-- menu button  -->
+    <!-- A button, which displays a menu when clicked. -->
+    <button type="menu" menu="popup-menu">
+        Dropdown
+    </button>
+
+    <menu type="context" id="popup-menu">
+        <menuitem>Action</menuitem>
+        <menuitem>Another action</menuitem>
+        <hr />
+        <menuitem>Separated action</menuitem>
+    </menu>
+
+    <!-- toolbar  -->
+    <!-- A context menu for a simple editor,
+    - containing two menu buttons. -->
+    <menu type="toolbar">
+        <li>
+            <button type="menu" menu="file-menu">File</button>
+            <menu type="context" id="file-menu">
+                <menuitem label="New..." onclick="newFile()">
+                </menuitem>
+                <menuitem label="Save..." onclick="saveFile()">
+                </menuitem>
+            </menu>
+        </li>
+        <li>
+            <button type="menu" menu="edit-menu">Edit</button>
+            <menu type="context" id="edit-menu">
+                <menuitem label="Cut..." onclick="cutEdit()">
+                </menuitem>
+                <menuitem label="Copy..." onclick="copyEdit()">
+                </menuitem>
+                <menuitem label="Paste..." onclick="pasteEdit()">
+                </menuitem>
+            </menu>
+        </li>
+    </menu>
+
+    <!-- A <div> element with a context menu -->
+    <div contextmenu="popup-menu" style="width: 300px;
+    height: 80px;
+    background-color: lightgreen;">
+        Right-click to see the adjusted context menu
+    </div>
+
+    <menu type="context" id="popup-menu">
+        <menuitem type="checkbox" checked>Checkbox</menuitem>
+        <hr>
+        <menuitem type="command" label="This command does nothing"
+            icon="https://developer.cdn.mozilla.net/static/img/favicon144.png">
+        Commands don't render their contents.
+        </menuitem>
+        <menuitem type="command" label="This command has javascript" onclick="alert('command clicked')">
+        Commands don't render their contents.
+        </menuitem>
+        <hr>
+        <menuitem type="radio" radiogroup="group1">Radio Button 1</menuitem>
+        <menuitem type="radio" radiogroup="group1">Radio Button 2</menuitem>
+    </menu>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 基本用法 -->
+    <audio src="http://developer.mozilla.org/@api/deki/files/2926/=AudioTest_(1).ogg" autoplay>
+        your browser does not support the <code>audio</code> element.
+    </audio>
+    <audio src="foo.ogg">
+        <track kind="captions" src="foo.en.vtt" srclang="en" label="English"/>
+        <track kind="captions" src="foo.sv.vtt" srclang="sv" label="Svenska"/>
+    </audio>
+
+    <audio controls="controls">
+        your browser does not support the <code>audio</code> element.
+        <source src="foo.wav" type="audio/wav"/>
+    </audio>
+</body>
+</html>

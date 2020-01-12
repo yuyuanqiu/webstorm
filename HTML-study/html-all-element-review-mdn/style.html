@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <article>
+        <div>the scoped attribute allows for you to include for you to include style elements mid-document.
+        Inside rules only apply to the parent element.
+        </div>
+        <p>this text should be black. if it is red your browser does not support the scoped attribute.</p>
+        <section>
+            <style scoped>
+                p { color: red; }
+            </style>
+            <p>this should be red.</p>
+        </section>
+    </article>
+</body>
+</html>

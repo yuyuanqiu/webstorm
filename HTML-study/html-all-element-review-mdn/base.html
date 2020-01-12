@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 多个base只有第一个href和target有效 -->
+    <base href="../html-all-element-review-mdn"/>
+    <base href="../html5与css3权威指南" target="_self"/>
+    <base target="_blank"/>
+    <!-- open graph标签需要完整绝对的url -->
+    <meta property="og:image" content="https://example.com/thumnail.jpg">
+    <script>
+        console.log(document.baseURI);
+        console.log(document.location.href);
+    </script>
+    
+</head>
+<body>
+    <a href="html-all-element-review-mdn.md">跳转到同级mdn回顾</a>
+</body>
+</html>

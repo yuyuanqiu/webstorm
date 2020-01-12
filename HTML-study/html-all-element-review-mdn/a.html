@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- anchor linking to external file  -->
+    <a href="http://www.baidu.com">百度一下</a>
+    <!-- links to element on this page with id="attr-href" -->
+    <a href="#attr-href">本页链接</a>
+    <!-- 创建一个可点击的图片 -->
+    <a href="https://www.baidu.com/">
+        <img  src="https://mdn.mozillademos.org/files/6851/mdn_logo.png" alt="MDN LOGO"/>
+    </a>
+    <!-- 创建一个Email链接 -->
+    <a href="mailto:yuyuan@yu.com">发送邮件</a>
+    <!-- 使用download属性 -->
+    <script>
+        var link = document.createElement('a');
+        link.innerHTML = 'download image';
+        link.href = '../../img/九宫格.png';
+        let t = 0;
+        for (let i = 0; i < 100; i++) {
+            t += btoa(encodeURIComponent(new Date().toString()));
+        }
+        link.setAttribute("download",  t+ ".jpg")
+        // link.addEventListener('click', function(e) {
+        //     link.href = canvas.toDataURL();
+        //     link.download = '../../img/九宫格.png';
+        // }, false);
+
+        document.body.appendChild(link);
+    </script>
+</body>
+</html>
