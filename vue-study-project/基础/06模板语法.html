@@ -13,49 +13,63 @@
     </div>
 
     <!-- // v-once指令：一次性插值，内容不再更新 -->
+    <!-- 插入值之后就不再改变 -->
     <div id="app-2">
         <span v-once> {{ msg }}</span>
         <button v-on:click="changeMsg">Change it!</button>
     </div>
 
     <!-- 使用v-html指令输出真正的html -->
+    <!-- 即直接将html代码嵌入到{}内部不会将代码转化，因为{}会将数据解释为普通文本 -->
     <div id="app-3">
         <p>Using mustaches: {{ rawHtml }}</p>
-         <!-- span内部的内容会被替换为属性值rawHtml -->
-         <!-- 不能使用v-html来复合局部模板（Vue不是基于字符串的模板引擎） -->
-        <p>Using v-html mustaches: <span v-html="rawHtml"></span></p>
-    </div>
-
+        <!-- span内部的内容会被替换为属性值rawHtml -->
+        <!-- 注意v-html内容的html代码的数据绑定会被忽略，即其内部带有的vue命令无效 -->
+        <!-- 不能使用v-html来复合局部模板（Vue不是基于字符串的模板引擎） -->   <p>Using v-html mustaches: <span v-html="rawHtml"></span></p> 
+        
     <!-- Mustache语法不能作用在元素属性上： 应该使用v-bind指令 -->
     <!-- 其中，isButtonDisabled值为null/undefined/false时，disabled属性不会渲染在该元素中 -->
-    <button v-bind:disabled="isButtonDisabled">Button</button>
+        <button v-bind:disabled="isButtonDisabled">Button</button>
 
-    <!-- 对所有的数据绑定都支持单个JavaScript表达式但不包括除此之外的（语句/代码块） 
-         不要在模板表达式中试图访问用户定义的全局变量
+    
+
+
+    <!-- 在插值语法中，对所有的数据绑定都只支持单个JavaScript表达式，但不包括除此之外的（语句/代码块） 
+        不要在模板表达式中试图访问用户定义的全局变量（系统自动的全部变量除外）
     -->
 
     <!-- 一些指令能够接受一些参数（在指令后面以冒号表示） -->
     <!-- 这里的href是参数，告知v-bind指令将该元素的href特性与表达式url的值绑定 -->
-    <a v-bind:href="url">...</a>
+    <a v-bind:href="url">百度一下</a>
     <!-- 参数是监听的事件名 -->
-    <a v-on:click="doSomething">...</a>
+    <a v-on:click="alertSomething">弹出内容</a>
 
-    <!-- 动态参数：使用"[]"括起来的表达式作为指令的参数 -->
+    <!-- 动态参数：使用"[]"括起来的JS表达式作为指令的参数 -->
     <!-- 如果vue实例中data属性attributeName值为href，等价于v-bind:href="url" -->
     <!-- 动态参数表达式有一些语法约束，
         因为某些字符，例如空格和引号，放在 HTML 特性名里是无效的。
-        同样，在 DOM 中使用模板时你需要回避大写键名。 -->
-    <a v-bind:[attributeName]="url">...</a>
+        同样，在 DOM 中使用模板时你需要回避大写键名。
+        1,动态参数attributename必须是小写字母，否则会报错 
+        2,[]内的表达式不能有空格以及引号，比如[ attr], [attr+ attr2]
+    -->
+    <a v-bind:[attributename+attr2]="url">百度一下</a>
 
-    修饰符以英文句号指明的特殊后缀，指出一个指令应该以什么方式绑定
-    <!-- 例如：.prevent修饰符告诉v-on指令在触发事件时调用event.preventDefault(); -->
-    <form v-on:submit.prevent="onSubmit">...</form>
+    <!-- 利用值为null移除绑定，点击之后会移除href属性 -->
+    <a v-on:click="deleteHref" v-bind:[attribute2]="url2">点击移除绑定</a>
+    <!-- 修饰符以点号指明的特殊后缀，指出一个指令应该以什么方式绑定 -->
+    <!-- 例如：.prevent修饰符告诉v-on指令在触发事件时调用event.preventDefault(); 
+        event.preventDefault表示阻止事件的默认操作，下面是禁止提交表单(直接跳过传递数据到指定网址，而直接执行后面的事件)
+    -->
+    <form action="https://www.baidu.com" v-on:submit.prevent="submitFormData">
+        <button type="submit">提交表单</button>
+    </form>
 
     <!--
         缩写指令：
         v-bind的缩写：v-bind:href => :href
         v-on的缩写：v-on:click => @click
     -->
+    </div>
     <script>
         var app1 = new Vue({
             el: "#app-1",
@@ -82,7 +96,27 @@
         var app3 = new Vue({
             el: "#app-3",
             data: {
-                rawHtml: "<span style='color: red;font-size: 36px'>这不是一个寻常的字体</span>"
+                rawHtml: "<span v-on:click='doSomething' style='color: red;font-size: 36px'>这不是一个寻常的字体</span>",
+                isButtonDisabled: null,
+                attributename: "hre",
+                attr2: "f",
+                url: "https://www.baidu.com",
+                attribute2: "href",
+                url2: "https://www.google.com"
+            },
+            methods: {
+                doSomething() {
+                    console.log(this)
+                },
+                alertSomething() {
+                    alert(this.$el)
+                },
+                submitFormData() {
+                    console.log("禁止提交表单");
+                },
+                deleteHref(){
+                    this.url2 = null;
+                }
             }
         })
     </script>

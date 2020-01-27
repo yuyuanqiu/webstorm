@@ -23,7 +23,7 @@
         当从字符串(template: "..."),单文件组件(.vue文件),<script type="text/template">中使用组件模板时，不存在上述限制
     -->
     <table id="app">
-        <tr v-for="item in items" v-bind:post="item" is="post-row"></tr>
+        <tr v-for="item in items" v-bind:post="item" is="post-row" v-bind:key="Math.random()"></tr>
     </table>
     <script>
         Vue.component("post-row", {

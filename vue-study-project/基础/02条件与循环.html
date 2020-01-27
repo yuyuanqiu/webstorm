@@ -11,7 +11,7 @@
         <!-- 如果seen为true，则显示p标签 -->
         <p v-if="seen" @click="isSeen">现在你看到我了！</p>
     </div>
-    <div id="app-2">
+    <div id="app-2" @click="addItem">
         <ol>
             <li v-for="todo in todos">
                 {{ todo.text }}
@@ -38,6 +38,13 @@
                     {text: "学习Vue基本知识"},
                     {text: "学习面试技巧"},
                 ]
+            },
+            methods: {
+                addItem() {
+                    this.todos.push(
+                        {text: "添加todos于" + new Date()}
+                    )
+                }
             }
         });
         // 操作todos

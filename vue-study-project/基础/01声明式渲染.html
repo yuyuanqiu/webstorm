@@ -3,17 +3,18 @@
     <head>
         <meta charset="utf-8">
         <title>第一个vue应用</title>
-        <!-- vue.js应该在head中引入：不会因为延时出现模板语法（自己看法）-->
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     </head>
     <body>
+        <!-- vue文件应该在使用vue语法之前引入 -->
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
         <div id="app">
             {{ message }}
         </div>
         <div id = "app-2">
             <!-- v-开头的命令： 渲染dom上应用特殊的响应式行为，即后面两者之间的联系
             比如： v-bind表示元素节点的title属性值与Vue实例的message属性保持一致-->
-            <span v-bind:title="message">
+            <span v-bind:title = "message">
                 鼠标悬停几秒钟查看此处动态绑定的提示信息
             </span>
         </div>

@@ -46,7 +46,7 @@
         <!-- 使用返回对象的计算属性 -->
         <div v-bind:style="styleObjByComputed">haha</div>
         <!-- 从2.3版本开始，可以为style绑定的属性提供一个包含多个值的数组，浏览器只会渲染最后一个被他支持的值 -->
-        <div v-bind:style="{display: ['-ms-flexbox', 'flex','-webkit-box']}"></div>
+        <div v-bind:style="{display: ['-ms-flexbox','-webkit-box', 'flex']}"></div>
     </div>
     <!-- 数组语法： 多个样式对象应用到同一个元素上 -->
     <div id="bind-style-by-array">

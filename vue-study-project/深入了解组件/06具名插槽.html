@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 使用组件，在template元素上使用v-slot指令
+            其中v-slot参数需要对应相应的slot元素的name值
+        -->
+        <base-layout>
+            <template v-slot:header>
+                <h1>页面标题</h1>
+            </template>
+            
+            <p>页面主要内容</p>
+            <p>其他页面内容</p>
+
+            <!-- 若想要使代码更加明确，可显示写明默认内容 -->
+            <!-- 
+            <template v-slot:default>
+                <p>页面主要内容</p>
+                <p>页面其他内容</p>
+            </template>
+            -->
+            <template v-slot:footer>
+                <p>一些相关信息</p>
+            </template>
+        </base-layout>
+    </div>
+
+    <script>
+        Vue.component("base-layout", {
+            template: `
+                <div class="container">
+                    <header>
+                        <slot name="header"></slot>
+                    </header>
+                    <main>
+                        <slot></slot>
+                    </main>
+                    <footer>
+                        <slot name="footer"></slot>
+                    </footer>
+                </div>
+            `
+        })
+        var app = new Vue({
+            el: "#app",
+        })
+    </script>
+</body>
+</html>

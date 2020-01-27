@@ -34,7 +34,7 @@
                 }
             },
             created: function () {
-                this.debouncedGetAnswer =  _.debounce(this.getAnswer, 500);
+                this.debouncedGetAnswer =  _.debounce(this.getAnswer, 5);
             },
             methods: {
                 getAnswer: function () {
@@ -44,6 +44,7 @@
                     }
                     this.answer = "thinking...";
                     var vm = this;
+                    // 随机从该api中获取数据
                     axios.get("https://yesno.wtf/api")
                         .then(function (response) {
                             vm.answer = _.capitalize(response.data.answer);

@@ -17,8 +17,8 @@
     eg:filter(),concat(),slice() -->
     <div id="app">
         <ul>
-            <li v-for="(item, index) in items">
-                {{ items.length }} : {{ a }} : {{ item }}
+            <li @click="changeList" v-for="(item, index) in items">
+                长度{{ items.length }}：索引{{ index }} : a的值{{ a }} :item的值【 {{ item }}】
             </li>
         </ul>
         <ul>
@@ -39,7 +39,13 @@
                     sex: "M",
                     age: 23
                 }
-            }
+            },
+            methods: {
+                changeList() {
+                    this.items[length] = 100;
+                    console.log(this.items.length)
+                }
+            },
         });
         // 当使用新数组替换旧数组时，vue为使dom元素得到最大范围的重用而实现了智能启发式方法（高效）
         app.items = app.items.filter(function (item) {
@@ -49,7 +55,9 @@
 
         // 注意事项：由于JavaScript的限制，vue不能检测以下情况数组的变动
         // (在控制台下，即页面载入之后是不会随之响应的,在代码载入之前会)
-        // 1，使用索引直接设置一个数组项：
+
+/*         下述的两种情况在【页面载入之后】不会发生改变，但可以用替代方法在console中更改，而在所属代码中使用是有效的
+ */        // 1，使用索引直接设置一个数组项：
         app.items[0] = "新的值";
         // 解决方法：使用Vue.set、app.$set、Array.prototype.splice
         Vue.set(app.items, 0, "使用Vue.set解决");

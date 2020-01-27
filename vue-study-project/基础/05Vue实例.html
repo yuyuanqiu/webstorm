@@ -22,7 +22,7 @@
         });
         // 获取实例上的属性：返回原数据中对应的字段
         console.log(vm.a == data.a);    // true;
-        // 设置属性会影响到原始数据
+        // 设置属性会影响到原始数据 表明传入了引用（对象本身是引用）
         vm.a = 2;
         console.log(data.a);    // 2
         // 反之亦然
@@ -54,13 +54,14 @@
         });
         
         // Vue暴露了一些有用的实例属性和方法：均以前缀"$"开头
-        var data = {a: 1};
+        // 此即表示Vue中特有的属性关键字，若要获取则需以$开头才能获取
+        var data1 = {a: 1};
         var vm$ = new Vue({
             el: "#example",
-            data: data
+            data: data1
         });
-        console.log(vm.$data === data);      // true
-        console.log(vm.$el === document.getElementById("example"));     // true
+        console.log(vm$.$data === data1);      // true
+        console.log(vm$.$el === document.getElementById("example"));     // true
         // 实例方法： 在vm$.a改变后调用
         vm$.$watch("a", function (newValue, oldValue) {
             // ...
@@ -71,7 +72,7 @@
             data: {
                 a: 1
             },
-            created: function () {
+            created(){
                 // this指向调用它的Vue实例
                 /* 不要在选项属性/回调函数中使用箭头函数，
                 经常导致 Uncaught TypeError: Cannot read property of undefined 

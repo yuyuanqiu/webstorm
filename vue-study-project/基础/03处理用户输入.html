@@ -6,7 +6,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-    <!-- 通过v-on指令添加时间侦听器，调用Vue实例中定义的方法 -->
+    <!-- 通过v-on指令 即简写为@ 添加时间侦听器，调用Vue实例中定义的方法 -->
     <div id="app">
         <p>{{ message }}</p>
         <button v-on:click="reverseMessage">反转消息</button>
@@ -15,6 +15,12 @@
     <div id="app-2">
         <p>{{ message }}</p>
         <input v-model="message">
+    </div>
+
+    <div id="app-3">
+        <a v-bind:href="href">百度一下</a>
+        <br/>
+        <input type="text" v-model="href"/>
     </div>
     <script>
         var app = new Vue({
@@ -34,6 +40,12 @@
                 message: "hello, Vue!",
             }
         });
+        var app3 = new Vue({
+            el: "#app-3",
+            data: {
+                href: "https://www.baidu.com",
+            }
+        })
     </script>
 </body>
 </html>

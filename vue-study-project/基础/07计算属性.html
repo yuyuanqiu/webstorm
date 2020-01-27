@@ -22,6 +22,7 @@
         <!-- 表达式中调用方法达到相同效果 -->
         <p>expression reversed message: {{ reverseMessage2() }}</p>
         <p @click="updateTime">now time: {{ nowTime }}</p>
+
     </div>
 
     <script>
@@ -43,7 +44,8 @@
                 },
                 // nowTime这个计算属性载入页面后不再更新，Date.now()不是响应式依赖
                 nowTime: function () {
-                    return Date.now();
+                    // return Date.now();
+                    return this.time// 这样是可以的，因为time是响应式依赖，但是Date.now()不是
                 }
             },
             methods: {
@@ -52,7 +54,8 @@
                 },
                 // 测试nowTime
                 updateTime: function () {
-                    this.time = Date.now();
+                    console.log(this.time)
+                    return this.time = Date.now();
                 }
             }
         })

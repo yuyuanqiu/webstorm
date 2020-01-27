@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <current-user>
+            <!-- 作用域插槽 -->
+            <!-- 必须给v-slot设置一个值，才能访问子组件中（crrent-user的数据 
+                插槽应该是属于父级作用域的，而组件是为子作用域
+                注意设置的值slotProps变量作用域只属于该插槽
+            -->
+            <template v-slot:default="slotProps">
+                {{ slotProps.user.age }}
+                {{ test }}
+                {{ slotProps.other }}
+            </template>
+        </current-user>
+
+        <br>
+        <!-- 独占默认插槽的缩写语法 -->
+        <!-- 只有默认插槽（default）时，组件标签可当作插槽模板使用 -->
+        <current-user v-slot:default="slotProps1">
+            {{ slotProps1.user.age }}
+            {{ test }}
+            {{ slotProps1.other }}
+        </current-user>
+        <br/>
+        <!-- 简略写法：不带default参数 -->
+        <current-user v-slot="slotProps2">
+            {{ slotProps2.user.age }}
+            {{ test }}
+            {{ slotProps2.other }}
+        </current-user>
+        <!-- 
+            若具名插槽和默认插槽语法一起使用，会发出警告
+            出现多个插槽，应为所有插槽使用完整的基于template元素的语法
+            [Vue warn]: Error compiling template:
+            To avoid scope ambiguity, the default slot should also use <template> syntax when there are other named slots.
+        -->
+        <br>
+        <current-user1 v-slot="slotProps3">
+            {{ slotProps3.user.age }}
+            {{ test }}
+            <template v-slot:other="otherSlotProps">
+                {{ otherSlotProps.other }}
+            </template>
+        </current-user1>
+        <br/>
+        <!-- 解构插槽： 
+            作用域插槽内部工作原理是将插槽内容包括在一个传入单个参数的函数里
+            function(slotProps) {
+                // 插槽内容
+            }
+            意味着v-slot的值可以是任何能作为函数参数的JS表达式
+            所以在支持的环境（单文件组件/浏览器）可使用ES6解构传入具体的插槽prop（比如对象等）
+            也可为prop进行重命名，或给出默认内容用于prop为undefined的情形
+
+            你甚至可以定义后备内容，用于插槽 prop 是 undefined 的情形(官网内容，有疑问，会出错，怎么使用prop)
+        -->
+        <current-user v-slot="{ user, other: rehto, elses = ['like gia'] }">
+            {{ user.age }}
+            {{ test }}
+            {{ rehto }}
+            {{ elses }}
+        </current-user>
+    </div>
+
+    <script>
+        Vue.component("current-user", {
+            data: function() {
+                return {
+                    user: {
+                        name: "ioiy aig",
+                        age: 23,
+                        sex: "women"
+                    },
+                    other: "gia yio i",
+                    elses: undefined
+                }
+            },
+            template: `
+                <span>
+                    <slot 
+                        v-bind:other="other"
+                        v-bind:user="user" 
+                        v-bind:elses="elses"
+                        name="default"
+                    >
+                        {{ user.name }}
+                    </slot>
+                </span>
+            `
+        });
+
+        Vue.component("current-user1", {
+            data: function() {
+                return {
+                    user: {
+                        name: "ioiy aig",
+                        age: 23,
+                        sex: "women"
+                    },
+                    other: "gia yio i"
+                }
+            },
+            template: `
+                <span>
+                    <slot v-bind:other="other" v-bind:user="user" name="default">
+                        {{ user.name }}
+                    </slot>
+                    <slot v-bind:other="other" v-bind:user="user" name="other">
+                        {{ user.name }}
+                    </slot>
+                </span>
+            `
+        })
+
+        var app = new Vue({
+            el: "#app",
+            data: {
+                test: "tests"
+            }
+        })
+    </script>
+</body>
+</html>

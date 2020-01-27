@@ -15,6 +15,7 @@
     <!-- 升级 -->
     <div id="app-2">
         <ol>
+            <!-- 使用自定义属性，并将自定义属性todo绑定到实例data中的item(其中item来自于groceryList) -->
             <todo-item2
                 v-for="item in groceryList"
                 v-bind:todo="item"
@@ -33,6 +34,7 @@
         })
         // 注册组件
         Vue.component("todo-item2", {
+            // props代表了类似自定义组件的属性（属性即像title，href等这种）
             props: ["todo"],
             template: "<li>{{ todo.text }}</li>"
         });
