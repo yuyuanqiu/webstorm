@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../utils/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <transition>
+            <button @click="isEditing = !isEditing" v-if="isEditing" key="save">
+                Save
+            </button>
+            <button @click="isEditing = !isEditing" v-else key="edit">
+                Edit
+            </button>
+        </transition>
+
+        <!-- 通过同一元素的key设置不同的状态代替v-if/else -->
+        <transition>
+            <button @click="isEditing1 = !isEditing1" v-bind:key="isEditing1">
+                {{ isEditing1 ? "Save" : "Edit" }}
+            </button>
+        </transition>
+
+        <!-- 使用多个v-if的多个元素的过渡可重写为绑定动态属性的单个元素过渡 -->
+        <transition>
+            <button v-if="docState === 'saved'" key="saved">
+                Edit
+            </button>
+            <button v-if="docState === 'edited'" key="edited">
+                Save
+            </button>
+            <button v-if="docState === 'editing'" key="editing">
+                Cancel
+            </button>
+        </transition>
+
+        <!-- 重写 -->
+        <transition>
+            <button v-bind:key="docState1">
+                {{ buttonMessage }}
+            </button>
+        </transition>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                isEditing: true,
+                isEditing1: true,
+                docState: "saved",
+                docState1: "editing"
+            },
+            computed: {
+                buttonMessage: function () {
+                    switch(this.docState1) {
+                        case 'saved': return "edit";
+                        case 'edited': return "save";
+                        case 'editing': return "cancel"
+                    }
+                }
+            },
+        })
+    </script>
+</body>
+</html>

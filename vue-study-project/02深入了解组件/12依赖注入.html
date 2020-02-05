@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../utils/vue.js"></script>
+    <style>
+        #root {
+            height: 300px;
+            width: 300px;
+            border: 1px solid red;
+        }
+        #parent {
+            height: 200px;
+            width: 200px;
+            border: 1px solid rgb(0, 255, 64);
+        }
+        #child {
+            height: 100px;
+            width: 100px;
+            border: 1px solid rgb(0, 162, 255);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <root>
+            <parent>
+                <child></child>
+            </parent>
+        </root>
+    </div>
+
+    <script>
+        Vue.component('root', {
+            template: `
+                <div id="root"><slot></slot></div>
+            `,
+            provide() {
+                return {
+                    getMap() {
+                        console.log("这是根元素的: ", this);
+                    }
+                }
+            }
+        })
+        Vue.component('parent', {
+            
+            template: `
+                <div id="parent"  @click="getMap"><slot></slot></div>
+            `,
+            inject: ["getMap"],
+        })
+        Vue.component('child', {
+            
+            template: `
+                <div id="child"  @click="getMap"></div>
+            `,
+            inject: ["getMap"],
+        })
+        new Vue({
+            el: "#app",
+
+        })
+    </script>
+    <style>
+        h1 {
+            background: yellow;
+        }
+
+        h2 {
+            background: blue;
+        }
+
+        h3 {
+            background: pink;
+        }
+    </style>
+    <div id="dynamic-component-demo">
+        <google-map style="border:1px solid pink;">
+            <google-map-region v-bind:shape="cityBoundaries" style="border:1px solid red;width:80%;">
+                <google-map-markers v-bind:places="iceCreamShops" style="border:1px solid yellow;width:60%;">
+                </google-map-markers>
+            </google-map-region>
+        </google-map>
+    </div>
+    <script>
+        Vue.component('google-map', {
+            template: `<div><h1 @click="changeMsg">我是祖父，googel-map，{{msg}}</h1><div>改变msg<input type=“text” v-model="msg" /></div><slot></slot></div>`,
+            data() {
+                return {
+                    msg: '问候你,你好，我是李云龙'
+                }
+            },
+            provide: function () {
+                return {
+                    getMap: function () {
+                        console.log('我来自祖父组件，要用我用inject就好啦，怎么感觉我像react中的context', this.msg)
+                    },
+                    msg: this.msg
+                }
+            },
+            methods: {
+                changeMsg() {
+                    this.msg = 'hello,i am zhanglijian!'
+                }
+            }
+        })
+        Vue.component('google-map-region', {
+            props: ["shape"],
+            inject: ['getMap', 'msg'],
+            template: `<div><h2 @click="getMap">我是父亲,gooel-map-region,{{msg}}</h2><p>{{shape}}</p><slot></slot></div>`
+        })
+        Vue.component('google-map-markers', {
+            props: ["places"],
+            inject: ['getMap', 'msg'],
+            template: `<div><h3 @click="getMap">我是儿子,gooel-map-makers,{{msg}}</h3><p>{{places}}</p></div>`
+        })
+        new Vue({
+            el: '#dynamic-component-demo',
+            data: {
+                currentTab: 'Posts',
+                tabs: ['Posts', 'Archive'],
+                msg: '恭喜您中了我司一等奖，hiahiahia!',
+                cityBoundaries: '滨江',
+                iceCreamShops: '永辉超市'
+            },
+            computed: {
+                currentTabComponent: function () {
+                    return 'tab-' + this.currentTab.toLowerCase()
+                }
+            }
+        })
+    </script> 
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../utils/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <transition
+            v-on:before-enter="beforeEnter"
+            v-on:enter="enter"
+            v-on:after-enter="afterEnter"
+            v-on:enter-cancelled="enterCancelled"
+
+            v-on:before-leave="beforeLeave"
+            v-on:leave="leave"
+            v-on:after-leave="afterLeave"
+            v-on:leave-cancelled="leaveCancelled"
+        >
+            <!-- ... -->
+        </transition>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app",
+            methods: {
+                // 进入中
+                beforeEnter: function(el) {
+                    // ...
+                },
+                // 推荐对于仅使用JS过渡的元素添加v-bind:css="false"，vue会跳过检测，可避免过渡过程中css的影响
+                // 当与css结合使用时
+                // 回调函数done可选(只用JS过渡时必须使用)
+                enter: function(el, done) {
+                    // ...
+                    done()
+                },
+                afterEnter: function (el) {
+                    // ...
+                },
+                enterCancelled: function(el) {
+                    // ...
+                },
+
+                // 离开时
+                beforeLeave: function (el) {
+                    // ...
+                },
+                // 当与css结合使用时，回调done是可选的(只用JS过渡时必须使用)
+                leave: function (el, done) {
+                    // ... 
+                    done()
+                },
+                afterLeave: function (el) {
+                    // ... 
+                },
+                // leaveCancelled只用于v-show中
+                leaveCancelled: function (el) {
+                    // ... 
+                }
+            },
+
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../utils/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <async-example></async-example>
+    </div>
+    <script>
+        /* 
+    Vue允许用一个工厂函数定义组件，该组件会异步解析组件定义
+    只有在该组件需被渲染时才会触发工厂函数，且会把结果缓存起来供未来使用 
+    
+    该工厂函数会收到一个resolve回调，回调会在你从服务器得到组件定义时被调用
+    可调用reject（reason）表示加载失败
+    
+    */
+        Vue.component('async-example', function (resolve, reject) {
+            setInterval(function () {
+                // 向resolve回调传递组件定义
+                resolve({
+                    template: `<div>i am async</div>`
+                });
+                console.log(new Date())
+            }, 1000);
+        });
+        // 推荐将异步组件和webpack的code-splitting功能一起配合使用
+        Vue.component('async-webpack-example', function (resolve) {
+            // 这个特殊require语法会告诉webpack
+            // 自动将构建代码切割成多个包，这些包会通过Ajax请求加载
+            require(['./my-async-component'], resolve)
+        });
+        // 也可以在工厂函数中返回一个promise，把webpack2和es6一起使用：
+        Vue.component(
+            'async-webpack-example2',
+            // 这个 `import` 函数会返回一个 `Promise` 对象。
+
+            () => import('./my-async-component')
+        )
+        // 局部注册时可直接提供一个返回promise的函数
+        new Vue({
+            // ...
+            components: {
+                'my-component': () => import(
+                    './my-async-component'
+                )
+            }
+        })
+        var app = new Vue({
+            el: "#app",
+        })
+
+        // 处理加载状态，异步组件工厂函数返回下面的对象
+        const AsyncComponent = () => ({
+            // 需要加载的组件（一个promise对象）
+            component: import('./MyComponentvue'),
+            // 异步组件加载时使用的组件
+            loading: LoadingComponent,
+            // 加载失败使用的组件
+            error: ErrorComponent,
+            // 展示加载时组件的延迟时间
+            delay: 200,
+            // 加载超时的时间，超时后使用加载失败组件
+            timeout: 3000
+        })
+
+        // 若希望在VueRouter的路由组件中使用上述语法，必须使用Vue Router+2.4
+    </script>
+
+</body>
+
+</html>

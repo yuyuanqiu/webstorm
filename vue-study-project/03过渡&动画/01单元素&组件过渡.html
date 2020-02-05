@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="../../utils/vue.js"></script>
+    <style>
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity 3s;
+        }
+        .fade-enter-to,
+        .fade-leave-to {
+            border: 1px solid red;
+            opacity: 0;
+        }
+        .fade-enter,
+        .fade-leave {
+            background-color: black;
+        }
+
+        /* 设置不同的进入/离开动画 */
+        /* 设置持续时间和动画函数 */
+        .slide-fade-enter-active {
+            transition: all 2.3s ease;
+        }
+        .slide-fade-leave-active {
+            transition: all 1.8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+        }
+        .slide-fade-enter, .slide-fade-leave-to {
+            transform:  translateX(100px);
+            opacity: 0;
+        }
+
+        /* css动画，区别于过渡的是v-enter在节点插入DOM后不会立即删除，而是在animationend事件触发时删除 */
+        .bounce-enter-active {
+            animation: bounce-in 1.5s;
+        }
+        .bounce-leave-active {
+            animation: bounce-in 1.5s reverse;
+        }
+        @keyframes bounce-in {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Vue提供了过渡transition元素的封装组件，可给任何元素和组件添加进入/离开过渡：
+        条件渲染（v-if）
+        条件展示（v-show）
+        动态组件
+        组件根节点 -->
+    <div id="demo">
+        <button v-on:click="show = !show">
+            Toggle
+        </button>
+        <transition name="fade">
+            <p v-if="show">hello</p>
+        </transition>
+        <br/>
+        <button v-on:click="show1 = !show1">
+            toggle render
+        </button>
+        <transition name="slide-fade">
+            <p v-if="show1">hello</p>    
+        </transition>
+
+        <button @click="show2 = !show2">toggle show</button>
+        <transition name="bounce"> 
+            <p v-if="show2">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis enim libero, at lacinia diam fermentum id. Pellentesque habitant morbi tristique senectus et netus.
+            </p>
+        </transition>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#demo",
+            data: {
+                show: true,
+                show1: true,
+                show2: true,
+            }
+        })
+
+    </script>
+
+
+</body>
+
+</html>

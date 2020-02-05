@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../utils/vue.js"></script>
+    <script src="../../utils/lodash.js"></script>
+    <style type="text/css">
+        .list-complete-item {
+            transition: all 1s;
+            /* 注意使用了FLIP过渡的元素不能设置为display：inline */
+            /* 替代方案：设置为inline-block或放在flex中 */
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .list-complete-enter,
+        .list-complete-leave-to {
+            opacity: 0;
+            transform: translateY(300px);
+        }
+        .list-complete-leave-active {
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="list-complete-demo" class="demo">
+        <button @click="shuffle">shuffle</button>
+        <button @click="add">add</button>
+        <button @click="remove">remove</button>
+        <transition-group name="list-complete" tag="p">
+            <span v-for="item in items" :key="item" class="list-complete-item">
+                {{item}}
+            </span>
+        </transition-group>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#list-complete-demo",
+            data: {
+                items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                nextNum: 10,
+            },
+            methods: {
+                randomIndex() {
+                    return Math.floor(Math.random() * this.items.length)
+                },
+                add() {
+                    this.items.splice(this.randomIndex(), 0, this.nextNum++);
+                },
+                remove() {
+                    this.items.splice(this.randomIndex(), 1);
+                },
+                shuffle() {
+                    this.items = _.shuffle(this.items);
+                }
+
+            }
+        })
+    </script>
+</body>
+
+</html>

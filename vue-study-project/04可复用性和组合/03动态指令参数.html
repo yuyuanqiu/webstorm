@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../utils/vue.js"></script>
+</head>
+<body>
+    <div style="height: 1200px;" id="dynamic-example">
+        <h3 >Srcoll down inside this section.</h3>
+        <p v-pin:[direction]="200">I am pinned onto the paeg at 200px to the left.</p>
+    </div>
+
+    <div style="height: 1200px;" id="obj" v-demo="{ color: 'blue', text: 'hello' }">
+        ad
+    </div>
+    
+
+    <script>
+        Vue.directive('pin', {
+            bind(el, binding, vnode) {
+                el.style.position = "fixed"
+                var s = (binding.arg == 'left' ? 'left' : 'top')
+                el.style[s] = binding.value + 'px'
+            }
+        })
+
+        
+
+        new Vue({
+            el: '#dynamic-example',
+            data() {
+                return {
+                    direction: 'left'
+                }
+            }
+        })
+
+        // 函数简写和对象字面量
+
+        Vue.directive('demo', function(el, binding) {
+            el.style.color = binding.value.color
+            el.innerText = binding.value.text
+        }) 
+
+        var app = new Vue({
+            el: '#obj'
+        })
+    </script>
+</body>
+</html>

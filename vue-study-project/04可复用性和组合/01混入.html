@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../utils/vue.js"></script>
+</head>
+<body>
+    <script>
+        // 定义一个混入对象
+        var myMixin = {
+            created() {
+                this.hello()
+            },
+            methods: {
+                hello() {
+                    console.log('hello from mixin!')
+                }
+            },
+        }
+
+        // 定义一个使用混入对象的组件
+        var Component = Vue.extend({
+            mixins: [myMixin]
+        })
+
+        var component = new Component()
+        // hello from mixin!
+
+        // 选项合并
+        // 冲突以组件优先
+        // 钩子函数不冲突，全会执行（且钩子比组件优先）
+        // 对象选项将被合并，且同键名时取组件键值对
+        var mixin1 = {
+            data() {
+                return {
+                    message: 'hello',
+                    foo: 'abc'
+                }
+            }
+        }
+
+        new Vue({
+            mixins: [mixin1],
+            data() {
+                return {
+                    message: 'goodbye',
+                    bar: 'def'
+                }
+            },
+            created() {
+                console.log(this.$data)
+                // message: "goodbye" bar: "def"  foo: "abc"
+            }
+        })
+
+        // 同名钩子函数
+        var mixin2 = {
+            created() {
+                console.log('混入对象的钩子被调用')
+            }
+        }
+
+        new Vue({
+            mixins: [mixin2],
+            created() {
+                console.log('组件钩子被调用')
+            }
+            // 混入对象的钩子被调用 组件钩子被调用
+        })
+
+        // 对象选项
+        var mixin3 = {
+            methods: {
+                foo() {
+                    console.log('foo')
+                },
+                conflicting() {
+                    console.log('from mixin')
+                }
+            }
+        }
+
+        var vm = new Vue({
+            mixins: [mixin3],
+            methods: {
+                bar() {
+                    console.log('bar')
+                },
+                conflicting() {
+                    console.log('from self')
+                }
+            }
+        })
+
+        vm.foo()    // foo
+        vm.bar()    // bar
+        vm.conflicting()    // from self
+
+        // 全局混入
+
+        Vue.mixin({
+            created() {
+                var myOption = this.$options.myOption;
+                if (myOption) {
+                    console.log(myOption)
+                }
+            },
+            myOption: 'mixin'
+        })
+
+        var strategies = Vue.config.optionMergeStrategies;
+        // 其中toVal来自混入，fromVal来自组件
+        strategies.myOption = function (toVal, fromVal) {
+            // 返回合并后的值
+            return toVal + fromVal
+        }
+
+        new Vue({
+            myOption: 'hello!'
+        })
+        // hello!
+    </script>
+</body>
+</html>

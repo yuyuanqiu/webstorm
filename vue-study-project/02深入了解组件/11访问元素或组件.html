@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../utils/vue.js"></script>
+    <style>
+        p {
+            width: 100px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" @click="al">
+        <parent ref="reference">
+            <child ref="child1"></child>
+        </parent>
+        <parent ref="reference1">
+            <parent ref="reference2">
+                <parent ref="reference3">
+                </parent>
+            </parent>
+        </parent>
+        {{ foo }}
+        {{ bar }}
+        当ref和v-for一起使用，得到的ref将是一个包含对应数据的子组件数组
+        <div ref="arr" v-for="i in 5"></div>
+    </div>
+    <script>
+        /*
+            疑问：现在只能访问在模板选项中定义的子元素refs，
+                而其他在dom中引用的组件不能访问dom中的ref（像上面的parent访问child为空）
+                而根元素可以访问内部定义的所有ref
+        */ 
+        Vue.component('parent', {
+            template: `
+                <p @click="cli_p">
+                    <slot></slot>
+                    <span ref="span">span</span>
+                </p>
+            `,
+            methods: {
+                cli_p() {
+                    console.log("this.$ref", this.$refs)
+                }
+            },
+        })
+        Vue.component('child', {
+            template: `
+                <button  @click="cli">点击</button>
+            `,
+            methods: {
+                cli(){
+                    // 访问根实例，通过$root属性
+                    // 对于demo/小型应用很方便
+                    // 绝大多数情况下用Vuex管理应用状态
+                    console.log("this.$root", this.$root);
+                    this.$root.foo = 2;
+                    this.$root.baz();
+                    // 访问父级组件，通过$parent属性
+                    console.log("this.$parent", this.$parent)
+                }
+            },
+        })
+        
+        var app = new Vue({
+            el: "#app",
+            data: {
+                foo: 1,
+                p: {name: "iii"}
+            },
+            computed: {
+                bar: function () {
+                    return "bar";
+                }
+            },
+            methods: {
+                baz: function () {
+                    console.log(this.foo)
+                },
+                al(){
+                    console.log(this.$refs)
+                },
+                getThis() {
+                    console.log("this is: ", this)
+                }
+            },
+        })
+    </script>
+</body>
+</html>

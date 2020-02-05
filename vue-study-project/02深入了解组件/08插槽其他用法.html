@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../utils/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 组件绑定todos的用意是什么 -->
+        <todo-list v-bind:todos="todos">
+            <template v-slot:todo="{ todo }">
+                <span v-if="todo.isComponent">✓</span>
+                {{ todo.text }}
+            </template>
+        </todo-list>
+    </div>
+    
+    <script>
+        Vue.component("todo-list", {
+            data: function () {
+                return {
+                    filteredTodos: [
+                        {
+                            id: 1,
+                            text: "one",
+                            isComponent: true,
+                        },
+                        {
+                            id: 2,
+                            text: "two",
+                            isComponent: false,
+                        },
+                        {
+                            id: 3,
+                            text: "three",
+                            isComponent: true,
+                        }
+                    ]
+                }
+            },
+            // 为每个todo准备一个插槽，将todo对象作为插槽的prop传入
+            // 默认内容
+            template: `
+                <ul>
+                    <li
+                        v-for="todo in filteredTodos"
+                        v-bind:key="todo.id"
+                    >
+                        
+                        <slot name="todo" v-bind:todo="todo">
+                            
+                            {{ todo.text }}
+                        </slot>
+                    </li>
+                </ul>
+            `
+        })
+        var app = new Vue({
+            el: "#app",
+            data: {
+                todos: {}
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../utils/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+
+        <anchored-heading :level="1">
+            <a name="hello-world" href="#">hello world</a>
+        </anchored-heading>
+
+        <anchored-heading-re :level="1">
+            <a name="hello-world" href="#">hello world</a>
+        </anchored-heading-re>
+    </div>
+
+    <!-- // 模板名称使用name+template -->
+    <!-- 模板使得代码冗长且很多重复代码 -->
+    <script type="text/x-template" id="anchored-heading-template">
+        <h1 v-if="level === 1">
+            <slot></slot>
+        </h1>
+        <h2 v-else-if="level === 2">
+            <slot></slot>
+        </h2>
+        <h3 v-else-if="level === 3">
+            <slot></slot>
+        </h3>
+        <h4 v-else-if="level === 4">
+            <slot></slot>
+        </h4>
+        <h5 v-else-if="level === 5">
+            <slot></slot>
+        </h5>
+        <h6 v-else>
+            <slot></slot>
+        </h6>
+    </script>
+    <script>
+        Vue.component('anchored-heading', {
+            template: '#anchored-heading-template',
+            props: {
+                level: {
+                    type: Number,
+                    required: true
+                }
+            }
+        })
+
+        // 使用render函数重写，使代码精简
+        // 向组件中传递不带v-slot指令的子节点时，这些子节点被存储在组件实例的$slots.default中
+
+        Vue.component('anchored-heading-re', {
+            render(createElement) {
+                return createElement(
+                    'h' + this.level,   // 标签名称
+                    this.$slots.default // 子节点数组
+                )
+            },
+            props: {
+                level: {
+                    type: Number,
+                    required: true
+                }
+            }
+        })
+
+        var app = new Vue({
+            el: '#app'
+        })
+    </script>
+</body>
+</html>

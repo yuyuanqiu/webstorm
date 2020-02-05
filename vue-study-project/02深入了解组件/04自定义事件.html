@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../utils/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 
+            此时lovingVue的值会传入名为checked的prop
+            而当base-checkbox触发一个change事件并附带一个新值时，lovingVue属性将会更新
+            需要在组件的props选项声明checked这个prop
+        -->
+        <base-checkbox v-model="lovingVue"></base-checkbox>{{lovingVue}}
+    </div>
+
+    <div id="app2">
+        <base-input></base-input>
+    </div>
+    <script>
+        Vue.component("base-checkbox", {
+            model: {
+                prop: "checked",
+                event: "change"
+            },
+            props: {
+                checked: Boolean
+            },
+            template: `
+                <input
+                    type="checkbox"
+                    v-bind:checked="checked"
+                    v-on:change="$emit('change', $event.target.checked)"
+                >
+            `
+        })
+
+        var app = new Vue({
+            el: "#app",
+            data: {
+                lovingVue: false
+            }
+        })
+
+        // 此时该组件是一个完全透明的包裹器，可像input元素使用
+        Vue.component('base-input', {
+            inheritAttrs: false,
+            props: ['label', 'value'],
+            computed: {
+                inputListeners: function () {
+                    var vm = this;
+                    // Object.assign将所有的对象合并为一个新对象
+                    return Object.assign({},
+                        // 从父级添加所有监听器
+                        this.$listeners,
+                        // 添加自定义监听器或覆写监听器
+                        {
+                            // 确保组件配合v-model工作
+                            input: function (event) {
+                                vm.$emit('input', event.target.value)
+                            }
+                        }
+                    )
+                }
+            },
+            template: `
+                <label>
+                    {{ label }}
+                    <input
+                        v-bind="$attrs"
+                        v-bind:value="value"
+                        v-on="inputListeners"
+                    >
+                </label>
+            `
+        })
+        var app2 = new Vue({
+            el: "#app2",
+            
+        })
+    </script>
+</body>
+</html>
