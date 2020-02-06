@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // to String
+    console.log([1, 2] + '');
+    console.log([1, 2].toString());
+    console.log(String([1, 2]));
+    console.log(String(null), String(undefined));  // 特殊 null undefined
+    // to Number
+    console.log(Number([1, 2])); // NaN
+    console.log(Number(true)); // 1
+    console.log(Number(null)); // 0
+    console.log(Number(NaN)); // NaN
+    console.log(parseInt("ji12"), parseInt("12ji"));
+    console.log(parseFloat("12.12ji"));
+    // to Boolean
+    console.log(Boolean(false), Boolean(null), Boolean(undefined), Boolean(""), Boolean(0), Boolean(NaN)); // false
+
+    // 比较
+    console.log([] == ![], [], ![]); // true, [], false
+    console.log(1 == true); // true
+    console.log(null > 0, null < 0, null == 0, null <= 0, null >= 0); // false false false true true
+    // 严格比较
+    console.log([] === []); // false, 任意对象不相等
+    console.log(NaN !== NaN); // TRUE, 任意NaN不相等
+</script>
+</body>
+</html>

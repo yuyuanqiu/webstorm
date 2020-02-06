@@ -1,0 +1,13 @@
+@font-face
+{
+    font-family: bdt;
+    src: url('布丁体.ttf');
+}
+#first {
+    width: 50%;
+    height: 300px;
+    border: 1px double #e5c5c5;
+    box-shadow: 3px 3px 3px #e5001c;
+    background-color: #18b63d;
+    font-family: bdt;
+}

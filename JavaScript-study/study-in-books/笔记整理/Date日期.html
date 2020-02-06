@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 创建日期，1970为时间零点
+    console.log(Date(), Date("2019/1/1"));
+    var nowDate = new Date();
+    var nowDate1 = new Date(1000); // 距1970的毫秒数
+    // 只要能被Date()解析的字符串均可以创建
+    var nowDate2 = new Date("Dec 2019 12 12:12:12");
+    var nowDate3 = new Date("2019 Dec 12:12:12 12");
+    var nowDate4 = new Date("2019/12/Dec 12:12:12");
+    var nowDate5 = new Date("2019-Dec-12 12:12:12");
+    console.log(nowDate, nowDate1, nowDate2, nowDate3, nowDate4, nowDate5);
+    // 年：getFullYear()，月getMonth()：0-11，星期getDay()：0-6，日：getDate()
+    console.log(nowDate5.getFullYear(), nowDate5.getDate(), nowDate5.getDay());
+    console.log(nowDate5.getHours(), nowDate5.getMinutes()); // 小时及以下单位用复数形式
+
+    // 月日等可用负数，会自动相应的减
+    nowDate5.setFullYear(2019, 12, -12); // 月，日可选
+    console.log("nowDate5: " + nowDate5);
+    nowDate5.setHours(12, 12, 12, 12); // 分，秒，ms可选
+
+    // 对于倒计时，可用下列方式（加减），以此类推
+    nowDate5.setDate(nowDate5.getDate() + 10); // 十天后日期
+
+
+    // 返回当前距时间零点的ms
+    console.log(Date.now());
+    // 解析时间字符串，返回距时间零点ms
+    console.log(Date.parse("2019-Dec-12 12:12:12"));
+    // 实例方法：getTime(),valueOf(),返回距时间零点的ms
+    // 计算时间的间隔，new然后相减
+    var start = new Date();
+    console.log(nowDate5.getTime(), nowDate5.valueOf());
+    for (var i = 1; i < 100; i++) {console.log(Date())}
+    var end = new Date();
+    console.log(end - start);
+    // toXXX: 转化格式: Json格式,Date(无时间),Time(无日期)
+    console.log(nowDate5.toJSON(), nowDate5.toDateString(), nowDate5.toTimeString())
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 通过原型链（prototype）实现
+    // 通过构造函数生成对象：
+    // 缺点：不能共享属性/方法，每new一个对象，就生成一个新的实例方法
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+        this.getName = function () {
+            console.log(this === window);
+        }
+    }
+    // new Person("正一", 19).getName: 此时该方法指向全局
+    var amy = new Person("amy", 20).getName;
+    // 当把一个函数的函数名（new Person("amy", 20).getName）单独赋值给某个变量（amy）时，则该函数名中this指向的是该变量（amy）所处的运行环境
+    amy(); // true;
+    console.log(new Person("正一", 19).getName === new Person("正一", 19).getName); // false
+    // prototype原型对象设置的属性和方法可以被所有的实例共享
+    // 作用： 当实例对象无某方法时，会去原型对象寻找该方法/属性
+    // 每一个函数都有一个prototype对象，prototype为一个对象，该属性对象对普通函数无效果
+    // 修改一次之后，所有的值均会发生更改
+    Person.prototype.height = 2.22;
+    Person.prototype.getHeight = function () {
+        return this.age;
+    };
+    // prototype设置的一次new之后，应该是不同实例得到的是同一个函数，均指向（Person.prototype）
+    console.log(new Person("张三", 20).getHeight === new Person("李四", 23).getHeight); // true
+</script>
+</body>
+</html>

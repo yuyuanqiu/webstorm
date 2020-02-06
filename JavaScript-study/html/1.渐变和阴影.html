@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            width: 400px;
+            height: 300px;
+        }
+        .bg-color-change{
+            background: linear-gradient(to bottom, red, yellow);
+            /*background: -webkit-linear-gradient(to left, green, white);*/
+        }
+        .bg-color-change2{
+            /*通过角度变化deg,按左下与右上对角线为x轴*/
+            background: linear-gradient(60deg, green, khaki);
+            /*指定Firefox浏览器*/
+            /*background: -moz-linear-gradient(120deg, black, lime);*/
+            background: -moz-linear-gradient(120deg, red 10%, lime 20%, indianred 30%, aqua 40%);
+        }
+        .bg-color-change3{
+            border: 1px solid greenyellow;
+        /*Mismatched parameters ([[circle || <length>] [at <position>]? ,
+        | [ellipse || [<length> | <percentage>]{2}] [at <position>]? ,
+        | [[circle | ellipse] || <extent-keyword>] [at <position>]? ,
+        | at <position> ,]? <color-stop> [, <color-stop>]+ | [initial | inherit | unset | revert])*/
+            /*径向渐变*/
+        /*background: radial-gradient(circle 50px at top,red,white);*/
+            /*background: radial-gradient(circle  closest-side,red,white);*/
+
+            /*background: radial-gradient(ellipse farthest-corner,orange,red,orange,red);*/
+            /*重复效果：四个颜色的堆积*/
+            background: repeating-radial-gradient(circle,black, fuchsia 5px,white 5px,aqua 10px);
+        }
+    </style>
+</head>
+<body>
+<div class="bg-color-change"></div>
+<div class="bg-color-change2"></div>
+<div class="bg-color-change3"></div>
+</body>
+</html>

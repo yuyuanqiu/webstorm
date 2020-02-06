@@ -64,7 +64,7 @@
 
   /**
    * Strict object type check. Only returns true
-   * for plain JavaScript objects.
+   * for plain JavaScript-study objects.
    */
   function isPlainObject (obj) {
     return _toString.call(obj) === '[object Object]'
@@ -11512,7 +11512,7 @@
     var keywordMatch = stipped.match(unaryOperatorsRE);
     if (keywordMatch && stipped.charAt(keywordMatch.index - 1) !== '$') {
       warn(
-        "avoid using JavaScript unary operator as property name: " +
+        "avoid using JavaScript-study unary operator as property name: " +
         "\"" + (keywordMatch[0]) + "\" in expression " + (text.trim()),
         range
       );
@@ -11550,7 +11550,7 @@
       var keywordMatch = exp.replace(stripStringRE, '').match(prohibitedKeywordRE);
       if (keywordMatch) {
         warn(
-          "avoid using JavaScript keyword as property name: " +
+          "avoid using JavaScript-study keyword as property name: " +
           "\"" + (keywordMatch[0]) + "\"\n  Raw expression: " + (text.trim()),
           range
         );

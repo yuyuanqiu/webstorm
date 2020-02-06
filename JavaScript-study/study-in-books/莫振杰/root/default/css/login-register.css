@@ -1,0 +1,29 @@
+body,form,fieldset,legend,input,p,a{
+
+}
+body{
+    width: 100%;
+    background: #d2c8d9;
+}
+
+#login{
+    text-align: center;
+}
+p{
+    overflow: hidden;
+}
+label{
+    display: inline-block;
+    width: 60px;
+    text-align: justify;
+    vertical-align: -21PX;
+}
+label:after{
+    content: '';
+    padding-left: 100%;
+    display: inline-block;
+}
+form{
+    border: 1px solid red;
+    margin: auto;
+}

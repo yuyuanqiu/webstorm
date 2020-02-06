@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 由下可知字符串（原始值）为不可变值
+    var myName = "Aspirate Qiu";
+    myName[0] = "K";
+    console.log(myName); // Aspirate Qiu // 赋值是无效的
+    myName[myName.length] = 'a';
+    console.log(myName); // Aspirate Qiu
+    myName[myName.length] = 'b';
+    console.log(myName); // Aspirate Qiu
+</script>
+</body>
+</html>

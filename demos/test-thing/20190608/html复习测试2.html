@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        div {
+            position: absolute;
+            width: 20vw;
+            height: 20vh;
+        }
+        #a {
+            background: #dd0b0b;
+            top: 15%;
+        }
+        #b {
+            background: #5fff58;
+            top: 25%;
+        }
+        #c {
+            background: #ffb063;
+            top: 0;
+        }
+        video {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="a">红</div>
+<div id="b">绿</div>
+<video width="600px" height="400px" src="1.mp4" type="audio/mp4"></video>
+
+<div id="c">橙</div>
+<script>
+    document.body.onclick = function () {
+        var a = document.getElementsByTagName("video")[0];
+        a.setAttribute("style","z-index: 1000; height: 800px;")
+    }
+</script>
+</body>
+</html>

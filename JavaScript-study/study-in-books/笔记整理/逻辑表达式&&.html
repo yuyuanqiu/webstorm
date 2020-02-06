@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var num = 9;
+    num = num || 8; // 因为9为true，所以返回9
+    console.log(num);
+    var num2 = 10;
+    num = num && 11; // 因为两者均为true，返回后者11。
+    console.log(num);
+    // 运算符优先级：&& > ||
+
+    // 值为false的情况： 0，null，undefined，NaN，空串。
+    // ！！！！！为false的情况只有上述5种情况！！！！！！！
+
+    /*&&：遇到为false的情况则结束，返回该false。
+    两者均不为false，返回后者
+    ||：遇到为true则结束，返回该值。
+    两者均为false，返回后者*/
+    console.log("cat" && "dog"); // dog
+    console.log('' && false); // ''
+    console.log(false && ''); // false
+    console.log(NaN && ''); // NaN
+    console.log('' && NaN); // ''
+
+    console.log("cat" || "dog"); //cat
+    console.log('' || false); // false
+    console.log(false || ''); // ''
+    console.log(NaN || false); // false
+    console.log(false || NaN); // NaN
+
+</script>
+</body>
+</html>

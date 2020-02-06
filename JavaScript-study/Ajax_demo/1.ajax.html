@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    function loadXMLDoc(){
+        var xmlhttp;
+        if (window.XMLHttpRequest){
+            // IE7+,及其他浏览器
+            xmlhttp = new XMLHttpRequest();
+        }
+        else {
+            // IE5,6
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                // 当来自服务器的响应并非xml，使用responseText属性（获得字符串形式的响应数据），否则使用responseXML属性）
+                console.log(xmlhttp.responseText);
+            }
+        };
+        // 将请求发送到服务器，使用open和send方法
+        // xmlhttp.open(method, url, async)
+        // 请求的类型，文件在服务器的位置，是否异步处理请求
+        // 为了避免得到的是缓存，应在url中添加唯一的id（?t=num）
+        // 当XMLHttpRequest()用于AJAX中时，必须使用异步
+        // 并且必须规定当响应处于onreadystatechange事件就绪状态时执行的函数（为false时不需写此函数，而是将代码放在send语句之后）
+        /*好处：无需等待服务器的响应
+        在等待服务器响应时执行其他脚本
+        当响应就绪后对响应进行处理*/
+        xmlhttp.open("GET", "千古.lrc?t="+Math.random(), true);
+        // 将请求发送到服务器，send(string)中string仅用于post请求
+        /*使用post请求的情况：
+        无法使用缓存文件（更新服务器上的文件或数据库）
+        向服务器发送大量数据（post无数据量的限制）
+        发送包含未知字符的用户输入时，post更稳定可靠*/
+        xmlhttp.send();
+    }
+    loadXMLDoc();
+</script>
+</body>
+</html>

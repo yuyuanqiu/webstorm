@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class="button">
+    <button>获取div</button>
+    <button>获取input</button>
+    <button>获取img</button>
+    <button>函数设置div</button>
+    <button>移除所有的id属性</button>
+    <button>使用val获取表单值</button>
+    <button>使用html获取元素值</button>
+    <button>使用text获取元素的值</button>
+</div>
+<div class="useAttr">
+    <div class="firstSubDiv" id="firstSubDiv" onclick="test()" style="width: 200px; height: 10px;border: 1px solid purple;float: left;"></div>
+    <input type="text" id="text" width="100px">
+    <img src="#" title="img" alt="img" style="left: inherit">
+    <textarea width="100px"></textarea>
+</div>
+<script src="jquery-1.12.4.js" type="text/javascript"></script>
+<script>
+    $("button").each(function (index) {
+        $(this).on("click", function () {
+            var itAttr = '';
+            if (index === 0) {
+                // 获取attr
+                itAttr = $("div.firstSubDiv").attr("style");
+                console.log(itAttr);
+            }
+            if (index === 1) {
+                // 设置并获取attr
+                itAttr = $("input").attr("width", 600).attr("width");
+            }
+            if (index === 2) {
+                // 设置多个属性并获取
+                itAttr = $("img").attr({
+                    alt: "图片",
+                    title: "你的图片"
+                }).attr("title");
+            }
+            if (index === 3) {
+                // 参数为函数时设置属性值
+                // 参数attr是 需设置的属性style 原来的值
+                $("div.firstSubDiv").attr("style", function (index, attr) {
+                    attr = "background-color: red; height: 100px";
+                    itAttr = attr;
+                    return attr;
+                })
+            }
+
+            if (index === 5) {
+                // 获取表单元素的值
+                itAttr = $("textarea").val("你好，世界").val();
+            }
+            if (index === 6) {
+                itAttr = $(".useAttr").children("textarea").html(function (index, oldHtmlString) {
+                    return "<img src='#'>";
+                }).html();
+            }
+            if (index === 7) {
+                itAttr = $("#firstSubDiv").text(function () {
+                    return "你好，jQuery";
+                }).text();
+            }
+            $(".useAttr").append("<div>" + itAttr + "</div>");
+
+            if (index === 4) {
+                $(".useAttr").children().each(function () {
+                    if ($(this).has("id")) {
+                        $(this).removeAttr("id");
+                    }
+                    if (!$(this).attr("id")) {
+                        itAttr = "null";
+                    }
+                    $(".useAttr").append("<div>" + itAttr + "</div>");
+                });
+            }
+        });
+    })
+</script>
+</body>
+</html>

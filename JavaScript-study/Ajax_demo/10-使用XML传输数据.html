@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>使用xml获取后台数据</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #name {
+            width: 800px;
+            height: 800px;
+            margin: 0 auto;
+            border: 1px solid green;
+        }
+
+        img {
+            width: 300px;
+            /* height: 200px; */
+            margin: 0 auto;
+            border: 1px solid red;
+        }
+
+        p {
+            width: 800px;
+            height: 200px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div id="name">
+        <p>标题</p>
+        <img tittle="图片" alt="图片">
+        <p>描述</p>
+        <div>
+            <button>九宫格</button>
+            <button>草莓</button>
+        </div>
+    </div>
+    <script>
+        function toStr(obj) {
+            var arr = [];
+            obj.t = Date.now();
+            for (let key in obj) {
+                arr.push(encodeURIComponent(key) + "=" + encodeURIComponent(obj[key]));
+            }
+            return arr.join("&");
+        }
+
+        /**
+         * @method ajax 
+         * @description 一个类似jQuery的Ajax方法
+         * @option {Object} options 配置参数
+         */
+        function ajax(options) {
+            var xhr;
+            var timer;
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else {
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            var str = toStr(options.data);
+            // toLowerCase()是一个函数
+            if (options.type.toLowerCase() === "get") {
+                xhr.open(options.type, options.url + "?" + str, true);
+                xhr.send();
+            } else if (options.type.toLowerCase() === "post") {
+                xhr.open(options.type, options.url, true);
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhr.send(str);
+            }
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    clearInterval(timer);
+                    if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
+                        options.success(xhr);
+                    } else {
+                        options.error(xhr);
+                    }
+                }
+            }
+
+            if (options.timeout) {
+                timer = setInterval(function () {
+                    console.log("请求超时");
+                    console.log(xhr);
+                    xhr.abort();
+                    clearInterval(timer);
+                }, options.timeout);
+            }
+
+        }
+
+        window.onload = function () {
+            var tittle_description = document.querySelectorAll("p");
+            var img = document.querySelector("img");
+            var button = document.querySelectorAll("button");
+            for (let i = 0; i < button.length; i++) {
+                button[i].onclick = function () {
+                    // 为了在匿名函数内部的this指向正在点击的元素
+                    var self = this;
+                    // alert(this.innerHTML)
+                    ajax({
+                        type: "PosT",
+                        url: "./10.xml",
+                        timeout: 3000,
+                        data: {
+                            name: this.innerHTML
+                        },  
+                        success: function (xhr) {
+                            var name = self.innerHTML;
+                            var res = xhr.responseXML;
+                            // ie不支持某些css选择器
+                            var product = res.querySelector(name);
+                            console.log(product);
+                            tittle_description[0].innerHTML = product.getElementsByTagName("name")[0].firstChild.nodeValue;
+                            tittle_description[1].innerHTML = product.getElementsByTagName("description")[0].firstChild.nodeValue;
+                            img.setAttribute("src", product.getElementsByTagName("src")[0].firstChild.nodeValue);
+                        },
+                        error: function (xhr) {
+                            console.log(xhr.status);
+                        }
+                    })
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

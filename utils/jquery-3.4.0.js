@@ -1,5 +1,5 @@
 /*!
- * jQuery JavaScript Library v3.4.0
+ * jQuery JavaScript-study Library v3.4.0
  * https://jquery.com/
  *
  * Includes Sizzle.js

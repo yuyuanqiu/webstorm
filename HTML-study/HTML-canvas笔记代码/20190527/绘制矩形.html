@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #canvas {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px double #ff1c06;
+        }
+        #btn {
+            position: fixed;
+            left: 50%;
+            top: 3%;
+            transform: translate(-50%, 0);
+            width: 100px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="600" height="500"></canvas>
+<button id="btn">清空</button>
+<script>
+    // 前端坐标系： W3C坐标系（y正轴在下）
+    // canvas：为像素图（位图）
+    // get id: 减少重复代码量
+    function $$(id) {
+        return document.getElementById(id);
+    }
+    // 创建canvas对象
+    var canvas = $$("canvas");
+    // 只能标签内部设置才能使属性获取正确
+    // css可以设置高宽并显示，但是canvas对象不能获得css设置的实际的值，而是返回默认的值（300，150）
+    console.log(canvas, canvas.width, canvas.height);
+    // 创建上下文环境对象
+    var context = canvas.getContext("2d");
+    // 绘制矩形(描边矩形): 需要先设置XXXstyle
+    context.strokeStyle = "#ff0700"; // 颜色值/渐变值/图案
+    context.strokeRect(100, 100, 250, 150); // (pos.x, pos.y, width, height)
+    // 绘制填充矩形
+    context.fillStyle = "#fcf5bf";
+    context.fillRect(100, 100, 250, 150);
+    // 绘制一个紫色矩形（同时设置描边和填充矩形）
+    context.strokeStyle = "#0051ff";
+    context.fillStyle = "#9dff92";
+    context.rect(225, 175, 250, 150);
+    context.stroke();
+    context.fill();
+    // 清除指定位置的矩形区域
+    context.clearRect(0, 0, 225, 175);
+    // 由此可看出线条的宽度为1px (350, 250, 126, 75)
+    context.clearRect(350, 250, 126, 75);
+
+    // 清除整个canvas：
+    var btn = $$("btn");
+    btn.onclick = function () {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+    }
+</script>
+</body>
+</html>

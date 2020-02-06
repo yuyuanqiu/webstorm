@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>使用JSON传输数据</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+            }
+            div#product {
+                width: 800px;
+                height: 600px;
+                margin: 0 auto;
+                border: 1px solid red;
+            }
+            h3 {
+                width: 300px;
+                height: 100px;
+                margin: 0 auto;
+                border: 1px double green;
+            }
+            img {
+                height: 200px;
+                border: 1px groove yellow;
+            }
+            p {
+                width: 800px;
+                height: 200px;
+                border: 1px dotted orange;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div id="product">
+            <h3>标题</h3>
+            <hr/>
+            <img tittle="产品图" alt="产品图">
+            <p>描述</p>
+            <div id="btn">
+                <button>九宫格</button>
+                <button>草莓</button>
+            </div>
+        </div>
+        <script>
+            // 将数据转为符合要求的字符串
+            function toStr(data) {
+                var arr = [];
+                data.t = Date.now();
+                for (let key in data) {
+                    arr.push(encodeURIComponent(key) + "=" + encodeURIComponent(data[key]));
+                }
+                return arr.join("&");
+            }
+            // ajax：处理请求
+            function ajax (options) {
+                var xhr;
+                var timer;
+                var str = toStr(options.data);
+                if (window.XMLHttpRequest) {
+                    xhr = new XMLHttpRequest();
+                }
+                else {
+                    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                if (options.type.toLowerCase() === "get") {
+                    xhr.open(options.type, options.url + "?" + str, true);
+                    xhr.send();
+                }
+                else if (options.type.toLowerCase() === "post") {
+                    xhr.open(options.type, options.url, true);
+                    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+                    xhr.send(str);
+                }
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        // 清除定时器，防止请求成功还运行超时连接函数
+                        clearInterval(timer);
+                        if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
+                            options.success(xhr);
+                        }
+                        else {
+                            options.error(xhr);
+                        }
+                    }
+                }
+                // 请求超时处理函数
+                if (options.timeout) {
+                    var timer = setInterval(function () {
+                        console.log("请求超时");
+                        xhr.abort();
+                        clearInterval(timer);
+                    }, options.timeout);
+                }
+            }
+
+            function selector(tagName) {
+                var el =  document.querySelectorAll(tagName);
+                if (el.length > 1) {
+                    return el;
+                }
+                return el[0];
+            }
+            window.onload = function () {
+                var product = {
+                    tittle: selector("h3"),
+                    img: selector("img"),
+                    description: selector("p")
+                };
+                var btn = selector("#btn");
+                btn.addEventListener("click", function (event) {
+                    var that = this;
+                    ajax({
+                        url: "./11-使用JSON传输数据.php",
+                        type: "pOsT",
+                        data: {tagName: event.tagName},
+                        timeout: 3000,
+                        success: function (xhr) {
+                            // alert(event.target)
+                            /*
+                                注意：在IE8及以下不支持json函数，应该使用json2.js库
+                            */
+                            var res = JSON.parse(xhr.responseText);
+                            // console.log(res);
+                            var item = res[event.target.innerHTML];
+                            console.log(item);
+                            product.tittle.innerHTML = item["name"];
+                            product.description.innerHTML = item["description"];
+                            product.img.setAttribute("src", item["src"]);
+                        },
+                        error: function (xhr) {
+                            console.log("请求失败");
+                        }
+                    })
+                }, true);
+            }
+        </script>
+    </body>
+</html>

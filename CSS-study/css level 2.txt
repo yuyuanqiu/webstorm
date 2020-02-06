@@ -1,0 +1,7 @@
+css中的相对单位：
+px
+%：分为三类
+width、height、font-size用此单位是相对于父元素对应的各自单位
+比如width：100px; width: 50%;
+line-height的%相对于当前元素的font-size的值
+vertical-align的%相对于当前元素的line-height的值

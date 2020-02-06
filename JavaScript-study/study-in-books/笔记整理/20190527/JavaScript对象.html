@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 面向对象编程（OOP）
+    // JavaScript对象体系基于构造函数（constructor）和原型链（prototype）
+    // 使用构造函数（专门用来生成实例对象的函数）作为对象的模板
+    // 也可使用对象作为模板生成新的实例对象： 此时要使用Object.creat()
+    var o = {name: "apple", price: 12};
+    console.log(Object.create(o).price); // 12
+    // 构造函数： 使用首字母大写（区分普通函数），函数内部使用this关键字（指向对象实例），生成对象使用new命令
+    // 构造函数可以接受参数， 当有参数而未传入参数时，某些变量值为undefined
+    var Person = function (name) {
+        "use strict";
+        this.name = name;
+    };
+    // new命令：执行构造函数，返回一个实例对象
+    // new本身即可以执行构造函数，若无参时，可以省略括号（不推荐）
+    /*使用new命令时，它后面的函数依次执行下面的步骤。
+        创建一个空对象，作为将要返回的对象实例。
+        将这个空对象的原型，指向构造函数的prototype属性。
+        将这个空对象赋值给函数内部的this关键字。
+        开始执行构造函数内部的代码。*/
+    var name001 = new Person("张三");
+    console.log(name001);  // Person {name: "张三"}
+    var name002 = new Person; // 省略括号
+    console.log(name002);  // Person {name: undefined}
+    // 忘记使用new命令，则变为了普通函数，不会生成实例对象， 若构造函数有返回值，还是会等于return语句
+    // var name003 = Person("张三");
+    // console.log(name003.name); // Uncaught TypeError: Cannot read property 'name' of undefined
+    // 并且此时this代表了全局对象，所以this的属性和方法则变成了全局方法
+    // console.log(name); // "张三"
+    // 解决方法：
+    // 1：
+    // 在函数内部使用严格模式, 当构造函数忘记使用new则会报错
+    // 严格模式下，this默认等于undefined（不加属性会出错）
+    // var name004 = Person("李四"); // Uncaught TypeError: Cannot set property 'name' of undefined
+    // 2：判断是否使用了new命令
+    function Goods(name) {
+        if (!(this instanceof Goods)) {
+            return new Goods(name);
+        }
+        this.name = name;
+    }
+    console.log(new Goods("apple"));// 不管加没加new均返回一个对象，结果都一样
+    console.log(Goods("apple"));
+    // 构造函数的return语句
+    var Price = function () {
+        this.price = 12;
+        return 100;
+    };
+    console.log(new Price()); // 若return语句返回不是对象，则忽略return语句，否则返回对象
+    // new命令总是会返回一个对象，若普通函数return语句跟着一个对象，则new后返回该对象，否则使用new返回空对象{}
+    var Animate = function () {
+        return 12;
+    };
+    console.log(new Animate()); // {}
+    // 3：
+    // 使用target属性，当使用了new之后，new.target指向当前函数，否则指向undefined
+    var DateNow = function () {
+        if (!new.target) {
+            throw new Error("请使用new命令调用");
+        }
+        this.time = "12:12";
+    };
+    console.log(DateNow()); // Uncaught Error: 请使用new命令调用
+
+
+</script>
+</body>
+</html>

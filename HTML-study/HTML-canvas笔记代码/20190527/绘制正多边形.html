@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #canvas {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px double #ff1c06;
+        }
+        #btn {
+            position: fixed;
+            left: 50%;
+            top: 3%;
+            transform: translate(-50%, 0);
+            width: 100px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="600" height="600"></canvas>
+<div id="btn">
+    <button id="cls">清空</button>
+    <button id="set">设置</button>
+</div>
+<script>
+    /**
+     * 出处：html5 canvas 开发详解
+     * 索引：2.4.2
+     */
+    // 前端坐标系： W3C坐标系（y正轴在下）
+    // canvas：为像素图（位图）
+    // get id: 减少重复代码量
+    function $$(id) {
+        return document.getElementById(id);
+    }
+    // 创建canvas对象
+    var canvas = $$("canvas");
+    // 只能标签内部设置才能使属性获取正确
+    // css可以设置高宽并显示，但是canvas对象不能获得css设置的实际的值，而是返回默认的值（300，150）
+    console.log(canvas, canvas.width, canvas.height);
+    // 创建上下文环境对象
+    var context = canvas.getContext("2d");
+
+    $$("set").onclick = function() {
+        clearCanvas();
+        creatPolygon(context, setSideNumber(), 300, 300, 200, random());
+        context.fillStyle = "#fff8d6";
+        context.fill();
+        context.strokeStyle = "#ffd300";
+        context.stroke();
+    };
+    // 创建多边形的函数：creatPolygon
+    function creatPolygon(context, n, circle_x, circle_y, size, deg) {
+        context.beginPath();
+        var degree = 2 * Math.PI / n;
+        for (var i = 0; i < n; i++) {
+            var x = Math.cos(i * degree + deg);
+            var y = Math.sin(i * degree + deg);
+            context.lineTo(x * size + circle_x, y * size + circle_y);
+        }
+        context.closePath();
+    }
+    // 随机开始旋转角度
+    function random() {
+        return Math.PI * Math.random() ;
+    }
+    // 设置多边形的边个数
+    function setSideNumber() {
+        // return Number(prompt("请设置多边形边的个数："));
+        return 5;
+    }
+    // 清除整个canvas：
+    function clearCanvas() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    var cls = $$("cls");
+    cls.onclick = clearCanvas;
+</script>
+</body>
+</html>

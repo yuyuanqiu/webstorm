@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .outer {
+            width: 600px;
+            height: 600px;
+            padding: 20px;
+            border: 1px solid #9e73ff;
+            position: relative;
+        }
+        .inner {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            margin: 10px;
+            border: 1px solid #00B7FF;
+        }
+    </style>
+</head>
+<body>
+<div class="outer">
+    <div class="inner"></div>
+</div>
+<script src="jquery-1.12.4.js"></script>
+<script>
+    // offset相对于文档
+    // 获取的值为一个键值对对象
+    var outerOffset = $(".outer").offset();
+    // position相对于定位过的祖先元素的位置距离
+    var outerPosition = $(".outer").position();
+    var innerOffset = $(".inner").offset();
+    var innerPosition = $(".inner").position();
+    $("body").append(outerOffset.left + "\t" + outerOffset.top + "\t" + outerPosition.left  +"\t" + outerPosition.top +"\t" + innerOffset.left + "\t" +  innerOffset.top + "\t" + innerPosition.left + "\t" + innerPosition.top).on("click", function () {
+        // 只有offset才能设置值（对象）
+        $(".inner").offset(function () {
+            return {top: 100, left: 100};
+        })
+    });
+
+</script>
+</body>
+</html>

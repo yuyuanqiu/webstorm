@@ -14050,7 +14050,7 @@
      * is returned. If `floating` is `true`, or either `lower` or `upper` are
      * floats, a floating-point number is returned instead of an integer.
      *
-     * **Note:** JavaScript follows the IEEE-754 standard for resolving
+     * **Note:** JavaScript-study follows the IEEE-754 standard for resolving
      * floating-point values which can produce unexpected results.
      *
      * @static
@@ -14666,7 +14666,7 @@
     /**
      * Creates a compiled template function that can interpolate data properties
      * in "interpolate" delimiters, HTML-escape interpolated data properties in
-     * "escape" delimiters, and execute JavaScript in "evaluate" delimiters. Data
+     * "escape" delimiters, and execute JavaScript-study in "evaluate" delimiters. Data
      * properties may be accessed as free variables in the template. If a setting
      * object is given, it takes precedence over `_.templateSettings` values.
      *
@@ -14712,7 +14712,7 @@
      * compiled({ 'value': '<script>' });
      * // => '<b>&lt;script&gt;</b>'
      *
-     * // Use the "evaluate" delimiter to execute JavaScript and generate HTML.
+     * // Use the "evaluate" delimiter to execute JavaScript-study and generate HTML.
      * var compiled = _.template('<% _.forEach(users, function(user) { %><li><%- user %></li><% }); %>');
      * compiled({ 'users': ['fred', 'barney'] });
      * // => '<li>fred</li><li>barney</li>'
@@ -15919,7 +15919,7 @@
      * `start` is specified without an `end` or `step`. If `end` is not specified,
      * it's set to `start` with `start` then set to `0`.
      *
-     * **Note:** JavaScript follows the IEEE-754 standard for resolving
+     * **Note:** JavaScript-study follows the IEEE-754 standard for resolving
      * floating-point values which can produce unexpected results.
      *
      * @static

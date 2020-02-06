@@ -1,0 +1,10 @@
+CACHE MANIFEST
+# 第一行一定是上面这句，这行下面列出需要缓存的文件清单
+
+# NETWORK下的文件表示需与服务器交互，不被缓存，但当已设置为缓存时，则更新内容也无法获取更新。
+NETWORK:
+../../default/img/loginPageBackground.jpg
+# FALLBACK表示无法访问时的替代文件
+FALLBACK:
+
+

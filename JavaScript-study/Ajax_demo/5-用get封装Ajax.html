@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>封装ajax</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <input id="text" type="text" name="text">
+        <input id="submit" type="submit" value="提交" />
+
+    <div id="getData"></div>
+    <script>
+        function to_str(obj) {
+            var arr = [];
+            obj.t = Date.now();
+            for (let key in obj) {
+                arr.push(encodeURIComponent(key) + "=" + encodeURIComponent(obj[key]));
+            }
+            // 需要有返回值
+            return arr.join("&");
+        }
+
+        function ajax(url, obj, timeout, success, error) {
+            var xhr;
+            var timer;
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else {
+                xhr = new ActiveXObject("Microsoft.XHLHTTP");
+            }
+            // 将数据转成str形式
+            var str = to_str(obj);
+            // 兼容IE只刷新一次的错误
+            xhr.open("GET", url + "?" + str, true);
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    clearInterval(timer);
+                    if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
+                        success(xhr);
+                    } else {
+                        error(xhr);
+                    }
+                }
+            }
+            // 请求超时时调用
+            if (timeout) {
+                timer = setInterval(function () {
+                    xhr.abort();
+                    console.log("请求终止");
+                    clearInterval(timer);
+                }, timeout);
+            }
+        }
+
+        window.onload = function () {
+            var getData = document.getElementById("getData");
+            var submit = document.getElementById("submit");
+            var text = document.getElementById("text");
+            submit.onclick = function () {
+                var obj = {
+                    "wd": text.value
+                }
+                ajax("5-封装Ajax.php", obj, 3000, function (xhr) {
+                        getData.innerHTML = xhr.responseText;
+                    },
+                    function (xhr) {
+                        console.log(xhr.response);
+                    });
+            }
+        }
+    </script>
+</body>
+
+</html>

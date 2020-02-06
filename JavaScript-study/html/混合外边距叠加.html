@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        /*<!--混合叠加时，先计算父子元素的叠加，再计算兄弟元素的叠加，取最大值-->*/
+        .parent1,.parent2,.parent3{
+            width: 50px;
+            height: 85px;
+            background: yellow;
+        }
+        /*parent1与parent2边距为40px*/
+        .parent1{
+            margin: 20px;}
+        .parent2{
+            margin: 10px 20px;
+        }
+        /*当父子在上，兄弟在下，兄弟边距用兄弟中最大值计算，而不是所有元素中的最大值*/
+        /*此时parent2与son3外边距为50px*/
+        /*parent2与parent3外边距为40px*/
+        /*最后parent2与parent3的边距为40px*/
+        .parent3{
+            margin: 40px 20px;
+        }
+        .parent2 div{
+            width: 10px;
+            height: 5px;
+            background: #000000;
+        }
+        .son1{
+            margin: 40px 0 0;
+        }
+        .son2{
+            margin: 20px;}
+        .son3{
+            margin: 50px 20px;}
+    </style>
+</head>
+<body>
+<div class="parent1"></div>
+<div class="parent2">
+    <div class="son1"></div>
+    <div class="son2"></div>
+    <div class="son3"></div>
+</div>
+<div class="parent3"></div>
+</body>
+</html>
