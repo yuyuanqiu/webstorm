@@ -1,0 +1,201 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.top-container-out {
+  left: 0px;
+  top: 0px;
+  // ------------------------------------------------------更改为flex的测试-----------------------------
+  // padding: 0px;
+
+  // width: 100%;
+  width: 82%;
+  padding: 0 9%;
+
+  height: 64px;
+  position: absolute;
+  // clear: none;
+  // display: block;
+  // min-width: 0px;
+  // z-index: 21;
+  // color: black;
+  // font-size: 16px;
+  // margin: 0px;
+  // -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.08);
+  // overflow: hidden;
+  // ------------------------------------------------------更改为flex的测试-----------------------------
+
+  .top-container {
+    // top: 0px;
+    // ------------------------------------------------------更改为flex的测试-----------------------------
+
+    // width: 1260px;
+    // ------------------------------------------------------更改为flex的测试-----------------------------
+    // height: 64px;
+    // border-radius: 0px;
+    // position: relative;
+    // clear: none;
+    // ------------------------------------------------------更改为flex的测试-----------------------------
+    // display: block;
+    display: flex;
+    flex-flow: row;
+    // ------------------------------------------------------更改为flex的测试-----------------------------
+    // min-width: 0px;
+    // color: black;
+    // font-size: 16px;
+    // background-color: white;
+    // margin: 0px auto;
+    // padding: 0px;
+
+    // ------------------------------------------------------更改为flex的测试-----------------------------
+    // .top-logo,
+    // .top-nav {
+    //   float: left;
+    // }
+
+    .top-logo {
+      flex: 2;
+      // left: 0px;
+      // top: 17px;
+      // width: 190px;
+
+      // height: 28px;
+      // border-radius: 0px;
+      // position: relative;
+      // clear: none;
+      // display: block;
+      // min-width: 0px;
+      // z-index: 13;
+      // color: black;
+      // font-size: 16px;
+      // margin: 0px;
+      // padding: 0px;
+      // float: left;
+      // ------------------------------------------------------更改为flex的测试-----------------------------
+
+      a {
+        font-size: 26px;
+        font-family: 微软雅黑, 'Microsoft YaHei';
+        color: #333333;
+        line-height: 64px;
+
+        img {
+          height: 32px;
+          border-radius: 0px;
+        }
+      }
+    }
+
+    .top-nav {
+      // ------------------------------------------------------更改为flex的测试-----------------------------
+      // margin: 5px 0 0 99px;
+      flex: 3;
+
+      // ------------------------------------------------------更改为flex的测试-----------------------------
+
+      .el-menu {
+        // -----------------------------------------------------新增搜索框的flex适应------------3行-------------------------
+        display: flex;
+        flex-flow: row;
+
+        .el-menu-item {
+          flex: 1;
+          // -----------------------------------------------------新增搜索框的flex适应------------3行--------------------结束-----
+        }
+      }
+    }
+
+    .top-search {
+      // ------------------------------------------------------更改为flex的测试-----------------------------
+      flex: 3;
+      display: flex;
+      flex-flow: row;
+      // position: absolute;
+      // right: 222px;
+      // text-align: right;
+      // -webkit-transform: translateY(-50%);
+      // transform: translateY(-50%);
+      // top: 50%;
+      // ------------------------------------------------------更改为flex的测试-----------------------------
+
+      .el-autocomplete {
+        flex: 1;
+        position: relative;
+
+        .el-input-group {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        .el-input-group__append {
+          border-radius: 0 9px 9px 0;
+          padding: 0 20px;
+          width: 1px;
+          white-space: nowrap;
+          border: 2px solid #28a965;
+          border-left: 0;
+        }
+      }
+
+      .el-input__inner {
+        background-color: #fff;
+        border-radius: 9px 0 0 9px;
+        border: 2px solid #28a965;
+        border-right: 1px solid #28a965;
+        height: 43px;
+        line-height: 43px;
+        -webkit-transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+        transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+        // width: 288px;
+      }
+
+
+
+
+    }
+
+    .top-login-reg {
+      // ------------------------------------------------------更改为flex的测试-----------------------------
+      flex: 1;
+      position: relative;
+      // display: flex;
+      // flex-flow: row;
+      // align-items: center;
+      // position: absolute;
+      // right: 0;
+      // text-align: right;
+      // -webkit-transform: translateY(-50%);
+      // transform: translateY(-50%);
+      // top: 50%;
+      // ------------------------------------------------------更改为flex的测试-----------------------------
+      div {
+        // 此处设置是让注册登录按钮右侧居中对齐-------------------开始
+        position: absolute;
+        width: fit-content;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 0;
+        // 此处设置是让注册登录按钮右侧居中对齐-------------------开始
+      }
+      a {
+        // flex: 1;
+
+        // -----------------清除链接默认样式
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .split {
+        display: inline-block;
+        margin: 0 10px;
+      }
+    }
+
+    .el-menu {
+      border: none;
+    }
+  }
+}
