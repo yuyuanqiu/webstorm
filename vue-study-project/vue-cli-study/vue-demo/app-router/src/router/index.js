@@ -14,6 +14,11 @@ const Aboutmy = () => import('../components/Aboutmy.vue')
 const User = () => import('../components/User.vue')
 const Profile = () => import('../components/Profile.vue')
 
+const Other = () => import("../components/other.vue")
+const Error404 = () => import("../components/404Error.vue")
+
+const Nav = () => import("../components/nav.vue")
+
 // 第一步：通过Vue.use()使用插件
 Vue.use(VueRouter)
 
@@ -30,6 +35,12 @@ const routes = [
     path: '/',
     redirect: '/homemy',
   },
+  // ----------------------------------------------------------测试的其他网页----------------------------------
+  {
+    path: '/nav',
+    component: Nav
+  } , 
+
   {
     path: '/homemy',
     component: Homemy,
@@ -41,16 +52,23 @@ const routes = [
     children: [
       {
         path: '',
-        redirect: 'news'
+        redirect: 'news',
       },
       {
         // 注意这里的path不需要添加/
         path: 'news',
-        component: HomemyNews,
+        // component: HomemyNews,
+        // 假设这里使用多个同级视图
+        components: {
+          news: HomemyNews,
+          reports: HomemyReports,
+        }
       },
       {
         path: 'reports',
         component: HomemyReports,
+        // 别名即当用户访问/alias/ls时，路由匹配的是reports
+        alias: '/alias/ls'
       }
     ]
   },
@@ -58,6 +76,9 @@ const routes = [
     path: '/aboutmy',
     // 记住这里是component而不是name
     component: Aboutmy,
+
+    // 当在重定向时，若使用导航守卫，则应该在重定向目标中使用，而不是在当前路由中
+    redirect: '/other',
     meta: {
       title: '关于'
     },
@@ -70,9 +91,11 @@ const routes = [
     // 动态路由：/user/:xx的形式，还需要在app.vue中标注跳转
     path: '/user/:userID',
     component: User,
+    name: 'user',
     meta: {
       title: '用户'
     },
+    props: true,
     
 
   },
@@ -81,7 +104,31 @@ const routes = [
     component: Profile,
     meta: {
       title: '档案'
+    },
+    query: "",
+    // 返回一个对象
+    props: () => {
+      return {
+        name: "xia",
+        age: 23,
+        desperation: "我是ll"
+      }
     }
+     ,
+  },
+  {
+    path: '/other',
+
+    component: Other,
+  },
+
+
+
+
+
+  {
+    path: '*',
+    component: Error404,
   }
 ]
 

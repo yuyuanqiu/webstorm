@@ -10,6 +10,15 @@
 ## 使用
 
 在webpack4中还需要全局安装webpack-cli才能进行下面操作（下面知识都是webpack3中）
+
+webpack配置别名：在vue.config.js中配置
+
+**注意**：
+  1. 引入图片等资源：
+     1. 在template模板中，比如src应该在最前面加 **~**
+     2. 在样式中，比如url应该在最前面加 **~**
+     3. **这条有待验证**：在脚本中：若引用assets中的图片，应使用require引用，引用public中的文件，比如public/img/logo.png，应该使用(./)img/logo.png
+  2. 引用其他资源，可直接使用别名
  
 手动打包文件：webpack app.js bundle.js
   1. 其中app.js是项目的主入口文件，bundle.js是打包之后的文件

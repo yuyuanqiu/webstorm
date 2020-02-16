@@ -355,14 +355,228 @@ public文件夹：
 路由懒加载：需要时才加载代码（分割成一个个小文件，而不是放在一个大文件中）
    在路由选项中使用：component: () => import('../xxx')
 
+### 动态路由
+
+使用场景：把某种模式匹配到的所有路由，全部映射到同一个组件渲染
+
+用法：在vue-router路由路径中使用 **动态路径参数** 
+   1. 路由路径中：routes = [{path: "/user/:id", component: UserComponent}, ...otherRoutes]
+   2. 其中路由路径使用:表示，参数即冒号后的内容即id，
+   3. 匹配到的路由参数设置在**this.$route.params对象**中
+   4. 可以在一段路由中设置多个路径参数，path: "/user/:id/other/:o"
+   5. 当匹配到/user/路径下任一子路由（路径），都会使用UserComponent组件渲染，使用不同的参数，原来渲染的组件会被复用，意味着**不会再调用生命周期钩子**
+   6. 复用组件并监测路由参数的变化，可在组件中**使用watch或beforeRouteUpdate选项监测$route对象**
+   7. 路由路径可使用通配符*，其中path: "*"通常用于404，使用通配符时，$route.params.pathMatch表示被通配符匹配的内容
+   8. 同一路径若可匹配多个路由，则**匹配优先级按照路由的定义顺序**
+   9. vue-router 使用 path-to-regexp 作为路径匹配引擎，所以支持很多高级的匹配模式
+
+### 嵌套路由
+
+使用场景：应用界面有多层嵌套组件组合而成，而url各段动态路径也对应嵌套的各层组件
+
+用法：使用嵌套路由配置上述关系
+   1. 即在组件模板中嵌套<router-view>
+   2. 在嵌套的route中使用children配置嵌套路由
+   3. 在所有路由的path中，以/开头的路径表示根路径，所以在嵌套路由中不能以/开头（省略/），除此之外嵌套路由配置 **【都是一个数组】** 和路由配置相同
+   4. 若想渲染嵌套路由的父路由，还需**在children中提供一个空的子路由**，以匹配渲染父路由：children: [{path: '', component: ParentComponent}, ...]
+
+### 编程式的导航
+
+定义导航链接的方式：<router-link>和router的实例方法
+
+用法：在vue实例内部，通过$router访问路由实例
+   1. this.$router.push/replace(location, onComplete?, onAbort?)
+      1. 其中后两个函数将在导航成功完成/终止时进行调用，可省略
+      2. 若支持promise将返回一个promise
+   2. 导航到不同的url，可使用router.push方法，向history栈添加/替换一个新纪录
+   3. 当点击<router-link>等同于调用router.push()方法，以下也可在to参数中使用
+      1. 字符串：router.push('home');  // **/home**
+      2. 对象：router.push({path: 'home'})   // **/home**
+      3. 命名路由：router.push({name: 'user', params: {userId: '123'}}) // **/user/123**
+      4. 带查询参数：router.push({path: 'rigister', query: {plan: 'private'}})   // /**rigister?plan=prigister**
+   4. 当提供了path，则会忽略params，可使用命名路由或拼接：**router.push({path: `/user/${userId}`}}**
+   5. router.go(n)：表示history前进/后退的次数
+
+实例：**路由跳转，使用命名路由**
+   1. 定义方法：使用this.$router.push({name: 'xxx'})
+   2. 在路由route中（与path，component同级）定义name: 'xxx'
+   3. 在html标签中调用方法
+
+### 命名路由
+
+使用场景：**链接路由/路由跳转**
+
+用法：通过在routers配置routes中给某个路由设置名称
+   1. routes: [path:'xx', name: 'xx'...]
+   2. 参加 **编程导航中的实例**
+
+### 命名视图
+
+使用场景：同时展示多个视图，例如一个布局，有侧栏和主内容两个视图
+
+用法：使用命名视图，若router-view未设置name属性，默认为default，default可不设置
+   1. 步骤：
+      1. 设置router-view元素：`<router-view class="view three" name="b"></router-view>`
+      2. 在routes中设置components（非component）对象：**components: {default: FooComponent, b: BarComponent}**
+      3. 对应name之间的关系
+   2. 嵌套命名视图可创建更加复杂的布局
+
+### 重定向和别名
+
+重定向：通过配置routes中的选项   
+用法：
+   1. routes: [{path: '/a', redirect: '/b'}]
+      1. **表示访问/a，会直接刷新到/b页面（即url换成/b）**
+   2. routes: [{path: '/a', redirect: { name: 'foo'}}]
+      1. **重定向目标可以是一个命名的路由**，会直接定向到name为foo的路由
+   3. routes: [{path: '/a', redirect: to => {}}]
+      1. **重定向可动态返回一个重定向目标的方法**
+      2. 方法接收目标路由作为参数，返回重定向的字符串路径/路径对象（类似1，2的组合）
+   4. **注意**：导航守卫仅应用到目标路由上，
+      1. 这意味者routes: [{path: '/a', redirect: '/b'}]中
+      2. 导航路由应该在/b中设置才有效果
+
+别名：自由的将ui结构映射到任意url   
+用法：
+   1. { path: '/a', component: A, alias: '/b' }
+   2. 表示当用户访问/b时，url会保持/b，但是路由却匹配的是/a
+   3. 相当于访问/b页面，看到的是/a页面的结构，但url还是/b
+
+### 路由组件传参
+
+使用场景：在组件中使用$route会使组件与其对应的路由形成高度耦合，使组件只能在特定url使用
+   1. 使用props将组件和路由解耦
+
+用法：
+   1. 在routes中添加props选项，若包含命名视图的路由，必须分别为每个命名路由添加props选项
+      ```javascript
+         {
+         path: '/user/:id',
+         components: { default: User, sidebar: Sidebar },
+         props: { default: true, sidebar: false }
+      } 
+      ```
+   2. props的值：
+      1. 布尔值：设置为true，表示route.params（参数）将会被设置为组件属性
+      2. 对象：则该对象会被设置为组件属性，当props是静态时有用
+      3. 函数：返回props，可以将参数转为另一种类型，将静态值与基于路由route的值结合
+
+### HTML5 history模式
+
+vue-router默认使用hash模式，可以在new VueRouter({mode: 'xxx'})配置为history
+   1. 该模式需要后台配置支持，增加一个覆盖所有资源的候选情况，否则当匹配不到路径时返回404
+   2. 当使用候选时，服务器将不再返回404，避免这种情况应该在Vue中覆盖所有的路由情况，给出404页面（在最末尾配置）
+
+### 导航守卫（-----------------------不是很懂--------------------------）
+
+导航：表示路由正在发生改变
+
+定义：在跳转/取消跳转时守卫导航
+
+分类：
+   1. 全局前置守卫：
+      1. router.beforeEach(to, from, next)，router是一个路由实例
+         1. to：即将进入的目标路由对象
+         2. from：当前将离开的路由对象
+         3. next：**一定要调用该方法resolve这个钩子**
+            1. next()：进入下一个钩子
+            2. next(false)：中断当前导航，重置到from路由对应地址
+            3. next('/')或next({path: '/'})：跳转到下一个地址，对象可以是任何可用在to参数的选项
+            4. next(error)：终止导航，且传递错误给router.onError()的回调
+   2. 全局解析守卫：router.beforeResolve
+   3. 全局后置钩子：router.afterEach((to, from))=>{})
+      1. 不接受next函数
+   4. 路由守卫：定义在routers中的每个route中
+      1. beforeEnter(to, from, next)
+   5. 组件内的守卫：在组件实例中使用
+      1. beforeRouteEnter/Update/Leave(to, from, next)
+      2. enter守卫不能获取组件实例的this，但可传一个回调给next来访问组件实例，回调参数即组件实例
+      3. update在路由改变时**组件被复用则被调用**
+      4. leave常用来禁止用户未保存信息离开的操作
+
+### 路由元信息
+
+定义：元信息即指meta字段
+
+访问：通过$route对象
+   1. $route对象记录了所有路由记录（包括父子路由），包含在该对象的matched选项中
+
+### 过渡动效
+
+将router-view视图**套入transition组件**中添加过渡效果
+
+给单个路由添加过渡：只需要在组件模板中用transition包含模板即可，并设置name属性
+
+动态设置过渡效果，给name绑定v-bind即可
+
+### 数据获取
+
+使用场景：进入路由需要从服务器获取数据
+
+获取数据的方式：
+   1. 导航完成之后获取：完成导航之后在组件生命周期钩子中获取数据，获取期间显示加载中的提示
+   2. 导航完成之前获取：在路由进入的守卫中获取数据，获取成功执行导航
+
+### 滚动行为
+
+当切换路由时，想要页面滚动到某一位置，可在VueRouter实例中（与routes同级）提供一个scrollBehavior(to, from, savedPosition)方法
+   1. 返回滚动位置的对象信息，返回假值/空对象则不会滚动
+   2. 返回一个promise支持异步滚动
+
+[超详细Vue实现导航栏绑定内容锚点+滚动动画+vue-router(hash模式可用)](https://juejin.im/post/5d785ecef265da03e369ac26)
+
+### 路由懒加载
+
+产生原因：打包构建应用时，JS包会非常大，影响页面加载
+
+解决：把不同路由对应组件分割成不同代码块，然后在路由被访问时才加载对应组件
+   1. 结合Vue的异步组件和webpack的代码分隔功能，实现路由懒加载
+   2. 步骤：
+      1. 将异步组件定义为返回一个promise的工厂函数
+      2. 在webpack中使用动态import语法定义代码分块点
+      3. 形式：const Com = () => import('./xxx.vue')
 
 ## Vuex
 
 安装：npm install vuex --save
 
+Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。把组件的共享状态抽取出来，以一个全局单例模式管理
+
+1. 状态存储是响应式的
+2. 改变store的状态唯一途径：显式提交mutation
+3. 创建store对象：const store = new Vuex.Store({state: {}, mutations: {}})
+4. 通过store.commit(methodName)方法触发状态变更
+
 Vue.Store中mutation中的响应规则：
    只有提前在store中初始化的属性是响应式的
    新增/删除数据也要响应式（参考vue中对数组/对象的响应式）：使用Vue.set/delete
+
+Action提交的是mutation，且可以包含任意异步操作
+
+### state
+
+Vuex 使用单一状态树，每个应用将仅仅包含一个 store 实例
+
+Vuex 通过 store 选项，提供了一种机制将状态从根组件“注入”到每一个子组件中（需调用 Vue.use(Vuex)）：
+```javascript
+const app = new Vue({
+  el: '#app',
+  // 把 store 对象提供给 “store” 选项，这可以把 store 的实例注入所有的子组件
+  store,
+  components: { Counter },
+  template: `
+    <div class="app">
+      <counter></counter>
+    </div>
+  `
+})
+```
+
+store 实例会注入到根组件下的所有子组件中，且子组件能通过 this.$store 访问到。
+
+使用mapState辅助函数生成计算属性：
+   1. import {mapState} from 'vuex'
+   2. computed: mapState({方法列表})，或computed: { others, ...mapState({...})}
 
 ## axios
 
