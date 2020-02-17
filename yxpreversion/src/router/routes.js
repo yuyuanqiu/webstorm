@@ -5,22 +5,27 @@ const HomeMenu = () => import('components/home/HomeMenu.vue')
 const SchoolRandom = () => import('../components/home/SchoolRandom.vue')
 const HomeLessons = () => import('../components/home/HomeLessons.vue')
 
+const SpecialCourse = () => import('components/home/SpecialCourse')
+const SpecificCourseNav = () => import('components/home/SpecialCourseNav')
+const SpecialCourseGood = () => import('components/home/SpecialCourseGood')
+const SpecialCourseAll = () => import('components/home/SpecialCourseAll')
+
+const LessonsLunbo = () => import('components/home/LessonsLunbo')
+
 const Login = () => import('components/login/Login.vue')
 
 const Register = () => import('components/login/Register.vue')
 
+const NotFound404 = () => import('components/NotFound404.vue')
+
 const routes = [{
     path: '/',
-    redirect: '/test/homemenu'
-  },
-  {
-    path: '/home',
     name: 'home',
     component: Home,
 
     children: [{
         path: '',
-        redirect: 'home',
+        redirect: 'specialcourse'
       },
       {
         path: 'home',
@@ -39,6 +44,23 @@ const routes = [{
         }
       }
     ]
+  },
+  {
+    // 当使用命名视图时，应该在子组件定义，即同一级不能同时出现component/components
+    path: '/specialcourse',
+    component: SpecialCourse,
+    children: [{
+      path: '',
+      components: {
+        'special-course-nav': SpecificCourseNav,
+        'lessons-lunbo': LessonsLunbo,
+        'special-course-good': SpecialCourseGood,
+        'special-course-all': SpecialCourseAll,
+
+
+      }
+    }]
+
   },
   {
     path: '/login',
@@ -80,7 +102,29 @@ const routes = [{
   {
     path: '/test/homemenu',
     component: () => import('test/t-home-menu'),
+  },
+  {
+    path: '/test/textpic',
+    component: () => import('test/text-pic-lunbo')
+  },
+  {
+    path: '/test/specific',
+    component: () => import('components/home/SpecialCourseNav.vue')
+  },
+  {
+    path: '/test/lunbos',
+    component: () => import('test/lunbo-eazy')
+  },
+  {
+    path: '/test/lunbo2',
+    // component: () => import('test/lunbo2')
+  },
+  // ------------------------404路由
+  {
+    path: '*',
+    component: NotFound404,
   }
+
 ]
 
 export default routes

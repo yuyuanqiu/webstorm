@@ -1,6 +1,6 @@
 <template>
   <div class="home-menu">
-    <div class="main-1">
+    <div class="main-1" @mouseenter="mouseEnter" @mouseleave="mouseLeave">
       <el-cascader-panel
         :props="props"
         id="cascader-paner-my"
@@ -13,7 +13,12 @@
       <div class="main-2-1">
         <el-carousel height="361px" :interval="50000" arrow="always">
           <el-carousel-item v-for="item in 4" :key="item">
-            <h3>{{ item }}</h3>
+            <el-image :src="src">
+              <div slot="placeholder" class="image-slot">
+                加载中
+                <span class="dot">...</span>
+              </div>
+            </el-image>
           </el-carousel-item>
         </el-carousel>
       </div>
@@ -41,6 +46,7 @@ export default {
   name: "home-menu",
   data() {
     return {
+      src: require("assets/img/login.png"),
       props: {
         expandTrigger: "hover"
       },
@@ -315,6 +321,18 @@ export default {
     };
   },
   methods: {
+
+    // --------------------------element组件元素不能实现原生事件----此时可以外层嵌套一个div实现事件
+
+    mouseEnter() {
+      // this.changes();
+      console.log("mouseEnter: ");
+    },
+    // ----------------鼠标移出，隐藏面板
+    mouseLeave(e) {
+      this.changes()
+      console.log("mouseLeave: ");
+    },
     changes(n) {
       console.log("传入的参数：", n);
       let oP = document.querySelector("#cascader-paner-my");
@@ -390,111 +408,5 @@ export default {
 </script>
 
 <style lang="scss">
-// 在此处写某类样式，是由于在嵌套中书写样式不会生效
-// 当所写样式不生效时，应该考虑将其拿出来单独书写
-.el-cascader-panel {
-  box-shadow: 0 2px 4px #dbd9d98a, 0 0 6px #a9a9a9;
-}
-.el-cascader-menu {
-  color: #ecf5ff;
-  border-right: solid 1px #303133;
-  background: #303133;
-  border-radius: 4px;
-
-  .el-cascader-menu__wrap {
-    height: 378px;
-  }
-}
-
-// .el-cascader-menu__list,
-.el-cascader-node {
-  &:hover {
-    // 此处背景是鼠标点击/覆盖时菜单时的背景，加important的原因：以替换element 自带的样式
-
-    background: #2d2e2e !important;
-  }
-}
-
-// 首页左侧分类与中间轮播图：目的是让左侧分类子级在轮播图的上方（这样才能点击菜单中的选项
-.el-cascader-menu/* :last-child */ {
-  z-index: 100;
-}
-
-.el-header {
-  // 清除el-header默认的padding值
-
-  // padding: 0;
-}
-
-.home-menu {
-  // -----------------------------------------为了测试样式增加的选项 2行---------------父元素设置flex布局，固定一边长度，其他自适应
-  display: flex;
-  flex-flow: row;
-}
-
-.main-1 {
-  // z-index: 100;
-  // -----------------------------------------为了测试样式改动的选项 1行
-  // float: left;
-  // -----------------------------------------为了测试样式改动的选项 1行  结束
-  // box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  #cascader-paner-my {
-    width: 179px;
-  }
-}
-.main-2 {
-  // -----------------------------------------为了测试样式改动的选项 1行---------------父元素设置flex布局，固定一边长度，其他自适应
-  flex: 3;
-  // float: left;
-
-  // -----------------------------------------为了测试样式改动的选项 1行  结束
-  // z-index: -100;
-  height: 378px;
-  width: 814px;
-  padding: 0 13px;
-  .main-2-1 {
-    // z-index: -2;
-    .el-carousel {
-      .el-carousel__item.is-active {
-        // z-index: -2;
-      }
-
-      .el-carousel__item h3 {
-        color: #475669;
-        font-size: 18px;
-        opacity: 0.75;
-        line-height: 361px;
-        margin: 0;
-      }
-
-      .el-carousel__item:nth-child(2n) {
-        background-color: #99a9bf;
-      }
-
-      .el-carousel__item:nth-child(2n + 1) {
-        background-color: #d3dce6;
-      }
-    }
-  }
-}
-.main-3 {
-  // -----------------------------------------为了测试样式改动的选项 1行---------------父元素设置flex布局，固定一边长度，其他自适应
-  flex: 1;
-  // float: left;
-  // -----------------------------------------为了测试样式改动的选项 1行  结束
-  width: 224px;
-  height: 378px;
-
-  .el-card {
-    .el-card-a {
-      // -----------------清除链接默认样式--------------------------包括去除下划线，字体
-      text-decoration: none;
-      color: inherit;
-    }
-    img {
-      height: 80%;
-      width: 100%;
-    }
-  }
-}
+@import "assets/css/HomeMenu.scss";
 </style>

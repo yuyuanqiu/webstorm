@@ -1,7 +1,5 @@
 <template>
   <div id="app">
-
-
     <!-- 
       系统结构：
         网站头部，网站尾部始终渲染
@@ -11,13 +9,11 @@
     -->
     <el-container>
       <el-header height="64px">
-        
         <!-- 网站头部，始终渲染在页面上，因为每个页面都有头部 -->
         <top-container />
       </el-header>
 
       <el-main>
-
         <!-- 每个页面的内容都在这里面 -->
 
         <router-view />
@@ -42,18 +38,25 @@
 //   text-align: center;
 //   color: #2c3e50;
 // }
+
+#app {
+}
 .el-header {
   padding: 0 9%;
+  background: #fff;
 }
 .el-main {
   padding: 20px 9% !important;
   // width: 100%;
   position: relative;
+  background: #f5f5f5;
 }
 
 .el-footer {
   width: 100%;
-  padding: 50px 9% 0 !important;
+  padding: 50px 9% 10px !important;
   background-color: #333;
 }
+
+
 </style>

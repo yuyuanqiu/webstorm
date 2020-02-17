@@ -5,7 +5,18 @@
       <div class="card-lessons">
         <div class="card-aside">
           <el-card :body-style="{ padding: '0px', height: 'inherit' }">
-            <img src="~assets/img/shouye-kecheng-datu.jpg" class="image" />
+            <!-- 添加element image组件 -->
+            <el-image :src="src" lazy>
+              <div slot="placeholder" class="image-slot">
+                加载中
+                <span class="dot">...</span>
+              </div>
+              <!-- <div slot="error" class="image-slot">
+                <i class="el-icon-picture-outline"></i>
+              </div>-->
+            </el-image>
+            <!-- 添加element image组件 -->
+            <!-- <img src="~assets/img/shouye-kecheng-datu.jpg" class="image" /> -->
             <div class="el-card-divs">
               <a href="#" v-for="i in 3" :key="i">
                 <span>统计量抽样分布</span>
@@ -16,9 +27,17 @@
         </div>
         <div class="card-body">
           <el-row :gutter="20" type="flex">
-            <el-col :span="6" v-for="i in 12" :key="i">
+            <el-col :span="6" v-for="i in 8" :key="i">
               <a href="#" class="grid-content bg-purple">
-                <img src="../../assets/img/lessongs-icon/yanjiang.png" />
+                <el-image :src="src1" lazy>
+                  <div slot="placeholder" class="image-slot">
+                    加载中
+                    <span class="dot">...</span>
+                  </div>
+                  <!-- <div slot="error" class="image-slot">
+                <i class="el-icon-picture-outline"></i>
+                  </div>-->
+                </el-image>
                 <div>
                   <div class="lesson-name">
                     <span>信息素养：效率提升与终身学习的新引擎</span>
@@ -39,7 +58,13 @@
 
 <script>
 export default {
-  name: "home-lessons"
+  name: "home-lessons",
+  data() {
+    return {
+      src: require("assets/img/shouye-kecheng-datu.jpg"),
+      src1: require("assets/img/lessongs-icon/yanjiang.png")
+    };
+  }
 };
 </script>
 

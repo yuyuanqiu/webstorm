@@ -46,10 +46,12 @@
 
       <div class="top-login-reg">
         <div>
-          <a href="#">登录</a>
+          <a @click="dialogVisible = true">登录</a>
           <span class="split">|</span>
           <a href="#">注册</a>
         </div>
+
+        
       </div>
     </div>
   </div>
@@ -57,7 +59,8 @@
 
 <script>
 export default {
-  name: "top-container"
+  name: "top-container",
+  
 };
 </script>
 

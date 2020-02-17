@@ -23,15 +23,17 @@
 
     .card-aside {
       flex: 1;
-      // max-width: 210px;
+      // max-width: 229px;
       // margin-right: 20px;
 
       .el-card {
+        height: 420px;
 
         .el-card__body {
 
-          img {
+          .el-image {
             width: 100%;
+            height: 323px;
           }
 
           .el-card-divs {
@@ -72,14 +74,14 @@
 
     .card-body {
       flex: 4;
-      margin-left: 18px;
+      // margin-left: 20px;
       // display: flex;
       // flex-flow: row;
       .el-row {
         // ------------------flex布局,让flex布局能够自动换行
         flex-flow: row;
         flex-wrap: wrap;
-        justify-content: space-between;
+        // justify-content: space-between;
         // ------------------flex布局,让flex布局能够自动换行--结束
         height: fit-content;
         margin: 0 !important;
@@ -93,14 +95,14 @@
         .el-col {
           flex: 1;
           // -----------------若想让flex布局能够自动换行，则必须固定width，若设置max-width则当布局盒子总宽度小于该值时，则width会压缩失真
-          width: 210px;
-          max-width: 210px;
-          min-width: 210px;
+          width: 229px;
+          max-width: 229px;
+          min-width: 229px;
           // --------------------j结束
-          height: 100%;
+          height: 200px;
           border-radius: 4px;
           padding: 0 !important;
-          margin: 0 0 20px;
+          margin: 0 0 20px 20px;
           background-color: #fff;
 
           &:hover {

@@ -1,0 +1,50 @@
+#specific-course-nav {
+  width: 100%;
+
+  .el-row {
+    width: 100%;
+
+
+
+
+
+    .el-col {
+
+      height: 32px;
+      line-height: 32px;
+      // -----------------------实现多个容器排列时，容器之间的间距值相等，且容器的宽度和内容宽度一样----方法
+
+      width: auto;
+      display: inline-block !important;
+      // -----------------------实现多个容器排列时，容器之间的间距值相等的办法，结束
+      // 然后在容器里面设置padding值拉开间距
+
+      // padding: 0 20px 0 0;
+      margin: 0 12px 14px 0px;
+      text-align: center;
+
+
+      h3 {
+
+        font-size: 24px;
+        font-weight: 300;
+        margin-block-start: 0;
+        margin-block-end: 0;
+      }
+
+      .el-link {
+        font-size: 14px;
+        padding: 0 20px;
+        text-decoration: none !important;
+
+        &:hover{
+          border-radius: 16px;
+        background: #00C758;
+        color: #fff;
+
+        }
+      }
+
+    }
+  }
+}
