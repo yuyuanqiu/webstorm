@@ -12,6 +12,13 @@ const SpecialCourseAll = () => import('components/home/SpecialCourseAll')
 
 const LessonsLunbo = () => import('components/home/LessonsLunbo')
 
+const LessonsADColumn3 = () => import('components/home/LessonsADColumn3')
+
+const Lesson = () => import('components/lessonInfo/Lesson')
+const LessonTitle = () => import('components/lessonInfo/LessonTitle')
+const LessonBodyLeft = () => import('components/lessonInfo/LessonBodyLeft')
+const LessonBodyRight = () => import('components/lessonInfo/LessonBodyRight')
+
 const Login = () => import('components/login/Login.vue')
 
 const Register = () => import('components/login/Register.vue')
@@ -55,12 +62,27 @@ const routes = [{
         'special-course-nav': SpecificCourseNav,
         'lessons-lunbo': LessonsLunbo,
         'special-course-good': SpecialCourseGood,
+        'lessons-ad-column3': LessonsADColumn3,
         'special-course-all': SpecialCourseAll,
 
 
       }
     }]
 
+  },
+  {
+    path: '/lessoninfo',
+    component: Lesson,
+    children: [
+      {
+        path: '',
+        components: {
+          'lesson-title': LessonTitle,
+          'lesson-body-left': LessonBodyLeft,
+          'lesson-body-right': LessonBodyRight,
+        }
+      }
+    ]
   },
   {
     path: '/login',

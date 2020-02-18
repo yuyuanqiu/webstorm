@@ -1,0 +1,68 @@
+.special-course-all {
+
+  // 禁止选取文字
+  user-select: none;
+
+  margin: 50px 0;
+
+  h3 {
+    // 去除h3标签默认的上下margin
+    margin-block-start: 0;
+    margin-block-end: 0;
+
+    height: 36px;
+    line-height: 36px;
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  .options-lesson {
+    .el-row {
+      .el-col {
+        margin: 8px 0;
+        font-size: 12px;
+
+        &:last-child {
+          div {
+
+            span {
+              // 右对齐
+              float: right;
+            }
+          }
+
+        }
+
+        div {
+
+
+          span {
+
+            padding: 0px 24px 0px 0;
+            cursor: pointer;
+
+            &:hover {
+              cursor: pointer;
+            }
+
+          }
+        }
+      }
+    }
+  }
+
+  .options-lesson-pages {
+
+    // -------------------让分页水平居中对齐
+    display: table;
+    margin: 0 auto;
+
+    padding: 30px 0 112px;
+
+    .el-pagination {
+      // 适合内容
+      width: fit-content;
+
+    }
+  }
+}

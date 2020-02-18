@@ -2,10 +2,10 @@
   <div id="specific-course-nav">
     <el-row  class="row-bg">
       <el-col :span='4' class="course-head">
-        <h3>课程</h3>
+        <h3>国家精品</h3>
       </el-col>
       <el-col v-for="i of course_specific" :key="i">
-        <el-link href="#">{{i}}</el-link>
+        <el-link href="#" :underline="false">{{i}}</el-link>
       </el-col>
     </el-row>
   </div>
@@ -17,12 +17,13 @@ export default {
   data() {
     return {
       course_specific: [
-        '精品课程','精品课程程','程程程程程','程程','程程程','程程','程程程程程','程课程程程','精品课程课程','精品课程程','程程程程程','程课程程','程程程','程程','程程程程程','程程程'
+        '全部','外语','计算机','理学','工学','经济管理','文史哲','艺术设计','心理学','医药卫生','法学','教育教学','农林园艺'
       ]
     };
   }
 };
 </script>
+
 
 <style lang="scss" scoped>
 @import "assets/css/SpecialCourseNav.scss";

@@ -1,0 +1,120 @@
+.lesson-body-left {
+
+  background-color: #fff;
+
+  .el-tabs {
+
+
+
+    .el-tabs__header {
+      height: 48px;
+      line-height: 48px;
+      margin-left: 30px;
+      padding-top: 20px;
+      // border-bottom: 1px solid #e6e6e6;
+
+      .el-tabs__item {
+        font-size: 18px;
+        font-weight: 600;
+
+      }
+
+
+    }
+
+    .el-tabs__content {
+
+      padding: 15px 30px 50px;
+      min-height: 302px;
+
+      .el-tab-pane:first-child {
+        text-indent: 2em;
+        line-height: 32px;
+        font-weight: 300;
+
+      }
+
+      .el-collapse-item__header {
+
+        color: #333;
+        font-size: 16px;
+        height: 56px;
+
+        h4 {
+          margin-block-start: 0;
+          margin-block-end: 0;
+          margin-right: 10px;
+          font-weight: 500;
+        }
+
+        span {
+          font-weight: 300;
+        }
+
+        i {
+          color: #959595;
+        }
+
+        // 
+
+      }
+
+      .el-collapse-item__content {
+        margin-left: 36px;
+        padding-bottom: 20px;
+        font-size: 14px;
+
+        div {
+
+
+          .el-link {
+            padding: 10px 0;
+
+            width: 100%;
+
+            display: inline-block;
+
+
+            &:hover {
+              background-color: #000;
+              color: #fcfcfc;
+            }
+
+            span {
+              margin-right: 10px;
+            }
+
+            i {
+              float: right;
+              padding-right: 10px;
+              font-size: 24px;
+              color: #606266;
+
+              &::before:hover {
+                color: #fcfcfc;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .ref {
+      margin: 20px 0;
+      font-weight: 300;
+
+      .el-icon-reading {
+        font-weight: 300;
+
+        &:before {
+          margin-right: 10px;
+        }
+      }
+
+
+
+    }
+
+
+  }
+}

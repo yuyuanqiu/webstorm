@@ -16,4 +16,5 @@ components：公共组件（可复用）
 
 使用flex布局
   1. flex布局自适应列数
-  2. 
+
+this.$router：指代的是router.js中的router对象

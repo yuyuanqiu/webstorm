@@ -1,9 +1,23 @@
+h3 {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  height: 36px;
+  line-height: 36px;
+  font-size: 24px;
+  font-weight: 500;
+
+  margin: 20px 0;
+}
+
 .good-course-body {
   flex: 4;
 
   // margin-left: 20px;
   // display: flex;
   // flex-flow: row;
+
+
+
   .el-row {
     // ------------------flex布局,让flex布局能够自动换行
     flex-flow: row;
@@ -78,4 +92,3 @@
     }
   }
 }
-

@@ -1,0 +1,81 @@
+.lesson-body-right {
+
+  .el-card {
+    min-height: 450px;
+
+    .el-card__header {
+      height: 100px;
+      margin: 20px;
+
+      .header {
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        .el-image {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+
+          width: 70%;
+
+        }
+      }
+    }
+
+    .el-card__body {
+
+      .teachers {
+
+        padding: 0 36px 50px;
+
+        b {
+          font-weight: 600;
+          padding: 20px 0;
+          font-size: 18px;
+        }
+
+        .el-link {
+          width: 100%;
+          justify-content: start;
+
+          .el-link--inner {
+            width: 100%;
+            margin: 20px 0 0px 0;
+
+            display: inline-flex;
+            flex-flow: row wrap;
+
+          }
+
+          img {
+
+            max-width: 57px;
+            flex: 1;
+
+          }
+
+          .teacher_i {
+
+            flex: 1;
+
+            span {
+              display: block;
+
+              margin: 10px 20px;
+
+              &:last-child {
+                font-size: 12px;
+              }
+            }
+
+          }
+        }
+
+      }
+    }
+
+
+  }
+}
