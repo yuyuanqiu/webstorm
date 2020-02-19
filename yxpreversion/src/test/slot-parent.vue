@@ -1,10 +1,10 @@
 <template>
   <div>
     <my-solot>
-      <div slot="s1">
+      <template v-slot:s1>
         <h1>这是s1插槽
         </h1>
-      </div>
+      </template>
 
       <div slot="s">
 

@@ -3,15 +3,15 @@
   .el-row {
     flex-flow: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
 
     transition: left .3s ease-in;
 
     .el-col {
-      margin: 20px 12px 20px 0;
-      width: 392px;
-      max-width: 392px;
-      min-width: 392px;
+      margin: 20px 0 20px 0;
+      width: 404px;
+      // max-width: 392px;
+      min-width: 404x;
       height: 110px;
 
     }

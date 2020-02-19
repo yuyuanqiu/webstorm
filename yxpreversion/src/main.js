@@ -11,9 +11,13 @@ import TopContainer from 'components/home/TopContainer.vue'
 import FooterContainer from 'components/home/FooterContainer.vue'
 import BackTop from 'components/home/BackTop.vue'
 
+import CourseList from 'components/common/CourseList.vue'
+
 Vue.component('top-container', TopContainer)
 Vue.component('footer-container', FooterContainer)
 Vue.component('back-top', BackTop)
+
+Vue.component('course-list', CourseList)
 
 Vue.use(ElementUI)
 

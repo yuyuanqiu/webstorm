@@ -50,7 +50,7 @@
 export default {};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .footer-container {
   color: #999;
   font-size: 12px;
@@ -62,16 +62,17 @@ export default {};
     &:last-child {
       height: 10%;
       .footer-info {
-        // 垂直水平居中对齐方式-----------开始-----------实现底部版权信息垂直水平居中 
+        // 垂直水平居中对齐方式-----------开始-----------实现底部版权信息垂直水平居中
         position: relative;
         small {
           position: absolute;
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-        // 垂直水平居中对齐方式-----------开始
+          // 垂直水平居中对齐方式-----------开始
           i {
-            font-style: normal !important;
+            // font-style: normal !important;
+            font-style: normal;
           }
         }
       }
@@ -92,32 +93,32 @@ export default {};
         font-weight: 500;
       }
     }
-  }
-}
 
-.aboutme {
-  height: 88%;
-  text-align: start;
-  h3 {
-    font-size: 19px;
-    font-weight: 500;
-  }
-  .el-col {
-    div {
-      height: 30px;
+    .aboutme {
+      height: 88%;
+      text-align: start;
+      h3 {
+        font-size: 19px;
+        font-weight: 500;
+      }
+      .el-col {
+        div {
+          height: 30px;
+        }
+      }
     }
-  }
-}
 
-.friend-links {
-  h3 {
-    text-align: start;
-  }
-  .friend-item {
-    height: 50%;
-    text-align: start;
-    div {
-      height: 30%;
+    .friend-links {
+      h3 {
+        text-align: start;
+      }
+      .friend-item {
+        height: 50%;
+        text-align: start;
+        div {
+          height: 30%;
+        }
+      }
     }
   }
 }

@@ -36,7 +36,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 // 导入时记得加上分号---------------------------
 @import "assets/css/Not-Found-404.scss";
 </style>

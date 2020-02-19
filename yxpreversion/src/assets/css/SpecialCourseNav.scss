@@ -15,7 +15,8 @@
       // -----------------------实现多个容器排列时，容器之间的间距值相等，且容器的宽度和内容宽度一样----方法
 
       width: auto;
-      display: inline-block !important;
+      // display: inline-block !important;
+      display: inline-block ;
       // -----------------------实现多个容器排列时，容器之间的间距值相等的办法，结束
       // 然后在容器里面设置padding值拉开间距
 
@@ -35,7 +36,8 @@
       .el-link {
         font-size: 14px;
         padding: 0 24px;
-        text-decoration: none !important;
+        // text-decoration: none !important;
+        text-decoration: none;
 
         &:hover{
           border-radius: 16px;

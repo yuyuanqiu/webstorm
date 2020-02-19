@@ -20,50 +20,142 @@
         </el-col>
       </el-row>
     </div>
-    <div class="good-course-body">
-      <el-row :gutter="20" type="flex">
-        <el-col :span="6" v-for="i in 20" :key="i">
-          <a href="#" class="grid-content bg-purple">
-            <el-image :src="src1" lazy>
-              <div slot="placeholder" class="image-slot">
-                加载中
-                <span class="dot">...</span>
-              </div>
-              <!-- <div slot="error" class="image-slot">
-                <i class="el-icon-picture-outline"></i>
-              </div>-->
-            </el-image>
-            <div>
-              <div class="lesson-name">
-                <span>信息素养：效率提升与终身学习的新引擎</span>
-              </div>
-              <div class="lesson-info">
-                <span>四川大学</span>
-                <span>学习人数</span>
-              </div>
-            </div>
-          </a>
-        </el-col>
-      </el-row>
-    </div>
+
+    <course-list :courses="courses">
+      
+    </course-list>
 
     <div class="options-lesson-pages">
-      <el-pagination background layout="prev, pager, next" :total="1000" page-size="20" prev-text="上一页" next-text="下一页 "></el-pagination>
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :total="1000"
+        page-size="20"
+        prev-text="上一页"
+        next-text="下一页 "
+      ></el-pagination>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  created() {
+    setTimeout(() => {
+      this.courses = {
+        course1: {
+          icon: require("assets/img/lessongs-icon/yanjiang.png"),
+          name: "信息素养：效率提升与终身学习的新引擎",
+          teacher: {
+            name: "苏筱洪",
+            school: "中国科学技术大学"
+          },
+          people: "14164",
+          week_now: "3"
+        },
+        course2: {
+          icon: require("assets/img/lessongs-icon/yanjiang.png"),
+          name: "信息素养：效率提升与终身学习的新引擎",
+          teacher: {
+            name: "苏筱洪",
+            school: "中国科学技术大学"
+          },
+          people: "14164",
+          week_now: "3"
+        },
+        course5: {
+          icon: require("assets/img/lessongs-icon/yanjiang.png"),
+          name: "信息素养：效率提升与终身学习的新引擎",
+          teacher: {
+            name: "苏筱洪",
+            school: "中国科学技术大学"
+          },
+          people: "14164",
+          week_now: "3"
+        },
+        course4: {
+          icon: require("assets/img/lessongs-icon/yanjiang.png"),
+          name: "信息素养：效率提升与终身学习的新引擎",
+          teacher: {
+            name: "苏筱洪",
+            school: "中国科学技术大学"
+          },
+          people: "14164",
+          week_now: "3"
+        },
+        course3: {
+          icon: require("assets/img/lessongs-icon/yanjiang.png"),
+          name: "信息素养：效率提升与终身学习的新引擎",
+          teacher: {
+            name: "苏筱洪",
+            school: "中国科学技术大学"
+          },
+          people: "14164",
+          week_now: "3"
+        },
+        course11: {
+          icon: require("assets/img/lessongs-icon/yanjiang.png"),
+          name: "信息素养：效率提升与终身学习的新引擎",
+          teacher: {
+            name: "苏筱洪",
+            school: "中国科学技术大学"
+          },
+          people: "14164",
+          week_now: "3"
+        },
+        course12: {
+          icon: require("assets/img/lessongs-icon/yanjiang.png"),
+          name: "信息素养：效率提升与终身学习的新引擎",
+          teacher: {
+            name: "苏筱洪",
+            school: "中国科学技术大学"
+          },
+          people: "14164",
+          week_now: "3"
+        },
+        course15: {
+          icon: require("assets/img/lessongs-icon/yanjiang.png"),
+          name: "信息素养：效率提升与终身学习的新引擎",
+          teacher: {
+            name: "苏筱洪",
+            school: "中国科学技术大学"
+          },
+          people: "14164",
+          week_now: "3"
+        },
+        course41: {
+          icon: require("assets/img/lessongs-icon/yanjiang.png"),
+          name: "信息素养：效率提升与终身学习的新引擎",
+          teacher: {
+            name: "苏筱洪",
+            school: "中国科学技术大学"
+          },
+          people: "14164",
+          week_now: "3"
+        },
+        course31: {
+          icon: require("assets/img/lessongs-icon/yanjiang.png"),
+          name: "信息素养：效率提升与终身学习的新引擎",
+          teacher: {
+            name: "苏筱洪",
+            school: "中国科学技术大学"
+          },
+          people: "14164",
+          week_now: "3"
+        }
+      };
+    }, 1000);
+  },
   data() {
     return {
-      src1: require("assets/img/lessongs-icon/yanjiang.png")
+      src1: require("assets/img/lessongs-icon/yanjiang.png"),
+      courses: {}
     };
   }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "assets/css/SpecialCourseGood.scss";
 @import "assets/css/SpecialCourseAll.scss";
 </style>

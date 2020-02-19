@@ -4,87 +4,41 @@
   padding: 0;
 }
 
-ol,
-ul {
-  list-style: none;
-}
 
 #slider {
   text-align: center;
   padding: 24px 0;
 
-}
-
-.window {
-  position: relative;
-  width: 840px;
-  height: 390px;
-  // margin:0 auto;
-  overflow: hidden;
-
-
-  box-shadow: 0  0 5px0 #bebebe;
-}
-
-.container {
-  display: flex;
-  position: absolute;
-}
-
-.left,
-.right {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 50px;
-  height: 50px;
-  background-color: rgba(0, 0, 0, .3);
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.left {
-  left: 3%;
-  padding-left: 12px;
-  padding-top: 10px;
-}
-
-.right {
-  right: 3%;
-  padding-right: 12px;
-  padding-top: 10px;
-}
-
-img {
-  user-select: none;
-}
-
-.dots {
-  // position: absolute;
-  // bottom: 10px;
-  // left: 50%;
-  // transform: translateX(-50%);
-}
-
-.dots li {
-  // display: inline-block;
-  // width: 15px;
-  // height: 15px;
-  // margin: 0 3px;
-  // border: 1px solid white;
-  // border-radius: 50%;
-  // background-color: #333;
-  // cursor: pointer;
-}
-
-// .dots 
-
-#slider {
   display: flex;
   flex-flow: row;
 
   .window {
+    position: relative;
+    width: 840px;
+    height: 390px;
+    // margin:0 auto;
+    overflow: hidden;
+
     flex: 2;
+
+
+
+    box-shadow: 0 0 5px0 #bebebe;
+
+    ol,
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      display: flex;
+      position: absolute;
+
+      img {
+        user-select: none;
+      }
+    }
+
   }
 
   .dots-div {
@@ -108,7 +62,7 @@ img {
       display: flex;
       flex-flow: column;
 
-      box-shadow:0 0 8px #DDD;
+      box-shadow: 0 0 8px #DDD;
 
 
 
@@ -140,4 +94,57 @@ img {
       }
     }
   }
+
+  .dots {
+    // position: absolute;
+    // bottom: 10px;
+    // left: 50%;
+    // transform: translateX(-50%);
+  }
+
+
+
 }
+
+
+
+
+// .left,
+// .right {
+//   position: absolute;
+//   top: 50%;
+//   transform: translateY(-50%);
+//   width: 50px;
+//   height: 50px;
+//   background-color: rgba(0, 0, 0, .3);
+//   border-radius: 50%;
+//   cursor: pointer;
+// }
+
+// .left {
+//   left: 3%;
+//   padding-left: 12px;
+//   padding-top: 10px;
+// }
+
+// .right {
+//   right: 3%;
+//   padding-right: 12px;
+//   padding-top: 10px;
+// }
+
+
+
+
+.dots li {
+  // display: inline-block;
+  // width: 15px;
+  // height: 15px;
+  // margin: 0 3px;
+  // border: 1px solid white;
+  // border-radius: 50%;
+  // background-color: #333;
+  // cursor: pointer;
+}
+
+// .dots 

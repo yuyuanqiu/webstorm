@@ -19,11 +19,13 @@
   .card-lessons {
 
     display: flex;
-    flex-flow: row;
+    flex-flow: row wrap;
+    
 
     .card-aside {
       flex: 1;
-      // max-width: 229px;
+      margin-right: 20px;
+      min-width: 229px;
       // margin-right: 20px;
 
       .el-card {
@@ -81,6 +83,8 @@
         // ------------------flex布局,让flex布局能够自动换行
         flex-flow: row;
         flex-wrap: wrap;
+
+        justify-content: space-between;
         // justify-content: space-between;
         // ------------------flex布局,让flex布局能够自动换行--结束
         height: fit-content;
@@ -97,12 +101,13 @@
           // -----------------若想让flex布局能够自动换行，则必须固定width，若设置max-width则当布局盒子总宽度小于该值时，则width会压缩失真
           width: 229px;
           max-width: 229px;
-          min-width: 229px;
+          // min-width: 229px;
           // --------------------j结束
           height: 200px;
           border-radius: 4px;
           padding: 0 !important;
-          margin: 0 0 20px 20px;
+          // padding: 0;
+          margin-bottom: 20px;
           background-color: #fff;
 
           &:hover {

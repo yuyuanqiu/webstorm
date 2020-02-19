@@ -4,7 +4,8 @@
       <!-- sl -->
     </slot>
     <slot name="s2">
-      <!-- s2 -->
+      // 默认内容
+      s2
     </slot>
     <slot name="s3">
       <!-- s3 -->

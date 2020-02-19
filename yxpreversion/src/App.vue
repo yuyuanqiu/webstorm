@@ -40,23 +40,23 @@
 // }
 
 #app {
-}
-.el-header {
-  padding: 0 9%;
-  background: #fff;
-}
-.el-main {
-  padding: 20px 9% !important;
-  // width: 100%;
-  position: relative;
-  background: #f5f5f5;
-}
+  .el-header {
+    padding: 0;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.08);
+  }
+  .el-main {
+    padding: 20px 9%;
+    // width: 100%;
+    position: relative;
+    background: #f5f5f5;
+  }
 
-.el-footer {
-  width: 100%;
-  padding: 50px 9% 10px !important;
-  background-color: #333;
+  .el-footer {
+    width: 100%;
+    padding: 50px 9% 10px;
+    background-color: #333;
+  }
 }
-
-
 </style>

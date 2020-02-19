@@ -51,6 +51,99 @@
     }
   }
 
+  // .good-course-body {
+  //   flex: 4;
+
+  //   // margin-left: 20px;
+  //   // display: flex;
+  //   // flex-flow: row;
+
+
+
+  //   .el-row {
+  //     // ------------------flex布局,让flex布局能够自动换行
+  //     flex-flow: row;
+  //     flex-wrap: wrap;
+  //     justify-content: space-between;
+  //     // ------------------flex布局,让flex布局能够自动换行--结束
+  //     height: fit-content;
+  //     margin: 0 !important;
+  //     // margin: 0;
+  //     // margin-bottom: 2% !important;
+  //     // margin: 0 0 2% 0 !important;
+
+  //     &:last-child {
+  //       // margin-bottom: 0 !important;
+  //     }
+
+  //     .el-col {
+  //       flex: 1;
+  //       // -----------------若想让flex布局能够自动换行，则必须固定width，若设置max-width则当布局盒子总宽度小于该值时，则width会压缩失真
+  //       width: 229px;
+  //       max-width: 229px;
+  //       min-width: 229px;
+  //       // --------------------j结束
+  //       // height: 200px;
+  //       border-radius: 4px;
+  //       padding: 0 !important;
+  //       // padding: 0;
+  //       margin: 0 0 20px 0;
+  //       background-color: #fff;
+
+  //       &:hover {
+  //         box-shadow: 0 5px 15px -5px rgba(0, 0, 0, .5);
+
+  //       }
+
+  //       .grid-content {
+  //         display: block;
+  //         border-radius: 4px;
+  //         height: fit-content;
+
+
+  //         text-decoration: none;
+  //         text-align: start;
+  //         font-size: 14px;
+
+  //         img {
+  //           width: 100%;
+  //         }
+
+  //         .lesson-bottom {
+
+  //           height: 140px;
+
+  //           .lesson-name {
+  //             padding: 6px 12px 6px 12px;
+  //             overflow: hidden;
+
+  //             span {
+  //               overflow: hidden;
+  //               white-space: nowrap;
+  //               text-overflow: ellipsis;
+  //             }
+  //           }
+  //         }
+
+  //         .lesson-info {
+  //           padding: 6px 12px 6px 12px;
+  //           font-size: 12px;
+
+  //           span {
+  //             text-align: start;
+
+  //             &:last-child {
+  //               margin-left: 53%;
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
+
+
+  //   }
+  // }
+
   .options-lesson-pages {
 
     // -------------------让分页水平居中对齐

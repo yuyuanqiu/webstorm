@@ -4,17 +4,19 @@ body {
 }
 
 .top-container-out {
-  left: 0px;
+
+  z-index: 99;
+  position: fixed;
+  background-color: #fff;
+  // left: 0px;
   top: 0px;
   // ------------------------------------------------------更改为flex的测试-----------------------------
   // padding: 0px;
 
-  // width: 100%;
-  width: 82%;
-  padding: 0 9%;
+  width: 100%;
+  // width: 82%;
 
   height: 64px;
-  position: absolute;
   // clear: none;
   // display: block;
   // min-width: 0px;
@@ -23,11 +25,13 @@ body {
   // font-size: 16px;
   // margin: 0px;
   // -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.08);
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.08);
+  // box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.08);
   // overflow: hidden;
   // ------------------------------------------------------更改为flex的测试-----------------------------
 
   .top-container {
+    padding: 0 9%;
+
     // top: 0px;
     // ------------------------------------------------------更改为flex的测试-----------------------------
 
@@ -161,6 +165,7 @@ body {
       // ------------------------------------------------------更改为flex的测试-----------------------------
       flex: 1;
       position: relative;
+
       // display: flex;
       // flex-flow: row;
       // align-items: center;
@@ -180,6 +185,7 @@ body {
         right: 0;
         // 此处设置是让注册登录按钮右侧居中对齐-------------------开始
       }
+
       a {
         // flex: 1;
 
