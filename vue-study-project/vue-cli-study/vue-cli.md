@@ -543,7 +543,7 @@ vue-router默认使用hash模式，可以在new VueRouter({mode: 'xxx'})配置�
 Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。把组件的共享状态抽取出来，以一个全局单例模式管理
 
 1. 状态存储是响应式的
-2. 改变store的状态唯一途径：显式提交mutation
+2. 改变store的状态唯一途径：**显式提交mutation**
 3. 创建store对象：const store = new Vuex.Store({state: {}, mutations: {}})
 4. 通过store.commit(methodName)方法触发状态变更
 
@@ -556,6 +556,10 @@ Action提交的是mutation，且可以包含任意异步操作
 ### state
 
 Vuex 使用单一状态树，每个应用将仅仅包含一个 store 实例
+
+vuex的数据和vue实例的data遵循相同规则
+
+将store对象放在根组件中，可使所有子组件通过this.$store属性访问store实例
 
 Vuex 通过 store 选项，提供了一种机制将状态从根组件“注入”到每一个子组件中（需调用 Vue.use(Vuex)）：
 ```javascript

@@ -19,6 +19,12 @@ const LessonTitle = () => import('components/lessonInfo/LessonTitle')
 const LessonBodyLeft = () => import('components/lessonInfo/LessonBodyLeft')
 const LessonBodyRight = () => import('components/lessonInfo/LessonBodyRight')
 
+const SchoolAll = () => import('components/school/SchoolAll')
+
+const School = () => import('components/school/School')
+const SchoolTitle = () => import('components/school/SchoolTitle')
+const SchoolTeacher = () => import('components/school/SchoolTeacher')
+
 const Login = () => import('components/login/Login.vue')
 
 const Register = () => import('components/login/Register.vue')
@@ -32,7 +38,7 @@ const routes = [{
 
     children: [{
         path: '',
-        redirect: 'specialcourse'
+        redirect: 'specialcourse/ls'
       },
       {
         path: 'home',
@@ -54,7 +60,7 @@ const routes = [{
   },
   {
     // 当使用命名视图时，应该在子组件定义，即同一级不能同时出现component/components
-    path: '/specialcourse',
+    path: '/specialcourse/:class',
     component: SpecialCourse,
     children: [{
       path: '',
@@ -71,7 +77,7 @@ const routes = [{
 
   },
   {
-    path: '/lessoninfo',
+    path: '/lessoninfo/:lessonname',
     component: Lesson,
     children: [
       {
@@ -80,6 +86,25 @@ const routes = [{
           'lesson-title': LessonTitle,
           'lesson-body-left': LessonBodyLeft,
           'lesson-body-right': LessonBodyRight,
+        }
+      }
+    ]
+  },
+  {
+    path: '/schools',
+    component: SchoolAll,
+  },
+  {
+    path: '/school/:schoolname',
+    component: School,
+    children: [
+      {
+        path: '',
+        components: {
+
+          'school-title': SchoolTitle,
+          'special-course-all': SpecialCourseAll,
+          'school-teacher': SchoolTeacher,
         }
       }
     ]
@@ -140,6 +165,10 @@ const routes = [{
   {
     path: '/test/lunbo2',
     // component: () => import('test/lunbo2')
+  },
+  {
+    path: '/test/el-img',
+    component: () => import('test/el-img')
   },
   // ------------------------404路由
   {

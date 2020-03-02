@@ -2,12 +2,11 @@
   <div class="lesson-title" id="lesson-title">
     <el-row type="flex">
       <el-col :span="12">
-        <el-image :src="src">
-          <div slot="placeholder" class="image-slot">
+        <img :src="src" class="el-image"/>
+          <!-- <div slot="placeholder" class="image-slot">
             加载中
             <span class="dot">...</span>
-          </div>
-        </el-image>
+          </div> -->
       </el-col>
       <el-col :span="12">
         <div class="lesson-title-right">

@@ -8,8 +8,8 @@
       
     -->
     <el-container>
+      <!-- 网站头部，始终渲染在页面上，因为每个页面都有头部 -->
       <el-header height="64px">
-        <!-- 网站头部，始终渲染在页面上，因为每个页面都有头部 -->
         <top-container />
       </el-header>
 
@@ -25,7 +25,7 @@
       </el-footer>
     </el-container>
 
-    <!-- 返回顶部按钮 -->
+    <!-- 返回顶部按钮 -->   
     <back-top />
   </div>
 </template>
@@ -38,6 +38,11 @@
 //   text-align: center;
 //   color: #2c3e50;
 // }
+
+// --------------------------------------解决点击el-image时会出现页面固定不动的现象，该现象不知何时引入的------------------------------
+body {
+  overflow: initial !important;
+}
 
 #app {
   .el-header {
