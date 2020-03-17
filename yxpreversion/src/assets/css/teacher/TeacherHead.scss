@@ -1,0 +1,73 @@
+#teacher-head {
+
+  height: 220px;
+
+  color: #fff;
+  background-color: #5C7BA3;
+
+  .el-row {
+    height: 100%;
+
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    padding: 40px 0 0 37px;
+
+    .el-col {
+      &.teacher-avator {
+        flex: 1;
+
+
+        .el-avatar {
+
+
+          width: 96px;
+          height: 96px;
+        }
+      }
+
+      &:nth-child(2) {
+        flex: 6;
+
+        h2 {
+          margin-block-start: 0;
+          margin-block-end: 0;
+          margin-bottom: 8px;
+          font-size: 28px;
+        }
+
+        .zhicheng {
+          font-size: 14px;
+
+          
+          span:not(:first-child) {
+            padding: 0 3px;
+          }
+        }
+
+        .jianjie {
+          margin-top: 24px;
+          font-size: 12px;
+        }
+      }
+
+      &:last-child {
+        flex: 2;
+      }
+
+    }
+
+
+  }
+
+  .teacher-school-icon {
+
+    .el-image {
+      opacity: 0.03;
+
+      bottom: -36px;
+    }
+  }
+}

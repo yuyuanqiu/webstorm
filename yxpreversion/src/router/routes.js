@@ -25,6 +25,10 @@ const School = () => import('components/school/School')
 const SchoolTitle = () => import('components/school/SchoolTitle')
 const SchoolTeacher = () => import('components/school/SchoolTeacher')
 
+const Teacher = () => import('views/teacher/teacher')
+const TeacherHead = () => import('views/teacher/teacher-head')
+const TeacherBody = () => import('views/teacher/teacher-body')
+
 const Login = () => import('components/login/Login.vue')
 
 const Register = () => import('components/login/Register.vue')
@@ -38,9 +42,10 @@ const routes = [{
 
     children: [{
         path: '',
-        redirect: 'specialcourse/ls'
+        redirect: 'teacher/ls'
       },
       {
+        // --------------------------主页面------------------------
         path: 'home',
         components: {
           'top-container': TopContainer,
@@ -49,17 +54,11 @@ const routes = [{
           'home-lessons': HomeLessons,
         }
       },
-      {
-        path: 'about',
-        components: {
-          'top-container': TopContainer,
-          'about-test': () => import( /* webpackChunkName: "about" */ /* webpackMode: "lazy" */ 'views/About.vue')
-        }
-      }
     ]
   },
   {
     // 当使用命名视图时，应该在子组件定义，即同一级不能同时出现component/components
+    // -------------------子课程分类页面------------------
     path: '/specialcourse/:class',
     component: SpecialCourse,
     children: [{
@@ -71,12 +70,12 @@ const routes = [{
         'lessons-ad-column3': LessonsADColumn3,
         'special-course-all': SpecialCourseAll,
 
-
       }
     }]
 
   },
   {
+    // -----------------课程详情页----------------------
     path: '/lessoninfo/:lessonname',
     component: Lesson,
     children: [
@@ -91,10 +90,12 @@ const routes = [{
     ]
   },
   {
+    // -------------------所有学校页--------------------
     path: '/schools',
     component: SchoolAll,
   },
   {
+    // ------------------学校详情页--------------------
     path: '/school/:schoolname',
     component: School,
     children: [
@@ -110,6 +111,21 @@ const routes = [{
     ]
   },
   {
+    // -------------教师详情页-------------------
+    path: '/teacher/:teacher',
+    component: Teacher,
+    children: [
+      {
+        path: '',
+        components: {
+          'teacher-head': TeacherHead,
+          'teacher-body': TeacherBody,
+        }
+      }
+    ]
+  },
+  {
+    // ----------------登录页面----------------
     path: '/login',
     name: 'login',
     component: Login,
@@ -124,14 +140,6 @@ const routes = [{
     path: '/none',
     name: 'none',
     component: () => import('components/home/none.vue')
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import( /* webpackChunkName: "about" */ /* webpackMode: "lazy" */ 'views/About.vue')
   },
   // -------------------------------------------------------test用例---------------------------------------
   {

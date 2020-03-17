@@ -1,0 +1,61 @@
+#teacher-body {
+  background-color: #fff;
+  margin-top: 64px;
+
+  .el-tabs {
+
+
+
+    .el-tabs__header {
+      height: 48px;
+      line-height: 48px;
+      margin-left: 30px;
+      padding-top: 20px;
+      // border-bottom: 1px solid #e6e6e6;
+
+      .el-tabs__item {
+        font-size: 18px;
+        font-weight: 600;
+
+      }
+
+
+    }
+
+    .el-tabs__content {
+      margin: 0 30px;
+
+      .good-course-body {
+        .el-row  {
+          .el-col {
+            width: initial;
+            min-width: initial;
+            max-width: 218px;
+
+            .el-link.grid-content {
+              .el-image {
+                
+                margin-bottom: -4px;
+            }
+            .lesson-bottom {
+              background-color: #fafafa;
+            }
+            }
+          }
+        }
+      }
+
+      #pane-fourth {
+        .article-title {
+          .article-info {
+            
+          }
+        }
+      }
+    }
+
+    
+
+
+  }
+}

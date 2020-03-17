@@ -1,0 +1,49 @@
+.article-title {
+
+  border-bottom: 1px solid #eee;
+  .article-info {
+      padding-top: 20px !important;
+    position: relative;
+
+    &:first-child {
+      padding-top: 0 !important;
+    }
+    .el-link {
+
+      &:not(:first-child) {
+        padding-left: 36px;
+      }
+
+      &:last-child {
+        position: absolute;
+        right: 10px;
+      }
+    }
+  }
+  &-body {
+    
+
+    h3 {
+      color: #000;
+    }
+    &:hover {
+        color: #606266 !important;
+      
+    }
+    .hudong {
+      padding: 20px 0 ;
+      div {
+        display: inline-block;
+        margin-right: 24px;
+  
+        i {
+          font-weight: 900;
+        }
+  
+        span {
+          padding-left: 3px;
+        }
+      }
+    }
+  }
+}

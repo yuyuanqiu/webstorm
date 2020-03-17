@@ -60,14 +60,15 @@ body {
     // }
 
     .top-logo {
-      flex: 2;
+
+      flex: 1;
       // left: 0px;
       // top: 17px;
       // width: 190px;
 
       // height: 28px;
       // border-radius: 0px;
-      // position: relative;
+      position: relative;
       // clear: none;
       // display: block;
       // min-width: 0px;
@@ -86,8 +87,12 @@ body {
         line-height: 64px;
 
         img {
-          height: 32px;
+          height: 45px;
           border-radius: 0px;
+          line-height: 45px;
+          position: absolute;
+          top: 50%;
+          transform: translate(0, -50%);
         }
       }
     }
