@@ -183,7 +183,7 @@ body {
       // transform: translateY(-50%);
       // top: 50%;
       // ------------------------------------------------------更改为flex的测试-----------------------------
-      div {
+      .t-l-opt {
         // 此处设置是让注册登录按钮右侧居中对齐-------------------开始
         position: absolute;
         width: fit-content;
@@ -191,6 +191,50 @@ body {
         transform: translateY(-50%);
         right: 0;
         // 此处设置是让注册登录按钮右侧居中对齐-------------------开始
+      }
+
+      .t-l-my {
+
+        position: absolute;
+        width: fit-content;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 0;
+
+        .el-link {}
+
+        .el-dropdown {
+
+          .el-dropdown-link {
+            width: 36px;
+            height: 36px;
+            line-height: 36px;
+
+            div {
+              display: inline-block;
+
+              .el-avatar {
+
+                &>img {
+                  display: inline-block;
+                }
+
+              }
+
+
+            }
+
+            i {
+              margin-left: 0;
+              font-size: 12px;
+            }
+          }
+
+          .el-dropdown-menu {
+            .el-dropdown-item {}
+
+          }
+        }
       }
 
       a {
