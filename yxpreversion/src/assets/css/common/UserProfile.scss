@@ -1,0 +1,23 @@
+.user-profile {
+  width: 100%;
+  padding: 20px 0;
+  .el-form {
+    .el-form-item {
+
+      .el-form-item__content {
+        width: 36%;
+
+        .el-select {
+          width: 100%;
+        }
+      }
+      .el-input {
+
+      }
+
+      &.u-p-birth {
+        // width: 100% !important;
+      }
+    }
+  }
+}

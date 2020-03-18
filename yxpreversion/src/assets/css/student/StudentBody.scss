@@ -1,0 +1,52 @@
+#student-body {
+  .el-tabs {
+
+    .el-tabs__header {
+      padding: 10px 20px;
+      box-shadow: 0 0 0 1px #eee;
+      background: #fff;
+      border-top: none;
+      margin-bottom: 20px;
+      border-radius: 0 0 4px 4px;
+
+      .el-tabs__nav-wrap::after {
+        display: none;
+      }
+    }
+
+    .el-tabs__content {
+      background: #fff;
+      box-shadow: 0 0 0 1px #eee;
+      border-radius: 4px;
+      padding: 0 20px 20px;
+
+      .el-tab-pane {
+        .s-b-bar {
+          padding: 10px 0;
+
+          .el-link {
+
+            font-size: 12px;
+            padding: 0px 24px 0px 0;
+            cursor: pointer;
+
+            &:hover {
+              cursor: pointer;
+            }
+
+          }
+        }
+
+        .el-image {
+          margin-bottom: -4px;
+        }
+
+        .lesson-bottom {
+          background-color: #97bcce0f;
+        }
+      }
+
+    }
+
+  }
+}

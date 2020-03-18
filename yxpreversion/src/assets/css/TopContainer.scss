@@ -136,7 +136,9 @@ body {
         .el-input-group {
           position: absolute;
           top: 50%;
-          transform: translateY(-50%);
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 80%;
         }
 
         .el-input-group__append {
@@ -154,8 +156,8 @@ body {
         border-radius: 9px 0 0 9px;
         border: 2px solid #28a965;
         border-right: 1px solid #28a965;
-        height: 43px;
-        line-height: 43px;
+        height: 32px;
+        line-height: 32px;
         -webkit-transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
         transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
         // width: 288px;

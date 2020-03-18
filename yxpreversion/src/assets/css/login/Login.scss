@@ -1,0 +1,32 @@
+#login {
+
+  .el-card {
+    .el-card__body {
+      background-image: url(~public/login/login-bg-b.jpg);
+      background-size: 100%;
+
+      padding: 0;
+      .el-row {
+
+        .el-col {
+
+          &:first-child {
+            background-color: #8dc8ff42;
+          }
+
+          &:last-child {
+            background-color: #7abe746c;
+          }
+
+          .l-welcome {
+
+            .l-zh {
+              font-size: 39px;
+            }
+          }
+        }
+      }
+    }
+
+  }
+}

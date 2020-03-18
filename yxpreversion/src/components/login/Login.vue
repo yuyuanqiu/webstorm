@@ -1,112 +1,49 @@
 <template>
-  <div class="login" clearfix>
-    <div class="login-wrap">
-      <el-row type="flex" justify="center">
-        <el-form ref="loginForm" :model="user" :rules="rules" status-icon label-width="80px">
-          <h3>登录</h3>
-          <hr />
-          <el-form-item prop="username" label="用户名">
-            <el-input v-model="user.username" placeholder="请输入用户名" prefix-icon></el-input>
-          </el-form-item>
-          <el-form-item id="password" prop="password" label="密码">
-            <el-input v-model="user.password" show-password placeholder="请输入密码"></el-input>
-          </el-form-item>
-          <router-link to="/">找回密码</router-link>
-          <router-link to="/register">注册账号</router-link>
-          <el-form-item>
-            <el-button type="primary" icon="el-icon-upload" @click="doLogin()">登 录</el-button>
-          </el-form-item>
-        </el-form>
+  <div id="login">
+    <el-card>
+      <el-row type="flex" class="row-bg">
+        <el-col :span="12">
+          <div class="l-welcome">
+            <h2 class="l-zh">欢迎来到予思课程</h2>
+            <h2 class="l-us">Welcome to MissCourse</h2>
+            <div class="l-info">
+              <div class="l-info-1">
+                <i class="el-icon-s-flag"></i>
+                <div>
+                  <h3>灵活自由</h3>
+                  <p>无时无刻享受精品课程</p>
+                </div>
+              </div>
+              <div class="l-info-1">
+                <i class="el-icon-s-flag"></i>
+                <div>
+                  <h3>随时交流</h3>
+                  <p>无时无刻与老师同学讨论学习</p>
+                </div>
+              </div>
+              <div class="l-info-1">
+                <i class="el-icon-s-flag"></i>
+                <div>
+                  <h3>实时更新</h3>
+                  <p>下载课程最新资料</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </el-col>
+        <el-col :span="12">
+          <div class="login"></div>
+          <div class="registe"></div>
+        </el-col>
       </el-row>
-    </div>
+    </el-card>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-export default {
-  name: "login",
-  data() {
-    return {
-      user: {
-        username: "",
-        password: ""
-      }
-    };
-  },
-  created() {},
-  methods: {
-    doLogin() {
-      if (!this.user.username) {
-        this.$message.error("请输入用户名！");
-        return;
-      } else if (!this.user.password) {
-        this.$message.error("请输入密码！");
-        return;
-      } else {
-        //校验用户名和密码是否正确;
-        // this.$router.push({ path: "/personal" });
-        axios
-          .post("/login/", {
-            name: this.user.username,
-            password: this.user.password
-          })
-          .then(res => {
-            // console.log("输出response.data.status", res.data.status);
-            if (res.data.status === 200) {
-              this.$router.push({ path: "/personal" });
-            } else {
-              alert("您输入的用户名或密码错误！");
-            }
-          });
-      }
-    }
-  }
-};
+export default {};
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.login {
-  width: 100%;
-  height: 740px;
-  background: url("~assets/img/login.png") no-repeat;
-  /* background: url("~public/img/logo.png") no-repeat; */
-  background-size: cover;
-  overflow: hidden;
-}
-.login-wrap {
-  /* background: url("~assets/logo.png") no-repeat; */
-  background: rgba(0, 0, 0, 0.247);
-  background-size: cover;
-  width: 400px;
-  /* height: 300px; */
-  margin: 215px auto;
-  overflow: hidden;
-  padding-top: 10px;
-  line-height: 40px;
-}
-#password {
-  margin-bottom: 5px;
-}
-h3 {
-  color: #0babeab8;
-  font-size: 24px;
-}
-hr {
-  background-color: #444;
-  margin: 20px auto;
-}
-a {
-  text-decoration: none;
-  color: #aaa;
-  font-size: 15px;
-}
-a:hover {
-  color: coral;
-}
-.el-button {
-  width: 80%;
-  margin-left: -50px;
-}
-</style>
 
+<style lang="scss">
+@import "assets/css/login/Login.scss";
+</style>

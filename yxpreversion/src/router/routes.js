@@ -29,6 +29,10 @@ const Teacher = () => import('views/teacher/teacher')
 const TeacherHead = () => import('views/teacher/teacher-head')
 const TeacherBody = () => import('views/teacher/teacher-body')
 
+const Student = () => import('views/student/Student')
+const StudentHead = () => import('views/student/StudentHead')
+const StudentBody = () => import('views/student/StudentBody')
+
 const Login = () => import('components/login/Login.vue')
 
 const Register = () => import('components/login/Register.vue')
@@ -42,7 +46,7 @@ const routes = [{
 
     children: [{
         path: '',
-        redirect: 'teacher/ls'
+        redirect: 'login'
       },
       {
         // --------------------------主页面------------------------
@@ -120,6 +124,20 @@ const routes = [{
         components: {
           'teacher-head': TeacherHead,
           'teacher-body': TeacherBody,
+        }
+      }
+    ]
+  },
+  {
+    //-------------------学生详情页---------------
+    path: '/student/:student',
+    component: Student,
+    children: [
+      {
+        path: '',
+        components: {
+          'student-head': StudentHead,
+          'student-body': StudentBody,
         }
       }
     ]
