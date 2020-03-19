@@ -3,7 +3,7 @@
     <div class="top-container">
       <div class="top-logo">
         <a href="/">
-          <img src="~public/logo.png" />
+          <img src="~public/logo_black.png" />
         </a>
       </div>
       <div class="top-nav">

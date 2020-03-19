@@ -25,7 +25,7 @@
       </el-footer>
     </el-container>
 
-    <!-- 返回顶部按钮 -->   
+    <!-- 返回顶部按钮 -->
     <back-top />
   </div>
 </template>
@@ -41,6 +41,17 @@
 
 // --------------------------------------解决点击el-image时会出现页面固定不动的现象，该现象不知何时引入的------------------------------
 body {
+
+  // ------------隐藏滚动条----------
+  // ie10+
+  -ms-overflow-style: none;
+  // Firefox
+  overflow: -moz-scrollbars-none;
+
+  // webkit
+  &::-webkit-scrollbar {
+    display: none;
+  }
   overflow: initial !important;
 }
 

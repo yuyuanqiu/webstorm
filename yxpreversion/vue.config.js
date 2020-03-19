@@ -1,6 +1,6 @@
 const path = require('path')
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
@@ -16,6 +16,19 @@ module.exports = {
   //     .set('views', resolve('src/views'))
   //     .set('public', resolve('public'))
   // },
+
+  
+
+  // 修改图标icon
+  pwa: {
+    iconPaths: {
+      favicon32: 'favicon.ico',
+      favicon16: 'favicon.ico',
+      appleTouchIcon: 'favicon.ico',
+      maskIcon: 'favicon.ico',
+      msTileImage: 'favicon.ico'
+    }
+  },
   configureWebpack: config => {
     config.resolve = {
       // 配置解析别名

@@ -1,0 +1,142 @@
+#course-player {
+  // width: 66%;
+
+  .c-p-title {
+
+    h2 {
+
+      width: 48%;
+      margin-block-start: 0;
+      margin-block-end: 0;
+
+      font-weight: 500;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .fenlei {
+      margin: 11px 0;
+      font-size: 12px;
+
+      .el-breadcrumb {
+
+        font-size: 12px;
+        display: inline-block;
+
+        .el-breadcrumb__item {
+
+          .is-link {
+            font-weight: initial;
+          }
+
+          .el-breadcrumb__separator[class*=icon] {
+
+            margin: 0;
+
+          }
+        }
+      }
+
+      .c-p-date {
+
+        padding-left: 36px;
+      }
+    }
+  }
+
+  .el-row {
+
+    .el-col {
+
+      &:first-child {
+        flex: 3;
+      }
+
+      &:last-child {
+        flex: 1;
+      }
+
+      .v-p-inner {
+
+        border-width: 42px 8px 20px;
+        border-style: solid;
+
+        .video-player {
+
+          .video-js {
+
+            .vjs-big-play-button {
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+            }
+          }
+        }
+      }
+
+      .v-p-right {
+
+        h3 {
+          width: 100%;
+          height: 46px;
+          line-height: 46px;
+
+          background-color: #fff;
+          margin-block-start: 0;
+          margin-block-end: 0;
+
+          margin-bottom: 20px;
+
+
+
+          &:before {
+            margin-right: 5px;
+            padding: 0 0 0 20px;
+          }
+        }
+
+        .el-menu-outer {
+
+          height: 300px;
+          overflow: scroll;
+
+          // ------------ 去除滚动条----------------
+          &::-webkit-scrollbar {
+            display: none;
+          }
+
+          .el-submenu {
+
+            .el-submenu__title {
+              height: 36px;
+              line-height: 36px;
+
+              // ---------------------------文本过长省略
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
+
+            .el-menu--inline {
+              .el-menu-item {
+                font-size: 12px;
+
+                height: 30px;
+                line-height: 30px;
+
+                padding-left: 64px !important;
+              }
+            }
+
+
+          }
+        }
+      }
+    }
+  }
+
+
+  .el-menu {}
+}

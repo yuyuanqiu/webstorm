@@ -33,6 +33,11 @@ const Student = () => import('views/student/Student')
 const StudentHead = () => import('views/student/StudentHead')
 const StudentBody = () => import('views/student/StudentBody')
 
+const Course = () => import('views/course/Course')
+const CoursePlayer = () => import('views/course/CoursePlayer')
+const CourseDiscuss = () => import('views/course/CourseDiscuss')
+const CourseHomework = () => import('views/course/CourseHomework')
+
 const Login = () => import('components/login/Login.vue')
 
 const Register = () => import('components/login/Register.vue')
@@ -46,7 +51,7 @@ const routes = [{
 
     children: [{
         path: '',
-        redirect: 'login'
+        redirect: 'course/ls'
       },
       {
         // --------------------------主页面------------------------
@@ -89,6 +94,21 @@ const routes = [{
           'lesson-title': LessonTitle,
           'lesson-body-left': LessonBodyLeft,
           'lesson-body-right': LessonBodyRight,
+        }
+      }
+    ]
+  },
+  {
+    // ------------------------小节课程播放、讨论、作业-------------------
+    path: '/course/:coursename',
+    component: Course,
+    children: [
+      {
+        path: '',
+        components: {
+          "course-player": CoursePlayer,
+          "course-discuss": CourseDiscuss,
+          "course-homework": CourseHomework
         }
       }
     ]
@@ -195,6 +215,14 @@ const routes = [{
   {
     path: '/test/el-img',
     component: () => import('test/el-img')
+  },
+  {
+    path: '/test/video',
+    component: () => import('test/vider-player'),
+  },
+  {
+    path: '/test/impress',
+    component: () => import('test/impressjs')
   },
   // ------------------------404路由
   {

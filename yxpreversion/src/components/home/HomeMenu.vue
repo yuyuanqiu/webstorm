@@ -30,7 +30,7 @@
             <a href="#" class="el-card-a">
               <img src="~assets/img/广告.png" class="image" />
               <div style="padding: 14px;">
-                <div>下了课就来予思MOOC</div>
+                <div>下了课就来予思课程MissCourse</div>
                 <div>嘉狩予思出品</div>
               </div>
             </a>
