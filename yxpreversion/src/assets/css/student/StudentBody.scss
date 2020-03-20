@@ -18,9 +18,14 @@
       background: #fff;
       box-shadow: 0 0 0 1px #eee;
       border-radius: 4px;
-      padding: 0 20px 20px;
+      
 
       .el-tab-pane {
+        padding: 0 20px 20px;
+
+        &:last-child {
+
+        }
         .s-b-bar {
           padding: 10px 0;
 

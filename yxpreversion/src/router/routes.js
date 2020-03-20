@@ -67,7 +67,9 @@ const routes = [{
   },
   {
     // 当使用命名视图时，应该在子组件定义，即同一级不能同时出现component/components
-    // -------------------子课程分类页面------------------
+
+
+    // -------------------一级课程分类页面------------------
     path: '/specialcourse/:class',
     component: SpecialCourse,
     children: [{

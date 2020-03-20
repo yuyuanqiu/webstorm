@@ -1,11 +1,15 @@
 .user-profile {
   width: 100%;
   padding: 20px 0;
+
+  display: flex;
+  justify-content: center;
   .el-form {
+    width: 50%;
     .el-form-item {
 
       .el-form-item__content {
-        width: 36%;
+        // width: 36%;
 
         .el-select {
           width: 100%;

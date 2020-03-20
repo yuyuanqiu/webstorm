@@ -42,16 +42,16 @@
 // --------------------------------------解决点击el-image时会出现页面固定不动的现象，该现象不知何时引入的------------------------------
 body {
 
-  // ------------隐藏滚动条----------
-  // ie10+
-  -ms-overflow-style: none;
-  // Firefox
-  overflow: -moz-scrollbars-none;
+  // // ------------隐藏滚动条----------
+  // // ie10+
+  // -ms-overflow-style: none;
+  // // Firefox
+  // overflow: -moz-scrollbars-none;
 
-  // webkit
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  // // webkit
+  // &::-webkit-scrollbar {
+  //   display: none;
+  // }
   overflow: initial !important;
 }
 

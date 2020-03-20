@@ -15,8 +15,7 @@
           @select="handleSelect"
           active-text-color="#ffd04b"
         >
-          <el-menu-item index="1">课程分类</el-menu-item>
-          <el-menu-item index="2">
+          <el-menu-item index="1">
             <template slot="title">
               <el-popover
                 placement="top-start"
@@ -25,21 +24,20 @@
                 trigger="hover"
                 content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。"
               >
-                <el-button slot="reference">优秀课程</el-button>
+                <el-button slot="reference">课程分类</el-button>
               </el-popover>
             </template>
-            <!-- <el-menu-item index="2-1">选项1</el-menu-item>
-            <el-menu-item index="2-2">选项2</el-menu-item>
-            <el-menu-item index="2-3">选项3</el-menu-item>
-            <el-submenu index="2-4">
-              <template slot="title">选项</template>
-              <el-menu-item index="2-4-1">选项1</el-menu-item>
-              <el-menu-item index="2-4-2">选项2</el-menu-item>
-              <el-menu-item index="2-4-3">选项3</el-menu-item>
-            </el-submenu>-->
+            
           </el-menu-item>
-          <el-menu-item index="3">学校</el-menu-item>
-          <el-menu-item index="4">论坛</el-menu-item>
+          <el-menu-item index="2">
+            <el-button>示范课程</el-button>
+          </el-menu-item>
+          <el-menu-item index="3">
+            <el-button>入驻高校</el-button>
+          </el-menu-item>
+          <el-menu-item index="4">
+            <el-button>精彩论坛</el-button>
+          </el-menu-item>
         </el-menu>
       </div>
 
@@ -47,7 +45,7 @@
         <el-autocomplete
           v-model="state"
           :fetch-suggestions="querySearchAsync"
-          placeholder="请输入内容"
+          placeholder="搜索精品课程"
           @select="handleSelect"
         >
           <el-button slot="append" icon="el-icon-search"></el-button>

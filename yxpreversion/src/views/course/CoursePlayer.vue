@@ -45,26 +45,28 @@
       <el-col :span="2">
         <div class="v-p-right">
           <h3 class="el-icon-s-grid">视频选集</h3>
-          <el-menu
-            :router="true"
-            :default-active="$route.path"
-            :unique-opened="true"
-            class="el-menu-outer"
-            @open="handleOpen"
-            @close="handleClose"
-          >
-            <el-submenu index="1" v-for="chapter in video_info.chapters" :key="chapter">
-              <template slot="title">
-                <i class="el-icon-s-unfold"></i>
-                <span>{{ chapter.title_num + '：' + chapter.title_content }}</span>
-              </template>
-              <el-menu-item
-                v-for="lesson in chapter.lessons"
-                :key="lesson"
-                :index="'/course/' + Math.random()"
-              >{{ lesson.title_num + '：' + lesson.title_content }}</el-menu-item>
-            </el-submenu>
-          </el-menu>
+          <div class="v-p-chapter">
+            <el-menu
+              :router="true"
+              :default-active="$route.path"
+              :unique-opened="true"
+              class="el-menu-outer"
+              @open="handleOpen"
+              @close="handleClose"
+            >
+              <el-submenu index="1" v-for="chapter in video_info.chapters" :key="chapter">
+                <template slot="title">
+                  <i class="el-icon-s-unfold"></i>
+                  <span>{{ chapter.title_num + '：' + chapter.title_content }}</span>
+                </template>
+                <el-menu-item
+                  v-for="lesson in chapter.lessons"
+                  :key="lesson"
+                  :index="'/course/' + Math.random()"
+                >{{ lesson.title_num + '：' + lesson.title_content }}</el-menu-item>
+              </el-submenu>
+            </el-menu>
+          </div>
         </div>
       </el-col>
     </el-row>
@@ -72,7 +74,6 @@
 </template>
 
 <script>
-
 /**
  * -------------------------------------------------------------------------------------------------------------
  * 动态路由下切换视频资源
@@ -292,13 +293,12 @@ export default {
   },
   beforeRouteUpdate(to, from, next) {
     console.log("beforeRouteUpdate");
-    if (this.video_info.res_url ==  require("public/video/video-b.mp4")) {
-      this.video_info.res_url = require("public/video/video-a.mp4")
-      console.log('是')
+    if (this.video_info.res_url == require("public/video/video-b.mp4")) {
+      this.video_info.res_url = require("public/video/video-a.mp4");
+      console.log("是");
     } else {
-      this.video_info.res_url = require("public/video/video-b.mp4")
-      console.log('否')
-
+      this.video_info.res_url = require("public/video/video-b.mp4");
+      console.log("否");
     }
     console.log(to);
     console.log(from);
@@ -329,7 +329,7 @@ export default {
         sources: [
           {
             type: "video/mp4", // 类型
-            src: this.video_info.res_url, // url地址
+            src: this.video_info.res_url // url地址
           }
         ],
         // poster: require("public/img/student-title-bg-1.jpg"), // 封面地址
@@ -363,8 +363,7 @@ export default {
       console.log("the player is readied", player);
       // you can use it to do something...
       // player.[methods]
-    },
-
+    }
   }
 };
 </script>

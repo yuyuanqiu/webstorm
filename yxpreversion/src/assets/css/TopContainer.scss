@@ -101,6 +101,7 @@ body {
       // ------------------------------------------------------更改为flex的测试-----------------------------
       // margin: 5px 0 0 99px;
       flex: 3;
+      padding: 0 0 0 49px;
 
       // ------------------------------------------------------更改为flex的测试-----------------------------
 
@@ -110,8 +111,48 @@ body {
         flex-flow: row;
 
         .el-menu-item {
+
           flex: 1;
           // -----------------------------------------------------新增搜索框的flex适应------------3行--------------------结束-----
+          position: relative;
+
+          border-bottom: none;
+
+          max-width: 88px;
+          padding: 0;
+
+          &:is-active {
+            border-bottom: none;
+          }
+
+          &>* {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+
+            .el-button {
+              top: -2px;
+              position: relative;
+            }
+          }
+
+          .el-button {
+
+            border: none;
+
+            padding: 0;
+
+            color: #000;
+
+            &:focus,
+            &:hover {
+
+              color: inherit;
+              border-color: none;
+              background-color: inherit;
+            }
+          }
         }
       }
     }
@@ -142,20 +183,38 @@ body {
         }
 
         .el-input-group__append {
-          border-radius: 0 9px 9px 0;
+          border-radius: 0 6px 6px 0;
           padding: 0 20px;
           width: 1px;
           white-space: nowrap;
-          border: 2px solid #28a965;
+          border: 1px solid #000000;
+          background-color: #000;
           border-left: 0;
+
+          position: relative;
+
+          .el-button {
+            // padding: 0 24px;
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            margin: 0;
+            
+            i {
+              color: #fff;
+            }
+          }
         }
       }
 
       .el-input__inner {
         background-color: #fff;
-        border-radius: 9px 0 0 9px;
-        border: 2px solid #28a965;
-        border-right: 1px solid #28a965;
+        border-radius: 6px 0 0 6px;
+        border: 1px solid #000000;
+        border-right: 1px solid #000000;
         height: 32px;
         line-height: 32px;
         -webkit-transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
