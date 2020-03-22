@@ -1,5 +1,33 @@
 # yxpreversion 项目开发日志
 
+## 予思课程 口号：
+
+花费更少的时间，学到更多的知识。
+
+## 论文需求
+
+1. 实现课程视频可以反复观看
+2. 可随时与老师进行互动交流问题（课下课堂时间限制）
+   1. 老师和学生解决问题，可获取相应的积分
+   2. 老师可通过学生参与互动的情况，给学生进行相应的积分奖励
+   3. 积分可兑换道具卡（注意，兑换线下课堂缺席道具卡时，必须通过相关考核）
+   4. 积分最终可折算成平时成绩
+
+
+### 衍生需求
+
+1. 满足学生突发事件而无法上课的情况，可在线上通过老师的课程考核
+   1. 出现问题：考核过程中学生通过网络作弊：
+   2. 解决问题：JS如何监听浏览器页面窗口的获得焦点与失去焦点事件？（当浏览器窗口失去焦点时，考试结束）
+   3. 资料：
+      1. https://segmentfault.com/q/1010000009302485
+      2. https://blog.csdn.net/huangzhenkun94/article/details/73772728?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task
+      3. https://www.google.com/search?newwindow=1&ei=UsJ1XtK3L4L_wAP05rjgAg&q=%E7%9B%91%E5%90%AC%E6%B5%8F%E8%A7%88%E5%99%A8%E9%A1%B5%E9%9D%A2%E7%AA%97%E5%8F%A3%E7%9A%84%E8%8E%B7%E5%BE%97%E7%84%A6%E7%82%B9%E4%B8%8E%E5%A4%B1%E5%8E%BB%E7%84%A6%E7%82%B9%E4%BA%8B%E4%BB%B6&oq=%E7%9B%91%E5%90%AC%E6%B5%8F%E8%A7%88%E5%99%A8%E9%A1%B5%E9%9D%A2%E7%AA%97%E5%8F%A3%E7%9A%84%E8%8E%B7%E5%BE%97%E7%84%A6%E7%82%B9%E4%B8%8E%E5%A4%B1%E5%8E%BB%E7%84%A6%E7%82%B9%E4%BA%8B%E4%BB%B6&gs_l=psy-ab.3...561372.561372..561625...0.0..0.486.486.4-1......0....1..gws-wiz.oEkfaN7LKP0&ved=0ahUKEwjSqI7jhavoAhWCP3AKHXQzDiwQ4dUDCAs&uact=5
+      4. 
+2. 记录用户在网站的浏览记录和停留时间
+   1. https://blog.csdn.net/canglingyue/article/details/52409265
+   2. https://blog.csdn.net/lihefei_coder/article/details/79759145
+   3. 
 
 ## 拉取GitHub中某仓库时，若下载速度太慢，可先将其拉取到gitee中，然后从gitee下载即可
 
