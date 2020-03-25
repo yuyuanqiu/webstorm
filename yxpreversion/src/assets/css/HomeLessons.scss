@@ -20,7 +20,7 @@
 
     display: flex;
     flex-flow: row wrap;
-    
+
 
     .card-aside {
       flex: 1;
@@ -76,85 +76,143 @@
 
     .card-body {
       flex: 4;
-      // margin-left: 20px;
-      // display: flex;
-      // flex-flow: row;
-      .el-row {
-        // ------------------flex布局,让flex布局能够自动换行
-        flex-flow: row;
-        flex-wrap: wrap;
 
-        justify-content: space-between;
-        // justify-content: space-between;
-        // ------------------flex布局,让flex布局能够自动换行--结束
-        height: fit-content;
-        margin: 0 !important;
-        // margin-bottom: 2% !important;
-        // margin: 0 0 2% 0 !important;
+      .container-flex-a {
+        display: block;
 
-        &:last-child {
-          // margin-bottom: 0 !important;
-        }
+        text-decoration: none;
+        color: #333;
 
-        .el-col {
-          flex: 1;
-          // -----------------若想让flex布局能够自动换行，则必须固定width，若设置max-width则当布局盒子总宽度小于该值时，则width会压缩失真
-          width: 229px;
-          max-width: 229px;
-          // min-width: 229px;
-          // --------------------j结束
-          height: 200px;
-          border-radius: 4px;
-          padding: 0 !important;
-          // padding: 0;
-          margin-bottom: 20px;
-          background-color: #fff;
+        transition: all 0.6s;
 
-          &:hover {
-            box-shadow:0 5px 15px -5px rgba(0,0,0,.5);
-
-          }
-        }
-
-        .grid-content {
-          display: block;
-          border-radius: 4px;
-          // height: 100%;
-
-
-          text-decoration: none;
-          text-align: start;
-          font-size: 14px;
+        .container-flex-img {
+          overflow: hidden;
 
           img {
             width: 100%;
-          }
+            transition: all 0.6s;
 
-          .lesson-name {
-            padding: 6px 12px 6px 12px;
-            overflow: hidden;
 
-            span {
-              overflow: hidden;
-              white-space: nowrap;
-              text-overflow: ellipsis;
+            &:hover {
+              transform: scale(1.2);
             }
           }
 
-          .lesson-info {
-            padding: 6px 12px 6px 12px;
+          .enter_img {
+            transform: scale(1.2);
+          }
+        }
+
+
+
+        .course_info_body {
+
+          padding: 6px 12px 12px;
+
+
+          h3 {
+            height: 22px;
+            line-height: 22px;
+            font-size: 14px;
+            margin-bottom: 8px;
+
+            // 单行省略
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+
+          span {
             font-size: 12px;
+            height: 17px;
+            line-height: 17px;
 
-            span {
-              text-align: start;
-
-              &:last-child {
-                margin-left: 53%;
-              }
+            &.el-icon-user {
+              float: right;
             }
           }
         }
       }
+
+      // margin-left: 20px;
+      // display: flex;
+      // flex-flow: row;
+      // .el-row {
+      //   // ------------------flex布局,让flex布局能够自动换行
+      //   flex-flow: row;
+      //   flex-wrap: wrap;
+
+      //   justify-content: space-between;
+      //   // justify-content: space-between;
+      //   // ------------------flex布局,让flex布局能够自动换行--结束
+      //   height: fit-content;
+      //   margin: 0 !important;
+      //   // margin-bottom: 2% !important;
+      //   // margin: 0 0 2% 0 !important;
+
+      //   &:last-child {
+      //     // margin-bottom: 0 !important;
+      //   }
+
+      //   .el-col {
+      //     flex: 1;
+      //     // -----------------若想让flex布局能够自动换行，则必须固定width，若设置max-width则当布局盒子总宽度小于该值时，则width会压缩失真
+      //     width: 229px;
+      //     max-width: 229px;
+      //     // min-width: 229px;
+      //     // --------------------j结束
+      //     height: 200px;
+      //     border-radius: 4px;
+      //     padding: 0 !important;
+      //     // padding: 0;
+      //     margin-bottom: 20px;
+      //     background-color: #fff;
+
+      //     &:hover {
+      //       box-shadow:0 5px 15px -5px rgba(0,0,0,.5);
+
+      //     }
+      //   }
+
+      //   .grid-content {
+      //     display: block;
+      //     border-radius: 4px;
+      //     // height: 100%;
+
+
+      //     text-decoration: none;
+      //     text-align: start;
+      //     font-size: 14px;
+
+      //     img {
+      //       width: 100%;
+      //     }
+
+      //     .lesson-name {
+      //       padding: 6px 12px 6px 12px;
+      //       overflow: hidden;
+
+      //       span {
+      //         overflow: hidden;
+      //         white-space: nowrap;
+      //         text-overflow: ellipsis;
+      //       }
+      //     }
+
+      //     .lesson-info {
+      //       padding: 6px 12px 6px 12px;
+      //       font-size: 12px;
+
+      //       span {
+      //         text-align: start;
+
+      //         &:last-child {
+      //           margin-left: 53%;
+      //         }
+      //       }
+      //     }
+      //   }
+      // }
     }
 
   }

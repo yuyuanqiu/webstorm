@@ -1,0 +1,35 @@
+.container-flex {
+  width: 100%;
+
+  &-row {
+    flex-wrap: wrap;
+
+    &-col {
+      width: 229px;
+      min-width: 229px;
+      max-width: 229px;
+      height: fit-content;
+      // border-radius: 4px;
+      // padding: 0 !important;
+      margin-bottom: 20px;
+      background-color: #fff;
+
+      // 阴影过渡
+      transition: box-shadow .6s;
+
+      &:hover {
+        box-shadow: 0 5px 15px -5px rgba(0, 0, 0, .5);
+
+        transition: box-shadow .6s;
+      }
+
+      div {
+        height: inherit;
+        background-color: white;
+      }
+    }
+    
+  }
+}
+
+//  v-for="data in datalist" :key="data"

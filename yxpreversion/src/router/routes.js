@@ -1,16 +1,16 @@
-const TopContainer = () => import('components/home/TopContainer.vue')
+const TopContainer = () => import('components/TopContainer.vue')
 
 const Home = () => import('components/home/Home.vue')
 const HomeMenu = () => import('components/home/HomeMenu.vue')
 const SchoolRandom = () => import('../components/home/SchoolRandom.vue')
 const HomeLessons = () => import('../components/home/HomeLessons.vue')
 
-const SpecialCourse = () => import('components/home/SpecialCourse')
-const SpecificCourseNav = () => import('components/home/SpecialCourseNav')
-const SpecialCourseGood = () => import('components/home/SpecialCourseGood')
-const SpecialCourseAll = () => import('components/home/SpecialCourseAll')
+const SpecialCourse = () => import('views/specialcourse/SpecialCourse')
+const SpecificCourseNav = () => import('views/specialcourse/SpecialCourseNav')
+const SpecialCourseGood = () => import('views/specialcourse/SpecialCourseGood')
+const SpecialCourseAll = () => import('views/specialcourse/SpecialCourseAll')
 
-const LessonsLunbo = () => import('components/home/LessonsLunbo')
+const LessonsLunbo = () => import('views/specialcourse/LessonsLunbo')
 
 const LessonsADColumn3 = () => import('components/home/LessonsADColumn3')
 
@@ -204,7 +204,7 @@ const routes = [{
   },
   {
     path: '/test/specific',
-    component: () => import('components/home/SpecialCourseNav.vue')
+    // component: () => import('components/home/SpecialCourseNav.vue')
   },
   {
     path: '/test/lunbos',
@@ -225,6 +225,14 @@ const routes = [{
   {
     path: '/test/impress',
     component: () => import('test/impressjs')
+  },
+  {
+    path: '/test/chacao',
+    component: () => import('test/chacaousing')
+  },
+  {
+    path: '/co',
+    component: () => import('components/common/ContainerFlex')
   },
   // ------------------------404路由
   {

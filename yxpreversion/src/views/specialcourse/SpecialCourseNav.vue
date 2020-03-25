@@ -76,5 +76,5 @@ export default {
 
 
 <style lang="scss">
-@import "assets/css/SpecialCourseNav.scss";
+@import "assets/css/specialcourse/SpecialCourseNav.scss";
 </style>

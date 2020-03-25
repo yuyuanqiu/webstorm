@@ -156,6 +156,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "assets/css/SpecialCourseGood.scss";
-@import "assets/css/SpecialCourseAll.scss";
+@import "assets/css/specialcourse/SpecialCourseGood.scss";
+@import "assets/css/specialcourse/SpecialCourseAll.scss";
 </style>

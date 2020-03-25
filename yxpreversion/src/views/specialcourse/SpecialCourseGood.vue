@@ -61,6 +61,16 @@ export default {
           },
           people: "14164",
           week_now: "3"
+        },
+        course31: {
+          icon: require("assets/img/lessongs-icon/yanjiang.png"),
+          name: "信息素养：效率提升与终身学习的新引擎",
+          teacher: {
+            name: "苏筱洪",
+            school: "中国科学技术大学"
+          },
+          people: "14164",
+          week_now: "3"
         }
       }
     };
@@ -69,7 +79,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "assets/css/SpecialCourseGood.scss";
+@import "assets/css/specialcourse/SpecialCourseGood.scss";
 </style>
 
 <style lang="scss">

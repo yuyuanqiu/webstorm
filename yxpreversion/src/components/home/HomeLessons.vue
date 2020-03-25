@@ -26,9 +26,26 @@
           </el-card>
         </div>
         <div class="card-body">
-
-          <course-list :courses="courses"/>
-          <el-row :gutter="20" type="flex">
+          <container-flex :datalist="courses" v-slot="{ data }">
+            <!-- 给事件传回调时，不能使用() -->
+            <a
+              href="/home"
+              class="container-flex-a"
+              @mouseenter="mouseEnter"
+              @mouseleave="mouseLeave"
+            >
+              <div class="container-flex-img">
+                <img :src="data.icon" />
+              </div>
+              <div class="course_info_body">
+                <h3>{{ data.name }}</h3>
+                <span>{{ data.teacher.school }}</span>
+                <span class="el-icon-user">{{ data.people }}</span>
+              </div>
+            </a>
+          </container-flex>
+          <!-- <course-list :courses="courses"/> -->
+          <!-- <el-row :gutter="20" type="flex">
             <el-col :span="6" v-for="i in 8" :key="i">
               <a href="#" class="grid-content bg-purple">
                 <el-image :src="src1" lazy>
@@ -36,9 +53,7 @@
                     加载中
                     <span class="dot">...</span>
                   </div>
-                  <!-- <div slot="error" class="image-slot">
-                <i class="el-icon-picture-outline"></i>
-                  </div>-->
+                  
                 </el-image>
                 <div>
                   <div class="lesson-name">
@@ -51,7 +66,7 @@
                 </div>
               </a>
             </el-col>
-          </el-row>
+          </el-row>-->
         </div>
       </div>
     </div>
@@ -118,7 +133,24 @@ export default {
         }
       }
     };
-  }
+  },
+  methods: {
+    // 添加移除类名，放大缩小图片
+
+    mouseEnter(event) {
+      let img = event.target.getElementsByTagName("img")[0];
+      // console.log(img);
+
+      img.classList.add("enter_img");
+    },
+    mouseLeave(event) {
+      let img = event.target.getElementsByTagName("img")[0];
+      // console.log(img);
+
+      img.classList.remove("enter_img");
+    }
+  },
+  mounted() {}
 };
 </script>
 
