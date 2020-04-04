@@ -17,7 +17,7 @@
           :articleTitle="articleTitle"
         ></article-title>
       </el-tab-pane>
-      <el-tab-pane label="动态" name="third">动态</el-tab-pane>
+      <el-tab-pane label="讨论帖" name="third">动态</el-tab-pane>
       <el-tab-pane label="个人资料" name="fourth">
         <user-profile/>
       </el-tab-pane>

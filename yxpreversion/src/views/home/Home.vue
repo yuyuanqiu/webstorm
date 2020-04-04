@@ -13,24 +13,5 @@ export default {
 </script>
 
 <style lang="scss">
-#home {
-  // .el-header {
-  //   padding: 0 9%;
-  //   position: relative;
-  //   z-index: 999;
-  // }
-  // .el-main {
-  //   padding: 20px 9%;
-
-  //   position: relative;
-  // }
-
-  // .el-footer {
-  //   width: 100%;
-  //   padding: 50px 9% 0;
-  //   background-color: #333;
-  // }
-
- 
-}
+@import "assets/css/home/Home.scss";
 </style>

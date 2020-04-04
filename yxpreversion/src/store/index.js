@@ -5,8 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    is: ''
   },
   mutations: {
+    SETIS(state, playload) {
+      state.is = playload
+    }
   },
   actions: {
   },

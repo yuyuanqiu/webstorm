@@ -29,46 +29,175 @@
       // margin-right: 20px;
 
       .el-card {
-        height: 420px;
+        border-radius: unset;
+        height: inherit;
+        box-shadow: inherit;
+
+
+
 
         .el-card__body {
+
+
+
+          .h-l-img {
+            height: 324px;
+
+            position: relative;
+            background-color: transparent;
+
+            img {}
+
+            .el-link {
+
+              display: block;
+              width: 100%;
+              height: 100%;
+              z-index: 2;
+              position: absolute;
+              top: 0;
+
+
+              div {
+                width: 64px;
+                height: 64px;
+                // background-color: red;
+
+                border-radius: 50%;
+
+                position: absolute;
+                top: 64%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                overflow: hidden;
+
+
+                .el-icon-video-play {
+
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+
+
+                  font-size: 54px;
+                  border-radius: 50%;
+
+                  color: #fff;
+                  transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+
+
+                  &:hover,
+                  &.video-hover {
+
+                    transition: all 1.2s;
+                    font-size: 72px;
+
+                    box-shadow: 0px -10px 10px 0px #ffffff30, -10px 0px 10px 0px #ffffff29, 10px 0px 10px 0px #ffffff36, 0px 10px 10px 0px #ffffff38;
+
+                  }
+
+
+
+                }
+              }
+            }
+
+            .h-l-inner {
+              padding: 30px 8px 0;
+              box-sizing: border-box;
+
+              position: absolute;
+              z-index: 1;
+              height: 100%;
+              width: 100%;
+              top: 0;
+              background-color: rgba(97, 197, 201, 0.890196);
+
+              color: #fff;
+
+              .h-l-hx {
+                width: 25%;
+                border-bottom: 4px solid #fff;
+              }
+
+              h3 {
+                height: 20px;
+                line-height: 20px;
+                font-size: 14px;
+                padding: 8px 0 3px;
+
+                // 单行省略
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+              }
+
+              h4 {
+                line-height: 33px;
+                font-size: 24px;
+                padding: 8px 0 5px;
+              }
+
+              span {
+                line-height: 17px;
+                font-size: 12px;
+              }
+
+            }
+
+          }
 
           .el-image {
             width: 100%;
             height: 323px;
+            border-radius: none;
           }
 
           .el-card-divs {
+            padding: 12px;
+
+            .el-link:not(:first-child) {
+              margin-top: 12px;
+            }
+
+            .el-link {
+
+              width: 100%;
+              
+              justify-content: inherit;
+
+              text-decoration: none;
+              color: #333;
+
+              .el-link--inner {
+                width: 100%;
+
+                span:first-child {
+                  // 行内元素必须设置为块，不然无法进行单行省略
+                  display: inline-block;
+                  // 单行省略
+                  width: 75%;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+
+                  // 覆盖样式
+
+                }
+
+                span:last-child {
+                  float: right;
+                  
+                }
+              }
+
+
+            }
+
             // height: 23%;
 
-            a {
 
-              &:link,
-              &:visited,
-              &:hover,
-              &:active {
-                color: #6a6a6a;
-              }
-
-              // &:visited {
-
-              // }
-              // &:hover {
-              // }
-              // &:active {
-              // }
-              text-decoration: none;
-              display: inline-block;
-              width: 100%;
-              height: 28%;
-              font-size: 13px;
-              text-align: start;
-              padding: 5px 0 0 10px;
-
-              span:first-child {
-                margin-right: 39%;
-              }
-            }
           }
         }
       }
@@ -89,6 +218,7 @@
           overflow: hidden;
 
           img {
+            // 图片放大动画
             width: 100%;
             transition: all 0.6s;
 
@@ -116,7 +246,7 @@
             font-size: 14px;
             margin-bottom: 8px;
 
-            // 单行省略
+            // 单行溢出省略
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;

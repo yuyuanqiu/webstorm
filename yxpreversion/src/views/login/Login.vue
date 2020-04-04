@@ -46,7 +46,7 @@
                 <el-input type="password" v-model="login.pass" autocomplete="off"></el-input>
               </el-form-item>
               <el-form-item class="l-lo-login">
-                <el-button v-if="stat === 'login'" type="primary" plain>登录</el-button>
+                <el-button @click="logins" v-if="stat === 'login'" type="primary" plain>登录</el-button>
                 <el-button v-if="stat === 'register'" type="primary" plain>注册</el-button>
 
                 <el-link v-if="stat === 'login'" class="qiehuan" @click="qiehuan">没有账号？请点击注册</el-link>
@@ -74,6 +74,15 @@ export default {
     };
   },
   methods: {
+    logins() {
+      let getUserRole = this.login.number === '1' ? 'xuesheng' : 'user'
+      
+      localStorage.setItem('userRole', getUserRole)
+      // window.location.href="/main"
+      this.$router.push({
+        path: '/'
+      })
+    },
     qiehuan() {
       if (this.stat === "login") {
         this.stat = "register";

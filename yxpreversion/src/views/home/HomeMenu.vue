@@ -46,7 +46,7 @@ export default {
   name: "home-menu",
   data() {
     return {
-      src: require("assets/img/login.png"),
+      src: require("public/home_lunbo/a.png"),
       props: {
         expandTrigger: "hover"
       },
@@ -408,5 +408,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "assets/css/HomeMenu.scss";
+@import "assets/css/home/HomeMenu.scss";
 </style>

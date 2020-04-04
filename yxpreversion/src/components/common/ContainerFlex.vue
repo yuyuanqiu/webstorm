@@ -1,6 +1,6 @@
 <template>
   <div  class="container-flex">
-    <el-row type="flex" justify="space-between"  class="container-flex-row">
+    <el-row type="flex" justify="space-between" class="container-flex-row">
       <el-col class="container-flex-row-col" v-for="data in datalist" :key="data">
         <slot :data="data">
         </slot>

@@ -1,9 +1,9 @@
 const TopContainer = () => import('components/TopContainer.vue')
 
-const Home = () => import('components/home/Home.vue')
-const HomeMenu = () => import('components/home/HomeMenu.vue')
-const SchoolRandom = () => import('../components/home/SchoolRandom.vue')
-const HomeLessons = () => import('../components/home/HomeLessons.vue')
+const Home = () => import('views/home/Home.vue')
+const HomeMenu = () => import('views/home/HomeMenu.vue')
+const SchoolRandom = () => import('views/home/SchoolRandom.vue')
+const HomeLessons = () => import('views/home/HomeLessons.vue')
 
 const SpecialCourse = () => import('views/specialcourse/SpecialCourse')
 const SpecificCourseNav = () => import('views/specialcourse/SpecialCourseNav')
@@ -12,18 +12,18 @@ const SpecialCourseAll = () => import('views/specialcourse/SpecialCourseAll')
 
 const LessonsLunbo = () => import('views/specialcourse/LessonsLunbo')
 
-const LessonsADColumn3 = () => import('components/home/LessonsADColumn3')
+const LessonsADColumn3 = () => import('views/specialcourse/LessonsADColumn3')
 
-const Lesson = () => import('components/lessonInfo/Lesson')
-const LessonTitle = () => import('components/lessonInfo/LessonTitle')
-const LessonBodyLeft = () => import('components/lessonInfo/LessonBodyLeft')
-const LessonBodyRight = () => import('components/lessonInfo/LessonBodyRight')
+const Lesson = () => import('views/lessonInfo/Lesson')
+const LessonTitle = () => import('views/lessonInfo/LessonTitle')
+const LessonBodyLeft = () => import('views/lessonInfo/LessonBodyLeft')
+const LessonBodyRight = () => import('views/lessonInfo/LessonBodyRight')
 
-const SchoolAll = () => import('components/school/SchoolAll')
+const SchoolAll = () => import('views/school/SchoolAll')
 
-const School = () => import('components/school/School')
-const SchoolTitle = () => import('components/school/SchoolTitle')
-const SchoolTeacher = () => import('components/school/SchoolTeacher')
+const School = () => import('views/school/School')
+const SchoolTitle = () => import('views/school/SchoolTitle')
+const SchoolTeacher = () => import('views/school/SchoolTeacher')
 
 const Teacher = () => import('views/teacher/teacher')
 const TeacherHead = () => import('views/teacher/teacher-head')
@@ -38,9 +38,8 @@ const CoursePlayer = () => import('views/course/CoursePlayer')
 const CourseDiscuss = () => import('views/course/CourseDiscuss')
 const CourseHomework = () => import('views/course/CourseHomework')
 
-const Login = () => import('components/login/Login.vue')
+const Login = () => import('views/login/Login.vue')
 
-const Register = () => import('components/login/Register.vue')
 
 const NotFound404 = () => import('components/NotFound404.vue')
 
@@ -61,7 +60,8 @@ const routes = [{
           'home-menu': HomeMenu,
           'school-random': SchoolRandom,
           'home-lessons': HomeLessons,
-        }
+        },
+
       },
     ]
   },
@@ -89,16 +89,14 @@ const routes = [{
     // -----------------课程详情页----------------------
     path: '/lessoninfo/:lessonname',
     component: Lesson,
-    children: [
-      {
-        path: '',
-        components: {
-          'lesson-title': LessonTitle,
-          'lesson-body-left': LessonBodyLeft,
-          'lesson-body-right': LessonBodyRight,
-        }
+    children: [{
+      path: '',
+      components: {
+        'lesson-title': LessonTitle,
+        'lesson-body-left': LessonBodyLeft,
+        'lesson-body-right': LessonBodyRight,
       }
-    ]
+    }]
   },
   {
     // ------------------------小节课程播放、讨论、作业-------------------
@@ -111,6 +109,9 @@ const routes = [{
           "course-player": CoursePlayer,
           "course-discuss": CourseDiscuss,
           "course-homework": CourseHomework
+        },
+        meta: {
+          roles: ['xuesheng', 'jiaoshi']
         }
       }
     ]
@@ -124,45 +125,42 @@ const routes = [{
     // ------------------学校详情页--------------------
     path: '/school/:schoolname',
     component: School,
-    children: [
-      {
-        path: '',
-        components: {
+    children: [{
+      path: '',
+      components: {
 
-          'school-title': SchoolTitle,
-          'special-course-all': SpecialCourseAll,
-          'school-teacher': SchoolTeacher,
-        }
+        'school-title': SchoolTitle,
+        'special-course-all': SpecialCourseAll,
+        'school-teacher': SchoolTeacher,
       }
-    ]
+    }]
   },
   {
     // -------------教师详情页-------------------
     path: '/teacher/:teacher',
     component: Teacher,
-    children: [
-      {
-        path: '',
-        components: {
-          'teacher-head': TeacherHead,
-          'teacher-body': TeacherBody,
-        }
+    children: [{
+      path: '',
+      components: {
+        'teacher-head': TeacherHead,
+        'teacher-body': TeacherBody,
       }
-    ]
+    }]
   },
   {
     //-------------------学生详情页---------------
     path: '/student/:student',
     component: Student,
-    children: [
-      {
-        path: '',
-        components: {
-          'student-head': StudentHead,
-          'student-body': StudentBody,
-        }
+    children: [{
+      path: '',
+      components: {
+        'student-head': StudentHead,
+        'student-body': StudentBody,
+      },
+      meta: {
+        roles: ['xuesheng', 'jiaoshi']
       }
-    ]
+    }]
   },
   {
     // ----------------登录页面----------------
@@ -170,16 +168,12 @@ const routes = [{
     name: 'login',
     component: Login,
   },
-  {
-    path: '/register',
-    name: 'register',
-    component: Register,
-  },
+  
 
   {
     path: '/none',
     name: 'none',
-    component: () => import('components/home/none.vue')
+    component: () => import('components/common/none.vue')
   },
   // -------------------------------------------------------test用例---------------------------------------
   {
@@ -241,5 +235,22 @@ const routes = [{
   }
 
 ]
+
+export const quanxian = [{
+  // ------------------------小节课程播放、讨论、作业-------------------
+  path: '/course/:coursename',
+  component: Course,
+  children: [{
+    path: '',
+    components: {
+      "course-player": CoursePlayer,
+      "course-discuss": CourseDiscuss,
+      "course-homework": CourseHomework
+    },
+    meta: {
+      roles: ['xuesheng', 'jiaoshi']
+    }
+  }]
+}, ]
 
 export default routes

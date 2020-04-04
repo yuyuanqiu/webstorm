@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" >
     <!-- 
       系统结构：
         网站头部，网站尾部始终渲染
@@ -7,7 +7,7 @@
         故而要改动的页面内容为main中的内容
       
     -->
-    <el-container>
+    <el-container >
       <!-- 网站头部，始终渲染在页面上，因为每个页面都有头部 -->
       <el-header height="64px">
         <top-container />
@@ -25,9 +25,12 @@
       </el-footer>
     </el-container>
 
+ 
+
     <!-- 返回顶部按钮 -->
     <back-top />
   </div>
+  
 </template>
 
 <style lang="scss">

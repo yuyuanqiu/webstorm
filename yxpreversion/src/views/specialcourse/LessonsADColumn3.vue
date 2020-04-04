@@ -26,5 +26,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "assets/css/LessonsADColumn3.scss";
+@import "assets/css/specialcourse/LessonsADColumn3.scss";
 </style>

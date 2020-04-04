@@ -148,9 +148,9 @@ export default {
       this.timer = null;
     }
   }
-};
+}; 
 </script>
 
 <style lang="scss">
-@import "assets/css/LessonsLunbo.scss";
+@import "assets/css/specialcourse/LessonsLunbo.scss";
 </style>

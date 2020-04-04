@@ -36,7 +36,7 @@
             <el-button>入驻高校</el-button>
           </el-menu-item>
           <el-menu-item index="4">
-            <el-button>精彩论坛</el-button>
+            <el-button>积分商城</el-button>
           </el-menu-item>
         </el-menu>
       </div>
