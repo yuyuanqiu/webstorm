@@ -1,6 +1,7 @@
 .article-title {
 
   border-bottom: 1px solid #eee;
+
   .article-info {
     position: relative;
     margin-top: 10px;
@@ -8,7 +9,9 @@
     &:first-child {
       padding-top: 0 !important;
     }
+
     .el-link {
+      color: #acacac;
 
       &:not(:first-child) {
         padding-left: 36px;
@@ -20,26 +23,38 @@
       }
     }
   }
+
   &-body {
-    
+
 
     h3 {
       color: #000;
+
+      margin: 24px 0;
+      font-size: 18px;
     }
+
     &:hover {
-        color: #606266 !important;
-      
+      color: #606266 !important;
+
     }
+
+    &-des {
+      color: #555;
+    }
+
     .hudong {
-      padding: 20px 0 ;
+      padding: 12px 0;
+      font-size: 12px;
+
       div {
         display: inline-block;
         margin-right: 24px;
-  
+
         i {
           font-weight: 900;
         }
-  
+
         span {
           padding-left: 3px;
         }

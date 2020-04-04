@@ -11,6 +11,9 @@
         <course-list :courses="courses" />
       </el-tab-pane>
       <el-tab-pane label="文章" name="second">
+        <div class="student-body-write">
+          <el-button icon="el-icon-edit">写文章</el-button>
+        </div>
         <article-title
           v-for="articleTitle in articleTitles"
           :key="articleTitle"

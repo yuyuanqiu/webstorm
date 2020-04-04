@@ -23,6 +23,8 @@
       .el-tab-pane {
         padding: 0 20px 20px;
 
+        
+
         &:last-child {
 
         }
@@ -41,6 +43,22 @@
 
           }
         }
+
+        .student-body-write {
+          padding: 12px 0;
+          
+          .el-button {
+            width: 100%;
+
+            color: white;
+            background-color: #F0A4D3;
+            border-color: #F0A4D3;
+
+
+          }
+        }
+
+
 
         .el-image {
           margin-bottom: -4px;
