@@ -1,4 +1,4 @@
-#student-body {
+#article-all {
   .el-tabs {
 
     .el-tabs__header {
@@ -23,26 +23,6 @@
       .el-tab-pane {
         padding: 0 20px 20px;
 
-
-
-        &:last-child {}
-
-        .s-b-bar {
-          padding: 10px 0;
-
-          .el-link {
-
-            font-size: 12px;
-            padding: 0px 24px 0px 0;
-            cursor: pointer;
-
-            &:hover {
-              cursor: pointer;
-            }
-
-          }
-        }
-
         &.student-body-article {
 
           padding: 0;
@@ -50,20 +30,32 @@
           &>* {
             padding: 0 20px 0px;
           }
-          .student-body-write {
 
-            
-            padding: 12px 0;
+          .leibie {
+            margin: 8px 0;
+
 
             .el-button {
-              width: 100%;
+              padding: 8px 12px;
 
-              color: white;
-              background-color: #409eff;
-              border-color: #409eff;
+              background: #409eff;
+              color: #fff;
+              font-size: 12px;
+
+              &+& {
+                margin-left: 12px;
+              }
+
+              &:last-child {
+                float: right;
+
+                color: white;
+              background-color: #409EFF;
+              border-color: #409EFF;
+
 
               border-radius: 0;
-
+              }
 
             }
           }
@@ -95,13 +87,7 @@
 
 
 
-        .el-image {
-          margin-bottom: -4px;
-        }
 
-        .lesson-bottom {
-          background-color: #97bcce0f;
-        }
       }
 
     }

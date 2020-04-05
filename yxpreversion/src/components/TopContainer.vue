@@ -27,16 +27,15 @@
                 <el-button slot="reference">课程分类</el-button>
               </el-popover>
             </template>
-            
           </el-menu-item>
-          <el-menu-item index="2">
+          <el-menu-item index="2" @click="toPath('/specialcourse/ls')">
             <el-button>示范课程</el-button>
           </el-menu-item>
-          <el-menu-item index="3">
+          <el-menu-item index="3" @click="toPath('/schools')">
             <el-button>入驻高校</el-button>
           </el-menu-item>
-          <el-menu-item index="4">
-            <el-button>积分商城</el-button>
+          <el-menu-item index="4"  @click="toPath('/articleall/ls')">
+            <el-button>论坛</el-button>
           </el-menu-item>
         </el-menu>
       </div>
@@ -53,28 +52,31 @@
       </div>
 
       <div class="top-login-reg">
-        <div class="t-l-opt" v-if="status === 'unlogin'">
-          <a @click="dialogVisible = true">登录</a>
+        <div class="t-l-opt" v-if="isLogin === 'no'">
+          <el-link :underline="false" @click="toPath('/login')">登录</el-link>
           <span class="split">|</span>
-          <a href="#">注册</a>
+          <el-link :underline="false" @click="toPath('/login')">注册</el-link>
         </div>
-        <div class="t-l-my" v-else>
-          <el-link>个人中心</el-link>
-          <el-dropdown>
-            <span class="el-dropdown-link">
-              <div>
-                <el-avatar
-                  src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-                ></el-avatar>
-              </div>
-              <i class="el-icon-arrow-down el-icon--right"></i>
-            </span>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>设置</el-dropdown-item>
-              <el-dropdown-item>退出</el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </div>
+        <el-link class="t-l-my" v-else-if="isLogin === 'yes'"  :underline="false">
+          <div class="t-l-my--inner"  @click="toPath('/student/ls')">
+            <div>个人中心</div>
+            <el-dropdown>
+              <span class="el-dropdown-link">
+                <div>
+                  <el-avatar
+                    src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+                  ></el-avatar>
+                </div>
+                <i class=""></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>设置</el-dropdown-item>
+                <el-dropdown-item>积分商城</el-dropdown-item>
+                <el-dropdown-item>退出</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
+        </el-link>
       </div>
     </div>
   </div>
@@ -85,9 +87,16 @@ export default {
   name: "top-container",
   data() {
     return {
-      status: "login"
+      isLogin: "yes"
     };
-  }
+  },
+  methods: {
+    toPath(path) {
+      this.$router.push({ path: path})
+    },
+    
+  },
+  
 };
 </script>
 

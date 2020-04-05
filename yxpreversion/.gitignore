@@ -23,3 +23,4 @@ yarn-error.log*
 # 忽略媒体文件
 *.mp3
 *.mp4
+.history/

@@ -45,6 +45,10 @@ const NotFound404 = () => import('components/NotFound404.vue')
 
 const Main = () => import('views/main/Main')
 
+const ArticleEditor = () => import('views/article/ArticleEditor')
+const ArticleAll = () => import('views/articleall/ArticleAll')
+const ArticleContent = () => import('views/articlecontent/ArticleContent')
+
 const routes = [
   // ------------------------------用户界面--------开始----------------------
   // ------------------------------用户界面--------开始----------------------
@@ -56,7 +60,7 @@ const routes = [
 
     children: [{
         path: '',
-        redirect: 'home'
+        redirect: 'articlecontent/ls'
       },
       {
         // --------------------------主页面------------------------
@@ -171,6 +175,22 @@ const routes = [
             roles: ['xuesheng', 'jiaoshi']
           }
         }]
+      },
+      {
+        path: '/article/:ls',
+        name: 'ArticleEditor',
+        component: ArticleEditor,
+      },
+      {
+        path: '/articleall/:ls',
+        name: 'articleall',
+        component: ArticleAll,
+
+      },
+      {
+        path: 'articlecontent/:ls',
+        name: 'article-content',
+        component: ArticleContent,
       },
       {
         // ----------------登录页面----------------

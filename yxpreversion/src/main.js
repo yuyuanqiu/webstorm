@@ -31,7 +31,6 @@ Vue.component('container-flex', ContainerFlex)
 
 
 
-
 Vue.use(ElementUI)
 
 Vue.config.productionTip = false
