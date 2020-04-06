@@ -1,5 +1,5 @@
 <template>
-  <div class="article-title">
+  <div class="article-title" @click="toArticle">
     <div class="article-info">
       <el-link :underline="false">{{ articleTitle.author }}</el-link>
 
@@ -32,6 +32,11 @@ export default {
   props: ["articleTitle"],
   data() {
     return {};
+  },
+  methods: {
+    toArticle() {
+      this.$router.push({path: '/articlecontent/ls'})
+    }
   }
 };
 </script>

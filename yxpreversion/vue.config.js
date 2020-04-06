@@ -42,7 +42,8 @@ module.exports = {
         api: path.resolve(__dirname, "./src/api"),
         views: path.resolve(__dirname, "./src/views"),
         assets: path.resolve(__dirname, "./src/assets"),
-        test: path.resolve(__dirname, "./src/test")
+        test: path.resolve(__dirname, "./src/test"),
+        admin: path.resolve(__dirname, "./src/admin")
       }
     };
   },

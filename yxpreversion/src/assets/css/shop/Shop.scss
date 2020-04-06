@@ -1,0 +1,199 @@
+#shop {
+  background-color: #fff;
+
+  padding: 12px 36px;
+
+  .shop-title {
+
+    display: flex;
+    flex-flow: row wrap;
+
+    .el-avatar {
+      width: 50px;
+      max-width: 50px;
+
+      margin-right: 16px;
+    }
+
+    &>* {
+      flex: 1;
+      display: inline-block;
+
+
+
+      h2 {
+
+        font-size: 16px;
+        height: 32px;
+        line-height: 32px;
+        font-weight: 900;
+      }
+    }
+  }
+
+  .jifen-card {
+
+    &>.el-row {
+
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+
+      .outer {
+
+        flex: 1;
+        margin: 36px 0;
+
+        h2 {
+          height: 48px;
+          line-height: 48px;
+          font-size: 24px;
+          font-weight: 100;
+
+          margin: 0 24px 0 12px;
+          border-bottom: 2px solid #333;
+        }
+
+
+        .el-row {
+          flex-flow: row wrap;
+          align-items: center;
+
+
+
+          .el-col {
+
+            flex: 1;
+
+            min-width: 180px;
+            max-width: 180px;
+
+            padding: 12px;
+
+
+
+            .card {
+              height: 255px;
+              background: aliceblue;
+
+              border: 1px solid #e5e5e5;
+              padding: 0 18px 18px;
+
+
+
+              display: flex;
+              flex-flow: column;
+              align-items: center;
+
+              h3 {
+                // flex: 2;
+                // width: 100%;
+                height: 36px;
+                line-height: 36px;
+                font-size: 18px;
+                font-weight: 100;
+              }
+
+              .el-image {
+                flex: 5;
+                padding: 6px;
+
+                img {
+                  border-radius: 50%;
+                }
+
+              }
+
+              .des {
+                flex: 2;
+
+                text-align: center;
+
+                margin: 12px 0;
+
+                font-size: 12px;
+                font-weight: 100;
+                line-height: 1.2;
+              }
+
+              .el-button {
+                flex: 1;
+
+                padding: 6px 3px;
+              }
+
+            }
+
+            &:nth-child(1) {
+              .card {
+                background: aliceblue;
+
+              }
+            }
+
+            &:nth-child(2) {
+              .card {
+                background: #f0feff;
+
+              }
+            }
+
+            &:nth-child(3) {
+              .card {
+                background: #f0fff3;
+
+              }
+            }
+
+            &:nth-child(4) {
+              .card {
+                background: #fdfff0;
+
+              }
+            }
+
+            &:nth-child(5) {
+              .card {
+                background: #fff9f0;
+
+              }
+            }
+
+            &:nth-child(6) {
+              .card {
+                background: #fff0fc;
+
+              }
+            }
+
+            &:nth-child(7) {
+              .card {
+                background: rgb(0, 255, 242);
+
+              }
+            }
+
+            &:nth-child(8) {
+              .card {
+                background: rgb(0, 255, 242);
+
+              }
+            }
+
+
+
+
+
+
+
+
+          }
+        }
+
+      }
+    }
+
+
+  }
+
+}

@@ -78,6 +78,12 @@ this.$router：指代的是router.js中的router对象
 ps制作透明图标只能保存为png才能透明效果
 
 ## 20200302总结：
+  
+
 
 - element-ui使用属性和事件时，当出现属性出错，可将其转换：page-size <=> pageSize 
-- 
+
+
+## 20200406总结
+
+- 自定义元素不能激活click时间，需要内嵌或外套一个盒子

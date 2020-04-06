@@ -71,7 +71,9 @@
               </span>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>设置</el-dropdown-item>
-                <el-dropdown-item>积分商城</el-dropdown-item>
+                <el-dropdown-item>
+                  <span  @click="toPath('/shop/ls')">积分商城</span>
+                </el-dropdown-item>
                 <el-dropdown-item>退出</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>

@@ -4,6 +4,14 @@
   </div>
 </template>
 
+<script>
+export default {
+  
+
+
+}
+</script>
+
 <style lang="scss">
 // #app {
 //   font-family: 微软雅黑, "Microsoft YaHei", Avenir, Helvetica, Arial, sans-serif;

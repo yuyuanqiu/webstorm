@@ -193,6 +193,9 @@ export default {
     // 编辑器文本发生变化
     onEditorChange({ html }) {
       this.$emit("change", html);
+      // console.log(html)
+      localStorage.setItem("content", html); //设置b为"isaac"
+      console.log(localStorage.getItem("content"))
     }
   }
 };

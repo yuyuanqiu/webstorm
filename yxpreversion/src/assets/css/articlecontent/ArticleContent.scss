@@ -1,16 +1,325 @@
 #article-content {
 
-  height: 500px;
+  // height: 500px;
+
 
   .article-content-head {
 
     background-color: #fff;
+    padding: 12px 36px;
+
     .el-row {
+      flex-flow: row wrap;
 
       .el-col {
+
+        &:first-child {
+          width: 50px;
+          margin-right: 16px;
+
+
+        }
+
+        &:not(:first-child) {
+
+          flex: 1;
+          min-width: 226px;
+
+          position: relative;
+
+          .author {
+            height: 32px;
+            line-height: 32px;
+
+            font-size: 16px;
+            font-weight: 600;
+          }
+
+          .other {
+            font-size: 12px;
+
+            span {
+              padding-right: 12px;
+            }
+          }
+
+          .a-c-h-pingfen {
+
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            font-size: 18px;
+            font-weight: 100;
+
+            &>* {
+              display: inline-block;
+
+              .el-rate__text {
+                font-size: 18px;
+            }
+            }
+          }
+        }
+
+
 
 
       }
     }
+  }
+
+  .article-content-body {
+    padding: 12px 36px;
+
+    background-color: #fff;
+
+    &>h2 {
+      height: 48px;
+      line-height: 48px;
+
+      font-weight: 900;
+
+      font-size: 30px;
+    }
+
+    &>div {
+      margin: 24px 0;
+
+      line-height: 1.75;
+      font-size: 18px;
+
+      h1,
+      h2 {
+        padding-bottom: 12px;
+        font-weight: 600;
+        font-size: 24px;
+        border-bottom: 1px solid #ececec;
+      }
+
+      h3,
+      h4 {
+        padding-bottom: 6px;
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      p {
+        // text-indent: 2em;
+
+        line-height: inherit;
+        margin-top: 22px;
+        margin-bottom: 22px;
+
+        font-size: 18px;
+        line-height: 1.35;
+      }
+
+      pre {
+        background-color: #333;
+        color: #fff;
+
+        padding: 18px 15px 12px;
+
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      ol {
+        padding-left: 28px;
+        margin-top: 22px;
+        margin-bottom: 22px;
+
+        li {
+          list-style-type: square;
+        }
+
+      }
+    }
+
+
+    .article-content-footer-info {
+
+      margin: 0;
+
+
+      &>span {
+
+        padding-right: 24px;
+        display: inline-block;
+
+        cursor: pointer;
+
+        &:before {
+          padding-right: 6px;
+        }
+
+
+
+        .el-rate {
+          display: inline-block;
+        }
+
+
+      }
+    }
+
+  }
+
+
+
+  .article-comment {
+    background-color: #fff;
+
+    margin: 12px 0;
+    padding: 12px 36px;
+
+    .comment-input {
+
+      margin: 6px 0 18px;
+
+      .el-input {
+        width: 92%;
+      }
+
+      .el-input-group__prepend {
+        background-color: #fff;
+        border: none;
+
+      }
+
+      .el-input-group__append {
+        background-color: #2196f3;
+        color: #fff;
+        
+    }
+    }
+
+    &-item {
+
+      margin: 16px 0;
+      .el-row {
+        flex-flow: row wrap;
+
+        .el-col {
+
+          &:first-child {
+            width: 50px;
+            margin-right: 16px;
+
+
+          }
+
+          &.root-reply {
+            border-top: 1px solid #e3e3e3;
+
+            .reply_comment {
+              padding: 6px 0;
+
+              background: aliceblue;
+      
+              &:last-child {
+                padding-bottom: 12px;
+              }
+      
+      
+              .a-c-h-other {
+      
+                .other {
+      
+                  .comment {
+      
+                    span {
+                      font-weight: 500;
+      
+                      a {
+                        text-decoration: none;
+                        color: #333;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          &:not(:first-child) {
+
+            flex: 1;
+            min-width: 85%;
+            max-width: 85%;
+            line-height: 1.5;
+
+            position: relative;
+
+            .a-c-h-other {
+
+
+              .author {
+                height: 32px;
+                line-height: 32px;
+
+
+
+                &>div {
+                  display: inline-block;
+
+                  &:first-child {
+                    font-size: 18px;
+                    font-weight: 600;
+                  }
+
+                  &:not(:first-child) {
+                    margin-left: 16px;
+                    font-size: 12px;
+                  }
+                }
+              }
+
+              .other {
+                font-size: 18px;
+
+                p {
+                  font-weight: 200;
+                }
+
+                div {
+                  padding-right: 24px;
+                  font-size: 14px;
+
+                  span+span {
+
+                    margin-left: 16px;
+
+                  }
+
+                  span {
+                    cursor: pointer;
+
+                    &:before {
+                      padding-right: 6px;
+                    }
+                  }
+                }
+              }
+
+
+            }
+
+
+
+
+          }
+
+
+
+
+        }
+      }
+
+      
+    }
+
   }
 }

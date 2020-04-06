@@ -1,3 +1,4 @@
+// ------------------------前台页面------------
 const TopContainer = () => import('components/TopContainer.vue')
 
 const Home = () => import('views/home/Home.vue')
@@ -49,6 +50,14 @@ const ArticleEditor = () => import('views/article/ArticleEditor')
 const ArticleAll = () => import('views/articleall/ArticleAll')
 const ArticleContent = () => import('views/articlecontent/ArticleContent')
 
+
+const Shop = () => import('views/shop/Shop') 
+
+// ----------------------------------后台页面-------------------
+
+
+const AHome = () => import('admin/component/home')
+
 const routes = [
   // ------------------------------用户界面--------开始----------------------
   // ------------------------------用户界面--------开始----------------------
@@ -60,7 +69,7 @@ const routes = [
 
     children: [{
         path: '',
-        redirect: 'articlecontent/ls'
+        redirect: 'admin'
       },
       {
         // --------------------------主页面------------------------
@@ -176,6 +185,7 @@ const routes = [
           }
         }]
       },
+      //----------------文章编辑、列表、展示
       {
         path: '/article/:ls',
         name: 'ArticleEditor',
@@ -188,9 +198,15 @@ const routes = [
 
       },
       {
-        path: 'articlecontent/:ls',
+        path: '/articlecontent/:ls',
         name: 'article-content',
         component: ArticleContent,
+      },
+      // -------------------积分兑换商城
+      {
+        path: '/shop/:ls',
+        name: 'shop',
+        component: Shop,
       },
       {
         // ----------------登录页面----------------
@@ -214,6 +230,16 @@ const routes = [
 // ------------------------------用户界面--------结束----------------------
 // ------------------------------用户界面--------结束----------------------
 // ------------------------------用户界面--------结束----------------------
+
+// ---------------------------后台界面
+{
+  path: '/admin',
+  name: 'admin-home',
+  component: AHome,
+},
+
+
+// ----------------------------后台结束
 
   {
     path: '/none',
