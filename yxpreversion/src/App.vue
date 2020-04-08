@@ -21,6 +21,33 @@ export default {
 //   color: #2c3e50;
 // }
 
+
+
+  //   ::-webkit-scrollbar 滚动条整体部分
+
+  *::-webkit-scrollbar {
+    width: 6px;
+    // height: 10px;
+  }
+  // ::-webkit-scrollbar-track  滚动条的轨道（里面装有Thumb）
+  *::-webkit-scrollbar-track {
+    background: #333;
+    // border-radius: 2px;
+  }
+  // ::-webkit-scrollbar-thumb  滚动条里面的小方块，能向上向下移动（或往左往右移动，取决于是垂直滚动条还是水平滚动条）
+  *::-webkit-scrollbar-thumb {
+    background: #409EFF;
+    border-radius: 16px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: pink;
+  }
+  // ::-webkit-scrollbar-corner 边角，即两个滚动条的交汇处
+  *::-webkit-scrollbar-corner {
+    background: pink;
+  }
+
 // --------------------------------------解决点击el-image时会出现页面固定不动的现象，该现象不知何时引入的------------------------------
 body {
   /*修改滚动条样式*/

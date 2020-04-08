@@ -51,12 +51,15 @@ const ArticleAll = () => import('views/articleall/ArticleAll')
 const ArticleContent = () => import('views/articlecontent/ArticleContent')
 
 
-const Shop = () => import('views/shop/Shop') 
+const Shop = () => import('views/shop/Shop')
 
 // ----------------------------------后台页面-------------------
 
 
 const AHome = () => import('admin/component/home')
+
+const CourseApply = () => import('admin/component/CourseApply')
+const CourseAudit = () => import('admin/component/CourseAudit')
 
 const routes = [
   // ------------------------------用户界面--------开始----------------------
@@ -226,20 +229,93 @@ const routes = [
       // }
     ]
   },
-  
-// ------------------------------用户界面--------结束----------------------
-// ------------------------------用户界面--------结束----------------------
-// ------------------------------用户界面--------结束----------------------
 
-// ---------------------------后台界面
-{
-  path: '/admin',
-  name: 'admin-home',
-  component: AHome,
-},
+  // ------------------------------用户界面--------结束----------------------
+  // ------------------------------用户界面--------结束----------------------
+  // ------------------------------用户界面--------结束----------------------
+
+  // ---------------------------后台界面
+  {
+    path: '/admin',
+    name: 'admin-home',
+    component: AHome,
+    children: [{
+        path: '',
+        name: 'admin',
+        component: NotFound404
+      },
+      {
+        path: 'apply_school',
+        name: 'apply_school',
+        component: NotFound404
+      },
+      {
+        path: 'apply_teacher',
+        name: 'apply_teacher',
+        component: NotFound404
+      },
+      {
+        path: 'apply_student',
+        name: 'apply_student',
+        component: NotFound404
+      },
+      {
+        path: 'manage_school',
+        name: 'manage_school',
+        component: NotFound404
+      },
+      {
+        path: 'manage_student',
+        name: 'manage_student',
+        component: NotFound404
+      },
+      {
+        path: 'manage_teacher',
+        name: 'manage_teacher',
+        component: NotFound404
+      },
+      {
+        path: 'course_apply',
+        name: 'course_apply',
+        component: CourseApply
+
+      },
+      {
+        path: 'course_audit',
+        name: 'course_audit',
+        component: CourseAudit
+      },
+      {
+        path: 'course_online',
+        name: 'course_online',
+        component: CourseAudit
+      },
+      {
+        path: 'course_update',
+        name: 'course_update',
+        component: CourseAudit
+      },
+      {
+        path: 'manage_article',
+        name: 'manage_article',
+        component: NotFound404
+      },
+      {
+        path: 'manage_post',
+        name: 'manage_post',
+        component: NotFound404
+      },
+      {
+        path: 'manage_props',
+        name: 'manage_props',
+        component: NotFound404
+      },
+      
+    ]
+  },
 
 
-// ----------------------------后台结束
+  // ----------------------------后台结束
 
   {
     path: '/none',

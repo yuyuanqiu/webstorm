@@ -1,0 +1,42 @@
+#course-apply {
+
+  padding: 0 20%;
+
+  h2 {
+
+    line-height: 3;
+    font-size: 24px;
+    font-weight: 400;
+    padding-left: 30px;
+  }
+
+  .el-form-item {
+
+    .el-form-item__content {
+
+      .el-steps {
+
+        .el-step {
+          .el-step__head {}
+
+          .el-step__main {
+            .el-step__title {
+              font-size: 12px;
+              line-height: 2;
+            }
+
+          }
+        }
+      }
+
+      .el-textarea__inner {
+
+        min-height: 90px !important;
+      }
+    }
+  }
+
+
+
+
+}

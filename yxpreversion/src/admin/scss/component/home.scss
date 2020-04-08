@@ -1,16 +1,140 @@
+@mixin scrollbar_custom($width) {
+
+  // 滚动条样式
+  & {
+    //   ::-webkit-scrollbar 滚动条整体部分
+
+    &::-webkit-scrollbar {
+      width: $width;
+      // height: 10px;
+    }
+
+    // ::-webkit-scrollbar-track  滚动条的轨道（里面装有Thumb）
+    &::-webkit-scrollbar-track {
+      background: #333;
+      // border-radius: 2px;
+    }
+
+    // ::-webkit-scrollbar-thumb  滚动条里面的小方块，能向上向下移动（或往左往右移动，取决于是垂直滚动条还是水平滚动条）
+    &::-webkit-scrollbar-thumb {
+      background: #409EFF;
+      border-radius: 16px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: pink;
+    }
+
+    // ::-webkit-scrollbar-corner 边角，即两个滚动条的交汇处
+    &::-webkit-scrollbar-corner {
+      background: pink;
+    }
+  }
+}
+
+
 #admin {
 
   .el-container {
+    height: 100vh;
 
     .el-aside {
 
-      background-color: #333;
+      background-color: #304156;
       color: #fff;
+
       height: 100vh;
+      display: flex;
+      flex-flow: column;
+
+      overflow: hidden;
+
+
+
+
+      h1 {
+
+        cursor: pointer;
+
+        height: 56px;
+        min-height: 56px;
+        margin: 12px 24px;
+        // 背景填充满容器
+        background-repeat: round;
+        background-image: url(~public/logo_white.png);
+      }
 
       .el-menu {
 
+        flex: 1;
+        @include scrollbar_custom(1px);
+        overflow-y: auto;
+
+
+
+        background-color: #304156;
+
         height: 100%;
+        border-right: none;
+
+        &>li {
+
+          // padding-left: 32px;
+        }
+
+        .el-submenu {
+
+          i[class^=el-icon-] {
+            margin-right: 12px;
+          }
+
+          .el-submenu__title {
+
+            // font-size: 18px;
+
+            .el-menu {}
+          }
+
+          .el-menu-item {
+
+            &.is-active {
+              background-color: #151414 !important;
+
+            }
+            // 和一级菜单左对齐
+            padding-left: 72px !important;
+            background-color: #364e6c !important;
+
+
+            // 消除当菜单展开时，出现水平滚动条
+            min-width: initial;
+
+            // 更改二级菜单样式
+            // font-size: 16px !important;
+            height: 36px;
+            line-height: 36px;
+            // color: #98a4b2 !important;
+
+            &:active {
+              color: #409eff !important;
+            }
+          }
+        }
+
+        &>.el-menu-item {
+
+          &.is-active {
+            background-color: #151414 !important;
+          }
+
+
+          // font-size: 18px;
+
+          // 更改小图标的样式直接用class属性取样式
+          i[class^=el-icon-] {
+            margin-right: 12px;
+          }
+        }
       }
 
 
@@ -18,18 +142,92 @@
 
     .el-container {
 
+      background-color: #f5f5f5;
+
+      height: 100%;
+
+
+
       .el-header {
- 
-        
+        padding: 0 24px;
+        background-color: #fff;
 
-      }
-      
-      .el-main {
+        &-content {
+
+          display: flex;
+          flex-flow: row;
+
+          // 垂直居中对齐
+          padding: 10px 0;
+
+          &>div {
+            display: inline-block;
+  
+            &.el-page-header {
+              flex: 1;
+
+              div[class^="el-page-header__"] {
+
+                font-size: 16px;
+                height: 40px;
+                line-height: 40px;
+              }
+  
+              &>div {
+  
+                display: inline-block;
+  
+                &.el-page-header__left {
+  
+                  &>* {
+  
+                    display: inline-block;
+                  }
+                }
+              }
+            }
+
+            &.el-dropdown {
 
 
+            }
+          }
         }
 
+
+
+
+        .el-dropdown {
+
+
+
+          &-link {}
+        }
+
+      }
+
+      .el-main {
+        padding: 0 24px;
+        background-color: #f5f5f5;
+
+        @include scrollbar_custom(6px);
+
+
+
+
+
+
+
+
+      }
+
       .el-footer {
+        padding: 0 24px;
+        background-color: #f5f5f5;
+        margin: 0 auto;
+
+        font-size: 12px;
+
 
 
       }
