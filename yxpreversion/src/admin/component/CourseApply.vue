@@ -39,12 +39,17 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="课程状态" prop="status">
-          <el-steps :active="ruleForm.status" align-center >
-            <el-step v-for="status in ruleForm.statusList" :key="status.index" :title="status.title"></el-step>
-            
-          </el-steps>
+          <el-select v-model="ruleForm.status" placeholder="请输入课程状态">
+                  <el-option
+                    v-for="status in ruleForm.statusList"
+                    :key="status.value"
+                    :label="status.value"
+                    :value="status.value"
+                    :disabled="status.disabled"
+                  ></el-option>
+                </el-select>
         </el-form-item>
-        <el-form-item label="课程简介" prop="desc" :required="false">
+        <el-form-item label="课程简述" prop="desc" :required="false">
           <el-input type="textarea" v-model="ruleForm.desc"></el-input>
         </el-form-item>
         <el-form-item>
@@ -190,13 +195,28 @@ export default {
         bgUrl: "",
         dialogImageUrl: "",
         dialogVisible: false,
-        status: 0,
+        status: '',
         statusList: [
-          {
-            title: "课程申请",index: 1
-          },
-          { title: "课程待审核", index: 2 },
-          { title: "课程审核通过", index: 3 }
+        {
+          value: "申请",
+          comment: "",
+          disabled: false
+        },
+        {
+          value: "审核通过",
+          comment: "",
+          disabled: true
+        },
+        {
+          value: "待审核",
+          comment: "",
+          disabled: true
+        },
+        {
+          value: "审核未通过",
+          comment: "",
+          disabled: true
+        }
         ],
         desc: '',
         date1: "",
@@ -260,7 +280,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.ruleForm.status = 1
+          // this.ruleForm.status = 1
         } else {
           console.log("error submit!!");
           return false;

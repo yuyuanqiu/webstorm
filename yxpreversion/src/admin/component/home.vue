@@ -44,7 +44,7 @@
               <el-avatar
                 shape="square"
                 :size="40"
-                src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+                :src="src"
               ></el-avatar>
               <i class="el-icon-arrow-down el-icon--right"></i>
             </span>
@@ -58,7 +58,10 @@
           <router-view></router-view>
         </el-main>
         <el-footer height="24px">
+          <div>
           <small>©2020 嘉狩予思教育有限公司出品</small>
+
+          </div>
         </el-footer>
       </el-container>
     </el-container>
@@ -71,6 +74,7 @@ export default {
   props: ["nav"],
   data() {
     return {
+      src: require('assets/img/people-icon/user_avator.png'),
 
       header_nav: '首页',
       navs: [

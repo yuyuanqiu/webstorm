@@ -1,0 +1,66 @@
+#course-online {
+  h2 {
+
+    line-height: 3;
+    font-size: 18px;
+    background: white;
+    font-weight: 900;
+    margin: 10px 0;
+    padding: 0 0 0 15px;
+  }
+
+  .course-online-status {
+
+    .el-row {
+
+      flex-flow: row wrap;
+
+      .el-col {
+
+        background: #fff;
+        width: 50%;
+        min-width: 475px;
+        max-width: 630px;
+        margin-bottom: 10px;
+
+
+        &:nth-child(odd) {
+          margin-right: 10px;
+
+        }
+
+
+        .course-online-info {
+
+          &>* {
+
+            display: inline-block;
+          }
+
+          .el-image {
+
+            width: 60%;
+
+
+          }
+
+          .course-online-des {
+            height: 100%;
+            width: 50%;
+
+            h3 {
+              // display: inline-block;
+
+
+            }
+
+            span {
+
+            }
+          }
+        }
+      }
+    }
+  }
+
+}

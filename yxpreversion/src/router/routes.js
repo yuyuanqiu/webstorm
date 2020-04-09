@@ -60,7 +60,7 @@ const AHome = () => import('admin/component/home')
 
 const CourseApply = () => import('admin/component/CourseApply')
 const CourseAudit = () => import('admin/component/CourseAudit')
-
+const CourseOnline = () => import('admin/component/CourseOnline')
 const routes = [
   // ------------------------------用户界面--------开始----------------------
   // ------------------------------用户界面--------开始----------------------
@@ -288,7 +288,7 @@ const routes = [
       {
         path: 'course_online',
         name: 'course_online',
-        component: CourseAudit
+        component: CourseOnline
       },
       {
         path: 'course_update',

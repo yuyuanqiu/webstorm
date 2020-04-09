@@ -4,6 +4,122 @@
 
     line-height: 3;
     font-size: 18px;
+    background: white;
     font-weight: 900;
+    margin: 10px 0;
+    padding: 0 0 0 15px;
   }
+
+  .demo-table-expand {
+    font-size: 0;
+  }
+
+  .demo-table-expand label {
+    width: 108px;
+    color: #99a9bf;
+  }
+
+  .demo-table-expand .el-form-item {
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 50%;
+  }
+
+  .course-audit-list {
+
+    .el-table {
+      .sort-caret.ascending {
+        border-bottom-color: rgb(255, 255, 255);
+      }
+
+      .sort-caret.descending {
+
+        border-top-color: #ffffff;
+      }
+
+      .ascending {
+        .sort-caret.ascending {
+          border-bottom-color: #673ab7;
+
+        }
+      }
+
+      .descending {
+
+        .sort-caret.descending {
+
+          border-top-color: #673ab7;
+        }
+
+      }
+
+      .el-table__header-wrapper {}
+
+      .el-table__body-wrapper {
+
+        .el-table__header {
+
+
+          tr,
+          th {
+            background-color: #66B1FF !important;
+          }
+        }
+
+        .el-table__body {
+
+          tbody {
+
+            .el-table__row {}
+
+            // 扩展表单
+            .el-table__expanded-cell {
+
+              .el-form {
+
+                .el-form-item {
+
+                  &.is-required {
+
+                    .el-form-item__label {
+                      color: red;
+                      position: relative;
+
+                      &:before {
+
+                        position: absolute;
+                        left: -12px;
+                      }
+                    }
+                  }
+
+                  .el-form-item__content {
+
+                    .el-select,
+                    & {
+
+                      .el-input {
+
+                        .el-input__inner {
+
+                          border-radius: 0;
+                          border: none;
+                          border-bottom: 1px solid black;
+
+                          padding: 0;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+
+            }
+          }
+        }
+      }
+    }
+  }
+
+
 }

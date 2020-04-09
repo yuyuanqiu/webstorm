@@ -29,6 +29,10 @@ module.exports = {
       msTileImage: 'favicon.ico'
     }
   },
+  // 调试vue程序
+  configureWebpack: {
+    devtool: 'source-map'
+  },
   configureWebpack: config => {
     config.resolve = {
       // 配置解析别名

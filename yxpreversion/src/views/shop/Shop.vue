@@ -5,6 +5,7 @@
       <div>
         <h2>{{ user.name }}</h2>
         <span>总积分：{{ user.jifen_total }}</span>
+        <span>10积分相当于1鱼丝</span>
       </div>
     </div>
     <div class="jifen-card">
