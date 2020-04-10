@@ -27,7 +27,7 @@ export default {
 
   *::-webkit-scrollbar {
     width: 6px;
-    // height: 10px;
+    height: 6px;
   }
   // ::-webkit-scrollbar-track  滚动条的轨道（里面装有Thumb）
   *::-webkit-scrollbar-track {

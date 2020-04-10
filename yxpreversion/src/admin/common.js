@@ -142,7 +142,7 @@ let status = [{
     value: "审核未通过",
     comment: "",
     disabled: false,
-    active: 4,
+    active: 3,
   }
 ];
 
@@ -360,6 +360,281 @@ let applyers = [
   '娇杏',
 ];
 
+
+// 造句子
+function getContent(count) {
+
+
+
+  let uni_4 = []
+
+
+  for (let i = 0; i < count; i++) {
+
+    let uni_arr = []
+
+    let a_arr = ['5', '6', '7', '8']
+    let b_arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f']
+    uni_arr.push(a_arr[Math.floor(Math.random() * 4)])
+
+    uni_arr.push(b_arr[Math.floor(Math.random() * b_arr.length)])
+    uni_arr.push(b_arr[Math.floor(Math.random() * b_arr.length)])
+    uni_arr.push(b_arr[Math.floor(Math.random() * b_arr.length)])
+
+    let uni = '\\u' + uni_arr.join("")
+    // console.log(uni)
+
+    let l = unescape(uni.replace(/\\u/g, '%u'))
+    // console.log(l)
+
+    uni_4.push(l)
+    
+
+
+
+  }
+
+  let content = uni_4.join('')
+  // console.log(content)
+
+  return content
+
+
+
+}
+
+
+function getChapter() {
+  let chapter = []
+
+  let random = Math.floor(Math.random() * 10 + 1)
+
+  for(let i = 0; i < random; i++) {
+
+    let obj = {}
+    obj.title_num = getContent(4);
+    // console.log(obj.title_num)
+    obj.title_content = getContent(20)
+    // console.log(obj.title_content)
+
+    let random = Math.floor(Math.random() * 12 + 1)
+
+    let lesson = []
+
+    for(let i = 0; i < random; i++) {
+
+      let obj_inner = {}
+      obj_inner.title_num = getContent(4);
+      // console.log(obj_inner.title_num)
+      obj_inner.title_content = getContent(20)
+      // console.log(obj_inner.title_content)
+
+      lesson.push(obj_inner)
+
+      
+
+    }
+
+    obj.lessons = lesson
+    
+
+
+
+    chapter.push(obj)
+  
+  
+    
+  }
+
+  console.log(chapter)
+
+  return chapter
+}
+
+getChapter()
+
+
+
+let chapters = [{
+    title_num: "第一章",
+    title_content: "大数据计算技术概述",
+    lessons: [{
+        title_num: "第一小节",
+        title_content: "课程简介"
+      },
+      {
+        title_num: "第二小节",
+        title_content: "大数据计算概论（上）"
+      },
+      {
+        title_num: "第三小节",
+        title_content: "大数据计算概论（下）"
+      }
+    ]
+  },
+  {
+    title_num: "第二章",
+    title_content: "大数据计算系统",
+    lessons: [{
+        title_num: "第一小节",
+        title_content: "大数据计算系统"
+      },
+      {
+        title_num: "第二小节",
+        title_content: "数据存储系统"
+      },
+      {
+        title_num: "第三小节",
+        title_content: "数据处理系统"
+      },
+      {
+        title_num: "第四小节",
+        title_content: "数据处理系统（续）"
+      },
+      {
+        title_num: "第五小节",
+        title_content: "数据应用系统"
+      }
+    ]
+  },
+  {
+    title_num: "第三章",
+    title_content: "数据采集方法",
+    lessons: [{
+        title_num: "第一小节",
+        title_content: "系统日志数据采集"
+      },
+      {
+        title_num: "第二小节",
+        title_content: "网络数据采集"
+      }
+    ]
+  },
+  {
+    title_num: "第四章",
+    title_content: "数据清洗与规约方法",
+    lessons: [{
+        title_num: "第一小节",
+        title_content: "脏数据类型及处理方法"
+      },
+      {
+        title_num: "第二小节",
+        title_content: "数据噪声处理方法"
+      },
+      {
+        title_num: "第三小节",
+        title_content: "数据集成方法"
+      },
+      {
+        title_num: "第四小节",
+        title_content: "数据规约方法"
+      },
+      {
+        title_num: "第五小节",
+        title_content: "数据建模方法"
+      }
+    ]
+  },
+  {
+    title_num: "第五章",
+    title_content: "数据分析算法",
+    lessons: [{
+        title_num: "第一小节",
+        title_content: "C4.5算法"
+      },
+      {
+        title_num: "第二小节",
+        title_content: "K-均值算法"
+      },
+      {
+        title_num: "第三小节",
+        title_content: "SVM算法"
+      },
+      {
+        title_num: "第四小节",
+        title_content: "Apriori算法"
+      },
+      {
+        title_num: "第五小节",
+        title_content: "kNN算法"
+      },
+      {
+        title_num: "第六小节",
+        title_content: "PageRank算法"
+      }
+    ]
+  },
+  {
+    title_num: "第六章",
+    title_content: "文本读写技术",
+    lessons: [{
+        title_num: "第一小节",
+        title_content: "读取文本文件"
+      },
+      {
+        title_num: "第二小节",
+        title_content: "读取CSV文件"
+      },
+      {
+        title_num: "第三小节",
+        title_content: "写入文本文件"
+      },
+      {
+        title_num: "第四小节",
+        title_content: "其他操作"
+      }
+    ]
+  },
+  {
+    title_num: "第七章",
+    title_content: "数据处理技术",
+    lessons: [{
+        title_num: "第一小节",
+        title_content: "数据合并技术"
+      },
+      {
+        title_num: "第二小节",
+        title_content: "数据转换技术"
+      },
+      {
+        title_num: "第三小节",
+        title_content: "数据转换技术(续)"
+      }
+    ]
+  },
+  {
+    title_num: "第八章",
+    title_content: "数据分析技术",
+    lessons: [{
+        title_num: "第一小节",
+        title_content: "Numpy工具包"
+      },
+      {
+        title_num: "第二小节",
+        title_content: "Numpy工具包：基本运算"
+      },
+      {
+        title_num: "第三小节",
+        title_content: "Pandas工具包"
+      },
+      {
+        title_num: "第四小节",
+        title_content: "Python Scikit-learn"
+      },
+      {
+        title_num: "第五小节",
+        title_content: "Python NLTK 自然语言处理入门"
+      }
+    ]
+  },
+  {
+    title_num: "第九章",
+    name: 9,
+    title_content: "大数据计算技术概述",
+
+  },
+];
+
 function setDate() {
   let month_random = Math.ceil(Math.random() * 3);
   if (month_random < 10) {
@@ -424,18 +699,36 @@ export function autoCreatedCourse(count) {
       bg_url: require('assets/img/course_cover/course_cover_' + Math.ceil(Math.random() * 90) + '.png'),
       des: "本专业培养具备良好的政治理论素养、思想道德素质和科学文化素质，既能在学 校和科研机构从事本专业的教学、研究工作，又能在党政机关和企事业单位从事以本专业为基础 的宣传、组织、管理、思想政治工作的复合型人才",
       apply_date: setDate(),
-      current_status: {
-        value: "待审核",
-        comment: "",
-        disabled: false,
-        active: 2
-      },
-      comment: ""
+      current_status: status[Math.floor(Math.random() * 4)],
+      comment: "",
+      time_range: [],
+      time_week: '',
+      time_week_all: [
+        '1-2课时每周',
+        '2-3课时每周',
+        '3-4课时每周',
+        '4-5课时每周',
+        '5-6课时每周'
+      ],
+      resource: '',
+      resources: [],
+      chapters: getChapter(),
     });
 
     coursesss.push(course_item);
   }
-  // console.log(coursesss);
+  console.log(coursesss);
+
+
+
+
+  // 4E00-9FA5
+
+
+  
+
+
+
 
   return coursesss;
 }

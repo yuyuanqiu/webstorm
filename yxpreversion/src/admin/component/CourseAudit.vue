@@ -37,7 +37,7 @@
               <el-form-item label="申请教师">
                 <span>{{ scope.row.applyer }}</span>
               </el-form-item>
-              <el-form-item label="修改课程状态" required>
+              <el-form-item label="审核课程状态" required>
                 <el-select v-model="scope.row.current_status.value" placeholder="请选择">
                   <el-option
                     v-for="status in scope.row.status"
@@ -48,7 +48,7 @@
                   ></el-option>
                 </el-select>
               </el-form-item>
-              <el-form-item v-if="scope.row.current_status.value === '审核未通过'" label="修改意见" required>
+              <el-form-item v-if="scope.row.current_status.value === '审核未通过'" label="审批意见" required>
                 <el-input placeholder="请输入内容" v-model="scope.row.comment" class="input-with-select">
                   <i class="el-icon-edit el-input__icon" slot="suffix"></i>
                 </el-input>

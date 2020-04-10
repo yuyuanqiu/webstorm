@@ -1,0 +1,110 @@
+#course-update {
+
+  .el-card {
+    margin: 24px 0;
+
+    .el-card__header {
+
+      .clearfix {
+        display: flex;
+        flex-flow: row;
+
+        h2 {
+
+          flex: 1;
+        }
+
+
+        span {
+
+          flex: 1;
+
+
+
+          .el-button.el-popover__reference {
+
+            // float: right;
+          }
+
+        }
+
+
+      }
+
+
+
+
+
+
+    }
+  }
+
+  .el-collapse-item__wrap {
+    padding-left: 36px;
+  }
+
+
+  .demo-table-expand {
+    font-size: 0;
+  }
+
+  .demo-table-expand label {
+    width: 120px;
+    color: #99a9bf;
+  }
+
+  .demo-table-expand .el-form-item {
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 50%;
+  }
+
+  .add_chapter,
+  .add_lesson {
+
+    h2 {
+      margin: 20px 0;
+      font-weight: 900;
+    }
+
+    .el-form {
+
+      .el-form-item {
+
+        width: 50%;
+        display: inline-block;
+
+        .el-form-item__content {
+
+
+          &>*:not([type='button']) {
+            width: 50%;
+          }
+        }
+      }
+    }
+  }
+
+  .el-form-item__content {
+
+    // line-height: 24px;
+  }
+
+  .el-button--primary {
+    color: #FFF;
+    background-color: #03a9f4;
+    border-color: #03a9f4;
+}
+
+
+}
+
+
+
+.course-update-popover {
+
+  height: 300px;
+
+  overflow: scroll;
+
+}

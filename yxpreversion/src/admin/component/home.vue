@@ -133,7 +133,7 @@ export default {
               auth: ["teacher"]
             },
             {
-              name: "课程上线",
+              name: "课程状态",
               id: "course_online",
               auth: ["teacher", "school", "root"]
             },
