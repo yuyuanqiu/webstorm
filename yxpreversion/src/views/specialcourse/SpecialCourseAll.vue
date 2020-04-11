@@ -30,7 +30,7 @@
         background
         layout="prev, pager, next"
         :total="1000"
-        page-size="20"
+        :page-size="20"
         prev-text="上一页"
         next-text="下一页 "
       ></el-pagination>

@@ -1,4 +1,20 @@
 .home-lessons {
+
+  // 逐个赋值
+  $background-color: #61b1c9e3,#c961a1e3 , #6179c9e3 ,#c96161e3 ,#61c5c9e3 ,#bfc961e3 ,#82c961e3 ,#7461c9e3 ,#61c972e3 ,#c99861e3 ,#61c9a6e3 ,#b861c9e3 ,#61b1c9e3;
+  // 
+  @for $i from 1 through 12 {
+    &:nth-child(#{$i}) {
+
+      .h-l-inner {
+        background-color: nth($background-color,$i);
+  
+      }
+    }
+  }
+
+  
+
   width: 100%;
   height: fit-content;
   // border: 1px solid blueviolet;
@@ -112,9 +128,10 @@
               height: 100%;
               width: 100%;
               top: 0;
-              background-color: rgba(97, 197, 201, 0.890196);
 
               color: #fff;
+
+
 
               .h-l-hx {
                 width: 25%;
@@ -164,7 +181,7 @@
             .el-link {
 
               width: 100%;
-              
+
               justify-content: inherit;
 
               text-decoration: none;
@@ -188,7 +205,7 @@
 
                 span:last-child {
                   float: right;
-                  
+
                 }
               }
 

@@ -37,7 +37,7 @@
       <div class="article-content-footer-info">
         <span class="el-icon-view">{{ article_info.read_total }}</span>
         <span class="el-icon-thumb">{{ article_info.like }}</span>
-        <span class="el-icon-coin">
+        <span class="el-icon-star-on">
           <el-rate v-model="value2" :colors="colors" :show-text="true" :texts="pingjia"></el-rate>
         </span>
       </div>

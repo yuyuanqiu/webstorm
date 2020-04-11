@@ -75,7 +75,7 @@ const routes = [
 
     children: [{
         path: '',
-        redirect: 'admin'
+        redirect: '/home'
       },
       {
         // --------------------------主页面------------------------

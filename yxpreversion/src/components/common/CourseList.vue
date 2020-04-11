@@ -1,7 +1,7 @@
 <template>
   <div class="good-course-body">
     <el-row :gutter="20" type="flex">
-      <el-col :span="6" v-for="course in courses" :key="course">
+      <el-col :span="6" v-for="course in courses" :key="course.id">
         <el-link :underline="false" class="grid-content">
           <el-image :src="course.icon" lazy>
             <div slot="placeholder" class="image-slot">

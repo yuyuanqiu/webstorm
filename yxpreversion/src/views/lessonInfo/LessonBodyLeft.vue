@@ -5,13 +5,13 @@
       <el-tab-pane label="课程目录" name="second">
         <div class="lesson-chapter">
           <el-collapse v-model="activeNames" @change="handleChange">
-            <el-collapse-item v-for="chapter in course.chapters" :key="chapter">
+            <el-collapse-item v-for="chapter in course.chapters" :key="chapter.id">
               <template slot="title">
                 <h4>{{ chapter.title_num }}</h4>
                 <span>{{ chapter.title_content }}</span>
                 <i class="header-icon el-icon-info"></i>
               </template>
-              <div v-for="lesson in chapter.lessons" :key="lesson">
+              <div v-for="lesson in chapter.lessons" :key="lesson.id">
                 <el-link href="#" target="_blank" :underline="false">
                   <span>{{ lesson.title_num }}</span>
                   <span>{{ lesson.title_content }}</span>
@@ -23,7 +23,7 @@
         </div>
       </el-tab-pane>
       <el-tab-pane label="参考资料" name="third">
-        <div v-for="ref in course.references" :key="ref" class="ref">
+        <div v-for="ref in course.references" :key="ref.id" class="ref">
           <div class="el-icon-reading">{{ ref }}</div>
         </div>
       </el-tab-pane>

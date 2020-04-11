@@ -10,10 +10,10 @@
       </div>
 
       </el-col>-->
-      <el-col :span="4" v-for="i in 6" :key="i">
+      <el-col :span="4" v-for="random_school in school_random" :key="random_school.id">
         <div class="el-col-div-1">
           <a href="#">
-            <img src="../../assets/img/school-icon/南京大学.png" />
+            <img :src="random_school.url" />
           </a>
         </div>
       </el-col>
@@ -26,6 +26,26 @@ export default {
   name: "school-random",
   data() {
     return {
+      school_random: [
+        {
+          url: require("assets/img/school_huibiao/" + Math.ceil(Math.random() * 100) + ".png")
+        },
+        {
+          url: require("assets/img/school_huibiao/" + Math.ceil(Math.random() * 100) + ".png")
+        },
+        {
+          url: require("assets/img/school_huibiao/" + Math.ceil(Math.random() * 100) + ".png")
+        },
+        {
+          url: require("assets/img/school_huibiao/" + Math.ceil(Math.random() * 100) + ".png")
+        },
+        {
+          url: require("assets/img/school_huibiao/" + Math.ceil(Math.random() * 100) + ".png")
+        },
+        {
+          url: require("assets/img/school_huibiao/" + Math.ceil(Math.random() * 100) + ".png")
+        },
+      ],
       schools: [
         "../../assets/img/school-icon/北京大学.png",
         "../../assets/img/school-icon/南京大学.png",
@@ -47,6 +67,8 @@ export default {
   border: 1px solid #e9e9e9;
   border-radius: 4px;
   margin: 20px 0;
+
+  background: #fff;
 }
 
 .el-row {
@@ -69,7 +91,8 @@ export default {
         display: inline-block;
         position: relative;
         img {
-          width: 52%;
+          width: 75%;
+          height: 75%;
           // 水平垂直居中对齐
           position: absolute;
           top: 50%;

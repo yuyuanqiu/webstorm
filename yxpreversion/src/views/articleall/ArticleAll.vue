@@ -1,10 +1,10 @@
 <template>
   <div id="article-all">
     <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane :label="first_level.name" class="student-body-article" v-for="first_level in total_level" :key="first_level" :name="first_level.name">
+      <el-tab-pane :label="first_level.name" class="student-body-article" v-for="first_level in total_level" :key="first_level.id" :name="first_level.name">
         <div class="leibie">
           
-              <el-button round  v-for="i in first_level.children" :key="i">
+              <el-button round  v-for="i in first_level.children" :key="i.id">
                 {{ i }}
               </el-button>
 
@@ -14,7 +14,7 @@
         <article-title
           
           v-for="articleTitle in articleTitles"
-          :key="articleTitle"
+          :key="articleTitle.id"
           :articleTitle="articleTitle"
         ></article-title>
       </el-tab-pane>
@@ -246,6 +246,7 @@ export default {
     toPaths(path) {
       this.$router.push({ path: path})
     },
+    handleClick() {},
   }
 };
 </script>

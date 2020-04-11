@@ -1,8 +1,8 @@
 <template>
-  <div id="specific-course-nav" :class="{isFixed: isFixed}">
+  <div id="specific-course-nav">
     <el-row class="row-bg">
       <el-col :span="4" class="course-head">
-        <h3>国家精品</h3>
+        <h3>示范课程</h3>
       </el-col>
       <el-col v-for="i of course_specific" :key="i" class="lesss">
         <el-link @click="SCNtiaozhuan" :underline="false">{{i}}</el-link>

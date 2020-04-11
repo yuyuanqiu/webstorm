@@ -5,7 +5,7 @@
     </div>
     <div class="school-all-list">
       <el-row  :gutter="20" > 
-        <el-col v-for="school in schools" :key="school">
+        <el-col v-for="school in schools" :key="school.id">
           <el-link :title="school.name" :href="'/school/' + school.name" :underline="false">
             <img :src="school.icon" />
           </el-link>

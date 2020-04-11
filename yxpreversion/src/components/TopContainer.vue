@@ -8,12 +8,10 @@
       </div>
       <div class="top-nav">
         <el-menu
-          :default-active="activeIndex2"
           class="el-menu-demo"
           mode="horizontal"
           text-color="#000000"
-          @select="handleSelect"
-          active-text-color="#ffd04b"
+          active-text-color="#03A9F4"
         >
           <el-menu-item index="1">
             <template slot="title">
@@ -43,9 +41,7 @@
       <div class="top-search">
         <el-autocomplete
           v-model="state"
-          :fetch-suggestions="querySearchAsync"
           placeholder="搜索精品课程"
-          @select="handleSelect"
         >
           <el-button slot="append" icon="el-icon-search"></el-button>
         </el-autocomplete>
@@ -74,6 +70,9 @@
                 <el-dropdown-item>
                   <span  @click="toPath('/shop/ls')">积分商城</span>
                 </el-dropdown-item>
+                <el-dropdown-item>
+                  <span  @click="toPath('/admin')">后台</span>
+                </el-dropdown-item>
                 <el-dropdown-item>退出</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -89,6 +88,7 @@ export default {
   name: "top-container",
   data() {
     return {
+      state: '',
       isLogin: "yes"
     };
   },

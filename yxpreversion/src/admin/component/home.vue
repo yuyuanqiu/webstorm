@@ -50,6 +50,9 @@
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>退出登录</el-dropdown-item>
+              <el-dropdown-item>
+                  <span  @click="toPath('/home')">前台</span>
+                </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
           </div>
@@ -163,6 +166,11 @@ export default {
     };
   },
   methods: {
+    toPath(path) {
+      this.$router.push({
+        path: path
+      })
+    },
     toPathss(path) {
 
       // push时应该使用name参数，而不是path参数，否则会有意想不到的后果

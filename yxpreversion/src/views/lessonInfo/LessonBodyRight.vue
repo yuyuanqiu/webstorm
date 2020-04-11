@@ -11,8 +11,8 @@
       </div>
       <div class="teachers">
         <b class="el-icon-s-operation">{{ course.teachers.length }}位授课教师</b>
-        <div v-for="teacher in course.teachers" :key="teacher">
-          <el-link href="/null" :underline="false">
+        <div v-for="teacher in course.teachers" :key="teacher.id">
+          <el-link href="/teacher/ls" :underline="false">
             <img :src="course.avatar" />
             <div class="teacher_i">
               <span>{{ teacher.name }}</span>

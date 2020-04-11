@@ -10,7 +10,7 @@
       </el-col>
       <el-col :span="12">
         <div class="lesson-title-right">
-          <h3>4小时学完C语言</h3>
+          <h3>大数据计算技术</h3>
           <div class="lesson-title-right-time">
             <el-card class="box-card" shadow="never">
               <div slot="header">
