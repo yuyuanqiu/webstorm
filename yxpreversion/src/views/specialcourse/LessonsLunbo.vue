@@ -21,7 +21,9 @@
           :class="{dotted: i === (currentIndex-1)}"
           @click="jump(i+1)"
         >
-          <a href="#">21设计考研系列公开直播</a>
+          <a href="#">
+            {{ dot.text }}
+          </a>
         </li>
       </ul>
     </div>
@@ -47,19 +49,24 @@ export default {
     return {
       sliders: [
         {
-          img: require("assets/img/lessons-lunbo.png")
+          img: require("assets/img/special_course/lunbo.png"),
+          text: '1节课彻底搞清一词多义现象'
         },
         {
-          img: require("assets/img/lessons-lunbo.png")
+          img: require("assets/img/special_course/lunbo.png"),
+          text: '零基础直达B1水平'
         },
         {
-          img: require("assets/img/lessons-lunbo.png")
+          img: require("assets/img/special_course/lunbo.png"),
+          text: '考研英语系统提分班'
         },
         {
-          img: require("assets/img/lessons-lunbo.png")
+          img: require("assets/img/special_course/lunbo.png"),
+          text: '英语打基础系列直播'
         },
         {
-          img: require("assets/img/lessons-lunbo.png")
+          img: require("assets/img/special_course/lunbo.png"),
+          text: '大学英语自学课程（上）'
         }
       ],
       imgWidth: 840,

@@ -29,7 +29,13 @@ Vue.component('article-title', ArticleTitle)
 Vue.component('container-flex', ContainerFlex)
 
 
-
+// 全局导航守卫 动态配置 title
+router.beforeEach((to, from, next) => {
+  if (to.meta.title) {
+    document.title = "予思课程 | " + to.meta.title
+  }
+  next()
+})
 
 Vue.use(ElementUI)
 

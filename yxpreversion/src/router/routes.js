@@ -53,6 +53,8 @@ const ArticleContent = () => import('views/articlecontent/ArticleContent')
 
 const Shop = () => import('views/shop/Shop')
 
+const HomeWork = () => import('views/homework/Homework')
+
 // ----------------------------------后台页面-------------------
 
 
@@ -63,6 +65,7 @@ const CourseAudit = () => import('admin/component/CourseAudit')
 const CourseOnline = () => import('admin/component/CourseOnline')
 const CourseUpdate = () => import('admin/component/CourseUpdate')
 
+const ManageArticle = () => import('admin/component/ManageArticle')
 
 const routes = [
   // ------------------------------用户界面--------开始----------------------
@@ -88,6 +91,9 @@ const routes = [
               'home-menu': HomeMenu,
               'school-random': SchoolRandom,
               'home-lessons': HomeLessons,
+            },
+            meta: {
+              title: '首页',
             }
           },
 
@@ -112,6 +118,9 @@ const routes = [
             'lessons-ad-column3': LessonsADColumn3,
             'special-course-all': SpecialCourseAll,
 
+          },
+          meta: {
+            title: '课程分类',
           }
         }]
 
@@ -126,6 +135,9 @@ const routes = [
             'lesson-title': LessonTitle,
             'lesson-body-left': LessonBodyLeft,
             'lesson-body-right': LessonBodyRight,
+          },
+          meta: {
+            title: '课程详情',
           }
         }]
       },
@@ -141,7 +153,8 @@ const routes = [
             "course-homework": CourseHomework
           },
           meta: {
-            roles: ['xuesheng', 'jiaoshi']
+            roles: ['xuesheng', 'jiaoshi'],
+            title: '视频播放',
           }
         }]
       },
@@ -149,6 +162,9 @@ const routes = [
         // -------------------所有学校页--------------------
         path: '/schools',
         component: SchoolAll,
+        meta: {
+          title: '学校列表',
+        }
       },
       {
         // ------------------学校详情页--------------------
@@ -161,6 +177,9 @@ const routes = [
             'school-title': SchoolTitle,
             'special-course-all': SpecialCourseAll,
             'school-teacher': SchoolTeacher,
+          },
+          meta: {
+            title: '学校详情',
           }
         }]
       },
@@ -173,6 +192,9 @@ const routes = [
           components: {
             'teacher-head': TeacherHead,
             'teacher-body': TeacherBody,
+          },
+          meta: {
+            title: '教师详情',
           }
         }]
       },
@@ -187,7 +209,8 @@ const routes = [
             'student-body': StudentBody,
           },
           meta: {
-            roles: ['xuesheng', 'jiaoshi']
+            roles: ['xuesheng', 'jiaoshi'],
+            title: '个人中心'
           }
         }]
       },
@@ -196,29 +219,53 @@ const routes = [
         path: '/article/:ls',
         name: 'ArticleEditor',
         component: ArticleEditor,
+        meta: {
+          title: '编辑文章',
+        }
       },
       {
         path: '/articleall/:ls',
         name: 'articleall',
         component: ArticleAll,
+        meta: {
+          title: '文章中心',
+        }
 
       },
       {
         path: '/articlecontent/:ls',
         name: 'article-content',
         component: ArticleContent,
+        meta: {
+          title: '文章内容',
+        }
       },
       // -------------------积分兑换商城
       {
         path: '/shop/:ls',
         name: 'shop',
         component: Shop,
+        meta: {
+          title: '积分商城',
+        }
+      },
+      // 作业界面
+      {
+        path: 'homework/:ls',
+        name: 'homework',
+        component: HomeWork,
+        meta: {
+          title: '作业',
+        }
       },
       {
         // ----------------登录页面----------------
         path: '/login',
         name: 'login',
         component: Login,
+        meta: {
+          title: '登录',
+        }
       },
       {
         path: '/none',
@@ -245,12 +292,18 @@ const routes = [
     children: [{
         path: '',
         name: 'admin',
-        component: NotFound404
+        component: NotFound404,
+        meta: {
+          title: '后台首页',
+        }
       },
       {
         path: 'apply_school',
         name: 'apply_school',
-        component: NotFound404
+        component: NotFound404,
+        meta: {
+          title: '学校申请',
+        }
       },
       {
         path: 'apply_teacher',
@@ -280,28 +333,40 @@ const routes = [
       {
         path: 'course_apply',
         name: 'course_apply',
-        component: CourseApply
+        component: CourseApply,
+        meta: {
+          title: '课程申请',
+        }
 
       },
       {
         path: 'course_audit',
         name: 'course_audit',
-        component: CourseAudit
+        component: CourseAudit,
+        meta: {
+          title: '课程审核',
+        }
       },
       {
         path: 'course_online',
         name: 'course_online',
-        component: CourseOnline
+        component: CourseOnline,
+        meta: {
+          title: '课程状态',
+        }
       },
       {
         path: 'course_update',
         name: 'course_update',
-        component: CourseUpdate
+        component: CourseUpdate,
+        meta: {
+          title: '课程更新',
+        }
       },
       {
         path: 'manage_article',
         name: 'manage_article',
-        component: NotFound404
+        component: ManageArticle
       },
       {
         path: 'manage_post',

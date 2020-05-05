@@ -1,18 +1,18 @@
 <template>
   <div id="article-all">
     <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane :label="first_level.name" class="student-body-article" v-for="first_level in total_level" :key="first_level.id" :name="first_level.name">
+      <el-tab-pane
+        :label="first_level.name"
+        class="student-body-article"
+        v-for="first_level in total_level"
+        :key="first_level.id"
+        :name="first_level.name"
+      >
         <div class="leibie">
-          
-              <el-button round  v-for="i in first_level.children" :key="i.id">
-                {{ i }}
-              </el-button>
-
-              <el-button icon="el-icon-edit" @click="toPaths('/article/ls')">写文章</el-button>
-            
+          <el-button round v-for="i in first_level.children" :key="i.id">{{ i }}</el-button>
+          <el-button icon="el-icon-edit" @click="toPaths('/article/ls')">写文章</el-button>
         </div>
         <article-title
-          
           v-for="articleTitle in articleTitles"
           :key="articleTitle.id"
           :articleTitle="articleTitle"
@@ -46,7 +46,13 @@ export default {
         },
         jisuanji: {
           name: "计算机",
-          children: ['程序设计与开发', '数据库', '计算机网络', '算法', 'web安全']
+          children: [
+            "程序设计与开发",
+            "数据库",
+            "计算机网络",
+            "算法",
+            "web安全"
+          ]
         },
         lixue: {
           name: "理学",
@@ -92,12 +98,12 @@ export default {
         xinlixue: {
           name: "心理学",
           children: [
-            '基础心理学',
-            '生理心理学',
-            '认知心理学',
-            '比较心理学',
-            '社会心理学',
-            '应用心理学'
+            "基础心理学",
+            "生理心理学",
+            "认知心理学",
+            "比较心理学",
+            "社会心理学",
+            "应用心理学"
           ]
         },
         yiyaoweisheng: {
@@ -135,7 +141,7 @@ export default {
           children: ["植物", "动物", "生态"]
         }
       },
-      
+
       articleTitles: [
         {
           author: "宋佳佳",
@@ -240,13 +246,12 @@ export default {
       ]
     };
   },
-  components: {
-  },
+  components: {},
   methods: {
     toPaths(path) {
-      this.$router.push({ path: path})
+      this.$router.push({ path: path });
     },
-    handleClick() {},
+    handleClick() {}
   }
 };
 </script>

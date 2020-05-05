@@ -2,9 +2,11 @@
   <div id="specific-course-nav">
     <el-row class="row-bg">
       <el-col :span="4" class="course-head">
-        <h3>示范课程</h3>
+        <h3>
+          {{ course_specific.name }}
+        </h3>
       </el-col>
-      <el-col v-for="i of course_specific" :key="i" class="lesss">
+      <el-col v-for="i of course_specific.children" :key="i.id" class="lesss">
         <el-link @click="SCNtiaozhuan" :underline="false">{{i}}</el-link>
       </el-col>
     </el-row>
@@ -12,27 +14,16 @@
 </template>
 
 <script>
+
+import { second_level_res } from "admin/common.js"
+
 export default {
   name: "special-course-nav",
   data() {
     return {
       idFixed: true,
       offsetTop: 0,
-      course_specific: [
-        "全部",
-        "外语",
-        "计算机",
-        "理学",
-        "工学",
-        "经济管理",
-        "文史哲",
-        "艺术设计",
-        "心理学",
-        "医药卫生",
-        "法学",
-        "教育教学",
-        "农林园艺"
-      ]
+      course_specific: second_level_res[0]
     };
   },
   mounted() {

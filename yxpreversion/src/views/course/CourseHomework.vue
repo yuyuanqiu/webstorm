@@ -1,15 +1,12 @@
 <template>
-  <div id="course-homework">
-    
-  </div>
+  <div id="course-homework"></div>
+
+
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style>
-
 </style>

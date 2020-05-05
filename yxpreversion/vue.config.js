@@ -5,6 +5,22 @@ function resolve(dir) {
 }
 
 module.exports = {
+
+
+  //基本路径
+	//baseUrl: './',//vue-cli3.3以下版本使用
+  publicPath:'./',//vue-cli3.3+新版本使用
+	//输出文件目录
+	outputDir: 'dist',
+	// eslint-loader 是否在保存的时候检查
+	lintOnSave: true,
+	//放置生成的静态资源 (js、css、img、fonts) 的 (相对于 outputDir 的) 目录。
+	assetsDir: 'static',
+	//以多页模式构建应用程序。
+	pages: undefined,
+	//是否使用包含运行时编译器的 Vue 构建版本
+	runtimeCompiler: false,
+
   // chainWebpack: (config) => {
   //   config.resolve.alias
   //     .set('@', resolve('src'))
@@ -17,7 +33,6 @@ module.exports = {
   //     .set('public', resolve('public'))
   // },
 
-  
 
   // 修改图标icon
   pwa: {
@@ -33,7 +48,19 @@ module.exports = {
   configureWebpack: {
     devtool: 'source-map'
   },
+
+
+
+
+
   configureWebpack: config => {
+
+    config.devtool = 'inline-source-map';
+    config.performance = {
+      // hints: false,
+      // maxEntrypointSize: 512000,
+      // maxAssetSize: 512000
+    };
     config.resolve = {
       // 配置解析别名
       extensions: [".js", ".json", ".vue"],
@@ -50,6 +77,19 @@ module.exports = {
         admin: path.resolve(__dirname, "./src/admin")
       }
     };
+  },
+  // webpack-dev-server 相关配置
+  devServer: {
+    open: process.platform === 'darwin',
+    // host: 'localhost',
+    host: "0.0.0.0",
+    port: 18081,
+    https: false, // 是否启用https
+    hot: true, // 启用webpack的热模块替换功能：
+    hotOnly: false, // devServer.hot在没有页面刷新的情况下启用热模块替换（请参阅）作为构建失败时的后备。
+    inline: true, // 在开发服务器的两种不同模式之间切换，默认为true
+    compress: true, // 是否开启压缩
+    proxy: null, // 设置代理
   },
 }
 // // }

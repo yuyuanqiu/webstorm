@@ -16,16 +16,16 @@
           <div class="lesson-bottom">
             <div class="lesson-name">
               <b>{{ course.name }}</b>
-              <div class="school">{{ course.teacher.school }}</div>
-              <div class="name">{{ course.teacher.name }}</div>
+              <div class="school">{{ course.school }}</div>
+              <div class="name">{{ course.teacher }}</div>
             </div>
             <div class="lesson-info">
-              <span class="el-icon-user-solid">{{ course.people }}</span>
+              <span class="el-icon-user-solid">{{ course.count }}</span>
               <span
-                v-if="Number(course.week_now) > 0"
+                v-if="Number(course.week) > 0"
                 class="el-icon-pie-chart"
-              >进行至第{{ course.week_now }}周</span>
-              <span v-else-if="Number(course.week_now) <= 0" class="el-icon-pie-chart">课程未开始</span>
+              >进行至第{{ course.week }}周</span>
+              <span v-else-if="Number(course.week) <= 0" class="el-icon-pie-chart">课程未开始</span>
               <span v-else class="el-icon-pie-chart">课程已结束</span>
             </div>
           </div>

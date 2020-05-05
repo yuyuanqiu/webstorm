@@ -313,3 +313,5 @@ export default {
 <style lang="scss">
 @import "admin/scss/component/CourseUpdate.scss";
 </style>
+
+

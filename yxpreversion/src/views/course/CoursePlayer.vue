@@ -73,6 +73,8 @@
   </div>
 </template>
 
+
+
 <script>
 /**
  * -------------------------------------------------------------------------------------------------------------
@@ -372,3 +374,4 @@ export default {
 <style lang="scss">
 @import "assets/css/course/CoursePlayer.scss";
 </style>
+

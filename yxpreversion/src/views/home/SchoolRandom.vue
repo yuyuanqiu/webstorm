@@ -28,22 +28,22 @@ export default {
     return {
       school_random: [
         {
-          url: require("assets/img/school_huibiao/" + Math.ceil(Math.random() * 100) + ".png")
+          url: require("assets/img/school_huibiao/" + Math.ceil(Math.random() * 12) + ".png")
         },
         {
-          url: require("assets/img/school_huibiao/" + Math.ceil(Math.random() * 100) + ".png")
+          url: require("assets/img/school_huibiao/" + Math.ceil(Math.random() * 12) + ".png")
         },
         {
-          url: require("assets/img/school_huibiao/" + Math.ceil(Math.random() * 100) + ".png")
+          url: require("assets/img/school_huibiao/" + Math.ceil(Math.random() * 12) + ".png")
         },
         {
-          url: require("assets/img/school_huibiao/" + Math.ceil(Math.random() * 100) + ".png")
+          url: require("assets/img/school_huibiao/" + Math.ceil(Math.random() * 12) + ".png")
         },
         {
-          url: require("assets/img/school_huibiao/" + Math.ceil(Math.random() * 100) + ".png")
+          url: require("assets/img/school_huibiao/" + Math.ceil(Math.random() * 12) + ".png")
         },
         {
-          url: require("assets/img/school_huibiao/" + Math.ceil(Math.random() * 100) + ".png")
+          url: require("assets/img/school_huibiao/" + Math.ceil(Math.random() * 12) + ".png")
         },
       ],
       schools: [

@@ -43,79 +43,87 @@
       </div>
     </div>
 
-    <div class="article-comment">
-      <div class="comment-input">
-        <el-input placeholder="请输入内容" v-model="input2">
-          <template slot="prepend">
-            <el-avatar :size="36" :src="circleUrl"></el-avatar>
-          </template>
-          <template slot="append">评论</template>
-        </el-input>
-      </div>
-      <div class="article-comment-item" v-for="comment in article_info.comment" :key="comment.id">
-        <el-row type="flex">
-          <el-col>
-            <div class="a-c-h-avatar">
-              <el-avatar :size="50" :src="circleUrl"></el-avatar>
-            </div>
-          </el-col>
-          <el-col class="root-reply">
-            <div class="a-c-h-other">
-              <div class="author">
-                <div>{{ comment.author }}</div>
-
-                <div>{{ comment.publish_date }}</div>
-                <div>积分：3</div>
+      <!-- <div class="article-comment">
+        <div class="comment-input">
+          <el-input placeholder="请输入内容" v-model="input2">
+            <template slot="prepend">
+              <el-avatar :size="36" :src="circleUrl"></el-avatar>
+            </template>
+            <template slot="append">评论</template>
+          </el-input>
+        </div>
+        <div class="article-comment-item" v-for="comment in article_info.comment" :key="comment.id">
+          <el-row type="flex">
+            <el-col>
+              <div class="a-c-h-avatar">
+                <el-avatar :size="50" :src="circleUrl"></el-avatar>
               </div>
-              <div class="other">
-                <p class="comment">{{ comment.content }}</p>
-                <div>
-                  <span class="el-icon-thumb">21</span>
-                  <span class="el-icon-chat-dot-round">回复</span>
+            </el-col>
+            <el-col class="root-reply">
+              <div class="a-c-h-other">
+                <div class="author">
+                  <div>{{ comment.author }}</div>
+
+                  <div>{{ comment.publish_date }}</div>
+                  <div>积分：3</div>
+                </div>
+                <div class="other">
+                  <p class="comment">{{ comment.content }}</p>
+                  <div>
+                    <span class="el-icon-thumb">21</span>
+                    <span class="el-icon-chat-dot-round">回复</span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="reply_comment" v-for="reply in comment.reply" :key="reply.id">
-              <el-row type="flex">
-                <el-col>
-                  <div class="a-c-h-avatar">
-                    <el-avatar :size="50" :src="circleUrl"></el-avatar>
-                  </div>
-                </el-col>
-                <el-col>
-                  <div class="a-c-h-other">
-                    <div class="author">
-                      <div>{{ reply.author }}</div>
-
-                      <div>{{ reply.publish_date }}</div>
-                      <div>积分：3</div>
+              <div class="reply_comment" v-for="reply in comment.reply" :key="reply.id">
+                <el-row type="flex">
+                  <el-col>
+                    <div class="a-c-h-avatar">
+                      <el-avatar :size="50" :src="circleUrl"></el-avatar>
                     </div>
-                    <div class="other">
-                      <p class="comment">
-                        <span>回复</span>
-                        <span>
-                          <a href>{{comment.author }}</a>
-                        </span>
-                        {{ reply.content }}
-                      </p>
-                      <div>
-                        <span class="el-icon-thumb">21</span>
-                        <span class="el-icon-chat-dot-round">回复</span>
+                  </el-col>
+                  <el-col>
+                    <div class="a-c-h-other">
+                      <div class="author">
+                        <div>{{ reply.author }}</div>
+
+                        <div>{{ reply.publish_date }}</div>
+                        <div>积分：3</div>
+                      </div>
+                      <div class="other">
+                        <p class="comment">
+                          <span>回复</span>
+                          <span>
+                            <a href>{{comment.author }}</a>
+                          </span>
+                          {{ reply.content }}
+                        </p>
+                        <div>
+                          <span class="el-icon-thumb">21</span>
+                          <span class="el-icon-chat-dot-round">回复</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </el-col>
-              </el-row>
-            </div>
-          </el-col>
-        </el-row>
-      </div>
-    </div>
+                  </el-col>
+                </el-row>
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+      </div> -->
+
+      <comment></comment>
   </div>
 </template>
 
 <script>
+
+import Comment from "components/common/Comment"
+
 export default {
+  components: {
+    Comment,
+  },
   data() {
     return {
       pingjia: ["1.0分", "2.0分", "3.0分", "4.0分", "5.0分"],

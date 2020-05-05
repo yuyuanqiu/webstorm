@@ -1,0 +1,152 @@
+#comment {
+
+  background: #fff;
+  padding: 16px 36px;
+  margin: 16px 0;
+
+  .article-comment-item {
+
+    margin: 16px 0;
+
+    .el-row {
+      flex-flow: row wrap;
+
+      .el-col {
+
+        &:first-child {
+          width: 50px;
+          margin-right: 32px;
+
+
+        }
+
+        &.root-reply {
+          border-top: 1px solid #e3e3e3;
+
+          .reply_comment {
+            padding: 8px 16px 0;
+
+            background: aliceblue;
+
+            &:last-child {
+              padding-bottom: 12px;
+            }
+
+
+            .a-c-h-other {
+
+              .other {
+
+                .comment {
+
+                  span {
+                    font-weight: 500;
+
+                    &:last-child {
+
+                      text-decoration: underline;
+
+                    }
+
+                    a {
+                      text-decoration: none;
+                      color: #333;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        &:not(:first-child) {
+
+          flex: 1;
+          min-width: 85%;
+          max-width: 85%;
+          line-height: 1.5;
+
+          position: relative;
+
+          .a-c-h-other {
+
+
+            .author {
+              height: 32px;
+              line-height: 32px;
+
+
+
+              &>div {
+                display: inline-block;
+
+                &:first-child {
+                  font-size: 16px;
+                  font-weight: 600;
+                }
+
+                &:not(:first-child) {
+                  margin-left: 16px;
+                  font-size: 12px;
+                }
+              }
+            }
+
+            .other {
+              font-size: 16px;
+
+              .comment {
+                font-weight: 200;
+
+                a {
+
+                  padding: 6px;
+                }
+              }
+
+              &>div:not(.reply-input) {
+                padding: 8px 0;
+                padding-right: 24px;
+                font-size: 14px;
+
+                span+span {
+
+                  margin-left: 16px;
+
+                }
+
+                span {
+                  cursor: pointer;
+
+                  &:before {
+                    padding-right: 6px;
+                  }
+                }
+
+                
+              }
+
+              .reply-input {
+
+
+                padding: 8px 0;
+              }
+            }
+
+
+          }
+
+
+
+
+        }
+
+
+
+
+      }
+    }
+
+
+  }
+}

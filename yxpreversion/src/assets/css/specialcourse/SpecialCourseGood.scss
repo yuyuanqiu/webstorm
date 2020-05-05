@@ -108,4 +108,19 @@
     }
   }
 
+  .options-lesson-pages {
+
+    // -------------------让分页水平居中对齐
+    display: table;
+    margin: 0 auto;
+
+    padding: 30px 0 112px;
+
+    .el-pagination {
+      // 适合内容
+      width: fit-content;
+
+    }
+  }
+
 }

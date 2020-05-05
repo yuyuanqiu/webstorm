@@ -196,130 +196,130 @@
     }
     }
 
-    &-item {
+    // &-item {
 
-      margin: 16px 0;
-      .el-row {
-        flex-flow: row wrap;
+    //   margin: 16px 0;
+    //   .el-row {
+    //     flex-flow: row wrap;
 
-        .el-col {
+    //     .el-col {
 
-          &:first-child {
-            width: 50px;
-            margin-right: 16px;
+    //       &:first-child {
+    //         width: 50px;
+    //         margin-right: 16px;
 
 
-          }
+    //       }
 
-          &.root-reply {
-            border-top: 1px solid #e3e3e3;
+    //       &.root-reply {
+    //         border-top: 1px solid #e3e3e3;
 
-            .reply_comment {
-              padding: 6px 0;
+    //         .reply_comment {
+    //           padding: 6px 0;
 
-              background: aliceblue;
+    //           background: aliceblue;
       
-              &:last-child {
-                padding-bottom: 12px;
-              }
+    //           &:last-child {
+    //             padding-bottom: 12px;
+    //           }
       
       
-              .a-c-h-other {
+    //           .a-c-h-other {
       
-                .other {
+    //             .other {
       
-                  .comment {
+    //               .comment {
       
-                    span {
-                      font-weight: 500;
+    //                 span {
+    //                   font-weight: 500;
       
-                      a {
-                        text-decoration: none;
-                        color: #333;
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
+    //                   a {
+    //                     text-decoration: none;
+    //                     color: #333;
+    //                   }
+    //                 }
+    //               }
+    //             }
+    //           }
+    //         }
+    //       }
 
-          &:not(:first-child) {
+    //       &:not(:first-child) {
 
-            flex: 1;
-            min-width: 85%;
-            max-width: 85%;
-            line-height: 1.5;
+    //         flex: 1;
+    //         min-width: 85%;
+    //         max-width: 85%;
+    //         line-height: 1.5;
 
-            position: relative;
+    //         position: relative;
 
-            .a-c-h-other {
-
-
-              .author {
-                height: 32px;
-                line-height: 32px;
+    //         .a-c-h-other {
 
 
-
-                &>div {
-                  display: inline-block;
-
-                  &:first-child {
-                    font-size: 18px;
-                    font-weight: 600;
-                  }
-
-                  &:not(:first-child) {
-                    margin-left: 16px;
-                    font-size: 12px;
-                  }
-                }
-              }
-
-              .other {
-                font-size: 18px;
-
-                p {
-                  font-weight: 200;
-                }
-
-                div {
-                  padding-right: 24px;
-                  font-size: 14px;
-
-                  span+span {
-
-                    margin-left: 16px;
-
-                  }
-
-                  span {
-                    cursor: pointer;
-
-                    &:before {
-                      padding-right: 6px;
-                    }
-                  }
-                }
-              }
-
-
-            }
+    //           .author {
+    //             height: 32px;
+    //             line-height: 32px;
 
 
 
+    //             &>div {
+    //               display: inline-block;
 
-          }
+    //               &:first-child {
+    //                 font-size: 18px;
+    //                 font-weight: 600;
+    //               }
+
+    //               &:not(:first-child) {
+    //                 margin-left: 16px;
+    //                 font-size: 12px;
+    //               }
+    //             }
+    //           }
+
+    //           .other {
+    //             font-size: 18px;
+
+    //             p {
+    //               font-weight: 200;
+    //             }
+
+    //             div {
+    //               padding-right: 24px;
+    //               font-size: 14px;
+
+    //               span+span {
+
+    //                 margin-left: 16px;
+
+    //               }
+
+    //               span {
+    //                 cursor: pointer;
+
+    //                 &:before {
+    //                   padding-right: 6px;
+    //                 }
+    //               }
+    //             }
+    //           }
+
+
+    //         }
 
 
 
 
-        }
-      }
+    //       }
+
+
+
+
+    //     }
+    //   }
 
       
-    }
+    // }
 
   }
 }

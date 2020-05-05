@@ -2,7 +2,9 @@
   <div class="home-menu">
     <div class="main-1" @mouseleave="shouqi">
       <ul id="home_menu_ul">
-        <li :class="item.icon" v-for="item in home_category" :key="item.title">{{ item.title }}</li>
+        <li :class="item.icon" v-for="item in home_category" :key="item.title">
+          <el-link :underline="false" @click="toPath('/specialcourse/ls')">{{ item.title }}</el-link>
+        </li>
       </ul>
       <div v-if="zhankai" class="el-icon-chat-dot-round" @mouseenter="shouqi">收起</div>
       <div v-else class="el-icon-chat-dot-round" @mouseenter="zhankais">更多</div>

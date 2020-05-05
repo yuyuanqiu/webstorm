@@ -10,24 +10,28 @@
     </div>
     <div class="jifen-card">
       <el-row>
-        <el-col class="outer" v-for="i in 2" :key="i">
-          <h2>通用</h2>
+        <el-col class="outer" v-for="jifen in jifen_card_tongyong" :key="jifen.key">
+          <h2>{{ jifen.name }}</h2>
           <el-row type="flex">
-            <el-col class="inner" :span="6" v-for="data in jifen_card" :key="data.name">
+            <el-col class="inner" :span="6" v-for="data in jifen.jifen_card" :key="data.id">
               <div class="card">
                 <div>
                   <h3>{{ data.name }}</h3>
                 </div>
-                <el-image style="width: 100px;" :src="data.bg" :fit="cover"></el-image>
+                <el-image style="width: 100px;" :src="data.bg" fit="cover"></el-image>
 
                 <div class="des">{{ data.desc }}</div>
-
-                <el-button size="small" type="primary" class="el-icon-shopping-cart-2">3鱼丝</el-button>
+                <!-- <el-button type="text" >点击打开 Message Box</el-button> -->
+                <el-button
+                  size="small"
+                  @click="duihuan(data, $event)"
+                  type="primary"
+                  class="el-icon-shopping-cart-2"
+                >{{ data.price }}鱼丝</el-button>
               </div>
             </el-col>
           </el-row>
         </el-col>
-        
       </el-row>
     </div>
   </div>
@@ -73,60 +77,129 @@ export default {
           }
         ]
       },
-      jifen_card: [
+      jifen_card_tongyong: [
         {
-          name: "背景装饰",
-          price: 20,
-          bg:
-            require("assets/img/shop_item_bg.png"),
-          desc:
-            "背景装饰特权可以对个人空间的背景进行更改，更改特效持续时间共14天"
+          name: "通用特权",
+          jifen_card: [
+            {
+              name: "背景装饰",
+              price: 5,
+              bg: require("assets/img/shop_item_bg.png"),
+              desc:
+                "背景装饰特权可以对个人空间的背景进行更改，更改特效持续时间共3天"
+            },
+            {
+              name: "背景装饰",
+              price: 10,
+              bg: require("assets/img/shop_item_bg.png"),
+              desc:
+                "背景装饰特权可以对个人空间的背景进行更改，更改特效持续时间共7天"
+            },
+            {
+              name: "背景装饰",
+              price: 20,
+              bg: require("assets/img/shop_item_bg.png"),
+              desc:
+                "背景装饰特权可以对个人空间的背景进行更改，更改特效持续时间共15天"
+            },
+            {
+              name: "个性签名",
+              price: 5,
+              bg: require("assets/img/shop_item_bg.png"),
+              desc:
+                "个性签名特权可以对个人空间的签名进行更改，更改特效持续时间共3天"
+            },
+            {
+              name: "个性签名",
+              price: 10,
+              bg: require("assets/img/shop_item_bg.png"),
+              desc:
+                "个性签名特权可以对个人空间的签名进行更改，更改特效持续时间共7天"
+            },
+            {
+              name: "个性签名",
+              price: 20,
+              bg: require("assets/img/shop_item_bg.png"),
+              desc:
+                "个性签名特权可以对个人空间的签名进行更改，更改特效持续时间共15天"
+            }
+          ]
         },
         {
-          name: "背景装饰",
-          price: 20,
-          bg:
-            require("assets/img/shop_item_bg.png"),
-          desc:
-            "背景装饰特权可以对个人空间的背景进行更改，更改特效持续时间共14天"
-        },
-        {
-          name: "背景装饰",
-          price: 20,
-          bg:
-            require("assets/img/shop_item_bg.png"),
-          desc:
-            "背景装饰特权可以对个人空间的背景进行更改，更改特效持续时间共14天"
-        },
-        {
-          name: "背景装饰",
-          price: 20,
-          bg:
-            require("assets/img/shop_item_bg.png"),
-          desc:
-            "背景装饰特权可以对个人空间的背景进行更改，更改特效持续时间共14天"
-        },
-        {
-          name: "背景装饰",
-          price: 20,
-          bg:
-            require("assets/img/shop_item_bg.png"),
-          desc:
-            "背景装饰特权可以对个人空间的背景进行更改，更改特效持续时间共14天"
-        },
-        {
-          name: "背景装饰",
-          price: 20,
-          bg:
-            require("assets/img/shop_item_bg.png"),
-          desc:
-            "背景装饰特权景进行更改，更改特效持续时间共14天"
-        },
-        
+          name: "课程专属特权",
+          jifen_card: [
+            {
+              name: "免到堂上课",
+              price: 20,
+              bg: require("assets/img/shop_item_bg.png"),
+              desc:
+                "免到堂上课特权在通过课程考核之后可不用到教室上课，此特权使用1次之后失效"
+            },
+            {
+              name: "免到堂上课",
+              price: 36,
+              bg: require("assets/img/shop_item_bg.png"),
+              desc:
+                "免到堂上课特权在通过课程考核之后可不用到教室上课，此特权使用2次之后失效"
+            },
+            {
+              name: "免到堂上课",
+              price: 49,
+              bg: require("assets/img/shop_item_bg.png"),
+              desc:
+                "免到堂上课特权在通过课程考核之后可不用到教室上课，此特权使用3次之后失效"
+            },
+            {
+              name: "免到堂上课",
+              price: 60,
+              bg: require("assets/img/shop_item_bg.png"),
+              desc:
+                "免到堂上课特权在通过课程考核之后可不用到教室上课，此特权使用4次之后失效"
+            },
+            {
+              name: "免到堂上课",
+              price: 70,
+              bg: require("assets/img/shop_item_bg.png"),
+              desc:
+                "免到堂上课特权在通过课程考核之后可不用到教室上课，此特权使用5次之后失效"
+            },
+            {
+              name: "免到堂上课",
+              price: 80,
+              bg: require("assets/img/shop_item_bg.png"),
+              desc:
+                "免到堂上课特权在通过课程考核之后可不用到教室上课，此特权使用6次之后失效"
+            }
+          ]
+        }
       ]
     };
+  },
+  methods: {
+    duihuan(data, event) {
+      console.log(data, event);
+      this.$confirm(data.desc, "兑换" + data.name, {
+        distinguishCancelAndClose: true,
+        confirmButtonText: "兑换",
+        cancelButtonText: "取消"
+      })
+        .then(() => {
+          this.$message({
+            type: "info",
+            message: "兑换成功"
+          });
+        })
+        .catch(action => {
+          this.$message({
+            type: "info",
+            message: action === "cancel" ? "取消兑换" : "取消兑换"
+          });
+        });
+    }
   }
 };
+
+
 </script>
 
 <style lang="scss">

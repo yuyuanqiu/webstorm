@@ -24,12 +24,15 @@
             <!-- 添加element image组件 -->
             <!-- <img src="~assets/img/shouye-kecheng-datu.jpg" class="image" /> -->
             <div class="el-card-divs">
-              <el-link href="#" v-for="chapter in sub_course_list.big_course.others_lesson" :key="chapter.id"
-              :underline="false">
+              <el-link
+                href="#"
+                v-for="chapter in sub_course_list.big_course.others_lesson"
+                :key="chapter.id"
+                :underline="false"
+              >
                 <span>{{chapter.title }}</span>
                 <span>{{ chapter.name }}</span>
               </el-link>
-              
             </div>
           </el-card>
         </div>
@@ -38,6 +41,7 @@
             <!-- 给事件传回调时，不能使用() -->
             <a
               class="container-flex-a"
+              :title="data.name"
               @mouseenter="mouseEnter($event, data)"
               @mouseleave="mouseLeave"
               @click="toPath('/lessoninfo/ls')"
@@ -52,7 +56,6 @@
               </div>
             </a>
           </container-flex>
-          
         </div>
       </div>
     </div>
@@ -60,14 +63,13 @@
 </template>
 
 <script>
-
-import { a } from "admin/common.js"
+import { home_lessons } from "admin/common.js";
 
 export default {
   name: "home-lessons",
   data() {
     return {
-      newCourseList: a,
+      newCourseList: home_lessons,
       level: "经济学",
       src: require("public/home_lesson_bigpic/a.png"),
       course_big: {
@@ -181,10 +183,10 @@ export default {
   methods: {
     // 添加移除类名，放大缩小图片
 
-    mouseEnter(event,data) {
+    mouseEnter(event, data) {
       let img = event.target.getElementsByTagName("img")[0];
       // console.log(img);
-      console.log(data)
+      console.log(data);
 
       img.classList.add("enter_img");
     },
@@ -203,8 +205,8 @@ export default {
       img.classList.remove("video-hover");
     },
     toPath(path) {
-      this.$router.push({path: path})
-    },
+      this.$router.push({ path: path });
+    }
   },
   mounted() {}
 };
@@ -213,3 +215,22 @@ export default {
 <style lang="scss">
 @import "assets/css/home/HomeLessons.scss";
 </style>
+
+open() {
+  this.$prompt("请输入审核不通过原因", "提示", {
+    confirmButtonText: "确定",
+    cancelButtonText: "取消"
+  })
+    .then(({ value }) => {
+      this.$message({
+        type: "success",
+        message: "审核意见: " + value
+      });
+    })
+    .catch(() => {
+      this.$message({
+        type: "info",
+        message: "取消输入"
+      });
+    });
+}
