@@ -4,15 +4,19 @@
       <el-row type="flex">
         <el-col>
           <div class="a-c-h-avatar">
-            <el-avatar :size="50" :src="circleUrl"></el-avatar>
+            <el-avatar
+              :size="50"
+              :title="article_info.publisher.student_name"
+              :src="article_info.publisher.student_img"
+            ></el-avatar>
           </div>
         </el-col>
         <el-col>
           <div class="a-c-h-other">
-            <div class="author">{{ article_info.author }}</div>
+            <div class="author">{{ article_info.publisher.student_name }}</div>
             <div class="other">
-              <span>{{ article_info.publish_date }}</span>
-              <span>积分：23</span>
+              <span>{{ article_info.publish_time }}</span>
+              <span>积分：{{ article_info.publisher.student_point }}</span>
             </div>
           </div>
         </el-col>
@@ -20,7 +24,7 @@
           <div class="a-c-h-pingfen">
             <div>总评分：</div>
             <el-rate
-              v-model="value"
+              v-model="total_score"
               disabled
               show-score
               text-color="#ff9900"
@@ -32,294 +36,260 @@
     </div>
 
     <div class="article-content-body">
-      <h2>{{ article_info.title }}</h2>
-      <div v-html="article_info.content"></div>
+      <h2>{{ article_info.article_title }}</h2>
+      <div v-html="article_info.article_content"></div>
       <div class="article-content-footer-info">
-        <span class="el-icon-view">{{ article_info.read_total }}</span>
-        <span class="el-icon-thumb">{{ article_info.like }}</span>
-        <span class="el-icon-star-on">
-          <el-rate v-model="value2" :colors="colors" :show-text="true" :texts="pingjia"></el-rate>
+        <span class="el-icon-view">{{ article_info.read }}</span>
+        <span class="el-icon-thumb" @click="click_like">{{ article_info.zan }}</span>
+        <span :plain="true">
+          <span>评分</span>
+          <el-rate
+            v-model="general_score"
+            id="reply_to_top"
+            :colors="colors"
+            :show-text="true"
+            :texts="pingjia"
+            @change="score_upload"
+          ></el-rate>
         </span>
       </div>
     </div>
 
-      <!-- <div class="article-comment">
-        <div class="comment-input">
-          <el-input placeholder="请输入内容" v-model="input2">
-            <template slot="prepend">
-              <el-avatar :size="36" :src="circleUrl"></el-avatar>
-            </template>
-            <template slot="append">评论</template>
-          </el-input>
-        </div>
-        <div class="article-comment-item" v-for="comment in article_info.comment" :key="comment.id">
-          <el-row type="flex">
-            <el-col>
-              <div class="a-c-h-avatar">
-                <el-avatar :size="50" :src="circleUrl"></el-avatar>
-              </div>
-            </el-col>
-            <el-col class="root-reply">
-              <div class="a-c-h-other">
-                <div class="author">
-                  <div>{{ comment.author }}</div>
-
-                  <div>{{ comment.publish_date }}</div>
-                  <div>积分：3</div>
-                </div>
-                <div class="other">
-                  <p class="comment">{{ comment.content }}</p>
-                  <div>
-                    <span class="el-icon-thumb">21</span>
-                    <span class="el-icon-chat-dot-round">回复</span>
-                  </div>
-                </div>
-              </div>
-              <div class="reply_comment" v-for="reply in comment.reply" :key="reply.id">
-                <el-row type="flex">
-                  <el-col>
-                    <div class="a-c-h-avatar">
-                      <el-avatar :size="50" :src="circleUrl"></el-avatar>
-                    </div>
-                  </el-col>
-                  <el-col>
-                    <div class="a-c-h-other">
-                      <div class="author">
-                        <div>{{ reply.author }}</div>
-
-                        <div>{{ reply.publish_date }}</div>
-                        <div>积分：3</div>
-                      </div>
-                      <div class="other">
-                        <p class="comment">
-                          <span>回复</span>
-                          <span>
-                            <a href>{{comment.author }}</a>
-                          </span>
-                          {{ reply.content }}
-                        </p>
-                        <div>
-                          <span class="el-icon-thumb">21</span>
-                          <span class="el-icon-chat-dot-round">回复</span>
-                        </div>
-                      </div>
-                    </div>
-                  </el-col>
-                </el-row>
-              </div>
-            </el-col>
-          </el-row>
-        </div>
-      </div> -->
-
-      <comment></comment>
+    <comment
+      :comments="comments"
+      :article_id="article_id"
+      v-loading="loading"
+      element-loading-text="评论正在加载中，请先食用文章哦ヾ(≧▽≦*)o"
+      element-loading-spinner="el-icon-loading"
+    ></comment>
   </div>
 </template>
 
 <script>
+import Comment from "components/common/Comment";
 
-import Comment from "components/common/Comment"
+import axios from "axios";
 
 export default {
+  methods: {
+    // 计算总评分
+    calculate_score(score_arr) {
+      let score_total = 0;
+      let score_arr_lenth = score_arr.length;
+      score_arr.forEach((value, index, arr) => {
+        // console.log(typeof value.score);
+        if (typeof value.score == "number") {
+          score_total += value.score;
+        }
+      });
+      // let average = (score_total / score_arr_lenth).toFixed(2);
+      // console.log(average);
+      return { score_total: score_total, score_arr_lenth: score_arr_lenth };
+    },
+    // 操作成功的提示消息
+    success_operate(msg) {
+      this.$message({
+        showClose: true,
+        message: msg,
+        type: "success"
+      });
+    },
+    err_operate(msg) {
+      this.$message({
+        showClose: true,
+        message: msg,
+        type: "error"
+      });
+    },
+    // 点赞
+    click_like() {
+      this.article_info.zan += 1;
+      let url = "http://localhost:20020/articles/like_add_one";
+      axios
+        .post(url, {
+          zan: this.article_info.zan,
+          article_id: this.article_info._id
+        })
+        .then(res => {
+          console.log(res);
+          this.success_operate("点赞成功");
+        })
+        .catch(err => {
+          console.log(err);
+          this.err_operate("点赞失败");
+        });
+    },
+    // 评分上传，包含用户id号和用户评分
+
+    score_upload(score) {
+      console.log(this.general_score, "score", score);
+      let url = "http://localhost:20020/articles/general_score";
+      axios
+        .post(url, {
+          score: score,
+          article_id: this.article_info._id,
+          // 用户id号
+          // 到时候要改正
+          user_id: this.article_info.publisher_id
+        })
+        .then(res => {
+          console.log(res);
+          // 评分成功的提示消息
+          this.success_operate("评分成功");
+
+          let score_info = this.calculate_score(this.article_info.score_arr);
+          this.total_score = Number(
+            (
+              (score_info.score_total + score) /
+              (score_info.score_arr_lenth + 1)
+            ).toFixed(2)
+          );
+
+          this.article_info.score_arr.push({
+            score: score
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          this.err_operate("评分失败");
+        });
+    },
+
+    // 节流函数，每隔一段时间执行一次
+    throttle(fn, delay) {
+      var prev = Date.now();
+      return function() {
+        var now = Date.now();
+        if (now - prev > delay) {
+          fn();
+          prev = Date.now();
+        }
+      };
+    },
+    // 侦听阅读数，当滚动到文章末尾时，阅读数+1，
+    // 使用侦听器，字段一定不要弄错
+    addEventListener_scroll(reply_content, that, is_read_success) {
+      addEventListener("scroll", function() {
+        // let reply_content = reply_content;
+        let scrollTop =
+          document.documentElement.scrollTop ||
+          window.pageYOffset ||
+          document.body.scrollTop;
+
+        let is_read = reply_content.offsetTop < scrollTop;
+        // console.log(is_read);
+
+        // 计数器：当第一次阅读完之后不做操作
+
+        if (is_read_success && is_read) {
+          console.log(that);
+          is_read_success = false;
+          console.log(is_read_success, "is_read_success");
+          that.article_info.read += 1;
+          console.log(that.article_info.read);
+          let url = "http://localhost:20020/articles/read_add_one";
+          axios
+            .post(url, {
+              read: that.article_info.read,
+              article_id: that.article_info._id
+            })
+            .then(res => {
+              console.log(res);
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
+      });
+    }
+  },
+  mounted() {
+    let that = this;
+    let is_read_success = true;
+    // console.log(that)
+    let reply_content = document.getElementById("reply_to_top");
+    if (reply_content) {
+      this.addEventListener_scroll(reply_content, that, is_read_success);
+    }
+  },
   components: {
-    Comment,
+    Comment
   },
   data() {
     return {
+      loading: true,
+      comments: [],
+      article_id: "",
+      total_score: 0,
       pingjia: ["1.0分", "2.0分", "3.0分", "4.0分", "5.0分"],
       input2: "",
-      value2: null,
+      general_score: 0,
       colors: ["#99A9BF", "#F7BA2A", "#FF9900"],
 
       circleUrl:
         "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
       value: 2.1,
+      // 当数据格式不对的时候会出错。。publisher奇怪
       article_info: {
-        id: parseInt(Math.random() * 100000000000000),
-        title: "为什么 Vue 中不要用 index 作为 key？（diff 算法详解）",
-        content: "看完这篇",
-        first_level: "计算机",
-        second_level: "程序设计与开发",
-        author: "雪鸢xueyuan",
-        publish_date: "2020年01月01日",
-        read_total: 200,
-        mark: 3.2,
-        like: 36,
-        comment: [
-          {
-            id: parseInt(Math.random() * 1000000),
-            author: "佳蕙jiahui",
-            content:
-              "根据业务场景判断是否使用index作为key，如果只是展示信息，无需对数据进行变更，完全可以使用index。",
-            publish_date: "2020年01月01日",
-            like: 12,
-          },
-          {
-            id: parseInt(Math.random() * 1000000),
-            author: "茜雪qixue",
-            content:
-              "我测试了下，对于你的reverse例子，加了key也会走到旧首部和新尾部是sameNode,同样也会patchNode？是么？",
-            publish_date: "2020年01月01日",
-            like: 12,
-            reply: [
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "琴韵qinyun",
-                content:
-                  "确实是，删除的场景是最可怕的，之前也试过。随机数作为key带来的组件销毁重建是新的一个知识点，感谢",
-                publish_date: "2020年01月01日",
-                like: 12
-              },
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "碧痕bihen",
-                content: "我想看大佬实现一个diff算法，一路从computed追过来",
-                publish_date: "2020年01月01日",
-                like: 12
-              },
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "墨雨moyu",
-                content: "并不是无脑不用 index 当 key 吧，标题有点误导了",
-                publish_date: "2020年01月01日",
-                like: 12
-              }
-            ]
-          },
-          {
-            id: parseInt(Math.random() * 1000000),
-            author: "茜雪qixue",
-            content:
-              "我测试了下，对于你的reverse例子，加了key也会走到旧首部和新尾部是sameNode,同样也会patchNode？是么？",
-            publish_date: "2020年01月01日",
-            like: 12,
-            reply: [
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "琴韵qinyun",
-                content:
-                  "确实是，删除的场景是最可怕的，之前也试过。随机数作为key带来的组件销毁重建是新的一个知识点，感谢",
-                publish_date: "2020年01月01日",
-                like: 12
-              },
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "碧痕bihen",
-                content: "我想看大佬实现一个diff算法，一路从computed追过来",
-                publish_date: "2020年01月01日",
-                like: 12
-              },
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "墨雨moyu",
-                content: "并不是无脑不用 index 当 key 吧，标题有点误导了",
-                publish_date: "2020年01月01日",
-                like: 12
-              }
-            ]
-          },
-          {
-            id: parseInt(Math.random() * 1000000),
-            author: "茜雪qixue",
-            content:
-              "我测试了下，对于你的reverse例子，加了key也会走到旧首部和新尾部是sameNode,同样也会patchNode？是么？",
-            publish_date: "2020年01月01日",
-            like: 12,
-            reply: [
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "琴韵qinyun",
-                content:
-                  "确实是，删除的场景是最可怕的，之前也试过。随机数作为key带来的组件销毁重建是新的一个知识点，感谢",
-                publish_date: "2020年01月01日",
-                like: 12
-              },
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "碧痕bihen",
-                content: "我想看大佬实现一个diff算法，一路从computed追过来",
-                publish_date: "2020年01月01日",
-                like: 12
-              },
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "墨雨moyu",
-                content: "并不是无脑不用 index 当 key 吧，标题有点误导了",
-                publish_date: "2020年01月01日",
-                like: 12
-              }
-            ]
-          },
-          {
-            id: parseInt(Math.random() * 1000000),
-            author: "茜雪qixue",
-            content:
-              "我测试了下，对于你的reverse例子，加了key也会走到旧首部和新尾部是sameNode,同样也会patchNode？是么？",
-            publish_date: "2020年01月01日",
-            like: 12,
-            reply: [
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "琴韵qinyun",
-                content:
-                  "确实是，删除的场景是最可怕的，之前也试过。随机数作为key带来的组件销毁重建是新的一个知识点，感谢",
-                publish_date: "2020年01月01日",
-                like: 12
-              },
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "碧痕bihen",
-                content: "我想看大佬实现一个diff算法，一路从computed追过来",
-                publish_date: "2020年01月01日",
-                like: 12
-              },
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "墨雨moyu",
-                content: "并不是无脑不用 index 当 key 吧，标题有点误导了",
-                publish_date: "2020年01月01日",
-                like: 12
-              }
-            ]
-          },
-          {
-            id: parseInt(Math.random() * 1000000),
-            author: "茜雪qixue",
-            content:
-              "我测试了下，对于你的reverse例子，加了key也会走到旧首部和新尾部是sameNode,同样也会patchNode？是么？",
-            publish_date: "2020年01月01日",
-            like: 12,
-            reply: [
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "琴韵qinyun",
-                content:
-                  "确实是，删除的场景是最可怕的，之前也试过。随机数作为key带来的组件销毁重建是新的一个知识点，感谢",
-                publish_date: "2020年01月01日",
-                like: 12
-              },
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "碧痕bihen",
-                content: "我想看大佬实现一个diff算法，一路从computed追过来",
-                publish_date: "2020年01月01日",
-                like: 12
-              },
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "墨雨moyu",
-                content: "并不是无脑不用 index 当 key 吧，标题有点误导了",
-                publish_date: "2020年01月01日",
-                like: 12
-              }
-            ]
-          }
-        ]
+        publisher: {}
       }
     };
   },
   created() {
-    this.article_info.content = localStorage.getItem("content");
+    console.log(this.$route, "created");
+
+    // 获取路由信息
+    // 分清楚this.$route 和 this.$router的区别
+    let article_id = this.$route.params.article_id;
+    // 传入到comment组件，评论文章时有用
+    this.article_id = article_id;
+
+    let url = "http://localhost:20020/articles/article_only/";
+    axios
+      .get(url + article_id)
+      .then(res => {
+        console.log(res.data, "article_only");
+
+        // this.article_info.content = res.data[0].article_content;
+
+        this.article_info = res.data[0];
+        // console.log("article_info", res.data, this.article_info.score_arr);
+        let score_info = this.calculate_score(this.article_info.score_arr);
+        if (score_info.score_arr_lenth > 0) {
+          this.total_score = Number(
+            (score_info.score_total / score_info.score_arr_lenth).toFixed(2)
+          );
+        } else {
+          this.total_score = 0;
+        }
+
+        console.log(this.total_score, "score_total");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    axios
+      .get("http://localhost:20020/articles/article_reply/" + article_id)
+      .then(res => {
+        console.log(res.data);
+        this.comments = res.data;
+        this.loading = false;
+
+        // this.article_info.content = res.data[0].article_content;
+
+        // this.article_info.title = res.data[0].article_title;
+      });
+
+    // 测试用数据，旨在将文章信息传到数据库，以便mock
+    // let url2 = "http://localhost:20020/articles/get_article";
+    // axios
+    //   .post(url2, {
+    //     article_content: localStorage.getItem("content")
+    //   })
+    //   .then(res => {
+    //     console.log(res, "huhhu");
+    //   });
   }
 };
 </script>

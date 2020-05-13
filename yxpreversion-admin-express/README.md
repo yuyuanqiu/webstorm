@@ -1,5 +1,182 @@
 # express 开发
 
+## mongodb 模拟生成数据
+
+```bash
+node school, teacher, student, article, course, note, props, homework
+```
+
+## 200510
+
+### 文章获取知识点小结
+
+#### vue
+
+vue匿名函数使用this时，若想获取this实例，则必须使用箭头函数或者定义`let that = this`的形式
+
+vue 的响应式原理(对象/数组）：
+
+- data 中的属性必须先声明，不然无法响应变化
+- 已创建的 vue 实例，不能直接添加/删除对象属性（无法响应变化）
+  - 解决方法(vm 表组件实例，一般是 this)：
+    - `Vue.set(obj, property_name, value)`
+    - `vm.$set(vm.obj, property_name, value)`
+    - `vm.obj = Object.assign({}, vm.obj, {/*需要改变的属性*/})`
+- 使用索引设置数组元素和直接修改数组长度（无法实时响应）
+  - 解决方法:
+    - `Vue.set(vm.arr, index, value)`
+    - `vm.arr.splice(index, 1, value)`
+    - `vm.$set(vm.arr, index, value)`
+    - `vm.arr.splice(new_length)`
+
+vue 事件的使用
+
+- `:click=handler($event, others_data)`中的$event 可以获取事件对象
+
+vue路由跳转：
+
+- `this.$router.push('xyy)`： 跳转到domain/xyy
+- `this.$router.push({path: "xyy"})`：跳转到domain/xyy
+- `this.$router.push({name: "xyy", params: {sub:"abc"}})`：跳转到domain/xyy/abc，其中name值必须和router中定义的name值相同，path的键名和路由中的path路由参数一致（`path: xyy/:sub, name: "xyy"`）
+- `this.$router.push({path: "xyy", query: {name: "abc"}})`：跳转domain/xyy?name:abc
+- **获取跳转的路由对象的信息比如path、params、query等需使用`this.$route`
+- **`this.$router`**是vueRouter的实例，是一个全局路由器对象
+
+#### axios
+
+axios的使用
+- get请求查询字段：`axios.get(url, {params: {key:value}})`
+  - 请求地址：`url?key:value`
+  - mongodb接收数据：`req.query.key`
+- get请求：`axios.get(url + "/" + path)`
+  - 请求地址：`url/path`
+- post请求：`axios.post(url, {key1: value1, key2: value2})`
+  - 请求地址：`url`
+
+```javascript
+// axios基本使用
+
+// get
+axios.get("localhost:20206/get_info", {params: {
+  name: "xyy",
+  age: 23
+}}).then(res => (
+  // 处理获取到的信息
+)).catch(err => {
+  // 处理错误信息
+})
+
+// post
+axios.post("localhost:20206/get_info", {
+  name: "xyy",
+  age: 23
+}).then(res => {
+
+}).catch(err => {
+
+})
+```
+
+#### express
+
+- get方法：`router.get(path, ...callback)`
+  - 请求参数：
+    - req.params: 对应path(first/:value1/second/:value2)中的路由参数:value1, value2，取值使用req.params.value1
+    - req.query: 对应path(first?key=value)的key和value，取value的值使用req.query.value
+- post方法：`router.post(path, ...callback)`
+  - 请求参数：
+    - req.body：获取例如`axios.post(url, {...})`中`{...}`的信息
+- 若不知道某信息，可以使用console输出一下res或req
+
+#### mongodb
+
+- 链式调用`db.collection("article").find(...).project.toArray(function(err, result) {})`
+- 聚合aggregate方法：
+  - 聚合管道中每一阶段的值供下一阶段使用
+    - $match阶段：输入查询的字段对象
+    - $sort阶段的值必须为1/-1
+    - $skip阶段：跳过前面n个集合的查询
+    - $project阶段：重新设置一个字段，或指定输出的字段，不输出值设置为0，输出值设置为1，当有值设置成1和0之后，其他未设置的字段将不会输出
+    - $lookup: 两表连接，有两个版本
+      - from, localField(本集合字段), foreignField(要连接的集合的字段), as
+      - from(要连接的集合), let(传入管道的变量), pipeline(聚合管道), as(查询返回的结果存入的新字段名称)
+    - $replaceRoot阶段：将数组解构，分别与其他的字段组成新的集合，配合$mergeObjects操作符使用
+    - 
+  - 聚合管道操作符
+    - $switch: 类似编程中的多分支选择switch语句
+    - $regexMatch: inpug的值若符合regex表达式要求则返回true
+    
+
+demo 分析（结合 mongodb 和 express 使用）：
+
+- 文章信息加载功能：
+  - 加载论坛页面时，默认获取第一个分类下第一个子类的10条数据
+  - 切换一级分类选项卡，默认获取该分类下第一个子类的10条数据
+  - 切换二级分类选项卡，获取该分类的10条数据
+  - 点击`加载更多`按钮，获取之后的10条数据内容
+- 解决：
+  - 在data中设置一级分类first_level和二级分类second_level，存取计数器 count，加载按钮信息loading
+  - 设计请求文章信息方法`get_article(first_level, second_level)`：
+    - 判断参数和data中同名属性是否一致，不一致重置计数器count，否则count+1，更新data中的first_level和second_level
+    - 发出axios get请求，查询参数：first_level, second_level, count
+    - 若第一次请求数据为空，重置文章信息数组为一个提示性文字，若其他次数请求数据为空，不做任何操作
+    - 使用forEach方法将请求的数据数组push到data文章数组属性中
+    - 当返回数据为空时，加载按钮信息loading值改为`没有更多了`的提示，否则显示`加载更多`
+  
+
+#### 后端
+
+express路由
+
+- 
+
+## 200509
+
+- **学习前端请求参数，后台去数据库查找数据并返回数据**
+
+- nodejs 和 es6 导入导出模块
+
+  - 在 commonjs 中，导入某模块时，会直接执行该模块的代码
+
+- 下载 node-sass：`npm config set sass_binary_site https://npm.taobao.org/mirrors/node-sass/`, `npm i -g node-sass`
+
+## 200508
+
+- 合并 mongodb 的两个文档：
+
+```javascript
+{id: 1, list_data: 12}
+{id: 1, list_data: 23}
+
+// to :
+{id; 1, list_data: [12,23]}
+
+// usage
+db.col.aggregate([
+  {$group: {
+    // 必须要有_id
+    _id: {id: "$id"},
+    list_data: {
+      $addToSet: "$list_data"
+    }
+  }}
+])
+```
+
+## 200507
+
+- 日期加减：
+
+```javascript
+let date = new Date();
+let new_date = new Date(date);
+// 天数/月份/年加减
+new_date.setDate(new_date.getDate() + count);
+console.log(new_date);
+```
+
+- 在 nodejs 模块导入中，若源模块中执行了某方法，则在导入时也将执行该方法
+
 ## 200503
 
 - nodejs 程序热更新：jj
@@ -11,7 +188,6 @@
   - 放在 promise 解决
 
 # mongodb
-
 
 ## insert
 
@@ -55,21 +231,17 @@ try {
 }
 ```
 
-
 ## 其他插入
 
 ### update
 
 - v4.2+开始，更新方法接受聚合管道
-  - 聚合阶段$set
+  - 聚合阶段\$set
   - 访问聚合变量在变量前加`$$`并用引号引起
   - 聚合变量：`$$NOW`(当前日期时间), `$$CLUSTER_TIME`(当前时间戳)
-  - 替换整个文档时，文档将会更新为<update>，但是_id字段不会被替换
-- 若<update>是聚合管道，则将在符合query的情况下将管道应用于要插入的文档中，无_id字段将被字段创建
-- 为了避免多次插入同一文档，需使用upsert: true，并且query条件具有唯一索引**疑惑**
-
-
-
+  - 替换整个文档时，文档将会更新为<update>，但是\_id 字段不会被替换
+- 若<update>是聚合管道，则将在符合 query 的情况下将管道应用于要插入的文档中，无\_id 字段将被字段创建
+- 为了避免多次插入同一文档，需使用 upsert: true，并且 query 条件具有唯一索引**疑惑**
 
 ```javascript
 db.collection.update(
@@ -105,7 +277,7 @@ db.books.update(
       }},
       $set: {avgRating:   // 与$set更新运算符类似
         {$avg: "$rating"},
-        tags: ["fiction", "murder"], 
+        tags: ["fiction", "murder"],
         lastModified: "$$NOW" // 当前时间，与$currentDate类似
       }
     }
@@ -124,7 +296,6 @@ db.books.update(
 ```
 
 #### 使用聚合管道（4.2+）
-
 
 - 聚合管道阶段：
   - $addFields及其别名$set
@@ -155,7 +326,7 @@ db.members.update(
 
 #### 确切的数组过滤器
 
-- 更新文档时使用$[<identifier>]过滤后的位置运算符定义一个标识符，然后在数组过滤器文档中引用该标识符
+- 更新文档时使用\$[<identifier>]过滤后的位置运算符定义一个标识符，然后在数组过滤器文档中引用该标识符
 - <identifier>必须小写字母开头，只能包含字母和数字
 - 不能为同一标识符指定多个数组过滤器文档，不能包含两个独立的相同标识符的过滤器文档
 
@@ -234,7 +405,7 @@ db.collection.findAndModify({
 
 ### findOneAndUpdate
 
-- 根据filter和sort条件更新单个文档
+- 根据 filter 和 sort 条件更新单个文档
 
 ```javascript
 db.collection.findOneAndUpdate(
@@ -254,7 +425,7 @@ db.collection.findOneAndUpdate(
 
 ### findOneAndReplace
 
-- 根据filter和sort条件更新单个文档
+- 根据 filter 和 sort 条件更新单个文档
 
 ```javascript
 db.collection.findOneAndReplace(
@@ -303,18 +474,11 @@ db.characters.bulkWrite([
 ])
 ```
 
-
-
-
-
-
-
-
 ## 查询
 
 - 查询所有文档，需将空文档作为查询过滤器`db.col.find({})`
 - 查询特定条件：`db.col.find({status: "d"})`
-- 
+-
 
 ## 操作符
 
@@ -322,7 +486,7 @@ db.characters.bulkWrite([
 
 ### 比较查询
 
-#### $eq
+#### \$eq
 
 - 字段值或字段中有的元素值等于指定的值
 
@@ -336,21 +500,21 @@ db.col.find({
 })
 ```
 
-#### $gt
+#### \$gt
 
 - 选择字段值或字段中有的元素值**大于**指定值的文档
-- $gte: **大于/等于**
+- \$gte: **大于/等于**
 
-#### $lt
+#### \$lt
 
 - 选择字段值或字段中有的元素值**小于**指定值的文档
-- $lte: **小于/等于**
+- \$lte: **小于/等于**
 
-#### $ne 
+#### \$ne
 
 - 选择的字段值不等于指定值的文档
 
-#### $in
+#### \$in
 
 - 字段值或字段中有的元素值等于指定数组中任何值的文档
 
@@ -360,7 +524,7 @@ db.col.find({
 }}
 ```
 
-#### $nin
+#### \$nin
 
 - 字段值或字段中有的元素值不包含指定数组中任何值的文档
 
@@ -372,7 +536,7 @@ db.col.find({
 
 ### 逻辑查询操作符
 
-#### $and
+#### \$and
 
 - 查询同时满足一系列条件的集合
 
@@ -390,7 +554,7 @@ db.col.find({
 })
 ```
 
-#### $not
+#### \$not
 
 ```javascript
 {field: {
@@ -405,7 +569,7 @@ db.col.find({
 })
 ```
 
-#### $nor
+#### \$nor
 
 ```javascript
 {$nor: [
@@ -414,18 +578,18 @@ db.col.find({
 
 // examples:
 db.col.find({
-  /** 
+  /**
    * 返回price!==1.99 && scale !== true
    * price !== 1.99 && scale not exist
    * price not exist && scale !== true
    * price and scale not exist
    * /
-  
-  $nor: [{price: 1.99}, {scale: true}]  
+
+  $nor: [{price: 1.99}, {scale: true}]
 })
 ```
 
-#### $or
+#### \$or
 
 ```javascript
 {$or: [
@@ -435,9 +599,9 @@ db.col.find({
 
 ### 元素查询操作符
 
-#### $exists
+#### \$exists
 
-- 是否匹配包含该字段的文档，即使该字段值为null
+- 是否匹配包含该字段的文档，即使该字段值为 null
 
 ```javascript
 {field: {
@@ -448,7 +612,7 @@ db.col.find({
 db.col.find({a: {$exists: true}})
 ```
 
-#### $type
+#### \$type
 
 - 返回指定类型字段的文档
 
@@ -460,7 +624,7 @@ db.col.find({a: {$exists: true}})
 
 ### 评估查询操作符
 
-#### $expr
+#### \$expr
 
 - 允许在查询语言中使用聚合表达式
 
@@ -469,13 +633,14 @@ db.col.find({a: {$exists: true}})
 
 
 ```
-#### $mod
+
+#### \$mod
 
 ```javascript
 {field: {$mod: [divi， rem]}}  // 选择字段除以除数divi之后余数为rem的文档
 ```
 
-#### $regex
+#### \$regex
 
 - 模式匹配
 
@@ -486,13 +651,31 @@ db.col.find({a: {$exists: true}})
   $regex: /pattern/<options>    // options: i: 不区分大小写，m：是否匹配多行值（多个文档），x：忽略空白字段，s：允许点字符匹配所有字符
 }}
 
-// example: 
+// example:
 
 ```
 
-#### $text
+#### \$text
 
+### 数组查询操作符
 
+#### \$all
+
+```javascript
+{<field>: {$all: [value, ...]}} // 返回包含value的数组
+```
+
+#### \$elemMatch(query)
+
+- 匹配数组字段至少一个元素匹配的文档
+
+```javascript
+{<field>: {
+  $elemMatch: {
+    <query>,...
+  }
+}}
+```
 
 ### 更新操作符
 
@@ -503,7 +686,7 @@ db.col.find({a: {$exists: true}})
 
 ### 字段更新操作符
 
-#### $set:
+#### \$set:
 
 - 用指定的值替换字段的值，
 
@@ -522,10 +705,10 @@ db.products.update(
 )
 ```
 
-#### $unset
+#### \$unset
 
-- 删除特定字段替换为null，与$一起使用时，会将匹配的第一个元素替换为null而非删除所有匹配的元素
-- $: 表示第一个匹配的元素
+- 删除特定字段替换为 null，与\$一起使用时，会将匹配的第一个元素替换为 null 而非删除所有匹配的元素
+- \$: 表示第一个匹配的元素
 
 ```javascript
 {$unset: {
@@ -541,9 +724,9 @@ db.products.update(
 )
 ```
 
-#### $setOnInsert
+#### \$setOnInsert
 
-- 需结合选项upsert： true一起使用，表示更新并插入文档，若已有某值，则更新不插入
+- 需结合选项 upsert： true 一起使用，表示更新并插入文档，若已有某值，则更新不插入
 
 ```javascript
 db.collection.update(
@@ -563,7 +746,7 @@ db.collectionstore.update(
 )
 ```
 
-#### $inc:
+#### \$inc:
 
 - 增加指定的值（+value）
 
@@ -582,10 +765,10 @@ db.products.update(
 )
 ```
 
-#### $mul
+#### \$mul
 
 - 将字段的值乘以某数字，**字段的值为数字**
-- 不存在某字段，将设置为与某数字类型相同的0
+- 不存在某字段，将设置为与某数字类型相同的 0
 - 不同数字类型相乘将会进行数字转换
 
 ```javascript
@@ -605,7 +788,7 @@ db.products.update(
 #### $max, $min
 
 - 若指定的值大于当前值，则更新为指定值，否则不更新
-- [使用BSON顺序比较不同类型的值](https://s0docs0mongodb0com.icopy.site/manual/reference/bson-type-comparison-order/#faq-dev-compare-order-for-bson-types)
+- [使用 BSON 顺序比较不同类型的值](https://s0docs0mongodb0com.icopy.site/manual/reference/bson-type-comparison-order/#faq-dev-compare-order-for-bson-types)
 - 字段不存在，将该字段设为指定值
 
 ```javascript
@@ -622,7 +805,7 @@ db.scores.update(
 )
 ```
 
-#### $rename
+#### \$rename
 
 - 重命名字段，该操作可能打乱原有顺序
 - 原理：执行旧名称和新名称的$unset，若新名称存在，则清空，再对新名称执行$set
@@ -642,13 +825,13 @@ db.students.update(
 )
 ```
 
-#### $currentDate
+#### \$currentDate
 
 - 将字段的值设置为当前日期（Date-默认， timestamp）
 - <typeSpecification>可以是：
-  - true：表示当前日期为Date
-  - { $type: "timestamp" }
-  - { $type: "data"}
+  - true：表示当前日期为 Date
+  - { \$type: "timestamp" }
+  - { \$type: "data"}
 
 ```javascript
 {$currentDate: {
@@ -681,11 +864,13 @@ db.customers.updateOne(
 
 ### 数组更新操作符
 
-#### $(update)
-#### $[]
-#### $[<identifier>]
+#### \$(update)
 
-#### $push
+#### \$[]
+
+#### \$[<identifier>]
+
+#### \$push
 
 - 将指定的值附加到**数组**中
 - 可与$each, $slice, $sort, $position 一起使用
@@ -722,9 +907,9 @@ db.students.update(
 )
 ```
 
-#### $addToSet
+#### \$addToSet
 
-- 将数组中不存在的value**值添加到数组**，存在则不添加
+- 将数组中不存在的 value**值添加到数组**，存在则不添加
 
 ```javascript
 {$addToSet: {
@@ -740,12 +925,11 @@ db.test.update(
 )
 ```
 
-#### $each
+#### \$each
 
-- 与$addToSet使用时，仅将不存在的value添加到数组，存在的value不添加
-- 与$push使用时
-- **$each可传递空数组**
-
+- 与\$addToSet 使用时，仅将不存在的 value 添加到数组，存在的 value 不添加
+- 与\$push 使用时
+- **\$each 可传递空数组**
 
 ```javascript
 {$addToSet: {
@@ -762,15 +946,16 @@ db.test.update(
 
 ```
 
-#### $position
+#### \$position
 
-- 与$push和$each运算符一起使用，在指定位置插入
-- 从0开始， 负数从末尾开始，例如-1表示在最后一个元素**之前**插入
+- 与$push和$each 运算符一起使用，在指定位置插入
+- 从 0 开始， 负数从末尾开始，例如-1 表示在最后一个元素**之前**插入
+
 ```javascript
 {$push: {
   <field>: {
     $each: [<value>, ...],
-    $position: <num>  
+    $position: <num>
   }
 }}
 
@@ -788,12 +973,10 @@ db.students.update(
 )
 ```
 
-#### $sort
+#### \$sort
 
-- 与$push和$each运算符一起使用，对数组元素进行排序
-- 当数组元素是嵌套对象时，使用$sort: {<field>: 1/-1};
-
-
+- 与$push和$each 运算符一起使用，对数组元素进行排序
+- 当数组元素是嵌套对象时，使用\$sort: {<field>: 1/-1};
 
 ```javascript
 {$push: {
@@ -803,7 +986,7 @@ db.students.update(
   }
 }}
 
-// examples: 
+// examples:
 db.students.update(
   {_id: 1},
   {$push: {
@@ -816,11 +999,11 @@ db.students.update(
 
 ```
 
-#### $slice
+#### \$slice
 
-- 与$push和$each运算符一起使用，返回指定数量元素的数组
+- 与$push和$each 运算符一起使用，返回指定数量元素的数组
 - <num>的值：0（空数组），负数（从末尾截取），正数
-- 以前的版本$each修饰符应在第一个
+- 以前的版本\$each 修饰符应在第一个
 
 ```javascript
 {$push: {
@@ -844,7 +1027,7 @@ db.students.update(
 )
 ```
 
-#### $pull
+#### \$pull
 
 - 从现有**数组**中删除 1/多个与指定条件匹配的值的实例
 - 删除的是数组，则仅删除顺序一致且完全匹配的数组
@@ -889,7 +1072,7 @@ db.survey.update(
 )
 ```
 
-#### $pullAll
+#### \$pullAll
 
 - 删除指定值的实例
 
@@ -898,7 +1081,7 @@ db.survey.update(
   <field1>: [<value1>, ...], ...
 }}
 
-// examples: 
+// examples:
 db.survey.update(
   {_id: 1},
   {
@@ -909,19 +1092,18 @@ db.survey.update(
 )
 ```
 
-#### $pop
+#### \$pop
 
-- 删除**数组**的第一个元素（使用-1）或最后一个元素（使用1）
-
+- 删除**数组**的第一个元素（使用-1）或最后一个元素（使用 1）
 
 ```javascript
 {$pop: {
   <field>: <-1 | 1>, ...
 }}
 
-// examples: 
+// examples:
 db.students.update(
-  {_id: 1}, 
+  {_id: 1},
   {$pop: {
     scores: -1  // 删除scores数组的第一个元素
     scores: 1 // 删除scores数组的最后一个元素

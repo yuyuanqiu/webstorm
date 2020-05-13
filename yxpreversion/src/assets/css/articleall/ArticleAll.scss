@@ -46,16 +46,16 @@
                 margin-left: 12px;
               }
 
-              &:last-child {
-                float: right;
+              // &:last-child {
+              //   float: right;
 
-                color: white;
-              background-color: #409EFF;
-              border-color: #409EFF;
+              //   color: white;
+              //   background-color: #409EFF;
+              //   border-color: #409EFF;
 
 
-              border-radius: 0;
-              }
+              //   border-radius: 0;
+              // }
 
             }
           }
@@ -93,4 +93,93 @@
     }
 
   }
+
+
+  #article-title-outer {
+
+
+    .article-title {
+
+
+      border-bottom: 1px solid #eee;
+
+      .article-info {
+        position: relative;
+        margin-top: 10px;
+
+        &:first-child {
+          padding-top: 0 !important;
+        }
+
+        .el-link {
+          color: #acacac;
+
+          &:not(:first-child) {
+            padding-left: 36px;
+          }
+
+          &:last-child {
+            position: absolute;
+            right: 10px;
+          }
+        }
+      }
+
+      &-body {
+
+
+        h3 {
+          color: #000;
+
+          margin: 24px 0;
+          font-size: 18px;
+        }
+
+        &:hover {
+          color: #606266 !important;
+
+        }
+
+        &-des {
+          color: #555;
+
+          line-height: 1.25;
+        }
+
+        .hudong {
+          padding: 12px 0;
+          font-size: 12px;
+
+          div {
+            display: inline-block;
+            margin-right: 24px;
+
+            i {
+              font-weight: 900;
+            }
+
+            span {
+              padding-left: 3px;
+            }
+          }
+        }
+      }
+    }
+
+    .loading {
+      width: 100%;
+      padding: 24px 0;
+
+      .el-button {
+        width: inherit;
+        border: none;
+        background-color: inherit;
+
+
+
+      }
+    }
+  }
+
+
 }

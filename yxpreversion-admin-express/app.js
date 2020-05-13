@@ -4,10 +4,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
+// 执行一次
+// var createIndex = require("./mongodb/createIndex");  
+
 var port = '20020';
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var articleRouter = require("./routes/article");
+var userInitRouter = require("./routes/user_init");
 
 var app = express();
 
@@ -40,8 +46,20 @@ app.use(cookieParser());
 // 创建一个虚拟路径映射静态资源
 app.use("/static", express.static(path.join(__dirname, "public")));
 
+app.get('/static/images/*', function (req, res) {
+  res.sendFile( __dirname + "/" + req.url );
+  console.log("Request for " + req.url + " received.");
+})
+
+app.get('/static/stylesheets/*', function (req, res) {
+  res.sendFile( __dirname + "/" + req.url );
+  console.log("Request for " + req.url + " received.");
+})
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use("/articles", articleRouter);
+app.use("/get_user",userInitRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

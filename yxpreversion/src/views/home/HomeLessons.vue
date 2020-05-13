@@ -216,21 +216,3 @@ export default {
 @import "assets/css/home/HomeLessons.scss";
 </style>
 
-open() {
-  this.$prompt("请输入审核不通过原因", "提示", {
-    confirmButtonText: "确定",
-    cancelButtonText: "取消"
-  })
-    .then(({ value }) => {
-      this.$message({
-        type: "success",
-        message: "审核意见: " + value
-      });
-    })
-    .catch(() => {
-      this.$message({
-        type: "info",
-        message: "取消输入"
-      });
-    });
-}

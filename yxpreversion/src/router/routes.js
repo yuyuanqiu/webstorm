@@ -229,11 +229,12 @@ const routes = [
         component: ArticleAll,
         meta: {
           title: '文章中心',
+          article_id: ""
         }
 
       },
       {
-        path: '/articlecontent/:ls',
+        path: '/articlecontent/:article_id',
         name: 'article-content',
         component: ArticleContent,
         meta: {
