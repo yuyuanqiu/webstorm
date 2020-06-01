@@ -2,19 +2,23 @@
 
 
   .login-inner {
-    padding: 170px;
+    // padding: 170px;
     background-image: url(~public/login/login-bg-e.jpg);
 
     background-size: cover;
   }
 
   .el-row {
-    width: 81%;
+    // width: 81%;
     margin: 0 auto;
+    // padding: 170px 0;
+    padding: 119px;
 
     .el-col {
 
       background: #00000057;
+
+      height: 399px;
 
       &:first-child {
         background-color: #ffffff57;
@@ -25,72 +29,190 @@
         background-color: #09090926;
       }
 
-      .l-welcome {
-        padding: 16px;
-        color: #000;
+      .outer-welcome {
 
-        h2 {
-          margin-block-start: 0;
-          margin-block-end: 0;
-        }
+        position: relative;
+        height: inherit;
 
-        .l-zh {
-          font-size: 38px;
-          font-weight: 300;
-        }
+        .l-welcome {
+          padding: 16px;
+          color: #000;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: 304px;
 
-        .l-us {
-          font-size: 22px;
-          font-weight: 700;
-          padding-left: 95px;
-          font-family: sans-serif;
-        }
+          h2 {
+            margin-block-start: 0;
+            margin-block-end: 0;
+          }
 
-        .l-info {
-          color: #515151;
-          padding: 16px 0;
+          .l-zh {
+            font-size: 38px;
+            font-weight: 300;
 
-          .l-info-1 {
+            padding-bottom: 8px;
+          }
 
-            &:not(:last-child) {
-              margin-bottom: 6px;
-            }
+          .l-us {
+            font-size: 22px;
+            font-weight: 400;
+            font-family: sans-serif;
 
-            i {
-              vertical-align: top;
-              font-size: 24px;
-            }
-
-            div {
-              display: inline-block;
-              padding-left: 12px;
-
-
-              p {
-                margin-block-start: 0;
-                margin-block-end: 0;
-
-                &:first-child {
-                  font-size: 18px;
-                }
-
-                &:last-child {
-                  font-size: 12px;
-                }
-              }
-
-              div {}
+            span {
+              float: right;
             }
           }
+
+          .l-info {
+            clear: both;
+            color: #515151;
+            padding: 16px 0;
+
+            .l-info-1 {
+
+              &:not(:last-child) {
+                margin-bottom: 6px;
+              }
+
+              i {
+                vertical-align: top;
+                font-size: 24px;
+              }
+
+              div {
+                display: inline-block;
+                padding-left: 12px;
+
+
+                p {
+                  margin-block-start: 0;
+                  margin-block-end: 0;
+
+                  &:first-child {
+                    font-size: 18px;
+                  }
+
+                  &:last-child {
+                    font-size: 12px;
+
+                    padding: 12px 0 10px 24px;
+                  }
+                }
+
+                div {}
+              }
+            }
+          }
+
+
         }
-
-
       }
 
       .l-l-login {
-        .l-login {
 
-          color: #fff;
+        position: relative;
+        height: inherit;
+
+
+
+
+        .l-login {
+          padding: 20px 40px;
+
+          padding: 16px;
+          color: #000;
+          position: absolute;
+          left: 50%;
+
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: 304px;
+
+          h3 {
+            margin-block-start: 0;
+            margin-block-end: 0;
+
+            padding-bottom: 12px;
+            text-align: center;
+            color: #81d4ff;
+            font-size: 24px;
+            font-weight: 300;
+
+
+          }
+
+          .el-form {
+
+            .el-form-item {
+              margin-bottom: 0;
+
+              .el-form-item__label {
+                color: #8bc1dd;
+
+                width: 18%;
+                padding: 0;
+              }
+
+              .el-form-item__content {
+
+                .el-radio-group {
+                  width: 82%;
+
+                  // #77bdd58c
+
+                  .el-radio-button {
+
+
+                    width: 33%;
+
+                    &.is-focus, &.is-active {
+                    }
+
+                    .el-radio-button__inner {
+
+                      width: 100%;
+                      color: #eee;
+                      background-color: #77bdd58c;
+                      padding: 6px 20px;
+
+                      
+                    }
+                  }
+
+
+                }
+
+                .el-input {
+                  width: 82%;
+
+                  .el-input__inner {
+                    height: 24px;
+                    line-height: 24px;
+
+                    background-color: #77bdd58c;
+                    color: #ffffff;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
+                  }
+                }
+
+                .el-button {
+                  background: #409EFF;
+                  border-color: #409EFF;
+                  color: #FFF;
+                  margin-left: 18%;
+                  padding: 6px 20px;
+                }
+              }
+
+              &.l-lo-login {
+                // position: absolute;
+                // bottom: 24px;
+              }
+            }
+
+          }
 
         }
 
@@ -99,63 +221,7 @@
 
       }
 
-      .l-login {
-        padding: 20px 40px;
 
-        h3 {
-          margin-block-start: 0;
-          margin-block-end: 0;
-
-          padding-bottom: 12px;
-          text-align: center;
-          color: #81d4ff;
-          font-size: 24px;
-          font-weight: 300;
-
-
-        }
-
-        .el-form {
-
-          .el-form-item {
-            margin-bottom: 0;
-
-            .el-form-item__label {
-              color: #8bc1dd;
-            }
-
-            .el-form-item__content {
-
-              .el-input {
-                width: initial;
-
-                .el-input__inner {
-                  height: 24px;
-                  line-height: 24px;
-
-                  background-color: #77bdd58c;
-                  color: #ffffff;
-                  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
-                }
-              }
-
-              .el-button {
-                background: #409EFF;
-                border-color: #409EFF;
-                color: #FFF;
-                margin-left: 40px;
-              }
-            }
-
-            &.l-lo-login {
-              position: absolute;
-              bottom: 24px;
-            }
-          }
-
-        }
-
-      }
 
       .qiehuan {
         padding-left: 24px;

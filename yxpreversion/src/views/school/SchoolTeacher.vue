@@ -2,16 +2,16 @@
   <div id="school-teacher">
     <h2>老师列表</h2>
     <el-row>
-      <el-col :span="6" v-for="teacher in teachers" :key="teacher">
-          <a :href="'/teacher/' + teacher.name" class="outer">
-            <div class="img">
-            <img :src="teacher.icon" />
+      <el-col :span="6" v-for="teacher in teachers" :key="teacher._id">
+        <a class="outer" @click="toPath(teacher._id)">
+          <div class="img">
+            <img :src="'http://localhost:20020/' + teacher.avatar" />
           </div>
           <div>
-            <h3>{{ teacher.name }}</h3>
-            <span>{{ teacher.job }}</span>
+            <h3>{{ teacher.teacher_name }}</h3>
+            <span>{{ teacher.teacher_job }}</span>
           </div>
-          </a>
+        </a>
       </el-col>
     </el-row>
 
@@ -19,66 +19,47 @@
       <el-pagination
         background
         layout="prev, pager, next"
-        :total="1000"
-        page-size="20"
+        :total="teachers.length"
+        :page-size="5"
         prev-text="上一页"
         next-text="下一页 "
+        @current-change="get_next_teacher"
       ></el-pagination>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
+  created() {
+    this.get_teacher()
+  },
+  methods: {
+    toPath(path) {
+      this.$router.push({ path: "/teacher/" + path });
+    },
+    get_next_teacher(page) {
+      this.get_teacher(page - 1);
+    },
+    get_teacher(skip) {
+      axios
+        .post("http://localhost:20020/course/teacher_count", {
+          school_id: this.$route.params.school_id,
+          skip: skip,
+        })
+        .then(res => {
+          // console.log(res.data);
+
+          this.teachers = res.data;
+        });
+    }
+  },
   data() {
     return {
-      teachers: {
-        teacher1: {
-          name: "冯菲",
-          job: "高级工程师",
-          icon: require("assets/img/school-icon/teacher-icon.png")
-        },
-        teacher2: {
-          name: "冯菲",
-          job: "高级工程师",
-          icon: require("assets/img/school-icon/teacher-icon.png")
-        },
-        teacher3: {
-          name: "冯菲",
-          job: "高级工程师",
-          icon: require("assets/img/school-icon/teacher-icon.png")
-        },
-        teacher4: {
-          name: "冯菲",
-          job: "高级工程师",
-          icon: require("assets/img/school-icon/teacher-icon.png")
-        },
-        teacher5: {
-          name: "冯菲",
-          job: "高级工程师",
-          icon: require("assets/img/school-icon/teacher-icon.png")
-        },
-        teacher6: {
-          name: "冯菲",
-          job: "高级工程师",
-          icon: require("assets/img/school-icon/teacher-icon.png")
-        },
-        teacher7: {
-          name: "冯菲",
-          job: "高级工程师",
-          icon: require("assets/img/school-icon/teacher-icon.png")
-        },
-        teacher8: {
-          name: "冯菲",
-          job: "高级工程师",
-          icon: require("assets/img/school-icon/teacher-icon.png")
-        },
-        teacher9: {
-          name: "冯菲",
-          job: "高级工程师",
-          icon: require("assets/img/school-icon/teacher-icon.png")
-        }
-      }
+      skip: 0,
+      teachers: []
     };
   }
 };

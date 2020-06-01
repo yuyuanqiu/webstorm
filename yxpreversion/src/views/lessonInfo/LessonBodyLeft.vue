@@ -1,20 +1,20 @@
 <template>
   <div class="lesson-body-left">
     <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="课程介绍" name="first">{{ course.summary }}</el-tab-pane>
+      <el-tab-pane label="课程介绍" name="first">{{ course.course_des }}</el-tab-pane>
       <el-tab-pane label="课程目录" name="second">
         <div class="lesson-chapter">
           <el-collapse v-model="activeNames" @change="handleChange">
-            <el-collapse-item v-for="chapter in course.chapters" :key="chapter.id">
+            <el-collapse-item v-for="chapter in course.chapter_info" :key="chapter.id">
               <template slot="title">
-                <h4>{{ chapter.title_num }}</h4>
-                <span>{{ chapter.title_content }}</span>
+                <h4>{{ chapter.id }}</h4>
+                <span>{{ chapter.title }}</span>
                 <i class="header-icon el-icon-info"></i>
               </template>
               <div v-for="lesson in chapter.lessons" :key="lesson.id">
-                <el-link href="#" target="_blank" :underline="false">
-                  <span>{{ lesson.title_num }}</span>
-                  <span>{{ lesson.title_content }}</span>
+                <el-link :underline="false">
+                  <span>{{ lesson.id }}</span>
+                  <span>{{ lesson.title }}</span>
                   <i class="el-icon-video-play"></i>
                 </el-link>
               </div>
@@ -23,21 +23,58 @@
         </div>
       </el-tab-pane>
       <el-tab-pane label="参考资料" name="third">
-        <div v-for="ref in course.references" :key="ref.id" class="ref">
+        <div v-for="ref in course.reference" :key="ref.id" class="ref">
           <div class="el-icon-reading">{{ ref }}</div>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="课程评价" name="fourth">课程评价</el-tab-pane>
+      <el-tab-pane label="课程评价" name="fourth">
+        <div>
+          <span>课程总评价：</span>
+          <el-rate
+            v-model="value"
+            disabled
+            show-score
+            text-color="#ff9900"
+            score-template="{value}"
+          ></el-rate>
+        </div>
+        <div>
+          <span>你的评价：</span>
+          <el-rate v-model="value_one" show-text @change="score_upload"></el-rate>
+        </div>
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
+  created() {
+    let url = "http://localhost:20020/course/get_course_info";
+
+    let course_id = this.$route.params.lessonname;
+
+    axios
+      .post(url, {
+        _id: course_id
+      })
+      .then(res => {
+        // console.log(res.data, "body-left");
+        this.course = res.data[0];
+        this.value = this.course.chapter_total_score.score;
+        
+        this.people = this.course.chapter_total_score.people;
+      });
+  },
   props: ["titles"],
   name: "lesson-body-left",
   data() {
     return {
+      value: 0,
+      people: 0,
+      value_one: 0,
       activeName: "first",
       activeNames: ["1"],
       course: {
@@ -240,11 +277,45 @@ export default {
     };
   },
   methods: {
+    score_upload(score) {
+      console.log(score,(this.value * this.people + score), (this.people + 1), "score")
+
+      let new_score = Number(((this.value * this.people + score) / (this.people + 1)).toFixed(2));
+      console.log(new_score, "new_score")
+
+      this.value = new_score;
+
+      this.people = this.people + 1;
+
+      let url = "http://localhost:20020/course/update_total_store";
+      axios
+        .post(url, {
+          change_store: {
+            score: this.value,
+            people: this.people
+          },
+          _id: this.course._id,
+        })
+        .then(res => {
+          console.log(res);
+          // 评分成功的提示消息
+          this.$message.success("评分成功");
+
+          
+        })
+        .catch(err => {
+          console.log(err);
+          this.$message("评分失败");
+        });
+    },
     handleClick(tab, event) {
-      console.log(tab, event);
+      // console.log(tab, event);
     },
     handleChange(val) {
-      console.log(val);
+      // console.log(val);
+    },
+    toPath(path) {
+      this.$router.push({ path: path });
     }
   }
 };

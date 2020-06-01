@@ -6,8 +6,8 @@
           <div class="a-c-h-avatar">
             <el-avatar
               :size="50"
-              :title="article_info.publisher.student_name"
-              :src="article_info.publisher.student_img"
+              :title="article_info.publisher.student_img"
+              :src="'http://localhost:20020/' + article_info.publisher.avatar"
             ></el-avatar>
           </div>
         </el-col>

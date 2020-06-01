@@ -3,11 +3,11 @@
     <el-row class="row-bg">
       <el-col :span="4" class="course-head">
         <h3>
-          {{ course_specific.name }}
+          {{ $route.params.class }}
         </h3>
       </el-col>
-      <el-col v-for="i of course_specific.children" :key="i.id" class="lesss">
-        <el-link @click="SCNtiaozhuan" :underline="false">{{i}}</el-link>
+      <el-col v-for="i of course_specific" :key="i.id" class="lesss">
+        <el-link @click="SCNtiaozhuan" :underline="false">{{i.first_level}}</el-link>
       </el-col>
     </el-row>
   </div>
@@ -15,18 +15,36 @@
 
 <script>
 
-import { second_level_res } from "admin/common.js"
+
+import axios from "axios";
 
 export default {
+  
   name: "special-course-nav",
   data() {
     return {
       idFixed: true,
       offsetTop: 0,
-      course_specific: second_level_res[0]
+      course_specific: []
     };
   },
   mounted() {
+
+    let url = "http://localhost:20020/course/categories";
+
+    axios.post(url, {
+      category: this.$route.params.class,
+    }).then(res => {
+      
+      if (this.$route.params.class == "示范课程") {
+        console.log(res.data)
+      this.course_specific = res.data
+
+      } else {
+        console.log(res.data[0])
+        this.course_specific = res.data
+      }
+    })
     // handleScroll为页面滚动的监听回调
     window.addEventListener("scroll", this.handleScroll,true);
 

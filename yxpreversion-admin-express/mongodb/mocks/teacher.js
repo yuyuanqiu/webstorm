@@ -239,7 +239,7 @@ function get_teacher_data(length, schools_id) {
     let school_id = schools_id[Math.floor(Math.random() * schools_id.length)]._id;
 
     // 头像
-    let teacher_img = "avatar_t_" + i + ".jpg";
+    let avatar = "static/images/avatar/teacher/avatar_t_" + 0 + ".jpg";
     // 描述
     let teacher_des = teacher_name + "教师描述"
 
@@ -251,9 +251,11 @@ function get_teacher_data(length, schools_id) {
       age: age,
       teacher_job: teacher_job,
       school_id: school_id,
-      teacher_img: teacher_img,
+      avatar: avatar,
       teacher_des: teacher_des,
-      points: 0
+      points: 0,
+      password: Math.floor(Math.random()  * 10000000),
+      role: "teacher"
     }
 
     data.push(single_school_data);

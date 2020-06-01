@@ -21,135 +21,69 @@
       </el-row>
     </div>
 
-    <course-list :courses="courses">
-      
-    </course-list>
+    <course-list :courses="courses"></course-list>
 
     <div class="options-lesson-pages">
       <el-pagination
         background
         layout="prev, pager, next"
-        :total="1000"
-        :page-size="20"
+        :total="count"
+        :page-size="10"
         prev-text="上一页"
         next-text="下一页 "
+        @current-change="request_course"
       ></el-pagination>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  created() {
-    setTimeout(() => {
-      this.courses = {
-        course1: {
-          icon: require("assets/img/lessongs-icon/yanjiang.png"),
-          name: "信息素养：效率提升与终身学习的新引擎",
-          teacher: {
-            name: "苏筱洪",
-            school: "中国科学技术大学"
-          },
-          people: "14164",
-          week_now: "3"
-        },
-        course2: {
-          icon: require("assets/img/lessongs-icon/yanjiang.png"),
-          name: "信息素养：效率提升与终身学习的新引擎",
-          teacher: {
-            name: "苏筱洪",
-            school: "中国科学技术大学"
-          },
-          people: "14164",
-          week_now: "3"
-        },
-        course5: {
-          icon: require("assets/img/lessongs-icon/yanjiang.png"),
-          name: "信息素养：效率提升与终身学习的新引擎",
-          teacher: {
-            name: "苏筱洪",
-            school: "中国科学技术大学"
-          },
-          people: "14164",
-          week_now: "3"
-        },
-        course4: {
-          icon: require("assets/img/lessongs-icon/yanjiang.png"),
-          name: "信息素养：效率提升与终身学习的新引擎",
-          teacher: {
-            name: "苏筱洪",
-            school: "中国科学技术大学"
-          },
-          people: "14164",
-          week_now: "3"
-        },
-        course3: {
-          icon: require("assets/img/lessongs-icon/yanjiang.png"),
-          name: "信息素养：效率提升与终身学习的新引擎",
-          teacher: {
-            name: "苏筱洪",
-            school: "中国科学技术大学"
-          },
-          people: "14164",
-          week_now: "3"
-        },
-        course11: {
-          icon: require("assets/img/lessongs-icon/yanjiang.png"),
-          name: "信息素养：效率提升与终身学习的新引擎",
-          teacher: {
-            name: "苏筱洪",
-            school: "中国科学技术大学"
-          },
-          people: "14164",
-          week_now: "3"
-        },
-        course12: {
-          icon: require("assets/img/lessongs-icon/yanjiang.png"),
-          name: "信息素养：效率提升与终身学习的新引擎",
-          teacher: {
-            name: "苏筱洪",
-            school: "中国科学技术大学"
-          },
-          people: "14164",
-          week_now: "3"
-        },
-        course15: {
-          icon: require("assets/img/lessongs-icon/yanjiang.png"),
-          name: "信息素养：效率提升与终身学习的新引擎",
-          teacher: {
-            name: "苏筱洪",
-            school: "中国科学技术大学"
-          },
-          people: "14164",
-          week_now: "3"
-        },
-        course41: {
-          icon: require("assets/img/lessongs-icon/yanjiang.png"),
-          name: "信息素养：效率提升与终身学习的新引擎",
-          teacher: {
-            name: "苏筱洪",
-            school: "中国科学技术大学"
-          },
-          people: "14164",
-          week_now: "3"
-        },
-        course31: {
-          icon: require("assets/img/lessongs-icon/yanjiang.png"),
-          name: "信息素养：效率提升与终身学习的新引擎",
-          teacher: {
-            name: "苏筱洪",
-            school: "中国科学技术大学"
-          },
-          people: "14164",
-          week_now: "3"
-        }
-      };
-    }, 1000);
+  methods: {
+    
+    request_course(skip) {
+      let url = "http://localhost:20020/course/course_all";
+      axios
+        .post(url, {
+          category: this.$route.params.class,
+          skip: skip - 1
+        })
+        .then(res => {
+          console.log(res.data, "course all");
+          this.courses = res.data;
+        });
+    }
   },
+  mounted() {
+    let url = "http://localhost:20020/course/course_all";
+    let url2 = "http://localhost:20020/course/course_pagess";
+    axios
+      .post(url, {
+        category: this.$route.params.class,
+        skip: this.skip
+      })
+      .then(res => {
+        console.log(res.data, "course all");
+        this.courses = res.data;
+      });
+
+    axios.post(url2, {
+      category: this.$route.params.class,
+    }).then(res => {
+      console.log(res.data, "pagesss")
+      let count = localStorage.setItem("count_page", res.data[0].number)
+      this.count = Number(localStorage.getItem("count_page"));
+    })
+  },
+
   data() {
     return {
+      skip: 0,
+      count: 0,
       src1: require("assets/img/lessongs-icon/yanjiang.png"),
-      courses: {}
+      courses: []
     };
   }
 };

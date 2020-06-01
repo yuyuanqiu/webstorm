@@ -1,14 +1,19 @@
 <template>
   <div id="school">
     <router-view name="school-title"></router-view>
-    <router-view name="special-course-all"></router-view>
+    <router-view name="school-course"></router-view>
     <router-view name="school-teacher"></router-view>
   </div>
 </template>
 
 <script>
-export default {
 
+
+export default {
+  data() {
+    return {
+    }
+  }
 }
 </script>
 

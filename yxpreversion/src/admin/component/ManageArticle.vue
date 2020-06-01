@@ -69,16 +69,16 @@
 
 
 <script>
-import { autoCreatedCourse } from "admin/common.js";
+// import { autoCreatedCourse } from "admin/common.js";
 
-import axios from "axios";
+// import axios from "axios";
 
-import {
-  applyers,
-  article_title,
-  setDate,
-  article_content
-} from "admin/common.js";
+// import {
+//   applyers,
+//   article_title,
+//   setDate,
+//   article_content
+// } from "admin/common.js";
 
 export default {
   data() {
@@ -88,7 +88,6 @@ export default {
   },
   created() {
     let backend_data = null;
-    
 
     for (let i = 0; i < 256; i++) {
       let course = {};
@@ -100,18 +99,19 @@ export default {
       // course.content =
       //   article_content[Math.floor(Math.random() * article_content.length)];
 
-      new Promise((resolve, reject) => {
-        axios.get("http://localhost:20020/users/a").then(res => {
-      // console.log(res);  
-      backend_data = res.data;
-      course.content = backend_data[Math.floor(Math.random() * backend_data.length)].content;
-
-    });
-      })
-      
+      // new Promise((resolve, reject) => {
+      //   axios.get("http://localhost:20020/users/a").then(res => {
+      //     // console.log(res);
+      //     backend_data = res.data;
+      //     course.content =
+      //       backend_data[
+      //         Math.floor(Math.random() * backend_data.length)
+      //       ].content;
+      //   });
+      // });
 
       this.courses.push(course);
-      console.log(this.courses)
+      console.log(this.courses);
     }
   },
   methods: {

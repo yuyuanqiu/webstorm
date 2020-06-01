@@ -12,8 +12,8 @@
       </el-col>-->
       <el-col :span="4" v-for="random_school in school_random" :key="random_school.id">
         <div class="el-col-div-1">
-          <a href="#">
-            <img :src="random_school.url" />
+          <a @click="toPath(random_school._id)">
+            <img :src="'http://localhost:20020/static/' + random_school.bigLogo" />
           </a>
         </div>
       </el-col>
@@ -22,37 +22,27 @@
 </template>
 
 <script>
+
+import axios from "axios";
+
 export default {
+  methods: {
+    toPath(_id) {
+      this.$router.push({path: '/school/' + _id});
+    }
+  },
+  created() {
+    let url = "http://localhost:20020/course/home_random_schools";
+
+    axios.get(url).then(res => {
+      // console.log(res.data, "random schools")
+      this.school_random = res.data;
+    })
+  },
   name: "school-random",
   data() {
     return {
-      school_random: [
-        {
-          url: require("assets/img/school_huibiao/" + Math.ceil(Math.random() * 12) + ".png")
-        },
-        {
-          url: require("assets/img/school_huibiao/" + Math.ceil(Math.random() * 12) + ".png")
-        },
-        {
-          url: require("assets/img/school_huibiao/" + Math.ceil(Math.random() * 12) + ".png")
-        },
-        {
-          url: require("assets/img/school_huibiao/" + Math.ceil(Math.random() * 12) + ".png")
-        },
-        {
-          url: require("assets/img/school_huibiao/" + Math.ceil(Math.random() * 12) + ".png")
-        },
-        {
-          url: require("assets/img/school_huibiao/" + Math.ceil(Math.random() * 12) + ".png")
-        },
-      ],
-      schools: [
-        "../../assets/img/school-icon/北京大学.png",
-        "../../assets/img/school-icon/南京大学.png",
-        "../../assets/img/school-icon/哈尔滨工业大学.png",
-        "../../assets/img/school-icon/武汉大学.png",
-        "../../assets/img/school-icon/浙江大学.png"
-      ]
+      school_random: [],
     };
   }
 };
@@ -90,6 +80,8 @@ export default {
         height: 100%;
         display: inline-block;
         position: relative;
+
+        cursor: pointer;
         img {
           width: 75%;
           height: 75%;

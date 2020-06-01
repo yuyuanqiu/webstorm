@@ -39,22 +39,26 @@
           <div class="el-header-content">
 
             <el-page-header :content="header_nav"></el-page-header>
-          <el-dropdown>
-            <span class="el-dropdown-link">
-              <el-avatar
-                shape="square"
-                :size="40"
-                :src="src"
-              ></el-avatar>
-              <i class="el-icon-arrow-down el-icon--right"></i>
-            </span>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>退出登录</el-dropdown-item>
-              <el-dropdown-item>
-                  <span  @click="toPath('/home')">前台</span>
+            <el-dropdown>
+              <span>欢迎您，{{ name }}</span>
+              <span class="el-dropdown-link">
+                <el-avatar
+                  shape="square"
+                  :size="40"
+                  :src="'http://localhost:20020/' + this.$store.state.user_info.avatar"
+                ></el-avatar>
+
+                <i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>
+                  <span @click="exit">退出登录</span>
                 </el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
+                <el-dropdown-item>
+                  <span @click="toPath('/home')">前台</span>
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
           </div>
         </el-header>
         <el-main>
@@ -62,8 +66,7 @@
         </el-main>
         <el-footer height="24px">
           <div>
-          <small>©2020 嘉狩予思教育有限公司出品</small>
-
+            <small>©2020 嘉狩予思教育有限公司出品</small>
           </div>
         </el-footer>
       </el-container>
@@ -75,16 +78,243 @@
 <script>
 export default {
   props: ["nav"],
+  created() {
+    console.log(this.$store.state.user_info.role, "角色");
+    let role = this.$store.state.user_info.role;
+    if (role == "teacher") {
+      this.navs = [
+        {
+          name: "首页",
+          id: "admin",
+          auth: ["root", "teacher", "school"]
+        },
+
+        {
+          name: "课程管理",
+          id: "manage_course",
+          auth: ["school", "teacher"],
+          children: [
+            {
+              name: "课程申请",
+              id: "course_apply",
+              auth: ["teacher"]
+            },
+
+            {
+              name: "课程状态",
+              id: "course_online",
+              auth: ["teacher", "school", "root"]
+            },
+            {
+              name: "课程更新",
+              id: "course_update",
+              auth: ["teacher"]
+            }
+          ]
+        },
+        {
+          name: "文章管理",
+          id: "manage_article",
+          auth: ["root", "teacher", "school"]
+        },
+
+        {
+          name: "道具管理",
+          id: "manage_props",
+          auth: ["root", "school"]
+        }
+      ];
+    } else if (role == "admin") {
+      this.navs = [
+        {
+          name: "首页",
+          id: "admin",
+          auth: ["root", "teacher", "school"]
+        },
+        {
+          name: "入驻申请",
+          auth: ["root"],
+          id: "apply",
+          children: [
+            {
+              name: "教师申请",
+              id: "apply_teacher"
+            },
+            {
+              name: "学生申请",
+              id: "apply_student"
+            }
+          ]
+        },
+        {
+          name: "教师管理",
+          id: "manage_teacher",
+          auth: ["school"]
+        },
+        {
+          name: "学生管理",
+          id: "manage_student",
+          auth: ["school", "teacher"]
+        },
+        {
+          name: "课程管理",
+          id: "manage_course",
+          auth: ["school", "teacher"],
+          children: [
+            {
+              name: "课程审核",
+              id: "course_audit",
+              auth: ["teacher"]
+            }
+          ]
+        },
+        {
+          name: "文章管理",
+          id: "manage_article",
+          auth: ["root", "teacher", "school"]
+        },
+        {
+          name: "讨论帖管理",
+          id: "manage_post",
+          auth: ["root", "teacher", "school"]
+        }
+      ];
+    } else if (role == "superadmin") {
+      this.navs = [
+        {
+          name: "首页",
+          id: "admin",
+          auth: ["root", "teacher", "school"]
+        },
+        {
+          name: "入驻申请",
+          auth: ["root"],
+          id: "apply",
+          children: [
+            {
+              name: "学校申请",
+              id: "apply_school"
+            },
+            {
+              name: "教师申请",
+              id: "apply_teacher"
+            },
+            {
+              name: "学生申请",
+              id: "apply_student"
+            }
+          ]
+        },
+        {
+          name: "学校管理",
+          id: "manage_school",
+          auth: ["root"]
+        },
+        {
+          name: "教师管理",
+          id: "manage_teacher",
+          auth: ["school"]
+        },
+        {
+          name: "学生管理",
+          id: "manage_student",
+          auth: ["school", "teacher"]
+        },
+        {
+          name: "课程管理",
+          id: "manage_course",
+          auth: ["school", "teacher"],
+          children: [
+            {
+              name: "课程申请",
+              id: "course_apply",
+              auth: ["teacher"]
+            },
+            {
+              name: "课程审核",
+              id: "course_audit",
+              auth: ["teacher"]
+            },
+            {
+              name: "课程状态",
+              id: "course_online",
+              auth: ["teacher", "school", "root"]
+            },
+            {
+              name: "课程更新",
+              id: "course_update",
+              auth: ["teacher"]
+            }
+          ]
+        },
+        {
+          name: "文章管理",
+          id: "manage_article",
+          auth: ["root", "teacher", "school"]
+        },
+        {
+          name: "讨论帖管理",
+          id: "manage_post",
+          auth: ["root", "teacher", "school"]
+        },
+        {
+          name: "道具管理",
+          id: "manage_props",
+          auth: ["root", "school"]
+        }
+      ];
+    }
+  },
+  computed: {
+    src() {
+      return;
+    }
+  },
   data() {
     return {
-      src: require('assets/img/people-icon/user_avator.png'),
-
-      header_nav: '首页',
+      name: localStorage.getItem("teacher_name"),
+      header_nav: "首页",
       navs: [
         {
           name: "首页",
           id: "admin",
-          auth: ["root", 'teacher', 'school']
+          auth: ["root", "teacher", "school"]
+        }
+      ]
+    };
+  },
+  methods: {
+    toPath(path) {
+      this.$router.push({
+        path: path
+      });
+    },
+    exit() {
+      this.$store.commit("set_is_login", false);
+
+      this.$router.push({ name: "login" });
+      localStorage.clear();
+    },
+    toPathss(path) {
+      // push时应该使用name参数，而不是path参数，否则会有意想不到的后果
+      this.$router.push({ name: path.id });
+
+      this.header_nav = path.name;
+    }
+  }
+};
+</script>
+
+<style lang="scss">
+@import "admin/scss/component/home.scss";
+
+/* 
+
+navs: [
+        {
+          name: "首页",
+          id: "admin",
+          auth: ["root", "teacher", "school"]
         },
         {
           name: "入驻申请",
@@ -163,25 +393,6 @@ export default {
           auth: ["root", "school"]
         }
       ]
-    };
-  },
-  methods: {
-    toPath(path) {
-      this.$router.push({
-        path: path
-      })
-    },
-    toPathss(path) {
 
-      // push时应该使用name参数，而不是path参数，否则会有意想不到的后果
-      this.$router.push({name: path.id});
-
-      this.header_nav = path.name
-    }
-  }
-};
-</script>
-
-<style lang="scss">
-@import "admin/scss/component/home.scss";
+*/
 </style>

@@ -2,14 +2,14 @@
   <div id="slider">
     <div class="window" @mouseover="stop" @mouseleave="play">
       <ul class="container" :style="containerStyle">
-        <li>
-          <img :style="{width:imgWidth+'px'}" :src="sliders[sliders.length - 1].img" alt />
+        <li style="cursor: pointer;">
+          <img @click="toPath(sliders[sliders.length - 1]._id)" :style="{width:imgWidth+'px'}" :src="'http://localhost:20020' + sliders[sliders.length - 1].big_pic" alt />
+        </li >
+        <li style="cursor: pointer;" v-for="(item, index) in sliders" :key="index">
+          <img @click="toPath(item._id)" :style="{width:imgWidth+'px'}" :src="'http://localhost:20020' + item.big_pic" alt />
         </li>
-        <li v-for="(item, index) in sliders" :key="index">
-          <img :style="{width:imgWidth+'px'}" :src="item.img" alt />
-        </li>
-        <li>
-          <img :style="{width:imgWidth+'px'}" :src="sliders[0].img" alt />
+        <li style="cursor: pointer;">
+          <img @click="toPath(sliders[sliders.length - 1]._id)" :style="{width:imgWidth+'px'}" :src="'http://localhost:20020' + sliders[0].big_pic" alt />
         </li>
       </ul>
     </div>
@@ -20,9 +20,10 @@
           :key="i"
           :class="{dotted: i === (currentIndex-1)}"
           @click="jump(i+1)"
+          style="cursor: pointer;"
         >
-          <a href="#">
-            {{ dot.text }}
+          <a>
+            {{ dot.course_name }}
           </a>
         </li>
       </ul>
@@ -33,7 +34,22 @@
 
 
 <script>
+
+import axios from "axios";
+
 export default {
+  mounted() {
+
+    this.init();
+    let url = "http://localhost:20020/course/course_first";
+
+    axios.post(url, {
+      category: this.$route.params.class,
+    }).then(res => {
+      console.log(res.data);
+      this.sliders = res.data;
+    })
+  },
   name: "slider",
   props: {
     initialSpeed: {
@@ -49,24 +65,7 @@ export default {
     return {
       sliders: [
         {
-          img: require("assets/img/special_course/lunbo.png"),
-          text: '1节课彻底搞清一词多义现象'
-        },
-        {
-          img: require("assets/img/special_course/lunbo.png"),
-          text: '零基础直达B1水平'
-        },
-        {
-          img: require("assets/img/special_course/lunbo.png"),
-          text: '考研英语系统提分班'
-        },
-        {
-          img: require("assets/img/special_course/lunbo.png"),
-          text: '英语打基础系列直播'
-        },
-        {
-          img: require("assets/img/special_course/lunbo.png"),
-          text: '大学英语自学课程（上）'
+          big_pic: ''
         }
       ],
       imgWidth: 840,
@@ -86,10 +85,11 @@ export default {
       return this.initialInterval * 1000;
     }
   },
-  mounted() {
-    this.init();
-  },
+
   methods: {
+    toPath(_id) {
+      this.$router.push({path: '/lessoninfo/' + _id})
+    },
     init() {
       this.play();
       window.onblur = function() {
@@ -100,7 +100,7 @@ export default {
       }.bind(this);
     },
     move(offset, direction, speed) {
-      console.log(speed);
+      // console.log(speed);
       if (!this.transitionEnd) return;
       this.transitionEnd = false;
       direction === -1

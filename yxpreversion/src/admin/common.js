@@ -737,7 +737,8 @@ export function autoCreatedCourse(count) {
 
 
 
-export let home_lessons = [{
+export let home_lessons = [
+  {
     top_level: '外语',
     title_big_big: require("assets/img/home_title_big_big/1.png"),
     big_course: {

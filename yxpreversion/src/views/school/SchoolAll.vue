@@ -6,8 +6,8 @@
     <div class="school-all-list">
       <el-row  :gutter="20" > 
         <el-col v-for="school in schools" :key="school.id">
-          <el-link :title="school.name" :href="'/school/' + school.name" :underline="false">
-            <img :src="school.icon" />
+          <el-link :title="school.name" @click="toPath(school._id)" :underline="false">
+            <img :src="'http://localhost:20020/static/' + school.bigLogo" />
           </el-link>
         </el-col>
       </el-row>
@@ -16,79 +16,29 @@
 </template>
 
 <script>
+
+import axios from "axios";
+
 export default {
+  methods: {
+    toPath(school_id) {
+
+// 有的时候一种方法不行，那就要换一种方法，比如使用name和params就是不行的
+      this.$router.push({path: '/school/' + school_id})
+    }
+  },
+  created() {
+    let url = "http://localhost:20020/course/all_schools";
+
+    axios.get(url).then(res => {
+      // console.log(res.data, "school all")
+      this.schools = res.data;
+    })
+  },
   data() {
     return {
-      schools: {
-        qinghua: {
-          name: "qinghua",
-          icon: require("assets/img/school-icon/北京大学.png")
-        },
-        qinghua1: {
-          name: "qinghua",
-          icon: require("assets/img/school-icon/北京大学.png")
-        },
-        qinghua2: {
-          name: "qinghua",
-          icon: require("assets/img/school-icon/北京大学.png")
-        },
-        qinghua3: {
-          name: "qinghua",
-          icon: require("assets/img/school-icon/北京大学.png")
-        },
-        qinghua4: {
-          name: "qinghua",
-          icon: require("assets/img/school-icon/北京大学.png")
-        },
-        qinghua5: {
-          name: "qinghua",
-          icon: require("assets/img/school-icon/北京大学.png")
-        },
-        qinghua6: {
-          name: "qinghua",
-          icon: require("assets/img/school-icon/北京大学.png")
-        },
-        qinghua7: {
-          name: "qinghua",
-          icon: require("assets/img/school-icon/北京大学.png")
-        },
-        qinghua8: {
-          name: "qinghua",
-          icon: require("assets/img/school-icon/北京大学.png")
-        },
-        qinghua9: {
-          name: "qinghua",
-          icon: require("assets/img/school-icon/北京大学.png")
-        },
-        qinghua10: {
-          name: "qinghua",
-          icon: require("assets/img/school-icon/北京大学.png")
-        },
-        qinghua11: {
-          name: "qinghua",
-          icon: require("assets/img/school-icon/北京大学.png")
-        },
-        qinghua12: {
-          name: "qinghua",
-          icon: require("assets/img/school-icon/北京大学.png")
-        },
-        qinghua13: {
-          name: "qinghua",
-          icon: require("assets/img/school-icon/北京大学.png")
-        },
-        qinghua14: {
-          name: "qinghua",
-          icon: require("assets/img/school-icon/北京大学.png")
-        },
-        qinghua15: {
-          name: "qinghua",
-          icon: require("assets/img/school-icon/北京大学.png")
-        },
-        qinghua16: {
-          name: "qinghua",
-          icon: require("assets/img/school-icon/北京大学.png")
-        }
-      }
+
+      schools: []
     };
   }
 };

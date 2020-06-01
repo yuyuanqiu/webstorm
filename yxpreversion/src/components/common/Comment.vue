@@ -14,8 +14,8 @@
     <div class="article-comment-item" v-for="comment in comments" :key="comment._id">
       <el-row type="flex">
         <el-col>
-          <div class="a-c-h-avatar">  
-            <el-avatar :size="50" :src="comment.publisher.student_img"></el-avatar>
+          <div class="a-c-h-avatar">
+            <el-avatar :size="50"  :title="'http://localhost:20020/' + comment.publisher.avatar" :src="'http://localhost:20020/' + comment.publisher.avatar"></el-avatar>
           </div>
         </el-col>
         <el-col class="root-reply">
@@ -47,7 +47,7 @@
             <el-row type="flex">
               <el-col>
                 <div class="a-c-h-avatar">
-                  <el-avatar :size="50" :src="reply.publisher.student_img"></el-avatar>
+                  <el-avatar :size="50" :title="'http://localhost:20020/' + reply.publisher.avatar" :src="'http://localhost:20020/' + reply.publisher.avatar"></el-avatar>
                 </div>
               </el-col>
               <el-col>
@@ -102,26 +102,29 @@ export default {
       is_expand_input: "",
       reply_input: "",
       click_replay_status: 0,
-      user_info: '',
+      user_info: "",
       avator: require("assets/img/people-icon/user_avator.png")
     };
   },
   props: ["comments", "article_id"],
   created() {
-    this.get_info();
+    // this.get_info();
   },
   mounted() {},
   methods: {
     // 获取学生信息
     get_info() {
       let url = "http://localhost:20020/get_user";
-      axios.get(url).then(res => {
-        // console.log(res.data)
-        this.user_info = res.data;
-        // console.log(this.user_info,"user_info");
-      }).catch(err => {
-        console.log(err)
-      });
+      axios
+        .get(url)
+        .then(res => {
+          // console.log(res.data)
+          this.user_info = res.data;
+          // console.log(this.user_info,"user_info");
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     // 点击回复,显示输入框输入评论
     click_replay(e, comment) {
@@ -149,7 +152,7 @@ export default {
           _id: _id,
           id: Math.floor(Math.random() * 1000000),
           note_content: this.reply_input,
-          publisher_id: this.user_info._id,
+          publisher_id: this.$store.state.user_info._id,
           publish_time: new Date(),
           parent_node: parent_node._id,
           root_node: root_node._id,
@@ -168,10 +171,10 @@ export default {
             student_name: parent_node.publisher.student_name
           },
           publisher: {
-            _id: this.user_info._id,
-            student_name: this.user_info.student_name,
-            student_img: "avatar_s_9513.jpg",
-            student_point: 1000
+            _id: this.$store.state.user_info._id,
+            student_name: this.$store.state.user_info.student_name,
+            avatar: this.$store.state.user_info.avatar,
+            student_point: this.$store.state.user_info.student_point
           }
         });
 
@@ -196,17 +199,17 @@ export default {
               student_name: root_node.publisher.student_name
             },
             publisher: {
-              _id: this.user_info._id,
-              student_name: this.user_info.student_name,
-              student_img: "avatar_s_9513.jpg",
-              student_point: 244
+              _id: this.$store.state.user_info._id,
+              student_name: this.$store.state.user_info.student_name,
+              avatar: this.$store.state.user_info.avatar,
+              student_point: this.$store.state.user_info.student_point
             }
           },
           reply_info = {
             _id: _id,
             id: Math.floor(Math.random() * 1000000),
             note_content: this.reply_input,
-            publisher_id: this.user_info._id,
+            publisher_id: this.$store.state.user_info._id,
             publish_time: new Date(),
             parent_node: root_node._id,
             root_node: root_node._id,
@@ -232,10 +235,10 @@ export default {
           root_node: root_node,
           zan: 0,
           publisher: {
-            _id: this.user_info._id,
-            student_name: this.user_info.student_name,
-            student_img: "avatar_s_7629.jpg",
-            student_point: 100
+            _id: this.$store.state.user_info._id,
+            student_name: this.$store.state.user_info.student_name,
+            avatar: this.$store.state.user_info.avatar,
+            student_point: this.$store.state.user_info.student_point
           },
           comments: []
         };
@@ -244,7 +247,7 @@ export default {
           _id: _id,
           id: Math.floor(Math.random() * 1000000),
           note_content: this.reply_input,
-          publisher_id: this.user_info._id,
+          publisher_id: this.$store.state.user_info._id,
           publish_time: new Date(),
           parent_node: null,
           root_node: this.article_id,

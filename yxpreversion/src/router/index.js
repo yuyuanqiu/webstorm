@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 
 import routes from './routes'
 
-import {quanxian} from './routes'
 
 
 
@@ -13,7 +12,7 @@ Vue.use(VueRouter)
 const router = new VueRouter({
   // mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes: routes
 })
 
 // // 取到需要权限判断的路由表

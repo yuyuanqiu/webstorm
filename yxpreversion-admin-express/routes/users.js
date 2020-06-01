@@ -6,10 +6,6 @@ var router = express.Router();
 
 var arr = [1, 2, 3]
 
-router.get('/', function (req, res, next) {
-  res.send(arr);
-  res.download('../public/favicon.ico')
-});
 
 var MongoClient = require('mongodb').MongoClient
 
@@ -20,11 +16,11 @@ MongoClient.connect('mongodb://localhost:27017', function (err, client) {
 
   db.collection('course').find().toArray(function (err, result) {
     if (err) throw err
-    router.get('/a', function (req, res, next) {
-      res.send(result);
-      // console.log(  result instanceof Array, "jljfsdl")
+    // router.get('/a', function (req, res, next) {
+    //   res.send(result);
+    //   // console.log(  result instanceof Array, "jljfsdl")
 
-    });
+    // });
   })
 
 

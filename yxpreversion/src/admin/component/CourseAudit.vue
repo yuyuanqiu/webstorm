@@ -8,39 +8,39 @@
         height="565"
         style="width: 100%"
         highlight-current-row
-        :default-sort="{prop: 'apply_date', order: 'ascending'}"
+        :default-sort="{prop: 'course.apply_date', order: 'descending'}"
       >
         <el-table-column type="expand">
           <template slot-scope="scope">
             <el-form label-position="left" inline class="demo-table-expand">
               <el-form-item label="课程名称">
-                <span>{{ scope.row.name }}</span>
+                <span>{{ scope.row.course.course_name }}</span>
               </el-form-item>
               <el-form-item label="课程编号">
-                <span>{{ scope.row.id }}</span>
+                <span>{{ scope.row.course.id }}</span>
               </el-form-item>
               <el-form-item label="课程一级类目">
-                <span>{{ scope.row.top_level }}</span>
+                <span>{{ scope.row.course.course_first }}</span>
               </el-form-item>
               <el-form-item label="课程二级类目">
-                <span>{{ scope.row.second_level }}</span>
+                <span>{{ scope.row.course.course_second }}</span>
               </el-form-item>
               <el-form-item label="课程简述">
-                <span>{{ scope.row.des }}</span>
+                <span>{{ scope.row.course.course_des }}</span>
               </el-form-item>
               <el-form-item label="课程当前状态">
-                <span>{{ scope.row.current_status.value }}</span>
+                <span>{{ scope.row.course.apply_status }}</span>
               </el-form-item>
               <el-form-item label="申请日期">
-                <span>{{ scope.row.apply_date }}</span>
+                <span>{{ scope.row.course.apply_date }}</span>
               </el-form-item>
               <el-form-item label="申请教师">
-                <span>{{ scope.row.applyer }}</span>
+                <span>{{ scope.row.teacher_name }}</span>
               </el-form-item>
               <el-form-item label="审核课程状态" required>
-                <el-select v-model="scope.row.current_status.value" placeholder="请选择">
+                <el-select v-model="scope.row.course.apply_status" placeholder="请选择">
                   <el-option
-                    v-for="status in scope.row.status"
+                    v-for="status in statuss"
                     :key="status.value"
                     :label="status.value"
                     :value="status.value"
@@ -48,15 +48,15 @@
                   ></el-option>
                 </el-select>
               </el-form-item>
-              <el-form-item v-if="scope.row.current_status.value === '审核未通过'" label="审批意见" required>
-                <el-input placeholder="请输入内容" v-model="scope.row.comment" class="input-with-select">
+              <el-form-item v-if="scope.row.course.apply_status  === '审核未通过'" label="审批意见" required>
+                <el-input placeholder="请输入内容" v-model="scope.row.course.apply_comment" class="input-with-select">
                   <i class="el-icon-edit el-input__icon" slot="suffix"></i>
                 </el-input>
               </el-form-item>
 
               <el-form-item label="提交">
                 <el-button
-                  @click.native.prevent="deleteRow(scope.$index, courses)"
+                  @click.native.prevent="deleteRow(scope.$index, scope.row)"
                   type="text"
                   size="medium"
                 >提交更改</el-button>
@@ -69,16 +69,21 @@
           <template slot="header">总计：{{ this.courses.length }}</template>
         </el-table-column>
 
-        <el-table-column prop="apply_date" label="申请日期" :sortable="true" sort-by="apply_date">
+        <el-table-column
+          prop="course.apply_date"
+          label="申请日期"
+          :sortable="true"
+          sort-by="course.apply_date"
+        >
           <template slot-scope="scope">
             <i class="el-icon-time"></i>
-            <span style="margin-left: 10px">{{ scope.row.apply_date }}</span>
+            <span style="margin-left: 10px">{{ scope.row.course.apply_date }}</span>
           </template>
         </el-table-column>
 
-        <el-table-column prop="id" label="课程编号" :sortable="true" sort-by="id"></el-table-column>
+        <el-table-column prop="course.id" label="课程编号" :sortable="true" sort-by="id"></el-table-column>
 
-        <el-table-column prop="name" label="课程名称" sort-by="name" :sortable="true"></el-table-column>
+        <el-table-column prop="course.course_name" label="课程名称" sort-by="name" :sortable="true"></el-table-column>
 
         <!-- <el-table-column label="课程类目">
           <template slot-scope="scope">
@@ -87,9 +92,9 @@
           </template>
         </el-table-column>-->
 
-        <el-table-column prop="applyer" label="申请教师" :sortable="true">
-          <template slot-scope="scope" sort-by="applyer">
-            <span>{{scope.row.applyer }}</span>
+        <el-table-column prop="teacher_name" label="申请教师" :sortable="true">
+          <template slot-scope="scope" sort-by="teacher_name">
+            <span>{{scope.row.teacher_name }}</span>
           </template>
         </el-table-column>
 
@@ -125,73 +130,79 @@
 
 
 <script>
-
-import {autoCreatedCourse} from 'admin/common.js'
+// import {autoCreatedCourse} from 'admin/common.js'
+import axios from "axios";
 
 export default {
+  created() {
+    let url = "http://localhost:20020/course/course_audits";
+
+    axios
+      .post(url, {
+        school_id: localStorage.getItem("school_id")
+      })
+      .then(res => {
+        console.log(res.data);
+        this.courses = res.data;
+      });
+  },
   data() {
     return {
+      statuss: [
+        {
+          value: "申请",
+          comment: "",
+          disabled: false
+        },
+        {
+          value: "审核通过",
+          comment: "",
+          disabled: false
+        },
+        {
+          value: "待审核",
+          comment: "",
+          disabled: false
+        },
+        {
+          value: "审核未通过",
+          comment: "",
+          disabled: false
+        }
+      ],
       courses: [
         {
-          id: 212121,
-          name: "计算机网络",
-          status: "待审核",
-          top_level: "计算机",
-          second_level: "信息科学与技术",
-          bg_url: "",
-          des: "哈哈哈",
-          applyer: "yuyuan",
-          apply_date: "2020-01-01",
-          current_status: "待审核",
-          status: [
-            {
-              value: "申请",
-              comment: "",
-              disabled: false
-            },
-            {
-              value: "审核通过",
-              comment: "",
-              disabled: false
-            },
-            {
-              value: "待审核",
-              comment: "",
-              disabled: false
-            },
-            {
-              value: "审核未通过",
-              comment: "",
-              disabled: false
-            }
-          ],
-          comment: ""
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄"
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
+          course: {}
         }
       ]
     };
   },
-  created() {
-    this.courses = autoCreatedCourse(100);
-  },
+
   methods: {
-    deleteRow(index, rows) {
-        rows.splice(index, 1);
-      },
+
+    deleteRow(index, course) {
+      console.log(index, course, "rows");
+      
+
+      let indexs = 0;
+
+      for(let i = 0; i < this.courses.length; i++) {
+        if(this.courses[i] == course) {
+          indexs = i;
+          this.courses.splice(indexs, 1);
+        }
+      }
+
+      let url = "http://localhost:20020/course/course_audit_submit";
+
+      axios.post(url, {
+        _id: course.course.course_id,
+        apply_status: course.course.apply_status,
+        apply_comment: course.course.apply_comment,
+      }).then(res => {
+        console.log(res);
+      })
+    },
     sortDate(a, b) {
       return a.apply_date - b.apply_date;
     },

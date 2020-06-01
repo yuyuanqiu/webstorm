@@ -4,9 +4,8 @@ const get_date = require("../utils/get_date")
 
 function get_chapters(course_name) {
 
-  let outer_length = Math.ceil(Math.random() * 24);
-  let inner_length = Math.ceil(Math.random() * 12);
-
+  let outer_length = Math.ceil((Math.random() + 2) * 12);
+  let inner_length = Math.ceil((Math.random() + 3) * 3);
   let chapters = [];
 
   for (let i = 1; i < outer_length; i++) {
@@ -42,7 +41,7 @@ function get_chapters(course_name) {
 
 }
 
-function get_course_data(length, teachers_id, all_major) {
+function get_course_data(length, teachers_id, all_major, students_id) {
 
   // console.log(schools_id)
   let data = [];
@@ -80,6 +79,9 @@ function get_course_data(length, teachers_id, all_major) {
     let apply_date = new Date(start_date);
     apply_date.setDate(apply_date.getDate() - Math.floor(Math.random() * 15));
 
+    // 开始日期
+    
+
 
 
     let run_week = Math.ceil(Math.random() * 18)
@@ -95,13 +97,29 @@ function get_course_data(length, teachers_id, all_major) {
     // let chapter_resource = [];
 
     // 课程总评分
-    let chapter_total_score = 0;
+    let chapter_total_score = {
+      score: 0,
+      people: 0
+    };
+
+    // 课程大图
+    let big_pic = "/static/images/course_big_pic/" + Math.ceil(Math.random() * 5) + ".png"
 
     // 开课次数
     let course_success_times = 0;
 
     // 是否示范课程
     let course_is_jingpin = (Math.floor(Math.random() * 100) % 9 == 0) ? true : false;
+
+    // 学习人数
+
+    let people_random = Math.floor(Math.random() * 200);
+    let people_arr = [];
+
+    for (let i = 0; i < people_random; i++) {
+      people_arr.push(students_id[Math.floor(Math.random() * students_id.length)]._id);
+    }
+
 
     let single_school_data = {
       _id: _id,
@@ -128,7 +146,9 @@ function get_course_data(length, teachers_id, all_major) {
       chapter_info: chapter_info,
       // chapter_resource: chapter_resource,
       course_success_times: course_success_times,
-      chapter_total_score: chapter_total_score
+      chapter_total_score: chapter_total_score,
+      study_people: people_arr,
+      big_pic: big_pic
     }
 
     data.push(single_school_data);
@@ -174,14 +194,24 @@ function success_teacher() {
         let all_major = result;
         // console.log(result, "all_major")
 
-        let teacher_data = get_course_data(1000, teacher_id, all_major);
-        const courses = db.collection("course");
-        courses.insertMany(teacher_data,
-          function (err, result) {
-            console.log(result.insertedCount)
-            client.close();
-          });
+        // 学生表
+        db.collection("student").find({}).project({
+          _id: 1
+        }).toArray(function(err, result) {
 
+          let students_id = result;
+
+          let teacher_data = get_course_data(1000, teacher_id, all_major, students_id);
+          const courses = db.collection("course");
+          courses.insertMany(teacher_data,
+            function (err, result) {
+              console.log(result.insertedCount)
+              client.close();
+            });
+  
+        })
+
+        
       })
 
 

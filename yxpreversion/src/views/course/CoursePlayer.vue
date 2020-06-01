@@ -1,14 +1,14 @@
 <template>
   <div id="course-player">
     <div class="c-p-title">
-      <h2>{{ video_info.title }}</h2>
+      <h2>{{ title }}</h2>
       <div class="fenlei">
         <el-breadcrumb separator-class="el-icon-arrow-right">
-          <el-breadcrumb-item :to="{ path: '/home' }">{{ video_info.first_level }}</el-breadcrumb-item>
-          <el-breadcrumb-item :to="{ path: '/home' }">{{ video_info.second_level }}</el-breadcrumb-item>
-          <el-breadcrumb-item>{{ video_info.lesson_title }}</el-breadcrumb-item>
+          <el-breadcrumb-item >{{ first_level }}</el-breadcrumb-item>
+          <el-breadcrumb-item>{{ second_level }}</el-breadcrumb-item>
+          <el-breadcrumb-item>{{ lesson_title }}</el-breadcrumb-item>
         </el-breadcrumb>
-        <span class="c-p-date">{{ video_info.publish_date }}</span>
+        <span class="c-p-date">{{ publish_date }}</span>
       </div>
     </div>
     <el-row type="flex" class="row-bg" :gutter="36">
@@ -20,17 +20,6 @@
             :options="playerOptions"
             :playsinline="true"
             customEventName="customstatechangedeventname"
-            @play="onPlayerPlay($event)"
-            @pause="onPlayerPause($event)"
-            @ended="onPlayerEnded($event)"
-            @waiting="onPlayerWaiting($event)"
-            @playing="onPlayerPlaying($event)"
-            @loadeddata="onPlayerLoadeddata($event)"
-            @timeupdate="onPlayerTimeupdate($event)"
-            @canplay="onPlayerCanplay($event)"
-            @canplaythrough="onPlayerCanplaythrough($event)"
-            @statechanged="playerStateChanged($event)"
-            @ready="playerReadied"
           ></video-player>
         </div>
       </el-col>
@@ -47,23 +36,22 @@
           <h3 class="el-icon-s-grid">视频选集</h3>
           <div class="v-p-chapter">
             <el-menu
-              :router="true"
-              :default-active="$route.path"
+              :router="false"
               :unique-opened="true"
               class="el-menu-outer"
-              @open="handleOpen"
-              @close="handleClose"
             >
-              <el-submenu index="1" v-for="chapter in video_info.chapters" :key="chapter">
+              <el-submenu
+                :index="chapter.title"
+                v-for="chapter in course_info.chapter_info"
+                :key="chapter.id"
+              >
                 <template slot="title">
                   <i class="el-icon-s-unfold"></i>
-                  <span>{{ chapter.title_num + '：' + chapter.title_content }}</span>
+                  <span>{{ chapter.id + '：' + chapter.title }}</span>
                 </template>
-                <el-menu-item
-                  v-for="lesson in chapter.lessons"
-                  :key="lesson"
-                  :index="'/course/' + Math.random()"
-                >{{ lesson.title_num + '：' + lesson.title_content }}</el-menu-item>
+                <el-menu-item v-for="lesson in chapter.lessons" :key="lesson.id" :index="lesson.title">
+                  <span @click="click_change_url(lesson)">{{ lesson.id + '：' + lesson.title }}</span>
+                </el-menu-item>
               </el-submenu>
             </el-menu>
           </div>
@@ -89,10 +77,66 @@ import "video.js/dist/video-js.css";
 
 import { videoPlayer } from "vue-video-player";
 
+import axios from "axios";
+
 export default {
+  created() {
+    // console.log(this.$route, "route-video");
+
+    let url = "http://localhost:20020/course/video_info";
+    axios
+      .post(url, {
+        course_id: this.$route.params.coursename
+      })
+      .then(res => {
+        // console.log(res.data[0]);
+
+        this.course_info = res.data[0];
+
+        this.title = this.course_info.chapter_info[0].lessons[0].title;
+        this.first_level = this.course_info.course_first;
+        this.second_level = this.course_info.course_second;
+        this.lesson_title = this.course_info.course_name;
+        this.publish_date = this.course_info.start_date;
+        this.res_url =
+          "http://localhost:20020" +
+          this.course_info.chapter_info[0].lessons[0].lesson_video;
+      });
+  },
   name: "course-player",
   data() {
     return {
+      course_info: {
+        apply_comment: "",
+        apply_date: "",
+        apply_status: "",
+        chapter_info: [],
+        chapter_total_score: 0,
+        course_bg: "",
+        course_des: "",
+        course_first: "",
+        course_is_jingpin: false,
+        course_name: "",
+        course_plan: "",
+        course_second: "",
+        course_status: "",
+        course_success_times: 0,
+        end_date: "",
+        id: "",
+        reference: [],
+        run_week: 0,
+        start_date: "",
+        study_people: [],
+        teacher_id: "",
+        _id: ""
+      },
+      title_id: 12123,
+      title: "课程简介",
+      first_level: "计算机",
+      second_level: "程序设计与开发",
+      lesson_title: "大数据计算技术",
+      publish_date: "2020年02月20日",
+      res_url: "example.mp4",
       video_info: {
         title_id: 12123,
         title: "课程简介",
@@ -100,7 +144,7 @@ export default {
         second_level: "程序设计与开发",
         lesson_title: "大数据计算技术",
         publish_date: "2020年02月20日",
-        res_url: require("public/video/video-a.mp4"),
+        // res_url: require("public/video/video-a.mp4"),
         chapters: {
           chapter1: {
             title_num: "第一章",
@@ -291,25 +335,13 @@ export default {
     videoPlayer
   },
   mounted() {
-    console.log("this is current player instance object", this.player);
+    // console.log("this is current player instance object", this.player);
   },
-  beforeRouteUpdate(to, from, next) {
-    console.log("beforeRouteUpdate");
-    if (this.video_info.res_url == require("public/video/video-b.mp4")) {
-      this.video_info.res_url = require("public/video/video-a.mp4");
-      console.log("是");
-    } else {
-      this.video_info.res_url = require("public/video/video-b.mp4");
-      console.log("否");
-    }
-    console.log(to);
-    console.log(from);
-    next();
-  },
+
   computed: {
-    player() {
-      return this.$refs.videoPlayer.player;
-    },
+    // player() {
+    //   return this.$refs.videoPlayer.player;
+    // },
     playerOptions() {
       return {
         // width: 200,
@@ -331,7 +363,7 @@ export default {
         sources: [
           {
             type: "video/mp4", // 类型
-            src: this.video_info.res_url // url地址
+            src: this.res_url // url地址
           }
         ],
         // poster: require("public/img/student-title-bg-1.jpg"), // 封面地址
@@ -346,26 +378,12 @@ export default {
     }
   },
   methods: {
-    // listen event
-    onPlayerPlay(player) {
-      // console.log('player play!', player)
-    },
-    onPlayerPause(player) {
-      // console.log('player pause!', player)
-    },
-    // ...player event
+    click_change_url(lesson) {
+      this.res_url = "http://localhost:20020" + lesson.lesson_video;
 
-    // or listen state event
-    playerStateChanged(playerCurrentState) {
-      // console.log('player current update state', playerCurrentState)
+      this.title = lesson.title;
     },
-
-    // player is ready
-    playerReadied(player) {
-      console.log("the player is readied", player);
-      // you can use it to do something...
-      // player.[methods]
-    }
+    handleClose() {}
   }
 };
 </script>

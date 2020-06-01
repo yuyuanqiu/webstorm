@@ -2,50 +2,66 @@
   <div id="teacher-head">
     <el-row :gutter="20">
       <el-col class="teacher-avator">
-        <el-avatar :size="96" :src="src" @error="errorHandler">
-          <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png" />
+        <el-avatar :size="96" :src="'http://localhost:20020/' + teacher_info.avatar">
         </el-avatar>
       </el-col>
       <el-col>
         <div class="teacher-jieshao">
-          <h2>{{ teacher.name }}</h2>
+          <h2>{{ teacher_info.teacher_name }}</h2>
           <div class="zhicheng">
-            <span @click="tiaozhuan">{{ teacher.school }}</span>
+            <span style="cursor: pointer; color: #6fcaff;" @click="tiaozhuan">{{ school_name }}</span>
             <span>-</span>
-            <span v-for="zhicheng in teacher.zhichengs" :key="zhicheng">{{ zhicheng }}</span>
+            <span>{{ teacher_info.teacher_job }}</span>
           </div>
           <div class="jianjie">
-            <span>{{ teacher.jianjie }}</span>
+            <span>{{ teacher_info.teacher_des }}</span>
           </div>
         </div>
       </el-col>
       <el-col class="teacher-school-icon">
-        <el-image style="width: 248px; height: 248px" :src="teacher.schoolicon" :fit="fit"></el-image>
+        <el-image style="width: 248px; height: 248px" :src="'http://localhost:20020/static/' + teacher_info.school.logo" fit="fit"></el-image>
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
+
+import axios from "axios";
+
 export default {
+  computed: {
+    school_name() {
+      return this.teacher_info.school.name
+    }
+  },
+  created() {
+
+    // console.log(this.$route);
+    let url  = "http://localhost:20020/course/teacher_page";
+
+    axios.post(url, {
+      teacher_id: this.$route.params.teacher,
+    }).then(res => {
+      console.log(res.data[0]);
+
+      this.teacher_info = res.data[0];
+    })
+
+  },
   data() {
     return {
+      teacher_info: {
+        school: {}
+      },
       src: require("assets/img/school-icon/teacher-icon.png"),
 
-      teacher: {
-        name: "李莉",
-        school: "四川大学",
-        schoolicon: require("assets/img/school-title-icon.jpg"),
-        zhichengs: ["华西医院皮肤科主任", "博士生导师"],
-        jianjie:
-          "毕业于法国贝桑松大学，于2008年获成都市科学技术协会“成都市科普工作先进个人”。职位名称：华西医院皮肤科、科室副主任重点研究领域：损美性皮肤病（色素性、血管性皮肤病、痤疮等），皮肤老化及光老化，皮肤保健与美容，皮肤美容激光，化妆品咨询等"
-      }
     };
   },
   methods: {
     tiaozhuan() {
       this.$router.push({
-        path: '/school/' + this.teacher.school
+        path: '/school/' + this.teacher_info.school._id
       })
     }
   },

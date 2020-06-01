@@ -16,7 +16,7 @@
       </el-col>
       <el-col :span="6">
         <div class="grid-content">
-          <a href="/">
+          <a @click="toPath({name: 'main'})">
             <el-button type="primary">发现课程</el-button>
           </a>
         </div>
@@ -32,7 +32,12 @@ export default {
     return {
       src: require("../assets/img/not-found-404.png")
     };
-  }
+  },
+  methods: {
+    toPath(obj) {
+      this.$router.push(obj)
+    }
+  },
 };
 </script>
 

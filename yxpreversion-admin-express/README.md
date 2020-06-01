@@ -6,6 +6,10 @@
 node school, teacher, student, article, course, note, props, homework
 ```
 
+## 200519
+
+- vue获取后端数据时，若data中的数据是一个嵌套的对象形式，则**应该将嵌套的对象/数组页设置一个默认的值**，不然会出现`Cannot read property 'length' of undefined`的形式，需特别注意。
+
 ## 200510
 
 ### 文章获取知识点小结

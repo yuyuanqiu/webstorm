@@ -3,7 +3,51 @@ body {
   padding: 0;
 }
 
+.el-popper {
+
+  .t-c-o-cate {
+
+    span {
+      display: inline-block;
+      // height: 24px;
+      // line-height: 24px;
+      padding: 8px;
+      cursor: pointer;
+
+      &:hover {
+
+        border-radius: 16px;
+        background: #00C758;
+        color: #fff;
+      }
+    }
+
+  }
+
+  .o-search_t {
+
+    display: inline-block;
+
+    &:first-child {
+      width: 50%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-weight: 600;
+    }
+
+    &:last-child {
+      width: 50%;
+    }
+
+  }
+}
+
+
+
 .top-container-out {
+
+
 
   z-index: 99;
   position: fixed;

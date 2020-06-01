@@ -1,4 +1,4 @@
-<template>
+  <template>
   <div id="course-apply">
     <h2>课程申请表</h2>
     <div class="course-apply-form">
@@ -8,10 +8,10 @@
         ref="ruleForm"
         label-width="100px"
         class="demo-ruleForm"
-        size='small'
+        size="small"
       >
-        <el-form-item label="课程名称" prop="name">
-          <el-input v-model="ruleForm.name"></el-input>
+        <el-form-item label="课程名称" prop="course_name">
+          <el-input v-model="ruleForm.course_name"></el-input>
         </el-form-item>
         <el-form-item label="课程编号" prop="id" required>
           <el-input v-model="ruleForm.id"></el-input>
@@ -22,38 +22,42 @@
             v-model="ruleForm.category"
             :options="kecheng"
             :props="{ expandTrigger: 'hover' }"
+            @change="getCheckedNode"
           ></el-cascader>
         </el-form-item>
         <el-form-item label="课程封面" required>
           <el-upload
             class="upload-demo"
-            action="/home"
+            action="http://localhost:20020/course/update_course_bg"
             :on-preview="handlePreview"
             :on-remove="handleRemove"
             :file-list="ruleForm.fileList"
             list-type="picture"
-            :auto-upload="false"
+            :auto-upload="true"
+
+                  accept="image/*"
+                  :on-success="getSuccess"
           >
             <el-button size="small" type="primary">点击上传</el-button>
             <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
           </el-upload>
         </el-form-item>
-        <el-form-item label="课程状态" prop="status">
-          <el-select v-model="ruleForm.status" placeholder="请输入课程状态">
-                  <el-option
-                    v-for="status in ruleForm.statusList"
-                    :key="status.value"
-                    :label="status.value"
-                    :value="status.value"
-                    :disabled="status.disabled"
-                  ></el-option>
-                </el-select>
+        <el-form-item label="课程状态" prop="apply_status">
+          <el-select v-model="ruleForm.apply_status" placeholder="请输入课程状态">
+            <el-option
+              v-for="status in ruleForm.statusList"
+              :key="status.value"
+              :label="status.value"
+              :value="status.value"
+              :disabled="status.disabled"
+            ></el-option>
+          </el-select>
         </el-form-item>
-        <el-form-item label="课程简述" prop="desc" :required="false">
-          <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+        <el-form-item label="课程简述" prop="course_des" :required="false">
+          <el-input type="textarea" v-model="ruleForm.course_des"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')">提交申请</el-button>
+          <el-button type="primary" @click="submitForm(ruleForm)">提交申请</el-button>
           <el-button @click="resetForm('ruleForm')">重置申请</el-button>
         </el-form-item>
       </el-form>
@@ -62,169 +66,75 @@
 </template>
 
 <script>
+import axios from "axios";
+import { uuid } from "../../common/uuid";
+
 export default {
+  created() {
+    let url = "http://localhost:20020/course/fenlei_zhengli";
+
+    axios.get(url).then(res => {
+      this.kecheng = res.data;
+    });
+  },
   data() {
     return {
-      kecheng: [
-        {
-          value: "jisuanji",
-          label: "计算机",
-          children: [
-            {
-              value: "yizhi",
-              label: "程序设计与开发"
-            },
-            {
-              value: "fankui",
-              label: "计算机基础与应用"
-            },
-            {
-              value: "xiaolv",
-              label: "软件工程"
-            },
-            {
-              value: "kekong",
-              label: "网络与安全技术"
-            },
-            {
-              value: "yingruanj",
-              label: "硬软件系统及原理"
-            },
-            {
-              value: "yingruanj",
-              label: "算法"
-            }
-          ]
-        },
-        {
-          value: "jisuanji",
-          label: "计算机",
-          children: [
-            {
-              value: "yizhi",
-              label: "程序设计与开发"
-            },
-            {
-              value: "fankui",
-              label: "计算机基础与应用"
-            },
-            {
-              value: "xiaolv",
-              label: "软件工程"
-            },
-            {
-              value: "kekong",
-              label: "网络与安全技术"
-            },
-            {
-              value: "yingruanj",
-              label: "硬软件系统及原理"
-            },
-            {
-              value: "yingruanj",
-              label: "算法"
-            }
-          ]
-        },
-        {
-          value: "jisuanji",
-          label: "计算机",
-          children: [
-            {
-              value: "yizhi",
-              label: "程序设计与开发"
-            },
-            {
-              value: "fankui",
-              label: "计算机基础与应用"
-            },
-            {
-              value: "xiaolv",
-              label: "软件工程"
-            },
-            {
-              value: "kekong",
-              label: "网络与安全技术"
-            },
-            {
-              value: "yingruanj",
-              label: "硬软件系统及原理"
-            },
-            {
-              value: "yingruanj",
-              label: "算法"
-            }
-          ]
-        },
-        {
-          value: "jisuanji",
-          label: "计算机",
-          children: [
-            {
-              value: "yizhi",
-              label: "程序设计与开发"
-            },
-            {
-              value: "fankui",
-              label: "计算机基础与应用"
-            },
-            {
-              value: "xiaolv",
-              label: "软件工程"
-            },
-            {
-              value: "kekong",
-              label: "网络与安全技术"
-            },
-            {
-              value: "yingruanj",
-              label: "硬软件系统及原理"
-            },
-            {
-              value: "yingruanj",
-              label: "算法"
-            }
-          ]
-        }
-      ],
+      kecheng: [],
+
       ruleForm: {
-        name: "",
+        _id: "course_" + uuid(),
         id: "",
-        category: "",
+        teacher_id: localStorage.getItem("_id"),
+        course_name: "",
+        course_is_jingpin: false,
+        course_des: "",
+        course_bg: "",
+        apply_status: "",
+        apply_comment: "",
+        course_status: "",
+        reference: [],
+        apply_date: new Date(),
+        start_date: new Date(),
+        end_date: new Date(),
+        run_week: 12,
+        course_plan: "",
+        chapter_info: [],
+        course_success_times: 0,
+        chapter_total_score: {
+          score: 0,
+          people: 0
+        },
+        study_people: [],
+        big_pic: "",
+        category: [],
+        course_first: "",
+        course_second: "",
         fileList: [],
         bgUrl: "",
         dialogImageUrl: "",
         dialogVisible: false,
-        status: '',
         statusList: [
-        {
-          value: "申请",
-          comment: "",
-          disabled: false
-        },
-        {
-          value: "审核通过",
-          comment: "",
-          disabled: true
-        },
-        {
-          value: "待审核",
-          comment: "",
-          disabled: true
-        },
-        {
-          value: "审核未通过",
-          comment: "",
-          disabled: true
-        }
+          {
+            value: "申请",
+            comment: "",
+            disabled: false
+          },
+          {
+            value: "审核通过",
+            comment: "",
+            disabled: true
+          },
+          {
+            value: "待审核",
+            comment: "",
+            disabled: true
+          },
+          {
+            value: "审核未通过",
+            comment: "",
+            disabled: true
+          }
         ],
-        desc: '',
-        date1: "",
-        date2: "",
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: ""
       },
       rules: {
         name: [
@@ -266,6 +176,17 @@ export default {
     };
   },
   methods: {
+    getSuccess(res) {
+      console.log(res)
+
+      this.ruleForm.course_bg = "/static/images/course_cover/" + res;
+    },
+    getCheckedNode(arr) {
+      console.log(arr);
+      this.ruleForm.course_first = arr[0];
+      this.ruleForm.course_second = arr[1];
+      console.log(this.ruleForm);
+    },
     handleRemove(file) {},
     handlePreview(file) {
       console.log(file);
@@ -278,14 +199,13 @@ export default {
       console.log(file);
     },
     submitForm(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          // this.ruleForm.status = 1
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
+      let url = "http://localhost:20020/course/submit_course";
+      axios.post(url, {
+        formName: formName,
+      }).then(res => {
+        console.log(res);
+        this.$message.success("提交成功")
+      })
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();

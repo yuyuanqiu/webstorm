@@ -1,64 +1,90 @@
 <template>
-  <div id="course-discuss">
-    <div class="article-comment">
-      <div class="comment-input">
-        <el-input placeholder="请输入内容" v-model="input2">
-          <template slot="prepend">
-            <el-avatar :size="36" :src="circleUrl"></el-avatar>
-          </template>
-          <template slot="append">评论</template>
-        </el-input>
+  <div
+    id="course-discuss"
+    v-loading="loading"
+    element-loading-text="评论正在加载中，请先食用视频哦ヾ(≧▽≦*)o"
+    element-loading-spinner="el-icon-loading"
+  >
+    <div id="comment">
+      <div class="reply-article">
+        <transition name="fade">
+          <div class="reply-input">
+            <el-input placeholder="请输入内容" v-model="reply_input">
+              <template slot="append">
+                <span @click="submit_reply($event)">评论</span>
+              </template>
+            </el-input>
+          </div>
+        </transition>
       </div>
-      <div class="article-comment-item" v-for="comment in article_info.comment" :key="comment.id">
+      <div class="article-comment-item" v-for="comment in comments" :key="comment._id">
         <el-row type="flex">
           <el-col>
             <div class="a-c-h-avatar">
-              <el-avatar :size="50" :src="circleUrl"></el-avatar>
+              <el-avatar :size="50" :title="'http://localhost:20020/' + comment.publisher.avatar" :src="'http://localhost:20020/' + comment.publisher.avatar"></el-avatar>
             </div>
           </el-col>
           <el-col class="root-reply">
             <div class="a-c-h-other">
               <div class="author">
-                <div>{{ comment.author }}</div>
+                <div>{{ comment.publisher.student_name}}</div>
 
-                <div>{{ comment.publish_date }}</div>
-                <div>积分：3</div>
+                <div>{{ comment.publish_time }}</div>
+                <div>积分：{{ comment.publisher.student_point}}</div>
               </div>
               <div class="other">
-                <p class="comment">{{ comment.content }}</p>
+                <p class="comment">{{ comment.note_content }}</p>
                 <div>
-                  <span class="el-icon-thumb">21</span>
-                  <span class="el-icon-chat-dot-round">回复</span>
+                  <span class="el-icon-thumb">{{ comment.zan }}</span>
+                  <span class="el-icon-chat-dot-round" @click="click_replay($event, comment)">回复</span>
                 </div>
+                <transition name="fade">
+                  <div class="reply-input" v-if="is_expand_input === comment._id">
+                    <el-input placeholder="请输入内容" v-model="reply_input">
+                      <template slot="append">
+                        <span @click="submit_reply($event, comment)">评论</span>
+                      </template>
+                    </el-input>
+                  </div>
+                </transition>
               </div>
             </div>
-            <div class="reply_comment" v-for="reply in comment.reply" :key="reply.id">
+            <div class="reply_comment" v-for="reply in comment.comments" :key="reply._id">
               <el-row type="flex">
                 <el-col>
                   <div class="a-c-h-avatar">
-                    <el-avatar :size="50" :src="circleUrl"></el-avatar>
+                    <el-avatar :size="50" :title="'http://localhost:20020/' + reply.publisher.avatar" :src="'http://localhost:20020/' + reply.publisher.avatar"></el-avatar>
                   </div>
                 </el-col>
                 <el-col>
                   <div class="a-c-h-other">
                     <div class="author">
-                      <div>{{ reply.author }}</div>
+                      <div>{{ reply.publisher.student_name }}</div>
 
-                      <div>{{ reply.publish_date }}</div>
-                      <div>积分：3</div>
+                      <div>{{ reply.publish_time }}</div>
+                      <div>积分：{{ reply.publisher.student_point}}</div>
                     </div>
                     <div class="other">
                       <p class="comment">
                         <span>回复</span>
                         <span>
-                          <a href>{{comment.author }}</a>
+                          <a href>{{reply.parent_reply. student_name}}</a>
                         </span>
-                        {{ reply.content }}
+                        {{ reply.note_content }}
                       </p>
                       <div>
-                        <span class="el-icon-thumb">21</span>
-                        <span class="el-icon-chat-dot-round">回复</span>
+                        <span class="el-icon-thumb">{{ reply.zan }}</span>
+                        <span class="el-icon-chat-dot-round" @click="click_replay($event, reply)">回复</span>
                       </div>
+                      <transition name="fade">
+                        <div class="reply-input" v-if="is_expand_input === reply._id">
+                          <el-input placeholder="请输入内容" v-model="reply_input">
+                            <template slot="append">
+                              <span @click="submit_reply($event, comment, reply)">评论</span>
+                            </template>
+                          </el-input>
+                        </div>
+                      </transition>
                     </div>
                   </div>
                 </el-col>
@@ -71,208 +97,236 @@
   </div>
 </template>
 
+
+    
+  </div>
+</template>
+
+
+
 <script>
+import { uuid } from "../../common/uuid";
+import Comment from "components/common/Comment";
+
+import axios from "axios";
+
 export default {
-  name: 'course-dicuss',
+  methods: {
+    // 操作成功的提示消息
+    success_operate(msg) {
+      this.$message({
+        showClose: true,
+        message: msg,
+        type: "success"
+      });
+    },
+    err_operate(msg) {
+      this.$message({
+        showClose: true,
+        message: msg,
+        type: "error"
+      });
+    },
+    // 获取学生信息
+    get_info() {
+      let url = "http://localhost:20020/get_user";
+      axios
+        .get(url)
+        .then(res => {
+          // console.log(res.data)
+          this.user_info = res.data;
+          // console.log(this.user_info,"user_info");
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    // 点击回复,显示输入框输入评论
+    click_replay(e, comment) {
+      this.is_expand_input = comment._id;
+      console.log(e, comment);
+      console.log(this.is_expand_input, comment._id);
+    },
+    // 提交评论
+    submit_reply(e, root_node, parent_node) {
+      console.log(arguments.length, "参数个数");
+
+      // 提交评论之后，评论框收起
+      this.is_expand_input = 0;
+      console.log(e, root_node, parent_node);
+      let parms_length = arguments.length;
+
+      let _id = uuid();
+
+      let reply_info = {};
+
+      let upload_url = "http://localhost:20020/articles/reply_update";
+
+      console.log(this.$store.state.user_info, "user-info")
+
+      if (parms_length === 3) {
+        reply_info = {
+          _id: _id,
+          id: Math.floor(Math.random() * 1000000),
+          note_content: this.reply_input,
+          publisher_id: this.$store.state.user_info._id,
+          publish_time: new Date(),
+          parent_node: parent_node._id,
+          root_node: root_node._id,
+          zan: 0
+        };
+
+        root_node.comments.unshift({
+          _id: _id,
+          note_content: this.reply_input,
+          publish_time: new Date(),
+          parent_node: parent_node._id,
+          root_node: root_node._id,
+          zan: 0,
+          parent_reply: {
+            student_id: parent_node._id,
+            student_name: parent_node.publisher.student_name
+          },
+          publisher: {
+            _id: this.$store.state.user_info._id,
+            student_name: this.$store.state.user_info.student_name,
+            avatar: this.$store.state.user_info.avatar,
+            student_point: this.$store.state.user_info.student_point
+          }
+        });
+
+        axios
+          .post(upload_url, reply_info)
+          .then(res => {
+            console.log(res);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      } else if (parms_length === 2) {
+        let local_push_data = {
+            _id: _id,
+            note_content: this.reply_input,
+            publish_time: new Date(),
+            parent_node: root_node._id,
+            root_node: root_node._id,
+            zan: 0,
+            parent_reply: {
+              student_id: root_node.publisher._id,
+              student_name: root_node.publisher.student_name
+            },
+            publisher: {
+              _id: this.$store.state.user_info._id,
+              student_name: this.$store.state.user_info.student_name,
+              avatar: this.$store.state.user_info.avatar,
+              student_point: this.$store.state.user_info.student_point
+            }
+          },
+          reply_info = {
+            _id: _id,
+            id: Math.floor(Math.random() * 1000000),
+            note_content: this.reply_input,
+            publisher_id: this.$store.state.user_info._id,
+            publish_time: new Date(),
+            parent_node: root_node._id,
+            root_node: root_node._id,
+            zan: 0
+          };
+        root_node.comments.unshift(local_push_data);
+        console.log(reply_info);
+
+        axios
+          .post(upload_url, reply_info)
+          .then(res => {
+            console.log(res);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      } else {
+        let local_push_data = {
+          _id: _id,
+          note_content: this.reply_input,
+          publish_time: new Date(),
+          parent_node: null,
+          root_node: root_node,
+          zan: 0,
+          publisher: {
+            _id: this.$store.state.user_info._id,
+            student_name: this.$store.state.user_info.student_name,
+            avatar: this.$store.state.user_info.avatar,
+            student_point: this.$store.state.user_info.student_point
+          },
+          comments: []
+        };
+
+        reply_info = {
+          _id: _id,
+          id: Math.floor(Math.random() * 1000000),
+          note_content: this.reply_input,
+          publisher_id: this.$store.state.user_info._id,
+          publish_time: new Date(),
+          parent_node: null,
+          root_node: this.$route.params.coursename,
+          zan: 0
+        };
+
+        this.comments.unshift(local_push_data);
+
+        axios
+          .post(upload_url, reply_info)
+          .then(res => {
+            console.log(res);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
+
+      // 在回复完之后，情况输入框的值
+      this.reply_input = "";
+    }
+  },
+
   data() {
     return {
-      pingjia: ["1.0分", "2.0分", "3.0分", "4.0分", "5.0分"],
+      loading: true,
+      comments: [],
       input2: "",
-      value2: null,
-      colors: ["#99A9BF", "#F7BA2A", "#FF9900"],
-
-      circleUrl:
-        "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
       value: 2.1,
-      article_info: {
-        id: parseInt(Math.random() * 100000000000000),
-        title: "为什么 Vue 中不要用 index 作为 key？（diff 算法详解）",
-        content: "看完这篇",
-        first_level: "计算机",
-        second_level: "程序设计与开发",
-        author: "雪鸢xueyuan",
-        publish_date: "2020年01月01日",
-        read_total: 200,
-        mark: 3.2,
-        like: 36,
-        comment: [
-          {
-            id: parseInt(Math.random() * 1000000),
-            author: "佳蕙jiahui",
-            content:
-              "根据业务场景判断是否使用index作为key，如果只是展示信息，无需对数据进行变更，完全可以使用index。",
-            publish_date: "2020年01月01日",
-            like: 12,
-          },
-          {
-            id: parseInt(Math.random() * 1000000),
-            author: "茜雪qixue",
-            content:
-              "我测试了下，对于你的reverse例子，加了key也会走到旧首部和新尾部是sameNode,同样也会patchNode？是么？",
-            publish_date: "2020年01月01日",
-            like: 12,
-            reply: [
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "琴韵qinyun",
-                content:
-                  "确实是，删除的场景是最可怕的，之前也试过。随机数作为key带来的组件销毁重建是新的一个知识点，感谢",
-                publish_date: "2020年01月01日",
-                like: 12
-              },
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "碧痕bihen",
-                content: "我想看大佬实现一个diff算法，一路从computed追过来",
-                publish_date: "2020年01月01日",
-                like: 12
-              },
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "墨雨moyu",
-                content: "并不是无脑不用 index 当 key 吧，标题有点误导了",
-                publish_date: "2020年01月01日",
-                like: 12
-              }
-            ]
-          },
-          {
-            id: parseInt(Math.random() * 1000000),
-            author: "茜雪qixue",
-            content:
-              "我测试了下，对于你的reverse例子，加了key也会走到旧首部和新尾部是sameNode,同样也会patchNode？是么？",
-            publish_date: "2020年01月01日",
-            like: 12,
-            reply: [
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "琴韵qinyun",
-                content:
-                  "确实是，删除的场景是最可怕的，之前也试过。随机数作为key带来的组件销毁重建是新的一个知识点，感谢",
-                publish_date: "2020年01月01日",
-                like: 12
-              },
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "碧痕bihen",
-                content: "我想看大佬实现一个diff算法，一路从computed追过来",
-                publish_date: "2020年01月01日",
-                like: 12
-              },
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "墨雨moyu",
-                content: "并不是无脑不用 index 当 key 吧，标题有点误导了",
-                publish_date: "2020年01月01日",
-                like: 12
-              }
-            ]
-          },
-          {
-            id: parseInt(Math.random() * 1000000),
-            author: "茜雪qixue",
-            content:
-              "我测试了下，对于你的reverse例子，加了key也会走到旧首部和新尾部是sameNode,同样也会patchNode？是么？",
-            publish_date: "2020年01月01日",
-            like: 12,
-            reply: [
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "琴韵qinyun",
-                content:
-                  "确实是，删除的场景是最可怕的，之前也试过。随机数作为key带来的组件销毁重建是新的一个知识点，感谢",
-                publish_date: "2020年01月01日",
-                like: 12
-              },
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "碧痕bihen",
-                content: "我想看大佬实现一个diff算法，一路从computed追过来",
-                publish_date: "2020年01月01日",
-                like: 12
-              },
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "墨雨moyu",
-                content: "并不是无脑不用 index 当 key 吧，标题有点误导了",
-                publish_date: "2020年01月01日",
-                like: 12
-              }
-            ]
-          },
-          {
-            id: parseInt(Math.random() * 1000000),
-            author: "茜雪qixue",
-            content:
-              "我测试了下，对于你的reverse例子，加了key也会走到旧首部和新尾部是sameNode,同样也会patchNode？是么？",
-            publish_date: "2020年01月01日",
-            like: 12,
-            reply: [
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "琴韵qinyun",
-                content:
-                  "确实是，删除的场景是最可怕的，之前也试过。随机数作为key带来的组件销毁重建是新的一个知识点，感谢",
-                publish_date: "2020年01月01日",
-                like: 12
-              },
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "碧痕bihen",
-                content: "我想看大佬实现一个diff算法，一路从computed追过来",
-                publish_date: "2020年01月01日",
-                like: 12
-              },
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "墨雨moyu",
-                content: "并不是无脑不用 index 当 key 吧，标题有点误导了",
-                publish_date: "2020年01月01日",
-                like: 12
-              }
-            ]
-          },
-          {
-            id: parseInt(Math.random() * 1000000),
-            author: "茜雪qixue",
-            content:
-              "我测试了下，对于你的reverse例子，加了key也会走到旧首部和新尾部是sameNode,同样也会patchNode？是么？",
-            publish_date: "2020年01月01日",
-            like: 12,
-            reply: [
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "琴韵qinyun",
-                content:
-                  "确实是，删除的场景是最可怕的，之前也试过。随机数作为key带来的组件销毁重建是新的一个知识点，感谢",
-                publish_date: "2020年01月01日",
-                like: 12
-              },
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "碧痕bihen",
-                content: "我想看大佬实现一个diff算法，一路从computed追过来",
-                publish_date: "2020年01月01日",
-                like: 12
-              },
-              {
-                id: parseInt(Math.random() * 1000000),
-                author: "墨雨moyu",
-                content: "并不是无脑不用 index 当 key 吧，标题有点误导了",
-                publish_date: "2020年01月01日",
-                like: 12
-              }
-            ]
-          }
-        ]
-      }
+      click_loading_more: 0,
+      is_expand_input: "",
+      reply_input: "",
+      click_replay_status: 0,
+      user_info: "",
+      avator: require("assets/img/people-icon/user_avator.png")
+      // 当数据格式不对的时候会出错。。publisher奇怪
     };
   },
   created() {
-    this.article_info.content = localStorage.getItem("content");
+    console.log(this.$route, "created");
+
+    // 获取路由信息
+    // 分清楚this.$route 和 this.$router的区别
+    let coursename = this.$route.params.coursename;
+    // 传入到comment组件，评论文章时有用
+    this.coursename = coursename;
+
+    axios
+      .post("http://localhost:20020/course/course_reply", {
+        coursename: coursename,
+        click_loading_more: this.click_loading_more
+      })
+      .then(res => {
+        console.log(res.data);
+        this.click_loading_more += 1;
+        this.comments = res.data;
+        this.loading = false;
+      });
   }
 };
 </script>
+
 
 <style lang="scss">
 @import "assets/css/course/CourseDiscuss.scss";

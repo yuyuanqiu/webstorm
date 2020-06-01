@@ -24,6 +24,7 @@ const SchoolAll = () => import('views/school/SchoolAll')
 
 const School = () => import('views/school/School')
 const SchoolTitle = () => import('views/school/SchoolTitle')
+const SchoolCourse = () => import("views/school/SchoolCourse")
 const SchoolTeacher = () => import('views/school/SchoolTeacher')
 
 const Teacher = () => import('views/teacher/teacher')
@@ -60,6 +61,8 @@ const HomeWork = () => import('views/homework/Homework')
 
 const AHome = () => import('admin/component/home')
 
+const AdminHome = () => import("admin/component/AdminHome")
+
 const CourseApply = () => import('admin/component/CourseApply')
 const CourseAudit = () => import('admin/component/CourseAudit')
 const CourseOnline = () => import('admin/component/CourseOnline')
@@ -75,12 +78,8 @@ const routes = [
     path: '',
     name: 'main',
     component: Main,
-
+    redirect: '/home',
     children: [{
-        path: '',
-        redirect: '/home'
-      },
-      {
         // --------------------------主页面------------------------
         path: 'home',
         component: Home,
@@ -153,7 +152,7 @@ const routes = [
             "course-homework": CourseHomework
           },
           meta: {
-            roles: ['xuesheng', 'jiaoshi'],
+            roles: ['student', 'teacher'],
             title: '视频播放',
           }
         }]
@@ -168,14 +167,15 @@ const routes = [
       },
       {
         // ------------------学校详情页--------------------
-        path: '/school/:schoolname',
+        path: '/school/:school_id',
         component: School,
+        name: "schools",
         children: [{
           path: '',
           components: {
 
             'school-title': SchoolTitle,
-            'special-course-all': SpecialCourseAll,
+            'school-course': SchoolCourse,
             'school-teacher': SchoolTeacher,
           },
           meta: {
@@ -194,6 +194,7 @@ const routes = [
             'teacher-body': TeacherBody,
           },
           meta: {
+            roles: ['student', 'teacher'],
             title: '教师详情',
           }
         }]
@@ -209,7 +210,7 @@ const routes = [
             'student-body': StudentBody,
           },
           meta: {
-            roles: ['xuesheng', 'jiaoshi'],
+            roles: ['student', 'teacher'],
             title: '个人中心'
           }
         }]
@@ -220,6 +221,7 @@ const routes = [
         name: 'ArticleEditor',
         component: ArticleEditor,
         meta: {
+          roles: ['student', 'teacher'],
           title: '编辑文章',
         }
       },
@@ -248,6 +250,7 @@ const routes = [
         component: Shop,
         meta: {
           title: '积分商城',
+          roles: ['student', 'teacher'],
         }
       },
       // 作业界面
@@ -257,6 +260,7 @@ const routes = [
         component: HomeWork,
         meta: {
           title: '作业',
+          roles: ['student', 'teacher'],
         }
       },
       {
@@ -273,13 +277,14 @@ const routes = [
         name: 'none',
         component: () => import('components/common/none.vue')
       },
-      // ------------------------404路由
+
       // {
       //   path: '*',
       //   component: NotFound404,
       // }
     ]
   },
+
 
   // ------------------------------用户界面--------结束----------------------
   // ------------------------------用户界面--------结束----------------------
@@ -290,12 +295,14 @@ const routes = [
     path: '/admin',
     name: 'admin-home',
     component: AHome,
+    redirect: "/admin",
     children: [{
         path: '',
         name: 'admin',
-        component: NotFound404,
+        component: AdminHome,
         meta: {
           title: '后台首页',
+          roles: ['admin', 'teacher'],
         }
       },
       {
@@ -304,32 +311,53 @@ const routes = [
         component: NotFound404,
         meta: {
           title: '学校申请',
+          roles: ['admin'],
         }
       },
       {
         path: 'apply_teacher',
         name: 'apply_teacher',
-        component: NotFound404
+        component: NotFound404,
+        meta: {
+          title: '教师申请',
+          roles: ['admin'],
+        }
       },
       {
         path: 'apply_student',
         name: 'apply_student',
-        component: NotFound404
+        component: NotFound404,
+        meta: {
+          title: '学生申请',
+          roles: ['admin'],
+        }
       },
       {
         path: 'manage_school',
         name: 'manage_school',
-        component: NotFound404
+        component: NotFound404,
+        meta: {
+          title: '学校管理',
+          roles: ['admin'],
+        }
       },
       {
         path: 'manage_student',
         name: 'manage_student',
-        component: NotFound404
+        component: NotFound404,
+        meta: {
+          title: '学生管理',
+          roles: ['admin'],
+        }
       },
       {
         path: 'manage_teacher',
         name: 'manage_teacher',
-        component: NotFound404
+        component: NotFound404,
+        meta: {
+          title: '教师管理',
+          roles: ['admin'],
+        }
       },
       {
         path: 'course_apply',
@@ -337,6 +365,7 @@ const routes = [
         component: CourseApply,
         meta: {
           title: '课程申请',
+          roles: ['admin', 'teacher'],
         }
 
       },
@@ -346,6 +375,7 @@ const routes = [
         component: CourseAudit,
         meta: {
           title: '课程审核',
+          roles: ['admin'],
         }
       },
       {
@@ -354,6 +384,7 @@ const routes = [
         component: CourseOnline,
         meta: {
           title: '课程状态',
+          roles: ['teacher'],
         }
       },
       {
@@ -362,24 +393,33 @@ const routes = [
         component: CourseUpdate,
         meta: {
           title: '课程更新',
+          roles: ['teacher'],
         }
       },
       {
         path: 'manage_article',
         name: 'manage_article',
-        component: ManageArticle
+        component: ManageArticle,
+        meta: {
+          title: '文章管理',
+          roles: ['admin'],
+        }
       },
       {
         path: 'manage_post',
         name: 'manage_post',
-        component: NotFound404
+        component: NotFound404,
+        meta: {
+          title: '讨论帖管理',
+          roles: ['admin'],
+        }
       },
       {
         path: 'manage_props',
         name: 'manage_props',
         component: NotFound404
       },
-      
+
     ]
   },
 
@@ -392,58 +432,46 @@ const routes = [
     component: () => import('components/common/none.vue')
   },
   // -------------------------------------------------------test用例---------------------------------------
-  {
-    path: '/test/slot',
-    component: () => import('test/slot-parent.vue')
-  },
-  {
-    path: '/test/panel',
-    component: () => import('test/el-cascader-panel.vue')
-  },
-  {
-    path: '/test/carousel',
-    component: () => import('test/el-carousel.vue'),
-  },
-  {
-    path: '/test/homemenu',
-    component: () => import('test/t-home-menu'),
-  },
-  {
-    path: '/test/textpic',
-    component: () => import('test/text-pic-lunbo')
-  },
-  {
-    path: '/test/specific',
-    // component: () => import('components/home/SpecialCourseNav.vue')
-  },
-  {
-    path: '/test/lunbos',
-    component: () => import('test/lunbo-eazy')
-  },
-  {
-    path: '/test/lunbo2',
-    // component: () => import('test/lunbo2')
-  },
-  {
-    path: '/test/el-img',
-    component: () => import('test/el-img')
-  },
-  {
-    path: '/test/video',
-    component: () => import('test/vider-player'),
-  },
-  {
-    path: '/test/impress',
-    component: () => import('test/impressjs')
-  },
-  {
-    path: '/test/chacao',
-    component: () => import('test/chacaousing')
-  },
-  {
-    path: '/co',
-    component: () => import('components/common/ContainerFlex')
-  },
+  // {
+  //   path: '/test/slot',
+  //   component: () => import('test/slot-parent.vue')
+  // }, {
+  //   path: '/test/panel',
+  //   component: () => import('test/el-cascader-panel.vue')
+  // }, {
+  //   path: '/test/carousel',
+  //   component: () => import('test/el-carousel.vue'),
+  // }, {
+  //   path: '/test/homemenu',
+  //   component: () => import('test/t-home-menu'),
+  // }, {
+  //   path: '/test/textpic',
+  //   component: () => import('test/text-pic-lunbo')
+  // }, {
+  //   path: '/test/specific',
+  //   // component: () => import('components/home/SpecialCourseNav.vue')
+  // }, {
+  //   path: '/test/lunbos',
+  //   component: () => import('test/lunbo-eazy')
+  // }, {
+  //   path: '/test/lunbo2',
+  //   // component: () => import('test/lunbo2')
+  // }, {
+  //   path: '/test/el-img',
+  //   component: () => import('test/el-img')
+  // }, {
+  //   path: '/test/video',
+  //   component: () => import('test/vider-player'),
+  // }, {
+  //   path: '/test/impress',
+  //   component: () => import('test/impressjs')
+  // }, {
+  //   path: '/test/chacao',
+  //   component: () => import('test/chacaousing')
+  // }, {
+  //   path: '/co',
+  //   component: () => import('components/common/ContainerFlex')
+  // },
   // ------------------------404路由
   {
     path: '*',

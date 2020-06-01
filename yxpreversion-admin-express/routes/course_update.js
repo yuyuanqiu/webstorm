@@ -20,24 +20,26 @@ MongoClient.connect('mongodb://localhost:27017', function (err, client) {
 
     router.get('/s', function (req, res, next) {
       res.send(result);
-      console.log(  result instanceof Array, "jljfsdl")
+      console.log(result instanceof Array, "jljfsdl")
 
-    }); 
+    });
   })
 
-      // db.collection('find').insertMany(article_content_all); 
+  // db.collection('find').insertMany(article_content_all); 
 
-      db.collection('find').find().toArray(function (err, result) {
-        if (err) throw err
-    
-        // console.log(result)
-    
-        router.get('/a', function (req, res, next) {
-          res.send(result);
-          // console.log(  result instanceof Array, "jljfsdl")
-    
-        }); 
-      })
+  db.collection('find').find().toArray(function (err, result) {
+    if (err) throw err
+
+    // console.log(result)
+
+    router.get('/a', function (req, res, next) {
+      res.send(result);
+      // console.log(  result instanceof Array, "jljfsdl")
+
+    });
+  })
+
+
 
 
 

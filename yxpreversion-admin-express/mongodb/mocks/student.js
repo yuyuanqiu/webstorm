@@ -10,7 +10,7 @@ function get_student_data(length, schools_id) {
     let student_name = "学生" + i;
     let student_sex = ["男", "女"][Math.floor(Math.random() * 2)];
     let student_age = Math.floor(((Math.random() * 15) + 15));
-    let student_img = "avatar_s_" + i + ".jpg";
+    let avatar = "static/images/avatar/student/avatar_s_" + 0 + ".jpg";
     let student_des = student_name + "学生描述"
     let student_bg = "bg_s" + i + ".jpg";
     let school_id = schools_id[Math.floor(Math.random() * schools_id.length)]._id;
@@ -24,13 +24,15 @@ function get_student_data(length, schools_id) {
       student_name: student_name,
       student_sex: student_sex,
       student_age: student_age,
-      student_img: student_img,
+      avatar: avatar,
       student_des: student_des,
       student_bg: student_bg,
       school_id: school_id,
       class_name: class_name,
       student_major: student_major,
-      student_point: student_point
+      student_point: student_point,
+      password: Math.floor(Math.random()  * 10000000),
+      role: "student"
     }
 
     shcool_data.push(single_school_data);

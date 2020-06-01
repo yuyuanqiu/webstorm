@@ -212,7 +212,7 @@ client.connect(function (err, client) {
               $project: {
                 _id: 1,
                 student_name: 1,
-                student_img: 1,
+                avatar: 1,
                 student_point: 1
               }
             }
@@ -282,7 +282,7 @@ client.connect(function (err, client) {
               $project: {
                 _id: 1,
                 student_name: 1,
-                student_img: 1,
+                avatar: 1,
                 student_point: 1,
               }
             }
@@ -336,7 +336,7 @@ client.connect(function (err, client) {
                           $project: {
                             replyed_student_id: "$_id",
                             student_name: 1,
-                            student_img: 1,
+                            avatar: 1,
                             _id: 0,
 
                           }
@@ -359,7 +359,7 @@ client.connect(function (err, client) {
                       _id: 0,
                       student_id: "$reply_stu.replyed_student_id",
                       student_name: "$reply_stu.student_name",
-                      student_img: 1,
+                      avatar: 1,
                     }
                   },
 
@@ -388,7 +388,7 @@ client.connect(function (err, client) {
                     $project: {
                       _id: 1,
                       student_name: 1,
-                      student_img: 1,
+                      avatar: 1,
                       student_point: 1,
                     }
                   },
@@ -443,7 +443,19 @@ client.connect(function (err, client) {
     console.log(req.body)
     res.send(req.body)
 
-    db.collection("note").insertOne(req.body)
+    let reply_info = {
+      _id: req.body._id,
+      id: req.body.id,
+      note_content: req.body.note_content,
+      publisher_id: req.body.publisher_id,
+      publish_time: new Date(req.body.publish_time),
+      parent_node: req.body.parent_node,
+      root_node: req.body.root_node,
+      zan: req.body.zan,
+
+    }
+
+    db.collection("note").insertOne(reply_info)
   })
 
   // 文章阅读数+1
@@ -525,7 +537,7 @@ client.connect(function (err, client) {
 
   })
 
-  
+
 
   /*
   {

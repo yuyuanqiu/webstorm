@@ -65,7 +65,7 @@ function get_date() {
   let n_second = date.getSeconds()
   
 
-  date = "" + add_0(n_year) + "-" + add_0(n_month) + "-" + add_0(n_date) + " " + add_0(n_hour) + ":" + add_0(n_miunte) + ":" + add_0(n_second) 
+  // date = "" + add_0(n_year) + "-" + add_0(n_month) + "-" + add_0(n_date) + " " + add_0(n_hour) + ":" + add_0(n_miunte) + ":" + add_0(n_second) 
 
   return date
 

@@ -2,8 +2,8 @@
   <div class="home-menu">
     <div class="main-1" @mouseleave="shouqi">
       <ul id="home_menu_ul">
-        <li :class="item.icon" v-for="item in home_category" :key="item.title">
-          <el-link :underline="false" @click="toPath('/specialcourse/ls')">{{ item.title }}</el-link>
+        <li :class="icon_arr[index]" v-for="(item, index) in home_category" :key="item.first_level">
+          <el-link :underline="false" @click="toPath(item.first_level)">{{ item.first_level }}</el-link>
         </li>
       </ul>
       <div v-if="zhankai" class="el-icon-chat-dot-round" @mouseenter="shouqi">收起</div>
@@ -12,8 +12,13 @@
     <div class="main-2">
       <div class="main-2-1">
         <el-carousel height="361px" :interval="50000" arrow="always">
-          <el-carousel-item v-for="item in 4" :key="item">
-            <el-image :src="src" @click="toPath('/lessoninfo/ls')">
+          <el-carousel-item v-for="item in lunbo_pic" :key="item._id">
+            <!-- <img class="el-image" :src="'http://localhost:20020' + item.big_pic" @click="toPath('/lessoninfo/' + item._id)"> -->
+            <el-image
+              :title="'http://localhost:20020' + item.big_pic"
+              :src="'http://localhost:20020' + item.big_pic"
+              @click="toPathss('/lessoninfo/' + item._id)"
+            >
               <div slot="placeholder" class="image-slot">
                 加载中
                 <span class="dot">...</span>
@@ -27,7 +32,7 @@
       <el-row>
         <el-col :span="24">
           <el-card :body-style="{ padding: '0px', height: '360px' }">
-            <a href="#" class="el-card-a" style="height: 100%;display: inline-block;">
+            <a  class="el-card-a" style="height: 100%;display: inline-block;">
               <el-image :src="src_2" fit="fill"></el-image>
               <!-- <img src="~public/logo_fish.png" class="image" /> -->
               <div style="padding: 14px;">
@@ -43,68 +48,48 @@
   </div>
 </template>
 
+
 <script>
+import axios from "axios";
+
 export default {
+  created() {
+    let url = "http://localhost:20020/get_user/home_categories";
+
+    axios.get(url).then(res => {
+      this.home_category = res.data;
+    });
+
+    let url2 = "http://localhost:20020/course/home_lunbo";
+
+    axios.get(url2).then(res => {
+      console.log(res.data, "lunbo ");
+      this.lunbo_pic = res.data;
+    });
+  },
   name: "home-menu",
 
   data() {
     return {
-      home_category: [
-        {
-          icon: "el-icon-collection",
-          title: "示范课程"
-        },
-        {
-          icon: "el-icon-news",
-          title: "外语"
-        },
-        {
-          icon: "el-icon-cpu",
-          title: "计算机"
-        },
-        {
-          icon: "el-icon-connection",
-          title: "工学"
-        },
-        {
-          icon: "el-icon-video-camera",
-          title: "理学"
-        },
-        {
-          icon: "el-icon-bell",
-          title: "经济管理"
-        },
-        {
-          icon: "el-icon-service",
-          title: "文史哲"
-        },
-        {
-          icon: "el-icon-coffee-cup",
-          title: "艺术设计"
-        },
-        {
-          icon: "el-icon-takeaway-box",
-          title: "心理学"
-        },
-        {
-          icon: "el-icon-s-management",
-          title: "医药卫生"
-        },
-        {
-          icon: "el-icon-s-open",
-          title: "法学"
-        },
-        {
-          icon: "el-icon-s-marketing",
-          title: "教育教学"
-        },
-        {
-          icon: "el-icon-collection-tag",
-          title: "农林园艺"
-        }
+      lunbo_pic: [],
+      icon_arr: [
+        "el-icon-collection",
+        "el-icon-news",
+        "el-icon-cpu",
+        "el-icon-connection",
+        "el-icon-video-camera",
+        "el-icon-bell",
+        "el-icon-service",
+        "el-icon-coffee-cup",
+        "el-icon-takeaway-box",
+        "el-icon-s-management",
+        "el-icon-s-open",
+        "el-icon-s-marketing",
+        "el-icon-copy-document"
       ],
+      home_category: [],
       zhankai: false,
-      src: require("assets/img/home_lunbo.png"),
+      src: "http://localhost:20020/static/images/course_big_pic/3.png",
       src_2: require("public/logo_black.png"),
       props: {
         expandTrigger: "hover"
@@ -112,20 +97,23 @@ export default {
     };
   },
   methods: {
+    toPathss(_id) {
+      this.$router.push({path: _id})
+    },
     toPath(path) {
-      this.$router.push({ path: path });
+      this.$router.push({ path: "/specialcourse/" + path });
     },
     zhankais() {
       let ul = document.getElementById("home_menu_ul");
 
       ul.className = "zhankai";
-      console.log("zhankai");
+      // console.log("zhankai");
       this.zhankai = true;
     },
     shouqi() {
       let ul = document.getElementById("home_menu_ul");
       ul.className = "shouqi";
-      console.log("shouqi");
+      // console.log("shouqi");
       this.zhankai = false;
     },
 
@@ -133,19 +121,19 @@ export default {
 
     mouseEnter() {
       // this.changes();
-      console.log("mouseEnter: ");
+      // console.log("mouseEnter: ");
     },
     // ----------------鼠标移出，隐藏面板
     mouseLeave(e) {
       this.changes();
-      console.log("mouseLeave: ");
+      // console.log("mouseLeave: ");
     },
     changes(n) {
-      console.log("传入的参数：", n);
+      // console.log("传入的参数：", n);
       let oP = document.querySelector("#cascader-paner-my");
       // console.log(oP);
       let oo = oP.querySelectorAll(".el-cascader-menu");
-      console.log("oo.length: ", oo.length);
+      // console.log("oo.length: ", oo.length);
 
       // 此处的功能是在点击级联面板时，隐藏打开的子级菜单
 

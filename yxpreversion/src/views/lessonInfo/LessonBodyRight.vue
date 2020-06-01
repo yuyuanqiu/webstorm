@@ -2,21 +2,16 @@
   <div class="lesson-body-right">
     <el-card :body-style="{ padding: '0px' }">
       <div slot="header" class="header">
-        <el-image :src="course.school">
-          <div slot="placeholder" class="image-slot">
-            加载中
-            <span class="dot">...</span>
-          </div>
-        </el-image>
+        <img :src="'http://localhost:20020/static/' + teacher_info.bigLogo" @click="toPath('/school/' + teacher_info.school_id)">
       </div>
       <div class="teachers">
-        <b class="el-icon-s-operation">{{ course.teachers.length }}位授课教师</b>
-        <div v-for="teacher in course.teachers" :key="teacher.id">
-          <el-link href="/teacher/ls" :underline="false">
-            <img :src="course.avatar" />
+        <b class="el-icon-s-operation">1位授课教师</b>
+        <div>
+          <el-link @click="toPath('/teacher/' + teacher_info._id)" :underline="false">
+            <img :src="'http://localhost:20020/' + teacher_info.avatar" />
             <div class="teacher_i">
-              <span>{{ teacher.name }}</span>
-              <span>{{ teacher.job }}</span>
+              <span>{{ teacher_info.teacher_name }}</span>
+              <span>{{ teacher_info.teacher_job }}</span>
             </div>
           </el-link>
         </div>
@@ -26,7 +21,32 @@
 </template>
 
 <script>
+
+import axios from "axios";
+
 export default {
+  methods: {
+    toPath(path) {
+      this.$router.push({
+        path: path,
+      })
+    }
+  },
+  created() {
+    let url = "http://localhost:20020/course/get_course_info";
+
+    let course_id = this.$route.params.lessonname;
+
+    axios
+      .post(url, {
+        _id: course_id
+      })
+      .then(res => {
+        this.teacher_info = res.data[0].teacher_info[0];
+        // console.log(this.teacher_info);
+
+      });
+  },
   computed: {
     teachers_num() {
       return this.course.teachers.length;
@@ -34,6 +54,7 @@ export default {
   },
   data() {
     return {
+      teacher_info: [],
       course: {
         school: require("assets/img/school-icon/北京大学.png"),
         avatar: require("assets/img/people-icon/教师头像.png"),

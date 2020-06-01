@@ -25,8 +25,113 @@
     .el-tabs__content {
       margin: 0 30px;
 
+
+      .el-row {
+        // ------------------flex布局,让flex布局能够自动换行
+        flex-flow: row;
+        flex-wrap: wrap;
+        // justify-content: space-around;
+        // ------------------flex布局,让flex布局能够自动换行--结束
+        height: fit-content;
+        margin: 0 !important;
+
+
+        .el-col {
+          flex: 1;
+        margin-right: 36px;
+
+          // -----------------若想让flex布局能够自动换行，则必须固定width，若设置max-width则当布局盒子总宽度小于该值时，则width会压缩失真
+          width: 229px;
+          min-width: 229px;
+          max-width: 229px;
+          // --------------------j结束
+          height: fit-content;
+          border-radius: 4px;
+          padding: 0 !important;
+          margin-bottom: 20px;
+          background-color: #fff;
+
+          // 阴影过渡
+          transition: box-shadow .6s;
+
+          &:hover {
+            box-shadow: 0 5px 15px -5px rgba(0, 0, 0, .5);
+
+            transition: box-shadow .6s;
+          }
+
+          .el-link.grid-content {
+            display: block;
+            border-radius: 4px;
+
+
+
+            text-decoration: none;
+            color: #333;
+            text-align: start;
+            font-size: 14px;
+
+            img {
+              width: 100%;
+            }
+
+            .lesson-bottom {
+
+              height: 81px;
+              padding: 14px;
+
+              background: aliceblue;
+
+              .lesson-name {
+
+                // 实现多行文本溢出省略显示
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+
+                height: 56px;
+
+                b {
+                  font-size: 14px;
+                }
+
+                .school {
+                  font-size: 12px;
+                  margin-top: 8px;
+                }
+
+                .name {
+                  font-size: 12px;
+                  margin-top: 12px;
+                }
+              }
+
+            }
+
+
+            .lesson-info {
+              font-size: 12px;
+
+              span {
+                text-align: start;
+
+                &:last-child {
+                  float: right;
+
+                  &:before {
+                    margin-right: 3px;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+
+      }
+
       .good-course-body {
-        .el-row  {
+        .el-row {
           .el-col {
             width: initial;
             min-width: initial;
@@ -34,12 +139,13 @@
 
             .el-link.grid-content {
               .el-image {
-                
+
                 margin-bottom: -4px;
-            }
-            .lesson-bottom {
-              background-color: #fafafa;
-            }
+              }
+
+              .lesson-bottom {
+                background-color: #fafafa;
+              }
             }
           }
         }
@@ -47,14 +153,12 @@
 
       #pane-fourth {
         .article-title {
-          .article-info {
-            
-          }
+          .article-info {}
         }
       }
     }
 
-    
+
 
 
   }
