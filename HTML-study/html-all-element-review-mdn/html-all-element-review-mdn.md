@@ -939,7 +939,7 @@
 ### `legend`
 
 - 定义：代表一个用于表示他的父元素内容的标题，为fieldset第一个子元素。
-<b style="display: inline-block; border: 10px solid green">
+
 ### `input`
 
 - 定义：用于为基于web的表单创建交互式控件来接受用户数据。
@@ -976,7 +976,6 @@
   - form：表示属于的表单元素，值为form的id
   - list：指向一个id为list属性值的datalist元素，datalist为这个元素提供建议值。
 
-</b>
 
 ### `label`
 
