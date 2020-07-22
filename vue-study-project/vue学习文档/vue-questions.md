@@ -352,6 +352,31 @@ computed: {
    1. 使用 router-link 可能在 Android 上有 Babel 的问题，可安装 Babel polyfill 解决
    2. router-link 上事件无效，可使用@click.native
 
+### vue 生成动态路由
+
+> 参考：https://segmentfault.com/a/1190000018727683
+
+#### 前端路由
+
+1. 前端写出所有包含**角色权限**（`meta.roles`）的路由表，包括公共路由和权限路由
+2. 访问页面的时候，判断是否有登录用户权限信息，没有就请求登录用户的角色
+   1. 在beforeEach中进行路由拦截，根据获取的角色信息和路由表中的角色进行对比，过滤出对应的用户路由，并进行路由菜单渲染
+   2. 此处要对路由角色进行遍历确认是否有权限（可使用数组的filter，some）
+
+#### 后端路由
+
+1. 在全局前置导航钩子 beforeEach 中拦截路由
+2. 从后台获取路由信息
+   1. 后端返回一个 json 格式的路由表
+   2. 前端将路由表转成一个路由对象，
+      1. 注意要对路由进行嵌套遍历
+      2. 然后使用**addRouters**将路由添加到总路由中
+      3. 同时将转换好的路由对象保存起来（vuex，localstorage），此时是为了方便生成一个路由菜单
+
+注：
+1. 为了避免导入组件产生的重复代码，可以将组件导入封装成一个方法，例如：
+   1. `module.exports = file => () => import('@/views/' + file + '.vue')`
+
 ### 定义动态路由，获取动态路由参数
 
 动态路由：
@@ -499,7 +524,7 @@ router：
 4. 重用组件则调用 beforeRouteUpdate 守卫
 5. 在路由配置里调用 beforeEnter 守卫
 6. 解析异步路由组件
-7. 在被激活（当前进入的）组件调用 before Route Enter 守卫
+7. 在被激活（当前进入的）组件调用 beforeRouteEnter 守卫
 8. 调用全局的 beforeResolve 守卫
 9. 导航被确认
 10. 调用全局的 afterEach 守卫
