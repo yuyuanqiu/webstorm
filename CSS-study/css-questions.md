@@ -156,7 +156,7 @@
    1. 它们的父级元素使用`text-align: center;`，它们使用`display: inline-block;`(和 1 类似)
    2. 它们的父级元素使用 flex 布局，`display: flex; justify-content: center;`
 4. 多个垂直排列的块级元素水平居中：块级元素需要设置`margin: xxx auto; width: ...px;`(和 2 类似)
-5. 子元素是浮动元素实现居中（`float: left;`），此时父元素需要设置：`width: fit-content; margin: ...px auto;`
+5. 子元素是浮动元素实现**居中**（`float: left;`），此时父元素需要设置：`width: fit-content; margin: ...px auto;`
 6. 子元素使用 transform 属性实现子元素水平居中：`position: absolute; left: 50%; transform: translate(-50%, 0);`
 7. 子元素实现居中（宽度固定），父子元素使用绝对定位：父元素设置：`width: xxx; position: relative;`
    1. 子元素设置 margin-left 为宽度的一半，且 left 为 50%：`position: absolute; width: 100px; left: 50%; margin-left: -50px;`
@@ -402,14 +402,15 @@ IE 盒模型：width === content + padding + border
 > 2. https://juejin.im/entry/595f1e3c5188250d914dd53c
 
 1. CSS3 新增的选择器：属性选择器、子元素选择器(xx-of-type, xx-child)、:root, :enabled, :disabled, :checked, :empty, :target, :not, ::placeholder, ::selection
-2. 动画相关特性：transform(转换), transition(过渡), animation(动画)
+2. 动画相关特性：transform(转换), transition(过渡，css属性的变换), animation(动画)
+   1. transform：translate（2d平移），rotate（旋转），scale（缩放），skew（扭曲，类似正方形 => 平行四边形）
 3. 新增的边框属性：border-radius, border-image, box-shadow
 4. 新增的背景属性：background-clip, background-origin, background-size, background-break
 5. 新增的文字效果：word-wrap, text-shadow, text-shadow, text-decoration,
 6. 新增的渐变效果：linear-gradient, radial-gradient
 7. @font-face：使用自定义字体，
 8. 媒体查询@media
-9. 新增的用户界面特性：resize, box-sizing, outline-offset
+9.  新增的用户界面特性：resize, box-sizing, outline-offset
 10. 滤镜：filter
 11. 新增的布局值：弹性布局, 栅格布局，多列布局
     1. 多列布局：column-count, colume-gap, column-rule
@@ -448,7 +449,7 @@ IE 盒模型：width === content + padding + border
 计算：
 
 1. 全部都为正值，取最大的
-2. 不全为正值，都去绝对值，然后用正值减去最大值
+2. 不全为正值，都取绝对值，然后用正值减去最大值
 3. 全为负值，取绝对值，用 0 减去最大值
 
 解决方法：创建 BFC
@@ -528,7 +529,7 @@ IE 盒模型：width === content + padding + border
 
 1. visibility 为 hidden
 2. opacity 为 0
-3. position 定位加上负的方向属性让其在课件区域之外
+3. position 定位加上负的方向属性让其在可见区域之外
 4. display 为 none
 5. transform 设置 scale(0)，无限缩小
 6. height 为 0，且隐藏边距/边框
@@ -775,7 +776,7 @@ w3c 标准：
 1. 使用`max-width: xxx%; height: auto`自适应，其中 auto 保证图片等比缩放，不使用 width 是防止图片拉伸，背景图应利用 background-size 属性
 2. 结合媒体查询+background-image 进行多个分辨率下图片的加载
 3. 在 img 元素中使用 srcset 属性定义多个不同分辨率的选项，最后加一个 src 属性加载普通视图`<img srcset="photo_w350.jpg 1x, photo_w640.jpg 2x" src="photo_w350.jpg" alt="">`
-4. 使用 picture 元素+（source 元素+media 属性）+img 元素：其中 img 元素必须有
+4. 使用 picture 元素+（source 元素+media 属性）+img 元素：其中必须要有 img 元素
 
 ## 弹性盒模型 flexible box 以及适用场景
 
@@ -809,6 +810,48 @@ w3c 标准：
    3. flex-shrink：项目的缩小比例，空间不足时将缩小，为 0 时不缩小，默认为 1
    4. flex: flex-grow flex-shrink flex-basis;
    5. align-self: 允许单个项目有不同于其他项目的对齐方式，可覆盖 align-items 属性
+
+## 网格模型`grid`
+
+定义：grid即网格布局，是唯一的css二维布局，擅长将一个页面划分为几个主要区域，和定义这些区域的大小、位置、层次等。
+
+组成：
+1. 容器
+2. 项目
+3. 网格轨道：划分项目（网格单元）的轨道线，如图所示，m x n列的网格项目有m+1, n+1根轨道线，从左往右/从上往下编号：1,2,3...，从右往左/从下往上编号：-1,-2,-3
+4. grid布局：![容器展示](img/css-grid容器.png 'gird布局')
+
+容器属性：
+1. display：grid, inline-grid(可和其他元素同处一行)
+2. grid-template-columns/rows：设置列宽/行高，这是显示定义的，用法如下：
+   1. `grid-template-columns: 200px 100px 200px;`：设置三列和对应的列宽
+   2. `grid-template-columns: repeat(3, 200px);`：重复，设置三列和每列宽度
+   3. `grid-template-columns: repeat(auto-fill, 200px);`：列宽200，**auto-fill关键字表示列数不固定，根据容器宽度自动响应**
+   4. `grid-template-columns: 200px 1fr 2fr;`：第一个列宽设为200px，剩余的分成3等份，第二个列宽占据剩余1/3，**fr**关键字表示容器**可用空间**的一等分，**fr可实现等分**
+   5. `grid-template-columns: 1fr 1fr minmax(300px, 2fr);`：表示第三个列宽至少200px，最多是其他列的2倍，**minmax()函数**定义网格元素的最大最小尺寸，**minmax函数可去掉右侧留有的空白**
+   6. `grid-template-columns: 100px auto 100px;`：**auto**关键字表示中间列的宽度由浏览器决定
+3. grid-auto-columns/rows：设置超出显式定义的网格（多余的网格）的列宽/行高，值和上者一致
+   1. `grid-auto-columns: 200px;`：表示超出了三列之后，多余列的宽度
+4. grid-gap：设置行间距和列间距
+   1. grid-row-gap
+   2. grid-column-gap
+5. grid-template-areas：定义区域，一个区域由一个或多个单元格组成，结合项目（网格）属性`grid-area`一起使用
+   1. 容器：`grid-template-areas: ". header header"  "sidebar content content";`：划分成6个单元格，其中`.`表示空的单元格
+   2. 项目：`grid-area: header;`：将设置了该属性的元素放在header区域
+6. grid-auto-flow：指定网格元素的排列顺序（从左往右row，从上往下column），
+   1. `grid-auto-flow: row dense;`：其中**dense**关键字表示若一行后面存在空白，则让**后面合适这个空白的网格**填满这个空白
+7. justify-items：设置单元格内容相对于单元格的水平对齐方式
+   1. start，end，center，stretch
+8. align-items：设置单元格内容相对于单元格的垂直对齐方式
+9. justify-content：整个内容区域相对于容器的水平对于方式
+10. align-content
+
+项目（网格属性）：
+1. 定义项目的位置：根据网格线定义的
+   1. grid-column/row-start/end：值为网格线数字，参考上图
+2. grid-area：项目所处区域
+3. justify-self：设置网格的水平位置，仅作用于设置的网格，和justify-items一致
+4. align-self：垂直，align-items一致
 
 ## 一个高度自适应的 div，里面有两个 div，其中一个固定高度 100px，另一个怎么填满剩余空间
 
@@ -978,7 +1021,7 @@ w3c 标准：
       5. theme：皮肤样式
    9. BEM 命名规范(常用于类名，[参考](https://juejin.im/post/5b925e616fb9a05cdd2ce70d)
       1. 中划线(-)：某类名的连接符，比如`.parent-of-me`
-      2. 双下划线(**)：表示子元素，比如`.parent**sub1`
+      2. 双下划线(`__`)：表示子元素，比如`.parent__sub1`
       3. 双中划线(--): 表示不同的状态/版本（比如成功：`.outer--success`
 
 ## css 样式抽离
